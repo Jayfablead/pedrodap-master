@@ -103,7 +103,7 @@ class _signupState extends State<signup> {
                           horizontal: 5.0, vertical: 0.5.h),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton2(
-                          offset:  Offset(0, 10),
+                          offset: Offset(0, 10),
                           dropdownDecoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(14),
                               // color: Colors.white.withOpacity(0.15),
@@ -192,7 +192,7 @@ class _signupState extends State<signup> {
                                 },
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return "Enter Your User Name";
+                                    return "            Enter Your User Name";
                                   }
                                   return null;
                                 },
@@ -252,7 +252,7 @@ class _signupState extends State<signup> {
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Enter Your phonenumber";
+                                return "            Enter Your phonenumber";
                               }
                               return null;
                             },
@@ -319,7 +319,7 @@ class _signupState extends State<signup> {
                               //Convert string p to a RegEx
                               RegExp regExp = RegExp(p);
                               if (value!.isEmpty) {
-                                return "Enter Your Email";
+                                return "            Enter Your Email";
                               } else {
                                 //If email address matches pattern
                                 return null;
@@ -379,7 +379,7 @@ class _signupState extends State<signup> {
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Enter Your Password";
+                                return "            Enter Your Password";
                               }
                               return null;
                             },
@@ -437,7 +437,7 @@ class _signupState extends State<signup> {
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Enter Your Confirm Password";
+                                return "            Enter Your Confirm Password";
                               }
                               return null;
                             },
@@ -495,8 +495,9 @@ class _signupState extends State<signup> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => loginpage()));
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => loginpage()));
                         },
                         child: Text(
                           "Sign In",
@@ -544,14 +545,23 @@ class _signupState extends State<signup> {
           borderSide: BorderSide.none),
     );
   }
-  signup(){
+
+  signup() {
     print(_selectedLocation);
     if (_formKey.currentState!.validate()) {
       final Map<String, String> data = {};
-      data['name'] =_user.text.trim().toString();
-      data['type'] = (_selectedLocation == "Coach") ?"3":(_selectedLocation == "Scouts") ?"5":
-      (_selectedLocation == "Medicals")? "6":(_selectedLocation == 'Nutritionists')?"7":
-      (_selectedLocation == 'Fitness Instructors') ?"8":"9";
+      data['name'] = _user.text.trim().toString();
+      data['type'] = (_selectedLocation == "Coach")
+          ? "3"
+          : (_selectedLocation == "Scouts")
+              ? "5"
+              : (_selectedLocation == "Medicals")
+                  ? "6"
+                  : (_selectedLocation == 'Nutritionists')
+                      ? "7"
+                      : (_selectedLocation == 'Fitness Instructors')
+                          ? "8"
+                          : "9";
       data['email'] = _email.text.trim().toString();
       data['password'] = _pass.text.trim().toString();
       data['action'] = 'signup_app';
@@ -567,14 +577,22 @@ class _signupState extends State<signup> {
               await SaveDataLocal.saveLogInData(userData!);
               print(userData?.status);
 
-
               // buildErrorDialog(context, "", "Login Successfully");
 
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => loginpage()));
+              if (_pass.text == _conf.text) {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => loginpage()));
+                _email.text = '';
+                _phone.text = '';
+                _user.text = '';
+                _pass.text = '';
+                _conf.text = '';
+              } else {
+                buildErrorDialog(context, "Error", "Password Dosen't Match");
+              }
             } else {
-
-              buildErrorDialog(context, "", "Invalid login");
+              buildErrorDialog(
+                  context, "Error", "Invalid Details Check Detials");
             }
           });
         } else {

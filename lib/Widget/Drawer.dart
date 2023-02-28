@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pedrodap/Widget/const.dart';
+import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/screens/all%20profiles/coachprofile.dart';
 import 'package:pedrodap/screens/all%20profiles/scoutprofile.dart';
 import 'package:pedrodap/screens/all%20profiles/trainerProfile.dart';
@@ -100,7 +102,7 @@ class _drawerState extends State<drawer> {
                           height: 0.5.h,
                         ),
                         Text(
-                          "Neymar JR.",
+                          userData!.userData!.name.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 12.sp,
@@ -110,7 +112,7 @@ class _drawerState extends State<drawer> {
                         SizedBox(
                           height: 0.5.h,
                         ),
-                        Text('neymar.jr07@gmail.com',
+                        Text(userData!.userData!.email.toString(),
                             style: TextStyle(
                                 color: Colors.cyanAccent,
                                 fontFamily: "Poppins",
@@ -139,59 +141,59 @@ class _drawerState extends State<drawer> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 2.5.h,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => mainpage()));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white.withOpacity(0.15)),
-                      width: 70.w,
-                      height: 6.h,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 1.w,
-                              ),
-                              Icon(
-                                Icons.contact_page,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text("Main Page1",
-                                  style: TextStyle(
-                                    fontSize: 4.w,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
-                                    color: Colors.white,
-                                  )),
-                            ],
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // SizedBox(
+              //   height: 2.5.h,
+              // ),
+              // Row(
+              //   children: [
+              //     SizedBox(
+              //       width: 5.w,
+              //     ),
+              //     InkWell(
+              //       onTap: () {
+              //         Navigator.of(context).push(
+              //             MaterialPageRoute(builder: (context) => mainpage()));
+              //       },
+              //       child: Container(
+              //         decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(10),
+              //             color: Colors.white.withOpacity(0.15)),
+              //         width: 67.w,
+              //         height: 6.h,
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Row(
+              //               children: [
+              //                 SizedBox(
+              //                   width: 1.w,
+              //                 ),
+              //                 Icon(
+              //                   Icons.contact_page,
+              //                   color: Colors.white,
+              //                 ),
+              //                 SizedBox(
+              //                   width: 2.w,
+              //                 ),
+              //                 Text("Main Page1",
+              //                     style: TextStyle(
+              //                       fontSize: 4.w,
+              //                       fontWeight: FontWeight.w500,
+              //                       fontFamily: "Poppins",
+              //                       color: Colors.white,
+              //                     )),
+              //               ],
+              //             ),
+              //             Icon(
+              //               Icons.chevron_right_rounded,
+              //               color: Colors.white,
+              //             )
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               SizedBox(
                 height: 1.5.h,
               ),
@@ -210,7 +212,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -223,7 +225,7 @@ class _drawerState extends State<drawer> {
                                 SizedBox(
                                   width: 2.w,
                                 ),
-                                Text("Main Page2",
+                                Text("Main Page",
                                     style: TextStyle(
                                       fontSize: 4.w,
                                       fontWeight: FontWeight.w500,
@@ -261,7 +263,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -312,7 +314,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -363,7 +365,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -454,7 +456,7 @@ class _drawerState extends State<drawer> {
                                 color: Colors.white,
                               )),
                           SizedBox(
-                            width: 35.w,
+                            width: 33.w,
                           ),
                           Icon(
                             Icons.chevron_right_rounded,
@@ -500,7 +502,7 @@ class _drawerState extends State<drawer> {
                                 color: Colors.white,
                               )),
                           SizedBox(
-                            width: 32.w,
+                            width: 30.w,
                           ),
                           Icon(
                             Icons.chevron_right_rounded,
@@ -530,7 +532,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -581,7 +583,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -632,7 +634,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -683,7 +685,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -715,7 +717,8 @@ class _drawerState extends State<drawer> {
                     ],
                   ),
                 ),
-              ),SizedBox(
+              ),
+              SizedBox(
                 height: 2.2.h,
               ),
               InkWell(
@@ -733,7 +736,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -811,7 +814,7 @@ class _drawerState extends State<drawer> {
                           SizedBox(
                             width: 2.w,
                           ),
-                          Text("Listing Page",
+                          Text("All Players",
                               style: TextStyle(
                                 fontSize: 4.w,
                                 fontWeight: FontWeight.w500,
@@ -819,7 +822,7 @@ class _drawerState extends State<drawer> {
                                 color: Colors.white,
                               )),
                           SizedBox(
-                            width: 31.w,
+                            width: 33.w,
                           ),
                           Icon(
                             Icons.chevron_right_rounded,
@@ -865,7 +868,7 @@ class _drawerState extends State<drawer> {
                                 color: Colors.white,
                               )),
                           SizedBox(
-                            width: 32.w,
+                            width: 30.w,
                           ),
                           Icon(
                             Icons.chevron_right_rounded,
@@ -913,7 +916,7 @@ class _drawerState extends State<drawer> {
                             ),
                           ),
                           SizedBox(
-                            width: 23.w,
+                            width: 21.w,
                           ),
                           Icon(
                             Icons.chevron_right_rounded,
@@ -959,7 +962,7 @@ class _drawerState extends State<drawer> {
                                 color: Colors.white,
                               )),
                           SizedBox(
-                            width: 45.w,
+                            width: 43.w,
                           ),
                           Icon(
                             Icons.chevron_right_rounded,
@@ -1013,7 +1016,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1064,7 +1067,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1115,7 +1118,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1166,7 +1169,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1217,7 +1220,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1292,7 +1295,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1343,7 +1346,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1394,7 +1397,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1445,7 +1448,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1520,7 +1523,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1571,7 +1574,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1622,7 +1625,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1673,7 +1676,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1724,7 +1727,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1799,7 +1802,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1850,7 +1853,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1901,7 +1904,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1952,7 +1955,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -2003,7 +2006,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -2035,7 +2038,8 @@ class _drawerState extends State<drawer> {
                     ],
                   ),
                 ),
-              ),SizedBox(
+              ),
+              SizedBox(
                 height: 1.5.h,
               ),
               Divider(
@@ -2077,7 +2081,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -2128,7 +2132,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -2179,7 +2183,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -2230,7 +2234,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -2281,7 +2285,7 @@ class _drawerState extends State<drawer> {
                         width: 6.w,
                       ),
                       Container(
-                        width: 68.5.w,
+                        width: 66.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -2337,51 +2341,11 @@ class _drawerState extends State<drawer> {
                 ],
               ),
               SizedBox(
-                height: 2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => loginpage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.login,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text(
-                            "Login",
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
                 height: 2.2.h,
               ),
               InkWell(
-                onTap: () {
+                onTap: () async {
+                  await SaveDataLocal.clearUserData();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => loginpage(),
@@ -2417,6 +2381,9 @@ class _drawerState extends State<drawer> {
                     ],
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 1.h,
               ),
             ],
           ),

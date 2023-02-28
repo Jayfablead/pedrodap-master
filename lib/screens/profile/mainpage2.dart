@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
+import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/screens/profile/listingpage.dart';
 import 'package:sizer/sizer.dart';
 
@@ -54,70 +55,17 @@ class _mainpage2State extends State<mainpage2> {
   CarouselController _controller = CarouselController();
 
   TextEditingController _search = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(userData!.userData!.email);
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: Stack(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 5.w, right: 5.w, bottom: 2.w),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: BottomAppBar(
-                color: Colors.white.withOpacity(0.15),
-                shape: CircularNotchedRectangle(), //shape of notch
-                notchMargin:
-                    20, //notche margin between floating button and bottom appbar
-                child: SizedBox(
-                  height: 7.h,
-                  child: Row(
-                    //children inside bottom appbar
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      SizedBox(
-                        width: 1.h,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.home,
-                          color: Colors.cyanAccent,
-                          size: 3.h,
-                        ),
-                        onPressed: () {},
-                      ),
-                      SizedBox(
-                        width: 2.h,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.chat_outlined,
-                          color: Colors.white,
-                          size: 3.h,
-                        ),
-                        onPressed: () {},
-                      ),
-                      SizedBox(
-                        width: 3.h,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 3.5.h,
-                        ),
-                        onPressed: () {},
-                      ),
-                      SizedBox(
-                        width: 1.h,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ]),
         key: _scaffoldKey,
         drawer: drawer(),
         backgroundColor: Color(0xff131313),
@@ -142,13 +90,15 @@ class _mainpage2State extends State<mainpage2> {
                           fontFamily: "Poppins",
                           fontWeight: FontWeight.w500),
                     ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                        SizedBox(width: 3.w,),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 3.w,
+                        ),
                         GestureDetector(
                             onTap: () {
                               _scaffoldKey.currentState?.openDrawer();
@@ -157,8 +107,8 @@ class _mainpage2State extends State<mainpage2> {
                               Icons.menu,
                               color: Colors.white,
                             )),
-                ],
-              )
+                      ],
+                    )
                   ],
                 ),
                 SizedBox(
@@ -224,8 +174,8 @@ class _mainpage2State extends State<mainpage2> {
                   items: profile1.map((item) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => listingpage()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => listingpage()));
                       },
                       child: SingleChildScrollView(
                         child: Container(
@@ -263,7 +213,7 @@ class _mainpage2State extends State<mainpage2> {
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             item.name.toString(),
@@ -297,16 +247,18 @@ class _mainpage2State extends State<mainpage2> {
                               Container(
                                 padding: EdgeInsets.all(5.w),
                                 decoration: BoxDecoration(
-                                  // color: Colors.white.withOpacity(0.15),
+                                    // color: Colors.white.withOpacity(0.15),
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(20.0),
                                         bottomRight: Radius.circular(20.0))),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           '28',
@@ -329,7 +281,8 @@ class _mainpage2State extends State<mainpage2> {
                                       ],
                                     ),
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           '69',
@@ -352,7 +305,8 @@ class _mainpage2State extends State<mainpage2> {
                                       ],
                                     ),
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           '2.3B',
@@ -387,9 +341,11 @@ class _mainpage2State extends State<mainpage2> {
                                   width: 50.w,
                                   height: 6.h,
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: Color(0xff0DF5E3),),
-
-                                      borderRadius: BorderRadius.circular(20.sp)),
+                                      border: Border.all(
+                                        color: Color(0xff0DF5E3),
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.circular(20.sp)),
                                   child: Text(
                                     "Connect",
                                     style: TextStyle(
@@ -439,18 +395,18 @@ class _mainpage2State extends State<mainpage2> {
                             fontWeight: FontWeight.w600),
                         textAlign: TextAlign.center,
                       ),
-                      TextButton(
-                          onPressed: () {
-                            click();
-                          },
-                          child: Text(
-                            "Show all",
-                            style: TextStyle(
-                                color: Color(0xff0DF5E3),
-                                fontSize: 12.sp,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w600),
-                          ))
+                      // TextButton(
+                      //     onPressed: () {
+                      //       // click();
+                      //     },
+                      //     child: Text(
+                      //       "Show all",
+                      //       style: TextStyle(
+                      //           color: Color(0xff0DF5E3),
+                      //           fontSize: 12.sp,
+                      //           fontFamily: "Poppins",
+                      //           fontWeight: FontWeight.w600),
+                      //     ))
                     ],
                   ),
                 ),
@@ -564,99 +520,162 @@ class _mainpage2State extends State<mainpage2> {
     );
   }
 
-  click() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          titlePadding: EdgeInsets.only(bottom: 0.h),
-          // insetPadding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          title: Container(
-            padding: EdgeInsets.only(left: 3.w, right: 0.w),
-            decoration: BoxDecoration(
-                color: Color(0xff131313),
-                // color: Color(0xffb4776e6),
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10.0),
-                    topLeft: Radius.circular(10.0))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Search For?",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Poppins"),
-                ),
-                IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(
-                      Icons.close,
-                      color: Colors.white,
-                    ))
-              ],
-            ),
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-          content: Container(
-            color: Colors.grey.shade800,
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-            // height: 38.h,
-            child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 2.w,
-                    crossAxisSpacing: 2.w,
-                    crossAxisCount: 3,
-                    childAspectRatio: 3 / 4),
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: data.length,
-                physics: ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.all(2.w),
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 12.w,
-                          width: 12.w,
-                          child: Image.asset(
-                            data[index].image.toString(),
-                            color: Colors.white,
-                          ),
-                        ),
-                        // CircleAvatar(
-                        //   backgroundColor: Colors.transparent,
-                        //     radius: 5.w,
-                        //     backgroundImage: AssetImage(
-                        //       data[index].image.toString(),
-                        //     )),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Text(
-                          data[index].name.toString(),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Poppins",
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-          ),
-        );
-      },
-    );
-  }
+  // click() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         titlePadding: EdgeInsets.only(bottom: 0.h),
+  //         // insetPadding: EdgeInsets.zero,
+  //         shape: RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.all(Radius.circular(10.0))),
+  //         title: Container(
+  //           padding: EdgeInsets.only(left: 3.w, right: 0.w),
+  //           decoration: BoxDecoration(
+  //               color: Color(0xff131313),
+  //               // color: Color(0xffb4776e6),
+  //               borderRadius: BorderRadius.only(
+  //                   topRight: Radius.circular(10.0),
+  //                   topLeft: Radius.circular(10.0))),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Text(
+  //                 "Search For?",
+  //                 style: TextStyle(
+  //                     color: Colors.white,
+  //                     fontWeight: FontWeight.bold,
+  //                     fontFamily: "Poppins"),
+  //               ),
+  //               IconButton(
+  //                   onPressed: () {
+  //                     Navigator.of(context).pop();
+  //                   },
+  //                   icon: Icon(
+  //                     Icons.close,
+  //                     color: Colors.white,
+  //                   ))
+  //             ],
+  //           ),
+  //         ),
+  //         contentPadding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
+  //         content: Container(
+  //           color: Colors.grey.shade800,
+  //           padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+  //           // height: 38.h,
+  //           child: GridView.builder(
+  //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //                   mainAxisSpacing: 2.w,
+  //                   crossAxisSpacing: 2.w,
+  //                   crossAxisCount: 3,
+  //                   childAspectRatio: 3 / 4),
+  //               shrinkWrap: true,
+  //               scrollDirection: Axis.vertical,
+  //               itemCount: data.length,
+  //               physics: ScrollPhysics(),
+  //               itemBuilder: (context, index) {
+  //                 return Container(
+  //                   padding: EdgeInsets.all(2.w),
+  //                   width: MediaQuery.of(context).size.width,
+  //                   child: Column(
+  //                     children: [
+  //                       Container(
+  //                         height: 12.w,
+  //                         width: 12.w,
+  //                         child: Image.asset(
+  //                           data[index].image.toString(),
+  //                           color: Colors.white,
+  //                         ),
+  //                       ),
+  //                       // CircleAvatar(
+  //                       //   backgroundColor: Colors.transparent,
+  //                       //     radius: 5.w,
+  //                       //     backgroundImage: AssetImage(
+  //                       //       data[index].image.toString(),
+  //                       //     )),
+  //                       SizedBox(
+  //                         height: 1.h,
+  //                       ),
+  //                       Text(
+  //                         data[index].name.toString(),
+  //                         maxLines: 2,
+  //                         overflow: TextOverflow.ellipsis,
+  //                         style: TextStyle(
+  //                             fontSize: 10.sp,
+  //                             fontWeight: FontWeight.bold,
+  //                             fontFamily: "Poppins",
+  //                             color: Colors.white),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 );
+  //               }),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }
+
+
+// ============================== Bottom NavigationBar incase if need ===================
+
+// bottomNavigationBar: Stack(children: <Widget>[
+//           Padding(
+//             padding: EdgeInsets.only(left: 5.w, right: 5.w, bottom: 2.w),
+//             child: ClipRRect(
+//               borderRadius: BorderRadius.circular(30),
+//               child: BottomAppBar(
+//                 color: Colors.white.withOpacity(0.15),
+//                 shape: CircularNotchedRectangle(), //shape of notch
+//                 notchMargin:
+//                     20, //notche margin between floating button and bottom appbar
+//                 child: SizedBox(
+//                   height: 7.h,
+//                   child: Row(
+//                     //children inside bottom appbar
+//                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                     children: <Widget>[
+//                       SizedBox(
+//                         width: 1.h,
+//                       ),
+//                       IconButton(
+//                         icon: Icon(
+//                           Icons.home,
+//                           color: Colors.cyanAccent,
+//                           size: 3.h,
+//                         ),
+//                         onPressed: () {},
+//                       ),
+//                       SizedBox(
+//                         width: 2.h,
+//                       ),
+//                       IconButton(
+//                         icon: Icon(
+//                           Icons.chat_outlined,
+//                           color: Colors.white,
+//                           size: 3.h,
+//                         ),
+//                         onPressed: () {},
+//                       ),
+//                       SizedBox(
+//                         width: 3.h,
+//                       ),
+//                       IconButton(
+//                         icon: Icon(
+//                           Icons.person,
+//                           color: Colors.white,
+//                           size: 3.5.h,
+//                         ),
+//                         onPressed: () {},
+//                       ),
+//                       SizedBox(
+//                         width: 1.h,
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ]),

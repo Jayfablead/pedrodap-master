@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/loginpage.dart';
+import 'package:pedrodap/splashScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -16,13 +17,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return MultiProvider(
-        providers:[
-          ChangeNotifierProvider(
-              create: (context) => authprovider()),
+        providers: [
+          ChangeNotifierProvider(create: (context) => authprovider()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: loginpage(),
+          home: splashscreen2(),
         ),
       );
     });

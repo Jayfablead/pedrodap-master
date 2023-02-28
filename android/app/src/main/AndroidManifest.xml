@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.feblead.pedrodap">
    <application
-        android:label="pedrodap"
+        android:label="Pedro Community"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

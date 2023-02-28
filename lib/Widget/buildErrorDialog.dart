@@ -13,13 +13,14 @@ buildErrorDialog(BuildContext context,String title, String contant,
       decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(20.0),
-          color: Color(0xffb4776e6)
+          color: Color(0xff0DF5E3)
       ),
       child: Center(
         child: Text(buttonname ?? 'OK',
             // textAlign: TextAlign.center,
             style: const TextStyle(
-                color: Colors.white,
+              fontWeight: FontWeight.w700,
+                color: Colors.black,
                 decorationColor: Colors.black,
                 fontFamily: 'poppins')),
       ),
@@ -34,7 +35,7 @@ buildErrorDialog(BuildContext context,String title, String contant,
   );
 
   if (Platform.isAndroid) {
-    AlertDialog alert = AlertDialog(
+    AlertDialog alert = AlertDialog(backgroundColor: Color(0xff131313),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
@@ -42,12 +43,12 @@ buildErrorDialog(BuildContext context,String title, String contant,
       contentPadding: EdgeInsets.only(top: 0.0,bottom: 0.0,left: 20.0),
       title: Text(title,
           style: const TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               decorationColor: Colors.black,
               fontFamily: 'poppins')),
       content: Text(contant,
           style: const TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               decorationColor: Colors.black,
               fontFamily: 'poppins')),
       actions: [
@@ -65,12 +66,12 @@ buildErrorDialog(BuildContext context,String title, String contant,
     CupertinoAlertDialog cupertinoAlertDialog = CupertinoAlertDialog(
       title: Text(title,
           style: const TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               decorationColor: Colors.black,
               fontFamily: 'poppins')),
       content: Text(contant,
           style: const TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               decorationColor: Colors.black,
               fontFamily: 'poppins')),
       actions: [
