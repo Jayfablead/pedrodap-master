@@ -1,7 +1,15 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:pedrodap/Model/playermodal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
+import 'package:pedrodap/Widget/buildErrorDialog.dart';
 import 'package:pedrodap/Widget/const.dart';
+import 'package:pedrodap/Widget/sharedpreferance.dart';
+import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/listingpage.dart';
 import 'package:sizer/sizer.dart';
 
@@ -55,440 +63,452 @@ class _mainpage2State extends State<mainpage2> {
   CarouselController _controller = CarouselController();
 
   TextEditingController _search = TextEditingController();
+  bool isloading = true;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     print(userData!.userData!.email);
+    playerapi();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return commanScreen(
+      scaffold: Scaffold(
         key: _scaffoldKey,
         drawer: drawer(),
         backgroundColor: Color(0xff131313),
-        body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 5.w),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 2.h,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Pedro",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontFamily: "Poppins",
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        GestureDetector(
-                            onTap: () {
-                              _scaffoldKey.currentState?.openDrawer();
-                            },
-                            child: Icon(
-                              Icons.menu,
-                              color: Colors.white,
-                            )),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Text(
-                  "Hello  Neymar !! ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.sp,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 0.5.h,
-                ),
-                Text(
-                  "Welcome to Pedro",
-                  style: TextStyle(
-                      color: Colors.grey.shade500,
-                      fontSize: 13.sp,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 3.h,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                        radius: 6.w,
-                        backgroundImage: NetworkImage(
-                            "https://icdn.football-espana.net/wp-content/uploads/2022/06/Neymar-Junior2.jpeg")),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Container(
-                      width: 72.w,
-                      child: SizedBox(
-                        height: 16.w,
-                        child: TextField(
-                          controller: _search,
-                          keyboardType: TextInputType.text,
-                          decoration: inputDecoration(
-                              hintText: "Search",
-                              col: Colors.white.withOpacity(0.15),
-                              icon: Icon(
+        body: isloading
+            ? Container()
+            : Container(
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Pedro",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.sp,
+                                fontFamily: "Poppins",
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Row(
+                            children: [
+                              Icon(
                                 Icons.search,
                                 color: Colors.white,
-                              )),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 2.h,
-                ),
-                CarouselSlider(
-                  carouselController: _controller,
-                  items: profile1.map((item) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => listingpage()));
-                      },
-                      child: SingleChildScrollView(
-                        child: Container(
-                          // padding:EdgeInsets.all(5.w),
-                          height: 40.h,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.15),
                               ),
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(5.w),
+                              SizedBox(
+                                width: 3.w,
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    _scaffoldKey.currentState?.openDrawer();
+                                  },
+                                  child: Icon(
+                                    Icons.menu,
+                                    color: Colors.white,
+                                  )),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text(
+                        "Hello " + userData!.userData!.name.toString() + ' !!',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 0.5.h,
+                      ),
+                      Text(
+                        "Welcome to Pedro",
+                        style: TextStyle(
+                            color: Colors.grey.shade500,
+                            fontSize: 13.sp,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                              radius: 6.w,
+                              backgroundImage: NetworkImage(
+                                  "https://icdn.football-espana.net/wp-content/uploads/2022/06/Neymar-Junior2.jpeg")),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Container(
+                            width: 72.w,
+                            child: SizedBox(
+                              height: 16.w,
+                              child: TextField(
+                                controller: _search,
+                                keyboardType: TextInputType.text,
+                                decoration: inputDecoration(
+                                    hintText: "Search",
+                                    col: Colors.white.withOpacity(0.15),
+                                    icon: Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      CarouselSlider(
+                        carouselController: _controller,
+                        items: playerdata!.players!.map((item) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => listingpage()));
+                            },
+                            child: SingleChildScrollView(
+                              child: Container(
+                                // padding:EdgeInsets.all(5.w),
+                                height: 40.h,
+                                width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.15),
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20.0),
-                                        topRight: Radius.circular(20.0))),
-                                child: Row(
+                                    border: Border.all(
+                                      color: Colors.white.withOpacity(0.15),
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                child: Column(
                                   children: [
-                                    CircleAvatar(
-                                      radius: 10.5.w,
-                                      backgroundColor: Colors.white,
-                                      child: CircleAvatar(
-                                          radius: 10.w,
-                                          backgroundImage: AssetImage(
-                                            item.image.toString(),
-                                          )),
-                                    ),
-                                    SizedBox(
-                                      width: 5.w,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                    Container(
+                                      padding: EdgeInsets.all(5.w),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.15),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20.0),
+                                              topRight: Radius.circular(20.0))),
+                                      child: Row(
                                         children: [
-                                          Text(
-                                            item.name.toString(),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white),
+                                          CircleAvatar(
+                                            radius: 10.5.w,
+                                            backgroundColor: Colors.white,
+                                            child: CircleAvatar(
+                                                radius: 10.w,
+                                                backgroundImage: AssetImage(
+                                                  'assets/messi.png',
+                                                )),
                                           ),
-                                          Text(
-                                            item.club.toString(),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  item.name.toString(),
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily: "Poppins",
+                                                      color: Colors.white),
+                                                ),
+                                                Text(
+                                                  item.clubName.toString(),
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontFamily: "Poppins",
+                                                      color: Colors.white),
+                                                )
+                                              ],
+                                            ),
                                           )
                                         ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(5.w),
+                                      decoration: BoxDecoration(
+                                          // color: Colors.white.withOpacity(0.15),
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(20.0),
+                                              bottomRight:
+                                                  Radius.circular(20.0))),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '28',
+                                                style: TextStyle(
+                                                  fontSize: 6.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Poppins",
+                                                  color: Color(0xffffffff),
+                                                ),
+                                              ),
+                                              Text(
+                                                'Posts',
+                                                style: TextStyle(
+                                                  fontSize: 3.5.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Poppins",
+                                                  color: Color(0xffb4b4b4),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '69',
+                                                style: TextStyle(
+                                                  fontSize: 6.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Poppins",
+                                                  color: Color(0xffffffff),
+                                                ),
+                                              ),
+                                              Text(
+                                                'Following',
+                                                style: TextStyle(
+                                                  fontSize: 3.5.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Poppins",
+                                                  color: Color(0xffb4b4b4),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '2.3B',
+                                                style: TextStyle(
+                                                  fontSize: 6.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Poppins",
+                                                  color: Color(0xffffffff),
+                                                ),
+                                              ),
+                                              Text(
+                                                'Followers',
+                                                style: TextStyle(
+                                                  fontSize: 3.5.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Poppins",
+                                                  color: Color(0xffb4b4b4),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: 50.w,
+                                        height: 6.h,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Color(0xff0DF5E3),
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.sp)),
+                                        child: Text(
+                                          "Connect",
+                                          style: TextStyle(
+                                              fontSize: 14.sp,
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     )
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 2.h,
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(5.w),
-                                decoration: BoxDecoration(
-                                    // color: Colors.white.withOpacity(0.15),
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(20.0),
-                                        bottomRight: Radius.circular(20.0))),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          '28',
-                                          style: TextStyle(
-                                            fontSize: 6.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xffffffff),
-                                          ),
-                                        ),
-                                        Text(
-                                          'Posts',
-                                          style: TextStyle(
-                                            fontSize: 3.5.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xffb4b4b4),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          '69',
-                                          style: TextStyle(
-                                            fontSize: 6.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xffffffff),
-                                          ),
-                                        ),
-                                        Text(
-                                          'Following',
-                                          style: TextStyle(
-                                            fontSize: 3.5.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xffb4b4b4),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          '2.3B',
-                                          style: TextStyle(
-                                            fontSize: 6.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xffffffff),
-                                          ),
-                                        ),
-                                        Text(
-                                          'Followers',
-                                          style: TextStyle(
-                                            fontSize: 3.5.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xffb4b4b4),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 2.h,
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: 50.w,
-                                  height: 6.h,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Color(0xff0DF5E3),
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(20.sp)),
-                                  child: Text(
-                                    "Connect",
-                                    style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: Colors.white,
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                            ),
+                          );
+                        }).toList(),
+                        options: CarouselOptions(
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _current = index;
+                            });
+                          },
+                          height: 40.h,
+                          enlargeCenterPage: true,
+                          autoPlay: false,
+                          // aspectRatio: 16 / 9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 500),
+                          viewportFraction: 0.8,
                         ),
                       ),
-                    );
-                  }).toList(),
-                  options: CarouselOptions(
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                      });
-                    },
-                    height: 40.h,
-                    enlargeCenterPage: true,
-                    autoPlay: false,
-                    // aspectRatio: 16 / 9,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enableInfiniteScroll: true,
-                    autoPlayAnimationDuration: Duration(milliseconds: 500),
-                    viewportFraction: 0.8,
-                  ),
-                ),
-                SizedBox(
-                  height: 3.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Search For?",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                            fontFamily: "Poppins",
-                            fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.center,
+                      SizedBox(
+                        height: 3.h,
                       ),
-                      // TextButton(
-                      //     onPressed: () {
-                      //       // click();
-                      //     },
-                      //     child: Text(
-                      //       "Show all",
-                      //       style: TextStyle(
-                      //           color: Color(0xff0DF5E3),
-                      //           fontSize: 12.sp,
-                      //           fontFamily: "Poppins",
-                      //           fontWeight: FontWeight.w600),
-                      //     ))
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Search For?",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.sp,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.w600),
+                              textAlign: TextAlign.center,
+                            ),
+                            // TextButton(
+                            //     onPressed: () {
+                            //       // click();
+                            //     },
+                            //     child: Text(
+                            //       "Show all",
+                            //       style: TextStyle(
+                            //           color: Color(0xff0DF5E3),
+                            //           fontSize: 12.sp,
+                            //           fontFamily: "Poppins",
+                            //           fontWeight: FontWeight.w600),
+                            //     ))
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Container(
+                        height: 16.h,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.only(left: 5.w, top: 2.h),
+                        decoration: BoxDecoration(
+                            // gradient: LinearGradient(
+                            //   begin: Alignment.topLeft,
+                            //   end: Alignment.bottomRight,
+                            //   colors: [
+                            //     Color(0xff514d56),
+                            //     Color(0xff252525),
+                            //   ],
+                            // )
+                            ),
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: data.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectindex1 = index;
+                                  });
+                                },
+                                child: Container(
+                                  width: 22.w,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          height: 8.5.w,
+                                          width: 22.w,
+                                          alignment: Alignment.center,
+                                          margin: EdgeInsets.only(right: 5.w),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 2.w, vertical: 0.h),
+                                          child: Image.asset(
+                                              data[index].image.toString(),
+                                              fit: BoxFit.cover,
+                                              height: 9.w,
+                                              width: 8.7.w,
+                                              color: Colors.grey.shade200)),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        margin: EdgeInsets.only(right: 4.w),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w, vertical: 0.h),
+                                        child: Text(
+                                          data[index].name.toString(),
+                                          maxLines: 4,
+                                          style: TextStyle(
+                                              color: Colors.grey.shade200,
+                                              fontSize: 10.sp,
+                                              fontFamily: "Poppins",
+                                              fontWeight: FontWeight.normal),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  height: 16.h,
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left: 5.w, top: 2.h),
-                  decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      //   begin: Alignment.topLeft,
-                      //   end: Alignment.bottomRight,
-                      //   colors: [
-                      //     Color(0xff514d56),
-                      //     Color(0xff252525),
-                      //   ],
-                      // )
-                      ),
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectindex1 = index;
-                            });
-                          },
-                          child: Container(
-                            width: 22.w,
-                            child: Column(
-                              children: [
-                                Container(
-                                    height: 8.5.w,
-                                    width: 22.w,
-                                    alignment: Alignment.center,
-                                    margin: EdgeInsets.only(right: 5.w),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 2.w, vertical: 0.h),
-                                    child: Image.asset(
-                                        data[index].image.toString(),
-                                        fit: BoxFit.cover,
-                                        height: 9.w,
-                                        width: 8.7.w,
-                                        color: Colors.grey.shade200)),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  margin: EdgeInsets.only(right: 4.w),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 1.w, vertical: 0.h),
-                                  child: Text(
-                                    data[index].name.toString(),
-                                    maxLines: 4,
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 10.sp,
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.normal),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-              ],
-            ),
-          ),
-        ),
+              ),
       ),
+      isLoading: isloading,
     );
   }
 
@@ -518,6 +538,36 @@ class _mainpage2State extends State<mainpage2> {
           borderRadius: BorderRadius.all(Radius.circular(10.sp)),
           borderSide: BorderSide.none),
     );
+  }
+
+  playerapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'all_players_app';
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().playersApi(data).then((Response response) async {
+          playerdata = Playermodal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && userData?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            isloading = false;
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
   }
 
   // click() {

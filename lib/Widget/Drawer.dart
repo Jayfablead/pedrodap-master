@@ -74,14 +74,14 @@ class _drawerState extends State<drawer> {
             //padding: EdgeInsets.all(2.w),
             children: [
               Container(
-                height: 10.h,
+                height: 12.h,
                 padding: EdgeInsets.all(1.w),
                 width: widthDrawer,
                 // color: Colors.black.withOpacity(0.3),
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage("assets/splash2.jpg"))
+                    // image: DecorationImage(
+                    //     fit: BoxFit.fill,
+                    //     image: AssetImage("assets/splash2.jpg"))
                     // image: NetworkImage(
                     //     'https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg')),
                     ),
@@ -112,11 +112,15 @@ class _drawerState extends State<drawer> {
                         SizedBox(
                           height: 0.5.h,
                         ),
-                        Text(userData!.userData!.email.toString(),
-                            style: TextStyle(
-                                color: Colors.cyanAccent,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w600)),
+                        SizedBox(
+                          width: 45.w,
+                          child: Text(userData!.userData!.email.toString(),
+                              maxLines: 2,
+                              style: TextStyle(
+                                  color: Colors.cyanAccent,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.w600)),
+                        ),
                       ],
                     ),
                   ],
@@ -245,108 +249,7 @@ class _drawerState extends State<drawer> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => FeedBackPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Send Feedback",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => FeedbackListings(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Feedback Listing",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+
               SizedBox(
                 height: 2.h,
               ),
@@ -399,129 +302,13 @@ class _drawerState extends State<drawer> {
                 ),
               ),
               SizedBox(
-                height: 1.5.h,
-              ),
-              Divider(
-                color: Colors.white54,
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    Text(
-                      "Profile",
-                      style: TextStyle(
-                        fontSize: 3.5.w,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins",
-                        color: Color(0xffb2b2b2),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
                 height: 2.h,
               ),
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => MyProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.person_outline_rounded,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text("My Profile",
-                              style: TextStyle(
-                                fontSize: 4.w,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
-                                color: Colors.white,
-                              )),
-                          SizedBox(
-                            width: 33.w,
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Userprofile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.people_alt_outlined,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text("User Profile",
-                              style: TextStyle(
-                                fontSize: 4.w,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
-                                color: Colors.white,
-                              )),
-                          SizedBox(
-                            width: 30.w,
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyScoutListingPage(),
+                      builder: (context) => FeedBackPage(),
                     ),
                   );
                 },
@@ -539,217 +326,13 @@ class _drawerState extends State<drawer> {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.person_outline_rounded,
+                                  Icons.contact_page_outlined,
                                   color: Colors.white,
                                 ),
                                 SizedBox(
                                   width: 2.w,
                                 ),
-                                Text("My Scout",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyCoachingFeedbackPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.person_outline_rounded,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("My Coach",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyTrainingFeedbackPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.person_outline_rounded,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("My Training",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyNutritionFeedbackPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.person_outline_rounded,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("My Nutritionist",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyMedicalPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.person_outline_rounded,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("My Medical",
+                                Text("Send Feedback",
                                     style: TextStyle(
                                       fontSize: 4.w,
                                       fontWeight: FontWeight.w500,
@@ -772,6 +355,342 @@ class _drawerState extends State<drawer> {
               SizedBox(
                 height: 1.5.h,
               ),
+              (userData!.userData!.role == "2")
+                  ? Column(
+                      children: [
+                        Divider(
+                          color: Colors.white54,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Text(
+                                "Profile",
+                                style: TextStyle(
+                                  fontSize: 3.5.w,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "Poppins",
+                                  color: Color(0xffb2b2b2),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyProfile(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person_outline_rounded,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text("My Profile",
+                                        style: TextStyle(
+                                          fontSize: 4.w,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "Poppins",
+                                          color: Colors.white,
+                                        )),
+                                    SizedBox(
+                                      width: 33.w,
+                                    ),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyScoutListingPage(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.person_outline_rounded,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Scout",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyCoachingFeedbackPage(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.person_outline_rounded,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Coach",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyTrainingFeedbackPage(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.person_outline_rounded,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Training",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyNutritionFeedbackPage(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.person_outline_rounded,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Nutritionist",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyMedicalPage(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.person_outline_rounded,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Medical",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 1.5.h,
+                        ),
+                      ],
+                    )
+                  : Container(),
               Divider(
                 color: Colors.white54,
               ),
@@ -974,288 +893,320 @@ class _drawerState extends State<drawer> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 1.5.h,
-              ),
-              Divider(
-                color: Colors.white54,
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    Text(
-                      "Scouts",
-                      style: TextStyle(
-                        fontSize: 3.5.w,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins",
-                        color: Color(0xffb2b2b2),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ScoutListing(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
+
+              (userData!.userData!.role == "5") ||
+                      (userData!.userData!.role == "2")
+                  ? Column(
+                      children: [
+                        SizedBox(
+                          height: 1.5.h,
+                        ),
+                        Divider(
+                          color: Colors.white54,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Text(
+                                "Scouts",
+                                style: TextStyle(
+                                  fontSize: 3.5.w,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "Poppins",
+                                  color: Color(0xffb2b2b2),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                      ],
+                    )
+                  : Container(),
+
+              (userData!.userData!.role == "5") ||
+                      (userData!.userData!.role == "2")
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ScoutListing(),
+                          ),
+                        );
+                      },
+                      child: Container(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("All Sessions",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
+                            SizedBox(
+                              width: 6.w,
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.contact_page_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("All Sessions",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins",
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CreateScouts(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
+                    )
+                  : Container(),
+              (userData!.userData!.role == "5") ||
+                      (userData!.userData!.role == "2")
+                  ? SizedBox(
+                      height: 2.2.h,
+                    )
+                  : Container(),
+              (userData!.userData!.role == "2")
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => CreateScouts(),
+                          ),
+                        );
+                      },
+                      child: Container(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Create Scout Session",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
+                            SizedBox(
+                              width: 6.w,
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.contact_page_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("Create Scout Session",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins",
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ScoutFeedbackListings(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
+                    )
+                  : Container(),
+              (userData!.userData!.role == "2")
+                  ? SizedBox(
+                      height: 2.2.h,
+                    )
+                  : Container(),
+              (userData!.userData!.role == "5")
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ScoutFeedbackListings(),
+                          ),
+                        );
+                      },
+                      child: Container(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Scout Feedback",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
+                            SizedBox(
+                              width: 6.w,
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.contact_page_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("Scout Feedback",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins",
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ScoutProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
+                    )
+                  : Container(),
+              // SizedBox(S
+              //   height: 2.2.h,
+              // ),
+              (userData!.userData!.role == "2")
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ScoutProfile(),
+                          ),
+                        );
+                      },
+                      child: Container(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Scout Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
+                            SizedBox(
+                              width: 6.w,
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.contact_page_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("Scout Profile",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins",
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    )
+                  : Container(),
               SizedBox(
                 height: 2.2.h,
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyScoutProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
+              (userData!.userData!.role == "5")
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => MyScoutProfile(),
+                          ),
+                        );
+                      },
+                      child: Container(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("My Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
+                            SizedBox(
+                              width: 6.w,
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.contact_page_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("My Profile",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins",
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 1.5.h,
-              ),
+                    )
+                  : Container(),
+              (userData!.userData!.role == "5")
+                  ? SizedBox(
+                      height: 1.5.h,
+                    )
+                  : Container(),
               Divider(
                 color: Colors.white54,
               ),
@@ -1430,84 +1381,152 @@ class _drawerState extends State<drawer> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyCoachProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+
+              (userData!.userData!.role == "3")
+                  ? Column(
+                      children: [
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => FeedbackListings(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("My Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Feedback Listing",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyCoachProfile(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Profile",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container(),
               SizedBox(
                 height: 1.5.h,
               ),
-              Divider(
-                color: Colors.white54,
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    Text(
-                      "Training",
-                      style: TextStyle(
-                        fontSize: 3.5.w,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins",
-                        color: Color(0xffb2b2b2),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
+              (userData!.userData!.role == "9")
+                  ||
+                         (userData!.userData!.role == "2")
+                  ? Column(
+                      children: [
+                        Divider(
+                          color: Colors.white54,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Text(
+                                "Training",
+                                style: TextStyle(
+                                  fontSize: 3.5.w,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "Poppins",
+                                  color: Color(0xffb2b2b2),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                      ],
+                    )
+                  : Container(),
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
@@ -1610,57 +1629,62 @@ class _drawerState extends State<drawer> {
               SizedBox(
                 height: 2.2.h,
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => TrainerFeedbackListings(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
+              (userData!.userData!.role == "9")
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => TrainerFeedbackListings(),
+                          ),
+                        );
+                      },
+                      child: Container(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Training Feedback",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
+                            SizedBox(
+                              width: 6.w,
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.contact_page_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("Training Feedback",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins",
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
+                    )
+                  : Container(),
+              (userData!.userData!.role == "9")
+                  ? SizedBox(
+                      height: 2.2.h,
+                    )
+                  : Container(),
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
@@ -1709,57 +1733,64 @@ class _drawerState extends State<drawer> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyTrainerProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+              (userData!.userData!.role == "9")
+                  ? Column(
+                      children: [
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyTrainerProfile(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("My Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Profile",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                      ],
+                    )
+                  : Container(),
               SizedBox(
                 height: 1.5.h,
               ),
@@ -1787,258 +1818,275 @@ class _drawerState extends State<drawer> {
               SizedBox(
                 height: 2.2.h,
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => NutriListing(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+              (userData!.userData!.role == "2")
+                  ? Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => NutriListing(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("All Sessions",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("All Sessions",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CreateNutritionist(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => CreateNutritionist(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("Create Nutri Session",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Create Nutri Session",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => NutriFeedbackListings(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => NutritionistProfile(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("Nutritionist Feedback",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Nutritionist Profile",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => NutritionistProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                      ],
+                    )
+                  : Container(),
+              (userData!.userData!.role == "7")
+                  ? Column(
+                      children: [
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => NutriFeedbackListings(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("Nutritionist Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Nutritionist Feedback",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyNutritionistProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyNutritionistProfile(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("My Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Profile",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                      ],
+                    )
+                  : Container(),
               SizedBox(
                 height: 1.5.h,
               ),
@@ -2066,258 +2114,275 @@ class _drawerState extends State<drawer> {
               SizedBox(
                 height: 2.2.h,
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MedicalListings(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+              (userData!.userData!.role == "2")
+                  ? Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MedicalListings(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("All Sessions",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("All Sessions",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CreateMedical(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => CreateMedical(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("Create Medical Session",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Create Medical Session",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MedicalFeedbackListings(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MedicalProfile(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("Medical Feedback",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Medical Profile",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MedicalProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                      ],
+                    )
+                  : Container(),
+              (userData!.userData!.role == "6")
+                  ? Column(
+                      children: [
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MedicalFeedbackListings(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("Medical Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Medical Feedback",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyMedicalProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                        SizedBox(
+                          height: 2.2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyMedicalProfile(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
                                 SizedBox(
-                                  width: 2.w,
+                                  width: 6.w,
                                 ),
-                                Text("My Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.contact_page_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("My Profile",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                      ],
+                    )
+                  : Container(),
               SizedBox(
                 height: 1.5.h,
               ),
@@ -2345,12 +2410,12 @@ class _drawerState extends State<drawer> {
               ),
               InkWell(
                 onTap: () async {
-                  await SaveDataLocal.clearUserData();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => loginpage(),
                     ),
                   );
+                  await SaveDataLocal.clearUserData();
                 },
                 child: Container(
                   child: Row(

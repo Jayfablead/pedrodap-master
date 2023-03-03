@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/loginpage.dart';
 import 'package:pedrodap/splashScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import 'loader.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
+  configLoading();
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +28,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: splashscreen2(),
+          builder: EasyLoading.init(),
         ),
       );
     });

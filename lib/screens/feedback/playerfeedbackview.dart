@@ -108,7 +108,8 @@ class _PlayerFeedbackState extends State<PlayerFeedback> {
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
-                  ),SizedBox(
+                  ),
+                  SizedBox(
                     height: 1.h,
                   ),
                   Container(
@@ -116,128 +117,144 @@ class _PlayerFeedbackState extends State<PlayerFeedback> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 1.w),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 2.w, vertical: 1.h),
-                                width: 90.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.15),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                profile[index].image.toString()),
-                                            radius: 4.h,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                profile[index].name.toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15.sp,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                              Text(
-                                                profile[index]
-                                                        .session
-                                                        .toString() +
-                                                    ' , ' +
-                                                    profile[index]
-                                                        .date
-                                                        .toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white
-                                                        .withOpacity(0.90),
-                                                    fontSize: 12.sp,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.sports_handball_rounded,color: Colors.white,size: 20.sp,),
-                                          SizedBox(width: 2.w,),
-                                          Text(
-                                            profile[index].details.toString(),
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15.sp,
-                                                fontFamily: "Poppins",
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      RatingBar.builder(
-                                        itemSize: 7.w,
-                                        ignoreGestures: true,
-                                        initialRating: 3,
-                                        minRating: 1,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemCount: 5,
-                                        itemPadding:
-                                            EdgeInsets.symmetric(horizontal: 4.0),
-                                        itemBuilder: (context, _) => Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
+                        return SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 1.w),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 2.w, vertical: 1.h),
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  profile[index]
+                                                      .image
+                                                      .toString()),
+                                              radius: 4.h,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  profile[index]
+                                                      .name
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.sp,
+                                                      fontFamily: "Poppins",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  profile[index]
+                                                          .session
+                                                          .toString() +
+                                                      ' , ' +
+                                                      profile[index]
+                                                          .date
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white
+                                                          .withOpacity(0.90),
+                                                      fontSize: 12.sp,
+                                                      fontFamily: "Poppins",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ],
+                                            )
+                                          ],
                                         ),
-                                        glowColor: Colors.amberAccent,
-                                        onRatingUpdate: (rating) {
-                                          print(rating);
-                                          setState(() {});
-                                        },
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Text(
-                                        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s."',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 11.sp,
-                                            fontFamily: "Poppins",
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ]),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.sports_handball_rounded,
+                                              color: Colors.white,
+                                              size: 20.sp,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Text(
+                                              profile[index].details.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15.sp,
+                                                  fontFamily: "Poppins",
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        RatingBar.builder(
+                                          itemSize: 7.w,
+                                          ignoreGestures: true,
+                                          initialRating: 3,
+                                          minRating: 1,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          itemPadding: EdgeInsets.symmetric(
+                                              horizontal: 4.0),
+                                          itemBuilder: (context, _) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          glowColor: Colors.amberAccent,
+                                          onRatingUpdate: (rating) {
+                                            print(rating);
+                                            setState(() {});
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Text(
+                                          '"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s."',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11.sp,
+                                              fontFamily: "Poppins",
+                                              fontWeight: FontWeight.w400),
+                                        )
+                                      ]),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
                       itemCount: profile.length,
                     ),
-                  ), SizedBox(
+                  ),
+                  SizedBox(
                     height: 3.h,
                   ),
                   Align(
@@ -252,7 +269,8 @@ class _PlayerFeedbackState extends State<PlayerFeedback> {
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
-                  ),SizedBox(
+                  ),
+                  SizedBox(
                     height: 1.h,
                   ),
                   Container(
@@ -260,128 +278,145 @@ class _PlayerFeedbackState extends State<PlayerFeedback> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 1.w),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 2.w, vertical: 1.h),
-                                width: 90.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.15),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                profile[index].image.toString()),
-                                            radius: 4.h,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                profile[index].name.toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15.sp,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                              Text(
-                                                profile[index]
-                                                        .session
-                                                        .toString() +
-                                                    ' , ' +
-                                                    profile[index]
-                                                        .date
-                                                        .toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white
-                                                        .withOpacity(0.90),
-                                                    fontSize: 12.sp,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.supervised_user_circle_outlined,color: Colors.white,size: 20.sp,),
-                                          SizedBox(width: 2.w,),
-                                          Text(
-                                            profile[index].details.toString(),
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15.sp,
-                                                fontFamily: "Poppins",
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      RatingBar.builder(
-                                        itemSize: 7.w,
-                                        ignoreGestures: true,
-                                        initialRating: 3,
-                                        minRating: 1,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemCount: 5,
-                                        itemPadding:
-                                            EdgeInsets.symmetric(horizontal: 4.0),
-                                        itemBuilder: (context, _) => Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
+                        return SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 1.w),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 2.w, vertical: 1.h),
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  profile[index]
+                                                      .image
+                                                      .toString()),
+                                              radius: 4.h,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  profile[index]
+                                                      .name
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.sp,
+                                                      fontFamily: "Poppins",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  profile[index]
+                                                          .session
+                                                          .toString() +
+                                                      ' , ' +
+                                                      profile[index]
+                                                          .date
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white
+                                                          .withOpacity(0.90),
+                                                      fontSize: 12.sp,
+                                                      fontFamily: "Poppins",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ],
+                                            )
+                                          ],
                                         ),
-                                        glowColor: Colors.amberAccent,
-                                        onRatingUpdate: (rating) {
-                                          print(rating);
-                                          setState(() {});
-                                        },
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Text(
-                                        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s."',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 11.sp,
-                                            fontFamily: "Poppins",
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ]),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons
+                                                  .supervised_user_circle_outlined,
+                                              color: Colors.white,
+                                              size: 20.sp,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Text(
+                                              profile[index].details.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15.sp,
+                                                  fontFamily: "Poppins",
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        RatingBar.builder(
+                                          itemSize: 7.w,
+                                          ignoreGestures: true,
+                                          initialRating: 3,
+                                          minRating: 1,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          itemPadding: EdgeInsets.symmetric(
+                                              horizontal: 4.0),
+                                          itemBuilder: (context, _) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          glowColor: Colors.amberAccent,
+                                          onRatingUpdate: (rating) {
+                                            print(rating);
+                                            setState(() {});
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Text(
+                                          '"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s."',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11.sp,
+                                              fontFamily: "Poppins",
+                                              fontWeight: FontWeight.w400),
+                                        )
+                                      ]),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
                       itemCount: profile.length,
                     ),
-                  ), SizedBox(
+                  ),
+                  SizedBox(
                     height: 3.h,
                   ),
                   Align(
@@ -396,7 +431,8 @@ class _PlayerFeedbackState extends State<PlayerFeedback> {
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
-                  ),SizedBox(
+                  ),
+                  SizedBox(
                     height: 1.h,
                   ),
                   Container(
@@ -404,128 +440,144 @@ class _PlayerFeedbackState extends State<PlayerFeedback> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 1.w),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 2.w, vertical: 1.h),
-                                width: 90.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.15),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                profile[index].image.toString()),
-                                            radius: 4.h,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                profile[index].name.toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15.sp,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                              Text(
-                                                profile[index]
-                                                        .session
-                                                        .toString() +
-                                                    ' , ' +
-                                                    profile[index]
-                                                        .date
-                                                        .toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white
-                                                        .withOpacity(0.90),
-                                                    fontSize: 12.sp,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.sports_volleyball_rounded,color: Colors.white,size: 20.sp,),
-                                          SizedBox(width: 2.w,),
-                                          Text(
-                                            profile[index].details.toString(),
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15.sp,
-                                                fontFamily: "Poppins",
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      RatingBar.builder(
-                                        itemSize: 7.w,
-                                        ignoreGestures: true,
-                                        initialRating: 3,
-                                        minRating: 1,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemCount: 5,
-                                        itemPadding:
-                                            EdgeInsets.symmetric(horizontal: 4.0),
-                                        itemBuilder: (context, _) => Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
+                        return SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 1.w),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 2.w, vertical: 1.h),
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  profile[index]
+                                                      .image
+                                                      .toString()),
+                                              radius: 4.h,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  profile[index]
+                                                      .name
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.sp,
+                                                      fontFamily: "Poppins",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  profile[index]
+                                                          .session
+                                                          .toString() +
+                                                      ' , ' +
+                                                      profile[index]
+                                                          .date
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white
+                                                          .withOpacity(0.90),
+                                                      fontSize: 12.sp,
+                                                      fontFamily: "Poppins",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ],
+                                            )
+                                          ],
                                         ),
-                                        glowColor: Colors.amberAccent,
-                                        onRatingUpdate: (rating) {
-                                          print(rating);
-                                          setState(() {});
-                                        },
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Text(
-                                        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s."',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 11.sp,
-                                            fontFamily: "Poppins",
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ]),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.sports_volleyball_rounded,
+                                              color: Colors.white,
+                                              size: 20.sp,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Text(
+                                              profile[index].details.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15.sp,
+                                                  fontFamily: "Poppins",
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        RatingBar.builder(
+                                          itemSize: 7.w,
+                                          ignoreGestures: true,
+                                          initialRating: 3,
+                                          minRating: 1,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          itemPadding: EdgeInsets.symmetric(
+                                              horizontal: 4.0),
+                                          itemBuilder: (context, _) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          glowColor: Colors.amberAccent,
+                                          onRatingUpdate: (rating) {
+                                            print(rating);
+                                            setState(() {});
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Text(
+                                          '"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s."',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11.sp,
+                                              fontFamily: "Poppins",
+                                              fontWeight: FontWeight.w400),
+                                        )
+                                      ]),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
                       itemCount: profile.length,
                     ),
-                  ), SizedBox(
+                  ),
+                  SizedBox(
                     height: 3.h,
                   ),
                   Align(
@@ -540,7 +592,8 @@ class _PlayerFeedbackState extends State<PlayerFeedback> {
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
-                  ),SizedBox(
+                  ),
+                  SizedBox(
                     height: 1.h,
                   ),
                   Container(
@@ -548,123 +601,138 @@ class _PlayerFeedbackState extends State<PlayerFeedback> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 1.w),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 2.w, vertical: 1.h),
-                                width: 90.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.15),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                profile[index].image.toString()),
-                                            radius: 4.h,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                profile[index].name.toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15.sp,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                              Text(
-                                                profile[index]
-                                                        .session
-                                                        .toString() +
-                                                    ' , ' +
-                                                    profile[index]
-                                                        .date
-                                                        .toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white
-                                                        .withOpacity(0.90),
-                                                    fontSize: 12.sp,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.favorite_border,color: Colors.white,size: 20.sp,),
-                                          SizedBox(width: 2.w,),
-                                          Text(
-                                            profile[index].details.toString(),
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15.sp,
-                                                fontFamily: "Poppins",
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      RatingBar.builder(
-                                        itemSize: 7.w,
-                                        ignoreGestures: true,
-                                        initialRating: 3,
-                                        minRating: 1,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemCount: 5,
-                                        itemPadding:
-                                            EdgeInsets.symmetric(horizontal: 4.0),
-                                        itemBuilder: (context, _) => Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
+                        return SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 1.w),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 2.w, vertical: 1.h),
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  profile[index]
+                                                      .image
+                                                      .toString()),
+                                              radius: 4.h,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  profile[index]
+                                                      .name
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.sp,
+                                                      fontFamily: "Poppins",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  profile[index]
+                                                          .session
+                                                          .toString() +
+                                                      ' , ' +
+                                                      profile[index]
+                                                          .date
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white
+                                                          .withOpacity(0.90),
+                                                      fontSize: 12.sp,
+                                                      fontFamily: "Poppins",
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ],
+                                            )
+                                          ],
                                         ),
-                                        glowColor: Colors.amberAccent,
-                                        onRatingUpdate: (rating) {
-                                          print(rating);
-                                          setState(() {});
-                                        },
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Text(
-                                        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s."',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 11.sp,
-                                            fontFamily: "Poppins",
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ]),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.favorite_border,
+                                              color: Colors.white,
+                                              size: 20.sp,
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Text(
+                                              profile[index].details.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15.sp,
+                                                  fontFamily: "Poppins",
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        RatingBar.builder(
+                                          itemSize: 7.w,
+                                          ignoreGestures: true,
+                                          initialRating: 3,
+                                          minRating: 1,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          itemPadding: EdgeInsets.symmetric(
+                                              horizontal: 4.0),
+                                          itemBuilder: (context, _) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          glowColor: Colors.amberAccent,
+                                          onRatingUpdate: (rating) {
+                                            print(rating);
+                                            setState(() {});
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Text(
+                                          '"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s."',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11.sp,
+                                              fontFamily: "Poppins",
+                                              fontWeight: FontWeight.w400),
+                                        )
+                                      ]),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
                       itemCount: profile.length,

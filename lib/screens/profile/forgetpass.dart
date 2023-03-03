@@ -1,6 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
+import 'package:pedrodap/Model/UserModal.dart';
+import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/loginpage.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../Widget/const.dart';
 
 class forgetpass extends StatefulWidget {
   const forgetpass({Key? key}) : super(key: key);
@@ -14,6 +23,7 @@ class _forgetpassState extends State<forgetpass> {
   TextEditingController _pass = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   int setup = 0;
+  bool isLodaing = true;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +47,6 @@ class _forgetpassState extends State<forgetpass> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
                 SizedBox(
                   height: 20.h,
@@ -110,7 +119,7 @@ class _forgetpassState extends State<forgetpass> {
                               //Convert string p to a RegEx
                               RegExp regExp = RegExp(p);
                               if (value!.isEmpty) {
-                                return "Enter Your Email";
+                                return "                Enter Your Email";
                               } else {
                                 //If email address matches pattern
                                 return null;
@@ -132,7 +141,12 @@ class _forgetpassState extends State<forgetpass> {
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        EasyLoading.show(status: 'Sending Email...');
+                      });
+                      forgetpwdapi();
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       width: 50.w,
@@ -151,7 +165,6 @@ class _forgetpassState extends State<forgetpass> {
                     ),
                   ),
                 ),
-
                 SizedBox(
                   height: 30.h,
                 ),
@@ -217,5 +230,55 @@ class _forgetpassState extends State<forgetpass> {
           borderRadius: BorderRadius.all(Radius.circular(10.sp)),
           borderSide: BorderSide.none),
     );
+  }
+
+  forgetpwdapi() async {
+    if (_formKey.currentState!.validate()) {
+      final Map<String, String> data = {};
+      data['forgotEmail'] = _email.text.trim().toString();
+      data['action'] = 'forgot_password';
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().loginapi(data).then((Response response) async {
+            print(response.statusCode);
+            userData = UserModal.fromJson(json.decode(response.body));
+
+            if (response.statusCode == 200 &&
+                userData!.status == "Check your mail!") {
+              setState(() async {
+                EasyLoading.showSuccess(' Check Your Mailbox !');
+
+                // Fluttertoast.showToast(
+                //   msg: "Check Your MailBox",
+                //   textColor: Colors.black,
+                //   toastLength: Toast.LENGTH_SHORT,
+                //   timeInSecForIosWeb: 1,
+                //   gravity: ToastGravity.BOTTOM,
+                //   backgroundColor: Color.fromARGB(255, 102, 181, 63),
+                // );
+                _email.clear();
+                Navigator.pop(context);
+                isLodaing = false;
+              });
+
+              _email.text = "";
+            } else {
+              EasyLoading.showError("Enter A Valid Email Address !!");
+
+              // Fluttertoast.showToast(
+              //   msg: "Enter A Valid Email Address",
+              //   textColor: Colors.white,
+              //   toastLength: Toast.LENGTH_SHORT,
+              //   timeInSecForIosWeb: 1,
+              //   gravity: ToastGravity.BOTTOM,
+              //   backgroundColor: Colors.indigo,
+              // );
+            }
+          });
+        } else {
+          setState(() {});
+        }
+      });
+    }
   }
 }

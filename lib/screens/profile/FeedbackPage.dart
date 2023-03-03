@@ -23,7 +23,6 @@ List<String> _Sessions = [
   "Health",
   "Trainings",
   "Medical",
-
 ];
 String? _selectedSession;
 List<String> _quality = [
@@ -130,7 +129,8 @@ class _FeedBackPageState extends State<FeedBackPage> {
                               child: DropdownButton2(
                                 offset: Offset(0, 0),
                                 dropdownDecoration: BoxDecoration(
-                                    border: Border.all(color: Colors.cyanAccent),
+                                    border:
+                                        Border.all(color: Colors.cyanAccent),
                                     borderRadius: BorderRadius.circular(14),
                                     // color: Colors.white.withOpacity(0.15),
                                     color: Color(0xff131313)),
@@ -208,7 +208,8 @@ class _FeedBackPageState extends State<FeedBackPage> {
                               child: DropdownButton2(
                                 offset: Offset(0, 0),
                                 dropdownDecoration: BoxDecoration(
-                                    border: Border.all(color: Colors.cyanAccent),
+                                    border:
+                                        Border.all(color: Colors.cyanAccent),
                                     borderRadius: BorderRadius.circular(14),
                                     // color: Colors.white.withOpacity(0.15),
                                     color: Color(0xff131313)),
@@ -275,6 +276,7 @@ class _FeedBackPageState extends State<FeedBackPage> {
                             height: 1.h,
                           ),
                           Container(
+                            height: 5.6.h,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.sp),
@@ -286,7 +288,8 @@ class _FeedBackPageState extends State<FeedBackPage> {
                               child: DropdownButton2(
                                 offset: Offset(0, 0),
                                 dropdownDecoration: BoxDecoration(
-                                    border: Border.all(color: Colors.cyanAccent),
+                                    border:
+                                        Border.all(color: Colors.cyanAccent),
                                     borderRadius: BorderRadius.circular(14),
                                     // color: Colors.white.withOpacity(0.15),
                                     color: Color(0xff131313)),
@@ -304,7 +307,7 @@ class _FeedBackPageState extends State<FeedBackPage> {
                                       style: TextStyle(
                                           color: Colors.grey.shade500,
                                           fontFamily: "Poppins",
-                                          fontSize: 12.sp),
+                                          fontSize: 10.sp),
                                     ),
                                   ],
                                 ),
@@ -363,12 +366,14 @@ class _FeedBackPageState extends State<FeedBackPage> {
                         borderRadius: BorderRadius.circular(15.0),
                         color: Colors.white.withOpacity(0.15),
                       ),
-                      child: TextField(controller: _feedback,
+                      child: TextField(
+                        controller: _feedback,
                         maxLines: 3,
                         cursorColor: Colors.white,
                         style: textStyle,
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(vertical: 1.5.h),
+                            contentPadding:
+                                EdgeInsets.symmetric(vertical: 1.5.h),
                             hintText: 'Feedback',
                             hintStyle: textStyle1),
                       ),
@@ -447,11 +452,10 @@ class _FeedBackPageState extends State<FeedBackPage> {
                 SizedBox(
                   height: 4.h,
                 ),
-                InkWell(onTap: ()async{
-                  print('hy');
-
-
-                },
+                InkWell(
+                  onTap: () async {
+                    print('hy');
+                  },
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(

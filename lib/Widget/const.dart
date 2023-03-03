@@ -1,7 +1,8 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:pedrodap/Model/UserModal.dart';
+import 'package:pedrodap/Model/playermodal.dart';
 
-
+import '../Model/fetchplayermodal.dart';
 
 Future<bool> checkInternet() async {
   var connectivityResult = await (Connectivity().checkConnectivity());
@@ -12,6 +13,8 @@ Future<bool> checkInternet() async {
   }
   return false;
 }
-UserModal? userData;
-const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';
 
+UserModal? userData;
+Playermodal? playerdata;
+Fetchplayermodal? fetchplayermodal;
+const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';

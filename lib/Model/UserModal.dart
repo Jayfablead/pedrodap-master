@@ -12,7 +12,7 @@ class UserModal {
   }
 
   Map<dynamic, dynamic> toJson() {
-    final Map<dynamic, dynamic> data = new Map<dynamic, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     if (this.userData != null) {
       data['user_data'] = this.userData!.toJson();
@@ -24,26 +24,26 @@ class UserModal {
 class UserData {
   String? uid;
   String? role;
-  Null? clubId;
+  String? clubId;
   String? name;
   String? email;
   String? password;
-  Null? forgotPassKey;
+  String? forgotPassKey;
   String? activeStatus;
   String? createdAt;
 
   UserData(
       {this.uid,
-        this.role,
-        this.clubId,
-        this.name,
-        this.email,
-        this.password,
-        this.forgotPassKey,
-        this.activeStatus,
-        this.createdAt});
+      this.role,
+      this.clubId,
+      this.name,
+      this.email,
+      this.password,
+      this.forgotPassKey,
+      this.activeStatus,
+      this.createdAt});
 
-  UserData.fromJson(Map<dynamic, dynamic> json) {
+  UserData.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
     role = json['role'];
     clubId = json['club_id'];
@@ -55,8 +55,8 @@ class UserData {
     createdAt = json['created_at'];
   }
 
-  Map<dynamic, dynamic> toJson() {
-    final Map<dynamic, dynamic> data = new Map<dynamic, dynamic>();
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['uid'] = this.uid;
     data['role'] = this.role;
     data['club_id'] = this.clubId;

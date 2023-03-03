@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/screens/profile/userprofile%20screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,7 +28,6 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
         drawer: drawer(),
         key: _scaffoldKey,
         backgroundColor: Color(0xff131313),
@@ -96,7 +96,7 @@ class _MyProfileState extends State<MyProfile> {
                           Container(
                             width: 50.w,
                             child: Text(
-                              'Neymar JR.',
+                              userData!.userData!.name.toString(),
                               style: TextStyle(
                                 fontSize: 6.w,
                                 fontWeight: FontWeight.w500,
@@ -192,7 +192,7 @@ class _MyProfileState extends State<MyProfile> {
                     height: 3.w,
                   ),
                   Text(
-                    'Neymar.jr07@gmail.com',
+                    userData!.userData!.email.toString(),
                     style: TextStyle(
                       fontSize: 4.5.w,
                       fontWeight: FontWeight.w500,
@@ -200,8 +200,266 @@ class _MyProfileState extends State<MyProfile> {
                       color: Colors.cyanAccent,
                     ),
                   ),
+                  SizedBox(height: 1.h),
+                  Divider(
+                    color: Color(0xff7a7a7a),
+                  ),
+                  SizedBox(height: 0.2.h),
+                  Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Icon(
+                            Icons.snowshoeing,
+                            color: Colors.white,
+                            size: 8.w,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            'Show me as Away',
+                            style: TextStyle(
+                              fontSize: 4.w,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
+                              color: Color(0xffffffff),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 24.w,
+                          ),
+                          CupertinoSwitch(
+                            activeColor: Color(0xff131313),
+                            value: false,
+                            onChanged: (value) {},
+                          ),
+                        ],
+                      )),
+                  SizedBox(height: 2.h),
+                  Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Icon(
+                            Icons.people_alt_outlined,
+                            color: Colors.white,
+                            size: 8.w,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            'My Current Team',
+                            style: TextStyle(
+                              fontSize: 4.w,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
+                              color: Color(0xffffffff),
+                            ),
+                          )
+                        ],
+                      )),
+                  SizedBox(height: 2.h),
+                  Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Icon(
+                            Icons.join_inner,
+                            color: Colors.white,
+                            size: 8.w,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            'Joined Clubs',
+                            style: TextStyle(
+                              fontSize: 4.w,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
+                              color: Color(0xffffffff),
+                            ),
+                          )
+                        ],
+                      )),
+                  SizedBox(height: 2.h),
+                  Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Icon(
+                            Icons.favorite_border,
+                            color: Colors.white,
+                            size: 8.w,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            'Health Data',
+                            style: TextStyle(
+                              fontSize: 4.w,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
+                              color: Color(0xffffffff),
+                            ),
+                          )
+                        ],
+                      )),
+                  SizedBox(height: 2.h),
+                  Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Icon(
+                            Icons.person_outline_rounded,
+                            color: Colors.white,
+                            size: 8.w,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            'Poersonal Details',
+                            style: TextStyle(
+                              fontSize: 4.w,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
+                              color: Color(0xffffffff),
+                            ),
+                          )
+                        ],
+                      )),
+                  SizedBox(height: 2.h),
+                  Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Icon(
+                            Icons.share,
+                            color: Colors.white,
+                            size: 8.w,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            'Share Profile',
+                            style: TextStyle(
+                              fontSize: 4.w,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
+                              color: Color(0xffffffff),
+                            ),
+                          )
+                        ],
+                      )),
+                  SizedBox(height: 2.h),
+                  Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          Icon(
+                            Icons.cloud_done_rounded,
+                            color: Colors.white,
+                            size: 8.w,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            'My Tasks',
+                            style: TextStyle(
+                              fontSize: 4.w,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
+                              color: Color(0xffffffff),
+                            ),
+                          )
+                        ],
+                      )),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-                  // Column(
+
+
+
+//======================================== crousals for follower ==============================================
+
+
+// Column(
                   //   children: [
                   //     CircleAvatar(
                   //       backgroundImage: NetworkImage(
@@ -470,255 +728,3 @@ class _MyProfileState extends State<MyProfile> {
                   //     // ),
                   //   ],
                   // ),
-                  SizedBox(height: 1.h),
-                  Divider(
-                    color: Color(0xff7a7a7a),
-                  ),
-                  SizedBox(height: 0.2.h),
-                  Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          Icon(
-                            Icons.snowshoeing,
-                            color: Colors.white,
-                            size: 8.w,
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            'Show me as Away',
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Color(0xffffffff),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 24.w,
-                          ),
-                          CupertinoSwitch(
-                            activeColor: Color(0xff131313),
-                            value: false,
-                            onChanged: (value) {},
-                          ),
-                        ],
-                      )),
-                  SizedBox(height: 2.h),
-                  Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          Icon(
-                            Icons.people_alt_outlined,
-                            color: Colors.white,
-                            size: 8.w,
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            'My Current Team',
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Color(0xffffffff),
-                            ),
-                          )
-                        ],
-                      )),
-                  SizedBox(height: 2.h),
-                  Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          Icon(
-                            Icons.join_inner,
-                            color: Colors.white,
-                            size: 8.w,
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            'Joined Clubs',
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Color(0xffffffff),
-                            ),
-                          )
-                        ],
-                      )),
-                  SizedBox(height: 2.h),
-                  Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
-                            size: 8.w,
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            'Health Data',
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Color(0xffffffff),
-                            ),
-                          )
-                        ],
-                      )),
-                  SizedBox(height: 2.h),
-                  Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          Icon(
-                            Icons.person_outline_rounded,
-                            color: Colors.white,
-                            size: 8.w,
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            'Poersonal Details',
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Color(0xffffffff),
-                            ),
-                          )
-                        ],
-                      )),
-                  SizedBox(height: 2.h),
-                  Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          Icon(
-                            Icons.share,
-                            color: Colors.white,
-                            size: 8.w,
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            'Share Profile',
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Color(0xffffffff),
-                            ),
-                          )
-                        ],
-                      )),
-                  SizedBox(height: 2.h),
-                  Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          Icon(
-                            Icons.cloud_done_rounded,
-                            color: Colors.white,
-                            size: 8.w,
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            'My Tasks',
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Color(0xffffffff),
-                            ),
-                          )
-                        ],
-                      )),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
