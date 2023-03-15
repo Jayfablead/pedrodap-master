@@ -62,7 +62,7 @@ class _listingpageState extends State<listingpage> {
         scaffold: Scaffold(
             key: _scaffoldKey,
             drawer: drawer(),
-            backgroundColor: isLoading ? Color(0xff131313) : Color(0xff131313),
+            backgroundColor: isLoading ? Colors.black : Colors.black,
             body: isLoading
                 ? Container(color: Colors.transparent)
                 : Container(
@@ -83,7 +83,7 @@ class _listingpageState extends State<listingpage> {
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20.sp,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     fontWeight: FontWeight.w500),
                               ),
                               IconButton(
@@ -104,7 +104,7 @@ class _listingpageState extends State<listingpage> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.sp,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -115,7 +115,7 @@ class _listingpageState extends State<listingpage> {
                             style: TextStyle(
                                 color: Colors.grey.shade500,
                                 fontSize: 13.sp,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontWeight: FontWeight.w500),
                           ),
                           SizedBox(
@@ -141,7 +141,7 @@ class _listingpageState extends State<listingpage> {
                                     keyboardType: TextInputType.text,
                                     decoration: inputDecoration(
                                         hintText: "Search",
-                                        col: Colors.white.withOpacity(0.15),
+                                        col: Colors.grey.withOpacity(0.30),
                                         icon: Icon(
                                           Icons.search,
                                           color: Colors.white,
@@ -180,7 +180,7 @@ class _listingpageState extends State<listingpage> {
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                         border: Border.all(
-                                          color: Colors.white.withOpacity(0.15),
+                                          color: Colors.grey,
                                         ),
                                         borderRadius:
                                             BorderRadius.circular(20.0)),
@@ -207,7 +207,7 @@ class _listingpageState extends State<listingpage> {
                                           style: TextStyle(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.bold,
-                                              fontFamily: "Poppins",
+                                              fontFamily: 'Meta1',
                                               color: Colors.white),
                                         )),
                                         SizedBox(
@@ -222,7 +222,7 @@ class _listingpageState extends State<listingpage> {
                                           style: TextStyle(
                                               fontSize: 10.sp,
                                               fontWeight: FontWeight.w400,
-                                              fontFamily: "Poppins",
+                                              fontFamily: 'Meta1',
                                               color: Colors.white),
                                         )),
                                         SizedBox(
@@ -237,7 +237,7 @@ class _listingpageState extends State<listingpage> {
                                               height: 5.h,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
-                                                    color: Color(0xff0DF5E3),
+                                                    color: Colors.white,
                                                   ),
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -247,7 +247,7 @@ class _listingpageState extends State<listingpage> {
                                                 style: TextStyle(
                                                     fontSize: 14.sp,
                                                     color: Colors.white,
-                                                    fontFamily: "Poppins",
+                                                    fontFamily: 'Meta1',
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -267,7 +267,7 @@ class _listingpageState extends State<listingpage> {
   }
 
   TextStyle textStyle =
-      TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: "Poppins");
+      TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: 'Meta1');
 
   InputDecoration inputDecoration(
       {required String hintText, required Color col, required Icon icon}) {

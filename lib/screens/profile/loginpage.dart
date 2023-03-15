@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:pedrodap/Widget/buildErrorDialog.dart';
 import 'package:pedrodap/screens/profile/mainpage2.dart';
 import 'package:pedrodap/screens/profile/signuppage.dart';
+import 'package:pedrodap/statichomepage.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -37,9 +38,8 @@ class _loginpageState extends State<loginpage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      backgroundColor: Color(0xff131313),
+    return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
         padding: EdgeInsets.all(5.w),
         child: Form(
@@ -53,10 +53,10 @@ class _loginpageState extends State<loginpage> {
                 ),
                 Center(
                     child: Image.asset(
-                  "assets/login.png",
-                  height: 20.h,
-                  width: 30.h,
-                  fit: BoxFit.cover,
+                  "assets/comu.png",
+                  height: 15.h,
+                  width: 40.h,
+                  fit: BoxFit.contain,
                 )),
                 Divider(
                   color: Colors.grey.shade500,
@@ -72,7 +72,7 @@ class _loginpageState extends State<loginpage> {
                         color: Colors.white,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
-                        fontFamily: "Poppins"),
+                        fontFamily: 'Meta1'),
                   ),
                 ),
                 SizedBox(
@@ -86,7 +86,7 @@ class _loginpageState extends State<loginpage> {
                         color: Colors.grey.shade700,
                         fontSize: 12.sp,
                         fontWeight: FontWeight.normal,
-                        fontFamily: "Poppins"),
+                        fontFamily: 'Meta1'),
                   ),
                 ),
                 SizedBox(
@@ -108,11 +108,11 @@ class _loginpageState extends State<loginpage> {
                               left: 47.0, bottom: 0.0, top: 1.0),
                           child: (setup == 1)
                               ? Text(
-                                  "Email",
+                                  "",
                                   style: TextStyle(
                                       color: Colors.grey.shade300,
-                                      fontFamily: "Poppins",
-                                      fontSize: 10.sp),
+                                      fontFamily: 'Meta1',
+                                      fontSize: 12.sp),
                                 )
                               : Container()),
                       SizedBox(
@@ -122,7 +122,7 @@ class _loginpageState extends State<loginpage> {
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontSize: 12.sp),
                             onTap: () {
                               setState(() {
@@ -176,11 +176,11 @@ class _loginpageState extends State<loginpage> {
                               left: 47.0, bottom: 0.0, top: 1.0),
                           child: (setup == 1)
                               ? Text(
-                                  "Password",
+                                  "",
                                   style: TextStyle(
                                       color: Colors.grey.shade300,
-                                      fontFamily: "Poppins",
-                                      fontSize: 10.sp),
+                                      fontFamily: 'Meta1',
+                                      fontSize: 12.sp),
                                 )
                               : Container()),
                       SizedBox(
@@ -190,7 +190,7 @@ class _loginpageState extends State<loginpage> {
                             keyboardType: TextInputType.text,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontSize: 12.sp),
                             onTap: () {
                               setState(() {
@@ -199,6 +199,9 @@ class _loginpageState extends State<loginpage> {
                               print(setup);
                             },
                             validator: (value) {
+                              setState(() {
+                                value;
+                              });
                               if (value!.isEmpty) {
                                 return "            Enter Your Password";
                               }
@@ -228,14 +231,14 @@ class _loginpageState extends State<loginpage> {
                       width: 50.w,
                       height: 7.h,
                       decoration: BoxDecoration(
-                          color: Color(0xff0DF5E3),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(20.sp)),
                       child: Text(
                         "LOGIN",
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.black,
-                            fontFamily: "Poppins",
+                            fontFamily: 'Meta1',
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -244,26 +247,38 @@ class _loginpageState extends State<loginpage> {
                 SizedBox(
                   height: 0.3.h,
                 ),
-                Center(
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => forgetpass()));
-                    },
-                    child: Text(
-                      "Forgot Password?",
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Can't login ?",
                       style: TextStyle(
-                        fontSize: 12.sp,
-                        color: Color(0xff0DF5E3),
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.normal,
-                        // decoration: TextDecoration.underline
+                          fontSize: 12.sp,
+                          color: Colors.grey.shade500,
+                          fontFamily: 'Meta1',
+                          fontWeight: FontWeight.normal),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => forgetpass()));
+                      },
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontWeight: FontWeight.normal,
+                          // decoration: TextDecoration.underline
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
                 SizedBox(
-                  height: 8.h,
+                  height: 7.h,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -274,7 +289,7 @@ class _loginpageState extends State<loginpage> {
                       style: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.grey.shade500,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.normal),
                     ),
                     TextButton(
@@ -286,8 +301,8 @@ class _loginpageState extends State<loginpage> {
                           "Sign Up",
                           style: TextStyle(
                               fontSize: 12.sp,
-                              color: Color(0xff0DF5E3),
-                              fontFamily: "Poppins",
+                              color: Colors.white,
+                              fontFamily: 'Meta1',
                               fontWeight: FontWeight.normal),
                         )),
                   ],
@@ -297,11 +312,11 @@ class _loginpageState extends State<loginpage> {
           ),
         ),
       ),
-    ));
+    );
   }
 
   TextStyle textStyle = TextStyle(
-      color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: "Poppins");
+      color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: 'Meta1');
 
   InputDecoration inputDecoration(
       {required String hintText, required Icon icon}) {
@@ -353,7 +368,7 @@ class _loginpageState extends State<loginpage> {
               // buildErrorDialog(context, "", "Login Successfully");
               if (_formKey.currentState!.validate()) {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => mainpage2()));
+                    MaterialPageRoute(builder: (context) => StaticHomePage()));
                 _email.text = '';
                 _pass.text = '';
               }

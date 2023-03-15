@@ -48,7 +48,7 @@ class _MyclientsState extends State<Myclients> {
       child: Scaffold(
         drawer: drawer(),
         key: _scaffoldKey,
-        backgroundColor: Color(0xff131313),
+        backgroundColor: Colors.black,
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 4.w),
           child: SingleChildScrollView(
@@ -71,7 +71,7 @@ class _MyclientsState extends State<Myclients> {
                       style: TextStyle(
                         fontSize: 5.5.w,
                         fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins",
+                        fontFamily: 'Meta1',
                         color: Color(0xffffffff),
                       ),
                     ),
@@ -100,7 +100,7 @@ class _MyclientsState extends State<Myclients> {
                           height: 10.h,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.15),
+                              color: Colors.black,
                               borderRadius: BorderRadius.circular(10)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,7 +129,7 @@ class _MyclientsState extends State<Myclients> {
                                           style: TextStyle(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.bold,
-                                              fontFamily: "Poppins",
+                                              fontFamily: 'Meta1',
                                               color: Colors.white),
                                         ),
                                       ],
@@ -137,8 +137,7 @@ class _MyclientsState extends State<Myclients> {
                                     PopupMenuButton(
                                       offset: Offset(0.0, 0.0),
                                       shape: RoundedRectangleBorder(
-                                        side: BorderSide(
-                                            color: Colors.cyanAccent),
+                                        side: BorderSide(color: Colors.white),
                                         borderRadius: BorderRadius.only(
                                           bottomLeft: Radius.circular(8.0),
                                           bottomRight: Radius.circular(8.0),
@@ -172,7 +171,7 @@ class _MyclientsState extends State<Myclients> {
                                                         BorderRadius.circular(
                                                             30),
                                                     border: Border.all(
-                                                      color: Color(0xff0DF5E3),
+                                                      color: Colors.white,
                                                     ),
                                                   ),
                                                   child: Text(
@@ -181,7 +180,7 @@ class _MyclientsState extends State<Myclients> {
                                                       fontSize: 4.w,
                                                       fontWeight:
                                                           FontWeight.w500,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: 'Meta1',
                                                       color: Colors.white,
                                                     ),
                                                   ),
@@ -208,7 +207,7 @@ class _MyclientsState extends State<Myclients> {
                                                         BorderRadius.circular(
                                                             30),
                                                     border: Border.all(
-                                                      color: Color(0xff0DF5E3),
+                                                      color: Colors.white,
                                                     ),
                                                   ),
                                                   child: Text(
@@ -217,7 +216,7 @@ class _MyclientsState extends State<Myclients> {
                                                       fontSize: 4.w,
                                                       fontWeight:
                                                           FontWeight.w500,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: 'Meta1',
                                                       color: Colors.white,
                                                     ),
                                                   ),
@@ -257,7 +256,7 @@ class _MyclientsState extends State<Myclients> {
   }
 
   TextStyle textStyle = TextStyle(
-      color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: "Poppins");
+      color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: 'Meta1');
 
   InputDecoration inputDecoration(
       {required String hintText, required Color col, required Icon icon}) {

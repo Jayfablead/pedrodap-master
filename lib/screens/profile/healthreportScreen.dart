@@ -14,7 +14,7 @@ class _HelathreportState extends State<Helathreport> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xff131313),
+        backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -41,7 +41,7 @@ class _HelathreportState extends State<Helathreport> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.sp,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -50,10 +50,10 @@ class _HelathreportState extends State<Helathreport> {
                   height: 3.w,
                 ),
                 Padding(
-                  padding:  EdgeInsets.only(left: 3.w,right: 3.w),
+                  padding: EdgeInsets.only(left: 3.w, right: 3.w),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
+                        color: Colors.black,
                         borderRadius: BorderRadius.circular(15.0)),
                     height: 13.h,
                     width: MediaQuery.of(context).size.width,
@@ -79,19 +79,18 @@ class _HelathreportState extends State<Helathreport> {
                                 style: TextStyle(
                                   fontSize: 5.w,
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
+                                  fontFamily: 'Meta1',
                                   color: Color(0xffffffff),
                                 ),
                               ),
                             ),
-
                             Text(
                               'Neymar.jr07@gmail.com',
                               style: TextStyle(
                                 fontSize: 4.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
-                                color: Colors.cyanAccent,
+                                fontFamily: 'Meta1',
+                                color: Colors.white,
                               ),
                             ),
                             SizedBox(
@@ -103,7 +102,6 @@ class _HelathreportState extends State<Helathreport> {
                     ),
                   ),
                 ),
-
                 SizedBox(
                   height: 3.h,
                 ),
@@ -123,7 +121,7 @@ class _HelathreportState extends State<Helathreport> {
                           height: 30.h,
                           width: 16.h,
                           decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.15),
+                              color: Colors.black,
                               borderRadius: BorderRadius.circular(15.0)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -139,7 +137,7 @@ class _HelathreportState extends State<Helathreport> {
                                     style: TextStyle(
                                       fontSize: 6.w,
                                       fontWeight: FontWeight.w600,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       color: Color(0xffffffff),
                                     ),
                                   ),
@@ -148,7 +146,7 @@ class _HelathreportState extends State<Helathreport> {
                                     style: TextStyle(
                                       fontSize: 6.w,
                                       fontWeight: FontWeight.w600,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       color: Color(0xffffffff),
                                     ),
                                   ),
@@ -166,7 +164,7 @@ class _HelathreportState extends State<Helathreport> {
                                     style: TextStyle(
                                       fontSize: 15.w,
                                       fontWeight: FontWeight.w600,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       color: Color(0xffffffff),
                                     ),
                                   ),
@@ -175,7 +173,7 @@ class _HelathreportState extends State<Helathreport> {
                                     style: TextStyle(
                                       fontSize: 15.w,
                                       fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       color: Color(0xffffffff),
                                     ),
                                   ),
@@ -191,7 +189,7 @@ class _HelathreportState extends State<Helathreport> {
                         height: 30.h,
                         width: 57.w,
                         decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(15.0)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -205,7 +203,7 @@ class _HelathreportState extends State<Helathreport> {
                               style: TextStyle(
                                 fontSize: 6.w,
                                 fontWeight: FontWeight.w600,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffffffff),
                               ),
                             ),
@@ -214,7 +212,7 @@ class _HelathreportState extends State<Helathreport> {
                               style: TextStyle(
                                 fontSize: 4.7.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffc5c5c5),
                               ),
                             ),
@@ -231,7 +229,7 @@ class _HelathreportState extends State<Helathreport> {
                                     width: 25.w,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Colors.cyanAccent),
+                                        color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -243,7 +241,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 13.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -255,7 +253,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 8.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -271,13 +269,13 @@ class _HelathreportState extends State<Helathreport> {
                   height: 2.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 3.w,right: 3.w),
+                  padding: EdgeInsets.only(left: 3.w, right: 3.w),
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 3.w),
                     height: 30.h,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
+                        color: Colors.black,
                         borderRadius: BorderRadius.circular(15.0)),
                     child: Row(
                       children: [
@@ -295,7 +293,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 6.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -306,7 +304,7 @@ class _HelathreportState extends State<Helathreport> {
                               style: TextStyle(
                                 fontSize: 4.7.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffc5c5c5),
                               ),
                             ),
@@ -317,7 +315,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 13.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -329,7 +327,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 8.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -352,7 +350,7 @@ class _HelathreportState extends State<Helathreport> {
                   height: 2.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 3.w,right: 3.w),
+                  padding: EdgeInsets.only(left: 3.w, right: 3.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -361,7 +359,7 @@ class _HelathreportState extends State<Helathreport> {
                         height: 18.h,
                         width: 38.w,
                         decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(15.0)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -375,7 +373,7 @@ class _HelathreportState extends State<Helathreport> {
                               style: TextStyle(
                                 fontSize: 6.w,
                                 fontWeight: FontWeight.w600,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffffffff),
                               ),
                             ),
@@ -386,7 +384,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 12.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -400,7 +398,7 @@ class _HelathreportState extends State<Helathreport> {
                         height: 18.h,
                         width: 54.w,
                         decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(15.0)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -413,13 +411,15 @@ class _HelathreportState extends State<Helathreport> {
                                   color: Colors.white,
                                   size: 6.w,
                                 ),
-                                SizedBox(width: 1.w,),
+                                SizedBox(
+                                  width: 1.w,
+                                ),
                                 Text(
                                   'Ashthama : ',
                                   style: TextStyle(
                                     fontSize: 5.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -428,7 +428,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 5.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -442,13 +442,15 @@ class _HelathreportState extends State<Helathreport> {
                                   color: Colors.white,
                                   size: 6.w,
                                 ),
-                                SizedBox(width: 1.w,),
+                                SizedBox(
+                                  width: 1.w,
+                                ),
                                 Text(
                                   'Fractures : ',
                                   style: TextStyle(
                                     fontSize: 5.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -457,7 +459,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 5.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -471,13 +473,15 @@ class _HelathreportState extends State<Helathreport> {
                                   color: Colors.white,
                                   size: 5.w,
                                 ),
-                                SizedBox(width: 1.w,),
+                                SizedBox(
+                                  width: 1.w,
+                                ),
                                 Text(
                                   'Celic Diseas : ',
                                   style: TextStyle(
                                     fontSize: 5.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -486,7 +490,7 @@ class _HelathreportState extends State<Helathreport> {
                                   style: TextStyle(
                                     fontSize: 5.w,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),

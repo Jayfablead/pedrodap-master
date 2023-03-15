@@ -2,50 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
-import 'package:pedrodap/screens/all%20profiles/coachprofile.dart';
-import 'package:pedrodap/screens/all%20profiles/scoutprofile.dart';
-import 'package:pedrodap/screens/all%20profiles/trainerProfile.dart';
-import 'package:pedrodap/screens/createsessions/createScouts.dart';
-import 'package:pedrodap/screens/feedback/feedbackListings.dart';
-import 'package:pedrodap/screens/feedback/myCoachingfeedback.dart';
-import 'package:pedrodap/screens/feedback/myTrainingFeedbackPage.dart';
-import 'package:pedrodap/screens/feedback/mynutritionFeedback.dart';
-import 'package:pedrodap/screens/feedback/nutrifeedbacklisgtings.dart';
-import 'package:pedrodap/screens/feedback/playerfeedbackview.dart';
-import 'package:pedrodap/screens/feedback/scoutfeedbacklisting.dart';
-import 'package:pedrodap/screens/feedback/trainerfeedbacklisting.dart';
-import 'package:pedrodap/screens/feedback/viewcoachfeedback.dart';
-import 'package:pedrodap/screens/medical/MedicalFeedback.dart';
-import 'package:pedrodap/screens/medical/allSessions.dart';
-import 'package:pedrodap/screens/medical/createsession.dart';
-import 'package:pedrodap/screens/medical/medicalprofile.dart';
-import 'package:pedrodap/screens/medical/mymedicalprofile.dart';
-import 'package:pedrodap/screens/medical/mymedicals.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
-import 'package:pedrodap/screens/profile/FeedbackPage.dart';
-import 'package:pedrodap/screens/sessions/allNutritions.dart';
-import 'package:pedrodap/screens/sessions/allScouts.dart';
-import 'package:pedrodap/screens/sessions/allcoaching.dart';
-import 'package:pedrodap/screens/sessions/alltrainnigs.dart';
-import 'package:pedrodap/screens/createsessions/create%20training%20session.dart';
-import 'package:pedrodap/screens/createsessions/createcoaching.dart';
-import 'package:pedrodap/screens/createsessions/createnutritions.dart';
+import 'package:pedrodap/screens/profile/Nutri.dart';
+import 'package:pedrodap/screens/profile/SleepSchedule.dart';
+import 'package:pedrodap/screens/profile/fitnessProgramme.dart';
 import 'package:pedrodap/screens/profile/myconnections.dart';
-import 'package:pedrodap/screens/profile/reqestPage.dart';
-import 'package:pedrodap/screens/view%20sessions/view%20Scouts.dart';
-import 'package:pedrodap/screens/view%20sessions/view%20training.dart';
-import 'package:pedrodap/screens/view%20sessions/viewNutrition.dart';
-import 'package:pedrodap/screens/view%20sessions/viewcoaching.dart';
-
+import 'package:pedrodap/screens/profile/DiscoverPage.dart';
+import 'package:pedrodap/screens/profile/trainningnotes.dart';
+import 'package:pedrodap/screens/profile/viewfitnessprograme.dart';
+import 'package:pedrodap/screens/profile/viewnutrition.dart';
+import 'package:pedrodap/statichomepage.dart';
 import 'package:sizer/sizer.dart';
-
-import '../screens/all profiles/coachmyprofile.dart';
-import '../screens/all profiles/nutritionistmyprofile.dart';
-import '../screens/all profiles/nutritionistprofile.dart';
-import '../screens/all profiles/scoutmyprofile.dart';
-import '../screens/all profiles/trainermyprofile.dart';
-import '../screens/feedback/myScoutfeedbackPage.dart';
-import '../screens/profile/coachprofile.dart';
 import '../screens/profile/listingpage.dart';
 import '../screens/profile/loginpage.dart';
 import '../screens/profile/mainpage.dart';
@@ -69,10 +36,13 @@ class _drawerState extends State<drawer> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: widthDrawer,
-          color: Color(0xff131313),
+          color: Colors.black,
           child: ListView(
             //padding: EdgeInsets.all(2.w),
             children: [
+              SizedBox(
+                height: 2.h,
+              ),
               Container(
                 height: 12.h,
                 padding: EdgeInsets.all(1.w),
@@ -106,7 +76,7 @@ class _drawerState extends State<drawer> {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 12.sp,
-                              fontFamily: "Poppins",
+                              fontFamily: 'Meta1',
                               fontWeight: FontWeight.w600),
                         ),
                         SizedBox(
@@ -117,8 +87,8 @@ class _drawerState extends State<drawer> {
                           child: Text(userData!.userData!.email.toString(),
                               maxLines: 2,
                               style: TextStyle(
-                                  color: Colors.cyanAccent,
-                                  fontFamily: "Poppins",
+                                  color: Colors.white,
+                                  fontFamily: 'Meta1',
                                   fontWeight: FontWeight.w600)),
                         ),
                       ],
@@ -129,586 +99,114 @@ class _drawerState extends State<drawer> {
               Divider(
                 color: Colors.grey,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 2.w,
-                  ),
-                  Text(
-                    "Pages",
-                    style: TextStyle(
-                      fontSize: 3.5.w,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Poppins",
-                      color: Color(0xffb2b2b2),
-                    ),
-                  ),
-                ],
-              ),
-              // SizedBox(
-              //   height: 2.5.h,
-              // ),
-              // Row(
-              //   children: [
-              //     SizedBox(
-              //       width: 5.w,
-              //     ),
-              //     InkWell(
-              //       onTap: () {
-              //         Navigator.of(context).push(
-              //             MaterialPageRoute(builder: (context) => mainpage()));
-              //       },
-              //       child: Container(
-              //         decoration: BoxDecoration(
-              //             borderRadius: BorderRadius.circular(10),
-              //             color: Colors.white.withOpacity(0.15)),
-              //         width: 67.w,
-              //         height: 6.h,
-              //         child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //           children: [
-              //             Row(
-              //               children: [
-              //                 SizedBox(
-              //                   width: 1.w,
-              //                 ),
-              //                 Icon(
-              //                   Icons.contact_page,
-              //                   color: Colors.white,
-              //                 ),
-              //                 SizedBox(
-              //                   width: 2.w,
-              //                 ),
-              //                 Text("Main Page1",
-              //                     style: TextStyle(
-              //                       fontSize: 4.w,
-              //                       fontWeight: FontWeight.w500,
-              //                       fontFamily: "Poppins",
-              //                       color: Colors.white,
-              //                     )),
-              //               ],
-              //             ),
-              //             Icon(
-              //               Icons.chevron_right_rounded,
-              //               color: Colors.white,
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
               SizedBox(
                 height: 1.5.h,
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => mainpage2(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Main Page",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(
-                height: 2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PlayerFeedback(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Player Feedback",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => FeedBackPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Send Feedback",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 1.5.h,
-              ),
-              (userData!.userData!.role == "2")
+              userData!.userData!.role == '2'
                   ? Column(
                       children: [
-                        Divider(
-                          color: Colors.white54,
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 2.w,
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => mainpage2(),
                               ),
-                              Text(
-                                "Profile",
-                                style: TextStyle(
-                                  fontSize: 3.5.w,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
-                                  color: Color(0xffb2b2b2),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
                                 ),
-                              ),
-                            ],
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.public,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Discover",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Meta1',
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(
                           height: 2.h,
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyProfile(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.person_outline_rounded,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width: 2.w,
-                                    ),
-                                    Text("My Profile",
-                                        style: TextStyle(
-                                          fontSize: 4.w,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Poppins",
-                                          color: Colors.white,
-                                        )),
-                                    SizedBox(
-                                      width: 33.w,
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right_rounded,
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyScoutListingPage(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.person_outline_rounded,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("My Scout",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyCoachingFeedbackPage(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.person_outline_rounded,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("My Coach",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyTrainingFeedbackPage(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.person_outline_rounded,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("My Training",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyNutritionFeedbackPage(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.person_outline_rounded,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("My Nutritionist",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyMedicalPage(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.person_outline_rounded,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("My Medical",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 1.5.h,
-                        ),
                       ],
                     )
                   : Container(),
-              Divider(
-                color: Colors.white54,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 2.w,
-                  ),
-                  Text(
-                    "Others",
-                    style: TextStyle(
-                      fontSize: 3.5.w,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Poppins",
-                      color: Color(0xffb2b2b2),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MyProfile(),
                     ),
+                  );
+                },
+                child: Container(
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      Container(
+                        width: 66.w,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person_outline_rounded,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 2.w,
+                                ),
+                                Text("My Profile",
+                                    style: TextStyle(
+                                      fontSize: 4.w,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Meta1',
+                                      color: Colors.white,
+                                    )),
+                              ],
+                            ),
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
               SizedBox(
                 height: 2.h,
@@ -716,51 +214,8 @@ class _drawerState extends State<drawer> {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => listingpage()));
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.pages_outlined,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text("All Players",
-                              style: TextStyle(
-                                fontSize: 4.w,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
-                                color: Colors.white,
-                              )),
-                          SizedBox(
-                            width: 33.w,
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => ReqestPage(),
+                      builder: (context) => DiscoverPage(),
                     ),
                   );
                 },
@@ -770,85 +225,42 @@ class _drawerState extends State<drawer> {
                       SizedBox(
                         width: 6.w,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.person_add_alt_1_outlined,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text("My Request",
-                              style: TextStyle(
-                                fontSize: 4.w,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
-                                color: Colors.white,
-                              )),
-                          SizedBox(
-                            width: 30.w,
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyConnections(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.person_add_alt_1_outlined,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text(
-                            "My Connections",
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Colors.white,
+                      Container(
+                        width: 66.w,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person_add_alt,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 2.w,
+                                ),
+                                Text("My Connections",
+                                    style: TextStyle(
+                                      fontSize: 4.w,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Meta1',
+                                      color: Colors.white,
+                                    )),
+                              ],
                             ),
-                          ),
-                          SizedBox(
-                            width: 21.w,
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white,
-                          )
-                        ],
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               SizedBox(
-                height: 2.2.h,
+                height: 2.h,
               ),
               InkWell(
                 onTap: () {
@@ -864,387 +276,6 @@ class _drawerState extends State<drawer> {
                       SizedBox(
                         width: 6.w,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.chat_rounded,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text("Chat",
-                              style: TextStyle(
-                                fontSize: 4.w,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
-                                color: Colors.white,
-                              )),
-                          SizedBox(
-                            width: 43.w,
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              (userData!.userData!.role == "5") ||
-                      (userData!.userData!.role == "2")
-                  ? Column(
-                      children: [
-                        SizedBox(
-                          height: 1.5.h,
-                        ),
-                        Divider(
-                          color: Colors.white54,
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                "Scouts",
-                                style: TextStyle(
-                                  fontSize: 3.5.w,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
-                                  color: Color(0xffb2b2b2),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                      ],
-                    )
-                  : Container(),
-
-              (userData!.userData!.role == "5") ||
-                      (userData!.userData!.role == "2")
-                  ? InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ScoutListing(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 6.w,
-                            ),
-                            Container(
-                              width: 66.w,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.contact_page_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      Text("All Sessions",
-                                          style: TextStyle(
-                                            fontSize: 4.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Colors.white,
-                                          )),
-                                    ],
-                                  ),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Container(),
-              (userData!.userData!.role == "5") ||
-                      (userData!.userData!.role == "2")
-                  ? SizedBox(
-                      height: 2.2.h,
-                    )
-                  : Container(),
-              (userData!.userData!.role == "2")
-                  ? InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => CreateScouts(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 6.w,
-                            ),
-                            Container(
-                              width: 66.w,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.contact_page_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      Text("Create Scout Session",
-                                          style: TextStyle(
-                                            fontSize: 4.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Colors.white,
-                                          )),
-                                    ],
-                                  ),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Container(),
-              (userData!.userData!.role == "2")
-                  ? SizedBox(
-                      height: 2.2.h,
-                    )
-                  : Container(),
-              (userData!.userData!.role == "5")
-                  ? InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ScoutFeedbackListings(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 6.w,
-                            ),
-                            Container(
-                              width: 66.w,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.contact_page_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      Text("Scout Feedback",
-                                          style: TextStyle(
-                                            fontSize: 4.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Colors.white,
-                                          )),
-                                    ],
-                                  ),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Container(),
-              // SizedBox(S
-              //   height: 2.2.h,
-              // ),
-              (userData!.userData!.role == "2")
-                  ? InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ScoutProfile(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 6.w,
-                            ),
-                            Container(
-                              width: 66.w,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.contact_page_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      Text("Scout Profile",
-                                          style: TextStyle(
-                                            fontSize: 4.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Colors.white,
-                                          )),
-                                    ],
-                                  ),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Container(),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              (userData!.userData!.role == "5")
-                  ? InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => MyScoutProfile(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 6.w,
-                            ),
-                            Container(
-                              width: 66.w,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.contact_page_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      Text("My Profile",
-                                          style: TextStyle(
-                                            fontSize: 4.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Colors.white,
-                                          )),
-                                    ],
-                                  ),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Container(),
-              (userData!.userData!.role == "5")
-                  ? SizedBox(
-                      height: 1.5.h,
-                    )
-                  : Container(),
-              Divider(
-                color: Colors.white54,
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    Text(
-                      "Coaching",
-                      style: TextStyle(
-                        fontSize: 3.5.w,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins",
-                        color: Color(0xffb2b2b2),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CoachListing(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
                       Container(
                         width: 66.w,
                         child: Row(
@@ -1253,17 +284,17 @@ class _drawerState extends State<drawer> {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.contact_page_outlined,
+                                  Icons.chat_outlined,
                                   color: Colors.white,
                                 ),
                                 SizedBox(
                                   width: 2.w,
                                 ),
-                                Text("All Sessions",
+                                Text("Messages",
                                     style: TextStyle(
                                       fontSize: 4.w,
                                       fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       color: Colors.white,
                                     )),
                               ],
@@ -1279,110 +310,7 @@ class _drawerState extends State<drawer> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CreateCoaching(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Create Coching Session",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CoachProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Coach Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              (userData!.userData!.role == "3")
+              userData!.userData!.role == '2'
                   ? Column(
                       children: [
                         SizedBox(
@@ -1392,7 +320,7 @@ class _drawerState extends State<drawer> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => FeedbackListings(),
+                                builder: (context) => TrainningNotes(),
                               ),
                             );
                           },
@@ -1411,17 +339,18 @@ class _drawerState extends State<drawer> {
                                       Row(
                                         children: [
                                           Icon(
-                                            Icons.contact_page_outlined,
+                                            Icons
+                                                .transfer_within_a_station_outlined,
                                             color: Colors.white,
                                           ),
                                           SizedBox(
                                             width: 2.w,
                                           ),
-                                          Text("Feedback Listing",
+                                          Text("Training & Notes",
                                               style: TextStyle(
                                                 fontSize: 4.w,
                                                 fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
+                                                fontFamily: 'Meta1',
                                                 color: Colors.white,
                                               )),
                                         ],
@@ -1438,13 +367,13 @@ class _drawerState extends State<drawer> {
                           ),
                         ),
                         SizedBox(
-                          height: 2.2.h,
+                          height: 2.h,
                         ),
                         InkWell(
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => MyCoachProfile(),
+                                builder: (context) => ViewFitness(),
                               ),
                             );
                           },
@@ -1463,17 +392,121 @@ class _drawerState extends State<drawer> {
                                       Row(
                                         children: [
                                           Icon(
-                                            Icons.contact_page_outlined,
+                                            Icons.fitness_center_rounded,
                                             color: Colors.white,
                                           ),
                                           SizedBox(
                                             width: 2.w,
                                           ),
-                                          Text("My Profile",
+                                          Text("Fitness Programme",
                                               style: TextStyle(
                                                 fontSize: 4.w,
                                                 fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
+                                                fontFamily: 'Meta1',
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ViewNutrition(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            CupertinoIcons.heart_circle,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Nutrition & Health",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Meta1',
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SleepSchedule(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                Container(
+                                  width: 66.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            CupertinoIcons.house_alt,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text("Sleep Schedule",
+                                              style: TextStyle(
+                                                fontSize: 4.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Meta1',
                                                 color: Colors.white,
                                               )),
                                         ],
@@ -1493,920 +526,7 @@ class _drawerState extends State<drawer> {
                     )
                   : Container(),
               SizedBox(
-                height: 1.5.h,
-              ),
-              (userData!.userData!.role == "9")
-                  ||
-                         (userData!.userData!.role == "2")
-                  ? Column(
-                      children: [
-                        Divider(
-                          color: Colors.white54,
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                "Training",
-                                style: TextStyle(
-                                  fontSize: 3.5.w,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
-                                  color: Color(0xffb2b2b2),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                      ],
-                    )
-                  : Container(),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => TrainingsListing(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("All Sessions",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CreateTraining(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Create Training Session",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              (userData!.userData!.role == "9")
-                  ? InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => TrainerFeedbackListings(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 6.w,
-                            ),
-                            Container(
-                              width: 66.w,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.contact_page_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      Text("Training Feedback",
-                                          style: TextStyle(
-                                            fontSize: 4.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Colors.white,
-                                          )),
-                                    ],
-                                  ),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Container(),
-              (userData!.userData!.role == "9")
-                  ? SizedBox(
-                      height: 2.2.h,
-                    )
-                  : Container(),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => TrainerProfile(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.contact_page_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Trainer Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              (userData!.userData!.role == "9")
-                  ? Column(
-                      children: [
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyTrainerProfile(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("My Profile",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              SizedBox(
-                height: 1.5.h,
-              ),
-              Divider(
-                color: Colors.white54,
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    Text(
-                      "Nutritionist",
-                      style: TextStyle(
-                        fontSize: 3.5.w,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins",
-                        color: Color(0xffb2b2b2),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              (userData!.userData!.role == "2")
-                  ? Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => NutriListing(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("All Sessions",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => CreateNutritionist(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Create Nutri Session",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => NutritionistProfile(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Nutritionist Profile",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              (userData!.userData!.role == "7")
-                  ? Column(
-                      children: [
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => NutriFeedbackListings(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Nutritionist Feedback",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyNutritionistProfile(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("My Profile",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              SizedBox(
-                height: 1.5.h,
-              ),
-              Divider(
-                color: Colors.white54,
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    Text(
-                      "Medical",
-                      style: TextStyle(
-                        fontSize: 3.5.w,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins",
-                        color: Color(0xffb2b2b2),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 2.2.h,
-              ),
-              (userData!.userData!.role == "2")
-                  ? Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MedicalListings(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("All Sessions",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => CreateMedical(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Create Medical Session",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MedicalProfile(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Medical Profile",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              (userData!.userData!.role == "6")
-                  ? Column(
-                      children: [
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MedicalFeedbackListings(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Medical Feedback",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyMedicalProfile(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.contact_page_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("My Profile",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Poppins",
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              SizedBox(
-                height: 1.5.h,
-              ),
-              Divider(
-                color: Colors.white54,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 2.w,
-                  ),
-                  Text(
-                    "Account",
-                    style: TextStyle(
-                      fontSize: 3.5.w,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Poppins",
-                      color: Color(0xffb2b2b2),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 2.2.h,
+                height: 5.h,
               ),
               InkWell(
                 onTap: () async {
@@ -2427,7 +547,7 @@ class _drawerState extends State<drawer> {
                         children: [
                           Icon(
                             Icons.logout_rounded,
-                            color: Colors.white,
+                            color: Colors.red,
                           ),
                           SizedBox(
                             width: 2.w,
@@ -2437,8 +557,8 @@ class _drawerState extends State<drawer> {
                             style: TextStyle(
                               fontSize: 4.w,
                               fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Colors.white,
+                              fontFamily: 'Meta1',
+                              color: Colors.red,
                             ),
                           ),
                         ],
@@ -2446,9 +566,6 @@ class _drawerState extends State<drawer> {
                     ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 1.h,
               ),
             ],
           ),
@@ -2460,6 +577,2107 @@ class _drawerState extends State<drawer> {
   TextStyle textStyle = TextStyle(
       color: Colors.black,
       fontSize: 12.sp,
-      fontFamily: "Poppins",
+      fontFamily: 'Meta1',
       fontWeight: FontWeight.w600);
 }
+
+
+// old drawer
+
+ // SizedBox(
+              //   height: 1.5.h,
+              // ),
+              // (userData!.userData!.role == "2")
+              //     ? Column(
+              //         children: [
+              //           Divider(
+              //             color: Colors.white54,
+              //           ),
+              //           Container(
+              //             child: Row(
+              //               children: [
+              //                 SizedBox(
+              //                   width: 2.w,
+              //                 ),
+              //                 Text(
+              //                   "Profile",
+              //                   style: TextStyle(
+              //                     fontSize: 3.5.w,
+              //                     fontWeight: FontWeight.w500,
+              //                      fontFamily: 'Meta1',
+              //                     color: Color(0xffb2b2b2),
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyProfile(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Row(
+              //                     children: [
+              //                       Icon(
+              //                         Icons.person_outline_rounded,
+              //                         color: Colors.white,
+              //                       ),
+              //                       SizedBox(
+              //                         width: 2.w,
+              //                       ),
+              //                       Text("My Profile",
+              //                           style: TextStyle(
+              //                             fontSize: 4.w,
+              //                             fontWeight: FontWeight.w500,
+              //                              fontFamily: 'Meta1',
+              //                             color: Colors.white,
+              //                           )),
+              //                       SizedBox(
+              //                         width: 33.w,
+              //                       ),
+              //                       Icon(
+              //                         Icons.chevron_right_rounded,
+              //                         color: Colors.white,
+              //                       )
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyScoutListingPage(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.person_outline_rounded,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Scout",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyCoachingFeedbackPage(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.person_outline_rounded,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Coach",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyTrainingFeedbackPage(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.person_outline_rounded,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Training",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyNutritionFeedbackPage(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.person_outline_rounded,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Nutritionist",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyMedicalPage(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.person_outline_rounded,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Medical",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 1.5.h,
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+              // Divider(
+              //   color: Colors.white54,
+              // ),
+              // Row(
+              //   children: [
+              //     SizedBox(
+              //       width: 2.w,
+              //     ),
+              //     Text(
+              //       "Others",
+              //       style: TextStyle(
+              //         fontSize: 3.5.w,
+              //         fontWeight: FontWeight.w500,
+              //          fontFamily: 'Meta1',
+              //         color: Color(0xffb2b2b2),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: 2.h,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //         MaterialPageRoute(builder: (context) => listingpage()));
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Row(
+              //           children: [
+              //             Icon(
+              //               Icons.pages_outlined,
+              //               color: Colors.white,
+              //             ),
+              //             SizedBox(
+              //               width: 2.w,
+              //             ),
+              //             Text("All Players",
+              //                 style: TextStyle(
+              //                   fontSize: 4.w,
+              //                   fontWeight: FontWeight.w500,
+              //                    fontFamily: 'Meta1',
+              //                   color: Colors.white,
+              //                 )),
+              //             SizedBox(
+              //               width: 33.w,
+              //             ),
+              //             Icon(
+              //               Icons.chevron_right_rounded,
+              //               color: Colors.white,
+              //             )
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => DiscoverPage(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Row(
+              //           children: [
+              //             Icon(
+              //               Icons.person_add_alt_1_outlined,
+              //               color: Colors.white,
+              //             ),
+              //             SizedBox(
+              //               width: 2.w,
+              //             ),
+              //             Text("My Request",
+              //                 style: TextStyle(
+              //                   fontSize: 4.w,
+              //                   fontWeight: FontWeight.w500,
+              //                    fontFamily: 'Meta1',
+              //                   color: Colors.white,
+              //                 )),
+              //             SizedBox(
+              //               width: 30.w,
+              //             ),
+              //             Icon(
+              //               Icons.chevron_right_rounded,
+              //               color: Colors.white,
+              //             )
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => MyConnections(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Row(
+              //           children: [
+              //             Icon(
+              //               Icons.person_add_alt_1_outlined,
+              //               color: Colors.white,
+              //             ),
+              //             SizedBox(
+              //               width: 2.w,
+              //             ),
+              //             Text(
+              //               "My Connections",
+              //               style: TextStyle(
+              //                 fontSize: 4.w,
+              //                 fontWeight: FontWeight.w500,
+              //                  fontFamily: 'Meta1',
+              //                 color: Colors.white,
+              //               ),
+              //             ),
+              //             SizedBox(
+              //               width: 21.w,
+              //             ),
+              //             Icon(
+              //               Icons.chevron_right_rounded,
+              //               color: Colors.white,
+              //             )
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => ChatPage(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Row(
+              //           children: [
+              //             Icon(
+              //               Icons.chat_rounded,
+              //               color: Colors.white,
+              //             ),
+              //             SizedBox(
+              //               width: 2.w,
+              //             ),
+              //             Text("Chat",
+              //                 style: TextStyle(
+              //                   fontSize: 4.w,
+              //                   fontWeight: FontWeight.w500,
+              //                    fontFamily: 'Meta1',
+              //                   color: Colors.white,
+              //                 )),
+              //             SizedBox(
+              //               width: 43.w,
+              //             ),
+              //             Icon(
+              //               Icons.chevron_right_rounded,
+              //               color: Colors.white,
+              //             )
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
+              // (userData!.userData!.role == "5") ||
+              //         (userData!.userData!.role == "2")
+              //     ? Column(
+              //         children: [
+              //           SizedBox(
+              //             height: 1.5.h,
+              //           ),
+              //           Divider(
+              //             color: Colors.white54,
+              //           ),
+              //           Container(
+              //             child: Row(
+              //               children: [
+              //                 SizedBox(
+              //                   width: 2.w,
+              //                 ),
+              //                 Text(
+              //                   "Scouts",
+              //                   style: TextStyle(
+              //                     fontSize: 3.5.w,
+              //                     fontWeight: FontWeight.w500,
+              //                      fontFamily: 'Meta1',
+              //                     color: Color(0xffb2b2b2),
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+
+              // (userData!.userData!.role == "5") ||
+              //         (userData!.userData!.role == "2")
+              //     ? InkWell(
+              //         onTap: () {
+              //           Navigator.of(context).push(
+              //             MaterialPageRoute(
+              //               builder: (context) => ScoutListing(),
+              //             ),
+              //           );
+              //         },
+              //         child: Container(
+              //           child: Row(
+              //             children: [
+              //               SizedBox(
+              //                 width: 6.w,
+              //               ),
+              //               Container(
+              //                 width: 66.w,
+              //                 child: Row(
+              //                   mainAxisAlignment:
+              //                       MainAxisAlignment.spaceBetween,
+              //                   children: [
+              //                     Row(
+              //                       children: [
+              //                         Icon(
+              //                           Icons.contact_page_outlined,
+              //                           color: Colors.white,
+              //                         ),
+              //                         SizedBox(
+              //                           width: 2.w,
+              //                         ),
+              //                         Text("All Sessions",
+              //                             style: TextStyle(
+              //                               fontSize: 4.w,
+              //                               fontWeight: FontWeight.w500,
+              //                                fontFamily: 'Meta1',
+              //                               color: Colors.white,
+              //                             )),
+              //                       ],
+              //                     ),
+              //                     Icon(
+              //                       Icons.chevron_right_rounded,
+              //                       color: Colors.white,
+              //                     )
+              //                   ],
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : Container(),
+              // (userData!.userData!.role == "5") ||
+              //         (userData!.userData!.role == "2")
+              //     ? SizedBox(
+              //         height: 2.2.h,
+              //       )
+              //     : Container(),
+              // (userData!.userData!.role == "2")
+              //     ? InkWell(
+              //         onTap: () {
+              //           Navigator.of(context).push(
+              //             MaterialPageRoute(
+              //               builder: (context) => CreateScouts(),
+              //             ),
+              //           );
+              //         },
+              //         child: Container(
+              //           child: Row(
+              //             children: [
+              //               SizedBox(
+              //                 width: 6.w,
+              //               ),
+              //               Container(
+              //                 width: 66.w,
+              //                 child: Row(
+              //                   mainAxisAlignment:
+              //                       MainAxisAlignment.spaceBetween,
+              //                   children: [
+              //                     Row(
+              //                       children: [
+              //                         Icon(
+              //                           Icons.contact_page_outlined,
+              //                           color: Colors.white,
+              //                         ),
+              //                         SizedBox(
+              //                           width: 2.w,
+              //                         ),
+              //                         Text("Create Scout Session",
+              //                             style: TextStyle(
+              //                               fontSize: 4.w,
+              //                               fontWeight: FontWeight.w500,
+              //                                fontFamily: 'Meta1',
+              //                               color: Colors.white,
+              //                             )),
+              //                       ],
+              //                     ),
+              //                     Icon(
+              //                       Icons.chevron_right_rounded,
+              //                       color: Colors.white,
+              //                     )
+              //                   ],
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : Container(),
+              // (userData!.userData!.role == "2")
+              //     ? SizedBox(
+              //         height: 2.2.h,
+              //       )
+              //     : Container(),
+              // (userData!.userData!.role == "5")
+              //     ? InkWell(
+              //         onTap: () {
+              //           Navigator.of(context).push(
+              //             MaterialPageRoute(
+              //               builder: (context) => ScoutFeedbackListings(),
+              //             ),
+              //           );
+              //         },
+              //         child: Container(
+              //           child: Row(
+              //             children: [
+              //               SizedBox(
+              //                 width: 6.w,
+              //               ),
+              //               Container(
+              //                 width: 66.w,
+              //                 child: Row(
+              //                   mainAxisAlignment:
+              //                       MainAxisAlignment.spaceBetween,
+              //                   children: [
+              //                     Row(
+              //                       children: [
+              //                         Icon(
+              //                           Icons.contact_page_outlined,
+              //                           color: Colors.white,
+              //                         ),
+              //                         SizedBox(
+              //                           width: 2.w,
+              //                         ),
+              //                         Text("Scout Feedback",
+              //                             style: TextStyle(
+              //                               fontSize: 4.w,
+              //                               fontWeight: FontWeight.w500,
+              //                                fontFamily: 'Meta1',
+              //                               color: Colors.white,
+              //                             )),
+              //                       ],
+              //                     ),
+              //                     Icon(
+              //                       Icons.chevron_right_rounded,
+              //                       color: Colors.white,
+              //                     )
+              //                   ],
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : Container(),
+              // // SizedBox(S
+              // //   height: 2.2.h,
+              // // ),
+              // (userData!.userData!.role == "2")
+              //     ? InkWell(
+              //         onTap: () {
+              //           Navigator.of(context).push(
+              //             MaterialPageRoute(
+              //               builder: (context) => ScoutProfile(),
+              //             ),
+              //           );
+              //         },
+              //         child: Container(
+              //           child: Row(
+              //             children: [
+              //               SizedBox(
+              //                 width: 6.w,
+              //               ),
+              //               Container(
+              //                 width: 66.w,
+              //                 child: Row(
+              //                   mainAxisAlignment:
+              //                       MainAxisAlignment.spaceBetween,
+              //                   children: [
+              //                     Row(
+              //                       children: [
+              //                         Icon(
+              //                           Icons.contact_page_outlined,
+              //                           color: Colors.white,
+              //                         ),
+              //                         SizedBox(
+              //                           width: 2.w,
+              //                         ),
+              //                         Text("Scout Profile",
+              //                             style: TextStyle(
+              //                               fontSize: 4.w,
+              //                               fontWeight: FontWeight.w500,
+              //                                fontFamily: 'Meta1',
+              //                               color: Colors.white,
+              //                             )),
+              //                       ],
+              //                     ),
+              //                     Icon(
+              //                       Icons.chevron_right_rounded,
+              //                       color: Colors.white,
+              //                     )
+              //                   ],
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : Container(),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // (userData!.userData!.role == "5")
+              //     ? InkWell(
+              //         onTap: () {
+              //           Navigator.of(context).push(
+              //             MaterialPageRoute(
+              //               builder: (context) => MyScoutProfile(),
+              //             ),
+              //           );
+              //         },
+              //         child: Container(
+              //           child: Row(
+              //             children: [
+              //               SizedBox(
+              //                 width: 6.w,
+              //               ),
+              //               Container(
+              //                 width: 66.w,
+              //                 child: Row(
+              //                   mainAxisAlignment:
+              //                       MainAxisAlignment.spaceBetween,
+              //                   children: [
+              //                     Row(
+              //                       children: [
+              //                         Icon(
+              //                           Icons.contact_page_outlined,
+              //                           color: Colors.white,
+              //                         ),
+              //                         SizedBox(
+              //                           width: 2.w,
+              //                         ),
+              //                         Text("My Profile",
+              //                             style: TextStyle(
+              //                               fontSize: 4.w,
+              //                               fontWeight: FontWeight.w500,
+              //                                fontFamily: 'Meta1',
+              //                               color: Colors.white,
+              //                             )),
+              //                       ],
+              //                     ),
+              //                     Icon(
+              //                       Icons.chevron_right_rounded,
+              //                       color: Colors.white,
+              //                     )
+              //                   ],
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : Container(),
+              // (userData!.userData!.role == "5")
+              //     ? SizedBox(
+              //         height: 1.5.h,
+              //       )
+              //     : Container(),
+              // Divider(
+              //   color: Colors.white54,
+              // ),
+              // Container(
+              //   child: Row(
+              //     children: [
+              //       SizedBox(
+              //         width: 2.w,
+              //       ),
+              //       Text(
+              //         "Coaching",
+              //         style: TextStyle(
+              //           fontSize: 3.5.w,
+              //           fontWeight: FontWeight.w500,
+              //            fontFamily: 'Meta1',
+              //           color: Color(0xffb2b2b2),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => CoachListing(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Container(
+              //           width: 66.w,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //             children: [
+              //               Row(
+              //                 children: [
+              //                   Icon(
+              //                     Icons.contact_page_outlined,
+              //                     color: Colors.white,
+              //                   ),
+              //                   SizedBox(
+              //                     width: 2.w,
+              //                   ),
+              //                   Text("All Sessions",
+              //                       style: TextStyle(
+              //                         fontSize: 4.w,
+              //                         fontWeight: FontWeight.w500,
+              //                          fontFamily: 'Meta1',
+              //                         color: Colors.white,
+              //                       )),
+              //                 ],
+              //               ),
+              //               Icon(
+              //                 Icons.chevron_right_rounded,
+              //                 color: Colors.white,
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => CreateCoaching(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Container(
+              //           width: 66.w,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //             children: [
+              //               Row(
+              //                 children: [
+              //                   Icon(
+              //                     Icons.contact_page_outlined,
+              //                     color: Colors.white,
+              //                   ),
+              //                   SizedBox(
+              //                     width: 2.w,
+              //                   ),
+              //                   Text("Create Coching Session",
+              //                       style: TextStyle(
+              //                         fontSize: 4.w,
+              //                         fontWeight: FontWeight.w500,
+              //                          fontFamily: 'Meta1',
+              //                         color: Colors.white,
+              //                       )),
+              //                 ],
+              //               ),
+              //               Icon(
+              //                 Icons.chevron_right_rounded,
+              //                 color: Colors.white,
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => CoachProfile(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Container(
+              //           width: 66.w,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //             children: [
+              //               Row(
+              //                 children: [
+              //                   Icon(
+              //                     Icons.contact_page_outlined,
+              //                     color: Colors.white,
+              //                   ),
+              //                   SizedBox(
+              //                     width: 2.w,
+              //                   ),
+              //                   Text("Coach Profile",
+              //                       style: TextStyle(
+              //                         fontSize: 4.w,
+              //                         fontWeight: FontWeight.w500,
+              //                          fontFamily: 'Meta1',
+              //                         color: Colors.white,
+              //                       )),
+              //                 ],
+              //               ),
+              //               Icon(
+              //                 Icons.chevron_right_rounded,
+              //                 color: Colors.white,
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
+              // (userData!.userData!.role == "3")
+              //     ? Column(
+              //         children: [
+              //           SizedBox(
+              //             height: 2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => FeedbackListings(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("Feedback Listing",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyCoachProfile(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Profile",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+              // SizedBox(
+              //   height: 1.5.h,
+              // ),
+              // (userData!.userData!.role == "9") ||
+              //         (userData!.userData!.role == "2")
+              //     ? Column(
+              //         children: [
+              //           Divider(
+              //             color: Colors.white54,
+              //           ),
+              //           Container(
+              //             child: Row(
+              //               children: [
+              //                 SizedBox(
+              //                   width: 2.w,
+              //                 ),
+              //                 Text(
+              //                   "Training",
+              //                   style: TextStyle(
+              //                     fontSize: 3.5.w,
+              //                     fontWeight: FontWeight.w500,
+              //                      fontFamily: 'Meta1',
+              //                     color: Color(0xffb2b2b2),
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => TrainingsListing(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Container(
+              //           width: 66.w,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //             children: [
+              //               Row(
+              //                 children: [
+              //                   Icon(
+              //                     Icons.contact_page_outlined,
+              //                     color: Colors.white,
+              //                   ),
+              //                   SizedBox(
+              //                     width: 2.w,
+              //                   ),
+              //                   Text("All Sessions",
+              //                       style: TextStyle(
+              //                         fontSize: 4.w,
+              //                         fontWeight: FontWeight.w500,
+              //                          fontFamily: 'Meta1',
+              //                         color: Colors.white,
+              //                       )),
+              //                 ],
+              //               ),
+              //               Icon(
+              //                 Icons.chevron_right_rounded,
+              //                 color: Colors.white,
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => CreateTraining(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Container(
+              //           width: 66.w,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //             children: [
+              //               Row(
+              //                 children: [
+              //                   Icon(
+              //                     Icons.contact_page_outlined,
+              //                     color: Colors.white,
+              //                   ),
+              //                   SizedBox(
+              //                     width: 2.w,
+              //                   ),
+              //                   Text("Create Training Session",
+              //                       style: TextStyle(
+              //                         fontSize: 4.w,
+              //                         fontWeight: FontWeight.w500,
+              //                          fontFamily: 'Meta1',
+              //                         color: Colors.white,
+              //                       )),
+              //                 ],
+              //               ),
+              //               Icon(
+              //                 Icons.chevron_right_rounded,
+              //                 color: Colors.white,
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // (userData!.userData!.role == "9")
+              //     ? InkWell(
+              //         onTap: () {
+              //           Navigator.of(context).push(
+              //             MaterialPageRoute(
+              //               builder: (context) => TrainerFeedbackListings(),
+              //             ),
+              //           );
+              //         },
+              //         child: Container(
+              //           child: Row(
+              //             children: [
+              //               SizedBox(
+              //                 width: 6.w,
+              //               ),
+              //               Container(
+              //                 width: 66.w,
+              //                 child: Row(
+              //                   mainAxisAlignment:
+              //                       MainAxisAlignment.spaceBetween,
+              //                   children: [
+              //                     Row(
+              //                       children: [
+              //                         Icon(
+              //                           Icons.contact_page_outlined,
+              //                           color: Colors.white,
+              //                         ),
+              //                         SizedBox(
+              //                           width: 2.w,
+              //                         ),
+              //                         Text("Training Feedback",
+              //                             style: TextStyle(
+              //                               fontSize: 4.w,
+              //                               fontWeight: FontWeight.w500,
+              //                                fontFamily: 'Meta1',
+              //                               color: Colors.white,
+              //                             )),
+              //                       ],
+              //                     ),
+              //                     Icon(
+              //                       Icons.chevron_right_rounded,
+              //                       color: Colors.white,
+              //                     )
+              //                   ],
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : Container(),
+              // (userData!.userData!.role == "9")
+              //     ? SizedBox(
+              //         height: 2.2.h,
+              //       )
+              //     : Container(),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => TrainerProfile(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Container(
+              //           width: 66.w,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //             children: [
+              //               Row(
+              //                 children: [
+              //                   Icon(
+              //                     Icons.contact_page_outlined,
+              //                     color: Colors.white,
+              //                   ),
+              //                   SizedBox(
+              //                     width: 2.w,
+              //                   ),
+              //                   Text("Trainer Profile",
+              //                       style: TextStyle(
+              //                         fontSize: 4.w,
+              //                         fontWeight: FontWeight.w500,
+              //                          fontFamily: 'Meta1',
+              //                         color: Colors.white,
+              //                       )),
+              //                 ],
+              //               ),
+              //               Icon(
+              //                 Icons.chevron_right_rounded,
+              //                 color: Colors.white,
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // (userData!.userData!.role == "9")
+              //     ? Column(
+              //         children: [
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyTrainerProfile(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Profile",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+              // SizedBox(
+              //   height: 1.5.h,
+              // ),
+              // Divider(
+              //   color: Colors.white54,
+              // ),
+              // Container(
+              //   child: Row(
+              //     children: [
+              //       SizedBox(
+              //         width: 2.w,
+              //       ),
+              //       Text(
+              //         "Nutritionist",
+              //         style: TextStyle(
+              //           fontSize: 3.5.w,
+              //           fontWeight: FontWeight.w500,
+              //            fontFamily: 'Meta1',
+              //           color: Color(0xffb2b2b2),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // (userData!.userData!.role == "2")
+              //     ? Column(
+              //         children: [
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => NutriListing(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("All Sessions",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => CreateNutritionist(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("Create Nutri Session",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => NutritionistProfile(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("Nutritionist Profile",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+              // (userData!.userData!.role == "7")
+              //     ? Column(
+              //         children: [
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => NutriFeedbackListings(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("Nutritionist Feedback",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyNutritionistProfile(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Profile",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+              // SizedBox(
+              //   height: 1.5.h,
+              // ),
+              // Divider(
+              //   color: Colors.white54,
+              // ),
+              // Container(
+              //   child: Row(
+              //     children: [
+              //       SizedBox(
+              //         width: 2.w,
+              //       ),
+              //       Text(
+              //         "Medical",
+              //         style: TextStyle(
+              //           fontSize: 3.5.w,
+              //           fontWeight: FontWeight.w500,
+              //            fontFamily: 'Meta1',
+              //           color: Color(0xffb2b2b2),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // (userData!.userData!.role == "2")
+              //     ? Column(
+              //         children: [
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MedicalListings(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("All Sessions",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => CreateMedical(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("Create Medical Session",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MedicalProfile(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("Medical Profile",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+              // (userData!.userData!.role == "6")
+              //     ? Column(
+              //         children: [
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MedicalFeedbackListings(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("Medical Feedback",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 2.2.h,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Navigator.of(context).push(
+              //                 MaterialPageRoute(
+              //                   builder: (context) => MyMedicalProfile(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Container(
+              //               child: Row(
+              //                 children: [
+              //                   SizedBox(
+              //                     width: 6.w,
+              //                   ),
+              //                   Container(
+              //                     width: 66.w,
+              //                     child: Row(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.spaceBetween,
+              //                       children: [
+              //                         Row(
+              //                           children: [
+              //                             Icon(
+              //                               Icons.contact_page_outlined,
+              //                               color: Colors.white,
+              //                             ),
+              //                             SizedBox(
+              //                               width: 2.w,
+              //                             ),
+              //                             Text("My Profile",
+              //                                 style: TextStyle(
+              //                                   fontSize: 4.w,
+              //                                   fontWeight: FontWeight.w500,
+              //                                    fontFamily: 'Meta1',
+              //                                   color: Colors.white,
+              //                                 )),
+              //                           ],
+              //                         ),
+              //                         Icon(
+              //                           Icons.chevron_right_rounded,
+              //                           color: Colors.white,
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       )
+              //     : Container(),
+              // SizedBox(
+              //   height: 1.5.h,
+              // ),
+              // Divider(
+              //   color: Colors.white54,
+              // ),
+              // Row(
+              //   children: [
+              //     SizedBox(
+              //       width: 2.w,
+              //     ),
+              //     Text(
+              //       "Account",
+              //       style: TextStyle(
+              //         fontSize: 3.5.w,
+              //         fontWeight: FontWeight.w500,
+              //          fontFamily: 'Meta1',
+              //         color: Color(0xffb2b2b2),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: 2.2.h,
+              // ),
+              // InkWell(
+              //   onTap: () async {
+              //     Navigator.of(context).pushReplacement(
+              //       MaterialPageRoute(
+              //         builder: (context) => loginpage(),
+              //       ),
+              //     );
+              //     await SaveDataLocal.clearUserData();
+              //   },
+              //   child: Container(
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 6.w,
+              //         ),
+              //         Row(
+              //           children: [
+              //             Icon(
+              //               Icons.logout_rounded,
+              //               color: Colors.white,
+              //             ),
+              //             SizedBox(
+              //               width: 2.w,
+              //             ),
+              //             Text(
+              //               "Logout",
+              //               style: TextStyle(
+              //                 fontSize: 4.w,
+              //                 fontWeight: FontWeight.w500,
+              //                  fontFamily: 'Meta1',
+              //                 color: Colors.white,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 1.h,
+              // ),

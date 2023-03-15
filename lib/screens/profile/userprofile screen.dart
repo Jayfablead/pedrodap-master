@@ -11,7 +11,7 @@ import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
 import 'package:pedrodap/screens/profile/healthreportScreen.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
-import 'package:pedrodap/screens/profile/reqestPage.dart';
+import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Widget/Drawer.dart';
@@ -79,7 +79,7 @@ class _UserprofileState extends State<Userprofile> {
       scaffold: Scaffold(
         drawer: drawer(),
         key: _scaffoldKey,
-        backgroundColor: Color(0xff131313),
+        backgroundColor: Colors.black,
         body: isloading
             ? Container()
             : SingleChildScrollView(
@@ -121,10 +121,10 @@ class _UserprofileState extends State<Userprofile> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.cyanAccent,
+                              backgroundColor: Colors.white,
                               radius: 6.1.h,
                               child: CircleAvatar(
-                                backgroundColor: Color(0xff131313),
+                                backgroundColor: Colors.black,
                                 radius: 5.7.h,
                                 child: CircleAvatar(
                                   backgroundImage: AssetImage(
@@ -142,7 +142,7 @@ class _UserprofileState extends State<Userprofile> {
                                   style: TextStyle(
                                     fontSize: 6.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -151,7 +151,7 @@ class _UserprofileState extends State<Userprofile> {
                                   style: TextStyle(
                                     fontSize: 3.5.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffb4b4b4),
                                   ),
                                 ),
@@ -165,7 +165,7 @@ class _UserprofileState extends State<Userprofile> {
                                   style: TextStyle(
                                     fontSize: 6.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -174,7 +174,7 @@ class _UserprofileState extends State<Userprofile> {
                                   style: TextStyle(
                                     fontSize: 3.5.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffb4b4b4),
                                   ),
                                 ),
@@ -188,7 +188,7 @@ class _UserprofileState extends State<Userprofile> {
                                   style: TextStyle(
                                     fontSize: 6.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -197,7 +197,7 @@ class _UserprofileState extends State<Userprofile> {
                                   style: TextStyle(
                                     fontSize: 3.5.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffb4b4b4),
                                   ),
                                 ),
@@ -216,7 +216,7 @@ class _UserprofileState extends State<Userprofile> {
                               style: TextStyle(
                                 fontSize: 6.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffffffff),
                               ),
                             ),
@@ -227,8 +227,8 @@ class _UserprofileState extends State<Userprofile> {
                                   style: TextStyle(
                                     fontSize: 4.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
-                                    color: Colors.cyanAccent,
+                                    fontFamily: 'Meta1',
+                                    color: Colors.white,
                                   ),
                                 ),
                                 Text(
@@ -236,7 +236,7 @@ class _UserprofileState extends State<Userprofile> {
                                   style: TextStyle(
                                     fontSize: 3.w,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     color: Color(0xffb4b4b4),
                                   ),
                                 ),
@@ -257,8 +257,7 @@ class _UserprofileState extends State<Userprofile> {
                                 decoration: BoxDecoration(
                                     color: Colors.white.withOpacity(0.10),
                                     borderRadius: BorderRadius.circular(15),
-                                    border:
-                                        Border.all(color: Colors.cyanAccent)),
+                                    border: Border.all(color: Colors.white)),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -272,7 +271,7 @@ class _UserprofileState extends State<Userprofile> {
                                       style: TextStyle(
                                         fontSize: 4.w,
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Poppins",
+                                        fontFamily: 'Meta1',
                                         color: Color(0xffeaeaea),
                                       ),
                                     )
@@ -295,8 +294,7 @@ class _UserprofileState extends State<Userprofile> {
                                 decoration: BoxDecoration(
                                     color: Colors.white.withOpacity(0.10),
                                     borderRadius: BorderRadius.circular(15),
-                                    border:
-                                        Border.all(color: Colors.cyanAccent)),
+                                    border: Border.all(color: Colors.white)),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -310,7 +308,7 @@ class _UserprofileState extends State<Userprofile> {
                                       style: TextStyle(
                                         fontSize: 4.w,
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Poppins",
+                                        fontFamily: 'Meta1',
                                         color: Color(0xffeaeaea),
                                       ),
                                     ),
@@ -323,9 +321,8 @@ class _UserprofileState extends State<Userprofile> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => MessagePage(
-                                      name: 'Kylin Mbappe',
-                                      photo: 'assets/prof.jpg',
-                                    ),
+                                        image: 'assets/10.png',
+                                        name: 'Lionel Messi'),
                                   ),
                                 );
                               },
@@ -336,8 +333,7 @@ class _UserprofileState extends State<Userprofile> {
                                 decoration: BoxDecoration(
                                     color: Colors.white.withOpacity(0.10),
                                     borderRadius: BorderRadius.circular(15),
-                                    border:
-                                        Border.all(color: Colors.cyanAccent)),
+                                    border: Border.all(color: Colors.white)),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -351,7 +347,7 @@ class _UserprofileState extends State<Userprofile> {
                                       style: TextStyle(
                                         fontSize: 4.w,
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Poppins",
+                                        fontFamily: 'Meta1',
                                         color: Color(0xffeaeaea),
                                       ),
                                     )
@@ -369,7 +365,7 @@ class _UserprofileState extends State<Userprofile> {
                             //       color: Colors.grey.withOpacity(0.05),
                             //       borderRadius: BorderRadius.circular(30),
                             //       border: Border.all(
-                            //         color: Color(0xff0DF5E3),
+                            //         color: Colors.white,
                             //       ),
                             //     ),
                             //     child: Text(
@@ -377,7 +373,7 @@ class _UserprofileState extends State<Userprofile> {
                             //       style: TextStyle(
                             //         fontSize: 4.w,
                             //         fontWeight: FontWeight.w500,
-                            //         fontFamily: "Poppins",
+                            //          fontFamily: 'Meta1',
                             //         color: Color(0xffeaeaea),
                             //       ),
                             //     ),
@@ -399,7 +395,7 @@ class _UserprofileState extends State<Userprofile> {
                             //       color: Colors.grey.withOpacity(0.05),
                             //       borderRadius: BorderRadius.circular(30),
                             //       border: Border.all(
-                            //         color: Color(0xff0DF5E3),
+                            //         color: Colors.white,
                             //       ),
                             //     ),
                             //     child: Text(
@@ -407,7 +403,7 @@ class _UserprofileState extends State<Userprofile> {
                             //       style: TextStyle(
                             //         fontSize: 4.w,
                             //         fontWeight: FontWeight.w500,
-                            //         fontFamily: "Poppins",
+                            //          fontFamily: 'Meta1',
                             //         color: Color(0xffeaeaea),
                             //       ),
                             //     ),
@@ -429,7 +425,7 @@ class _UserprofileState extends State<Userprofile> {
                             //       color: Colors.grey.withOpacity(0.05),
                             //       borderRadius: BorderRadius.circular(30),
                             //       border: Border.all(
-                            //         color: Color(0xff0DF5E3),
+                            //         color: Colors.white,
                             //       ),
                             //     ),
                             //     child: Text(
@@ -437,7 +433,7 @@ class _UserprofileState extends State<Userprofile> {
                             //       style: TextStyle(
                             //         fontSize: 4.w,
                             //         fontWeight: FontWeight.w500,
-                            //         fontFamily: "Poppins",
+                            //          fontFamily: 'Meta1',
                             //         color: Color(0xffeaeaea),
                             //       ),
                             //     ),
@@ -451,8 +447,8 @@ class _UserprofileState extends State<Userprofile> {
                           style: TextStyle(
                             fontSize: 4.5.w,
                             fontWeight: FontWeight.w500,
-                            fontFamily: "Poppins",
-                            color: Colors.cyanAccent,
+                            fontFamily: 'Meta1',
+                            color: Colors.white,
                           ),
                         ),
                         SizedBox(
@@ -469,7 +465,7 @@ class _UserprofileState extends State<Userprofile> {
                               style: TextStyle(
                                 fontSize: 4.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffc7c6c6),
                               ),
                             ),
@@ -480,8 +476,8 @@ class _UserprofileState extends State<Userprofile> {
                                 style: TextStyle(
                                   fontSize: 4.w,
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
-                                  color: Color(0xff0DF5E3),
+                                  fontFamily: 'Meta1',
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -506,8 +502,7 @@ class _UserprofileState extends State<Userprofile> {
                                             topLeft: Radius.circular(10),
                                             topRight: Radius.circular(10),
                                           ),
-                                          color:
-                                              Colors.white.withOpacity(0.15)),
+                                          color: Colors.black),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(10),
@@ -539,7 +534,7 @@ class _UserprofileState extends State<Userprofile> {
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 11.sp,
-                                                fontFamily: "Poppins",
+                                                fontFamily: 'Meta1',
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ],
@@ -563,7 +558,7 @@ class _UserprofileState extends State<Userprofile> {
                               style: TextStyle(
                                 fontSize: 4.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffc7c6c6),
                               ),
                             ),
@@ -574,8 +569,8 @@ class _UserprofileState extends State<Userprofile> {
                                 style: TextStyle(
                                   fontSize: 4.w,
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
-                                  color: Color(0xff0DF5E3),
+                                  fontFamily: 'Meta1',
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -622,7 +617,7 @@ class _UserprofileState extends State<Userprofile> {
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 11.sp,
-                                                fontFamily: "Poppins",
+                                                fontFamily: 'Meta1',
                                                 fontWeight: FontWeight.w500),
                                           ),
                                           Text(
@@ -630,7 +625,7 @@ class _UserprofileState extends State<Userprofile> {
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 11.sp,
-                                                fontFamily: "Poppins",
+                                                fontFamily: 'Meta1',
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ],
@@ -654,7 +649,7 @@ class _UserprofileState extends State<Userprofile> {
                               style: TextStyle(
                                 fontSize: 4.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffc7c6c6),
                               ),
                             ),
@@ -665,8 +660,8 @@ class _UserprofileState extends State<Userprofile> {
                                 style: TextStyle(
                                   fontSize: 4.w,
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
-                                  color: Color(0xff0DF5E3),
+                                  fontFamily: 'Meta1',
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -678,7 +673,7 @@ class _UserprofileState extends State<Userprofile> {
                           height: 24.5.h,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: ListView.builder(
@@ -702,7 +697,7 @@ class _UserprofileState extends State<Userprofile> {
                               style: TextStyle(
                                 fontSize: 4.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffc7c6c6),
                               ),
                             ),
@@ -713,8 +708,8 @@ class _UserprofileState extends State<Userprofile> {
                                 style: TextStyle(
                                   fontSize: 4.w,
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
-                                  color: Color(0xff0DF5E3),
+                                  fontFamily: 'Meta1',
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -726,7 +721,7 @@ class _UserprofileState extends State<Userprofile> {
                           height: 24.5.h,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: ListView.builder(

@@ -27,16 +27,16 @@ class _forgetpassState extends State<forgetpass> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      backgroundColor: Color(0xff131313),
+    return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        centerTitle: true,
         elevation: 00,
-        iconTheme: IconThemeData(color: Colors.grey.shade500),
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         title: Text(
           "Forget Password",
-          style: TextStyle(color: Colors.grey.shade500),
+          style: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
         ),
       ),
       body: Container(
@@ -59,7 +59,7 @@ class _forgetpassState extends State<forgetpass> {
                           color: Colors.white,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
-                          fontFamily: "Poppins"),
+                          fontFamily: 'Meta1'),
                     ),
                     SizedBox(
                       height: 1.h,
@@ -70,7 +70,7 @@ class _forgetpassState extends State<forgetpass> {
                           color: Colors.grey.shade700,
                           fontSize: 12.sp,
                           fontWeight: FontWeight.normal,
-                          fontFamily: "Poppins"),
+                          fontFamily: 'Meta1'),
                     ),
                   ],
                 ),
@@ -92,10 +92,10 @@ class _forgetpassState extends State<forgetpass> {
                           padding: EdgeInsets.only(
                               left: 47.0, bottom: 0.0, top: 1.0),
                           child: Text(
-                            "Email",
+                            "",
                             style: TextStyle(
                                 color: Colors.grey.shade300,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontSize: 10.sp),
                           )),
                       SizedBox(
@@ -105,7 +105,7 @@ class _forgetpassState extends State<forgetpass> {
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontSize: 12.sp),
                             onTap: () {},
                             validator: (value) {
@@ -142,24 +142,30 @@ class _forgetpassState extends State<forgetpass> {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      setState(() {
-                        EasyLoading.show(status: 'Sending Email...');
-                      });
-                      forgetpwdapi();
+                      if (_email.text == '') {
+                        setState(() {
+                          EasyLoading.showError('Enter Mail Address...');
+                        });
+                      } else {
+                        setState(() {
+                          EasyLoading.show(status: 'Sending Email...');
+                        });
+                        forgetpwdapi();
+                      }
                     },
                     child: Container(
                       alignment: Alignment.center,
                       width: 50.w,
                       height: 6.h,
                       decoration: BoxDecoration(
-                          color: Color(0xff0DF5E3),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(20.sp)),
                       child: Text(
                         "Send",
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.black,
-                            fontFamily: "Poppins",
+                            fontFamily: 'Meta1',
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -177,7 +183,7 @@ class _forgetpassState extends State<forgetpass> {
                       style: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.grey.shade500,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.normal),
                     ),
                     TextButton(
@@ -189,8 +195,8 @@ class _forgetpassState extends State<forgetpass> {
                           "Sign In",
                           style: TextStyle(
                               fontSize: 12.sp,
-                              color: Color(0xff0DF5E3),
-                              fontFamily: "Poppins",
+                              color: Colors.white,
+                              fontFamily: 'Meta1',
                               fontWeight: FontWeight.normal),
                         )),
                   ],
@@ -200,7 +206,7 @@ class _forgetpassState extends State<forgetpass> {
           ),
         ),
       ),
-    ));
+    );
   }
 
   TextStyle textStyle = TextStyle(

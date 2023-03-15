@@ -53,6 +53,8 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   modal_progress_hud_nsn: ^0.3.0
   flutter_easyloading: ^3.0.5
+  emoji_picker_flutter:
+  video_player: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -102,6 +104,13 @@ flutter:
         - asset: assets/fonts/poppins_semibold.ttf
           weight: 500
         - asset: assets/fonts/poppinsregular.ttf
+    - family: Meta
+      fonts:
+        - asset: assets/fonts/OdisseiaTest-Regular.otf
+    - family: Meta1
+      fonts:
+        - asset: assets/fonts/TypewalkMono1915-Medium-Demo.otf
+
   # fonts:
   #   - family: Schyler
   #     fonts:

@@ -38,14 +38,13 @@ class _signupState extends State<signup> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      backgroundColor: Color(0xff131313),
+    return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: true,
-        iconTheme: IconThemeData(color: Colors.grey.shade500),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Container(
         padding: EdgeInsets.all(5.w),
@@ -66,7 +65,7 @@ class _signupState extends State<signup> {
                             color: Colors.white,
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
-                            fontFamily: "Poppins"),
+                            fontFamily: 'Meta1'),
                       ),
                     ),
                     SizedBox(
@@ -80,7 +79,7 @@ class _signupState extends State<signup> {
                             color: Colors.grey.shade700,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.normal,
-                            fontFamily: "Poppins"),
+                            fontFamily: 'Meta1'),
                       ),
                     ),
                   ],
@@ -105,8 +104,9 @@ class _signupState extends State<signup> {
                         child: DropdownButton2(
                           offset: Offset(0, 10),
                           dropdownDecoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
                               borderRadius: BorderRadius.circular(14),
-                              // color: Colors.white.withOpacity(0.15),
+                              // color: Colors.black,
                               color: Colors.black),
                           hint: Row(
                             children: [
@@ -121,7 +121,7 @@ class _signupState extends State<signup> {
                                 'Choose a Type',
                                 style: TextStyle(
                                     color: Colors.grey.shade500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     fontSize: 12.sp),
                               ),
                             ],
@@ -140,7 +140,7 @@ class _signupState extends State<signup> {
                                 location,
                                 style: TextStyle(
                                     color: Colors.grey.shade500,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     fontSize: 12.sp),
                               ),
                               value: location,
@@ -168,10 +168,10 @@ class _signupState extends State<signup> {
                                   left: 47.0, bottom: 0.0, top: 1.0),
                               child: (setup == 1)
                                   ? Text(
-                                      "Full Name",
+                                      "",
                                       style: TextStyle(
                                           color: Colors.grey.shade300,
-                                          fontFamily: "Poppins",
+                                          fontFamily: 'Meta1',
                                           fontSize: 10.sp),
                                     )
                                   : Container()),
@@ -182,7 +182,7 @@ class _signupState extends State<signup> {
                                 keyboardType: TextInputType.text,
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontFamily: "Poppins",
+                                    fontFamily: 'Meta1',
                                     fontSize: 12.sp),
                                 onTap: () {
                                   setState(() {
@@ -228,10 +228,10 @@ class _signupState extends State<signup> {
                               left: 47.0, bottom: 0.0, top: 1.0),
                           child: (setup == 1)
                               ? Text(
-                                  "Phone Number",
+                                  "",
                                   style: TextStyle(
                                       color: Colors.grey.shade300,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       fontSize: 10.sp),
                                 )
                               : Container()),
@@ -242,7 +242,7 @@ class _signupState extends State<signup> {
                             keyboardType: TextInputType.phone,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontSize: 12.sp),
                             onTap: () {
                               setState(() {
@@ -286,10 +286,10 @@ class _signupState extends State<signup> {
                               left: 47.0, bottom: 0.0, top: 1.0),
                           child: (setup == 1)
                               ? Text(
-                                  "Email Address",
+                                  "",
                                   style: TextStyle(
                                       color: Colors.grey.shade300,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       fontSize: 10.sp),
                                 )
                               : Container()),
@@ -300,7 +300,7 @@ class _signupState extends State<signup> {
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontSize: 12.sp),
                             onTap: () {
                               setState(() {
@@ -355,10 +355,10 @@ class _signupState extends State<signup> {
                               left: 47.0, bottom: 0.0, top: 1.0),
                           child: (setup == 1)
                               ? Text(
-                                  "Password",
+                                  "",
                                   style: TextStyle(
                                       color: Colors.grey.shade300,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       fontSize: 10.sp),
                                 )
                               : Container()),
@@ -369,7 +369,7 @@ class _signupState extends State<signup> {
                             keyboardType: TextInputType.text,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontSize: 12.sp),
                             onTap: () {
                               setState(() {
@@ -413,10 +413,10 @@ class _signupState extends State<signup> {
                               left: 47.0, bottom: 0.0, top: 1.0),
                           child: (setup == 1)
                               ? Text(
-                                  "Confirm Password",
+                                  "",
                                   style: TextStyle(
                                       color: Colors.grey.shade300,
-                                      fontFamily: "Poppins",
+                                      fontFamily: 'Meta1',
                                       fontSize: 10.sp),
                                 )
                               : Container()),
@@ -427,7 +427,7 @@ class _signupState extends State<signup> {
                             keyboardType: TextInputType.text,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontSize: 12.sp),
                             onTap: () {
                               setState(() {
@@ -465,14 +465,14 @@ class _signupState extends State<signup> {
                       width: 50.w,
                       height: 7.h,
                       decoration: BoxDecoration(
-                          color: Color(0xff0DF5E3),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(20.sp)),
                       child: Text(
                         "SIGN UP",
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.black,
-                            fontFamily: "Poppins",
+                            fontFamily: 'Meta1',
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -490,7 +490,7 @@ class _signupState extends State<signup> {
                       style: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.grey.shade500,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.normal),
                     ),
                     TextButton(
@@ -503,8 +503,8 @@ class _signupState extends State<signup> {
                           "Sign In",
                           style: TextStyle(
                               fontSize: 12.sp,
-                              color: Color(0xff0DF5E3),
-                              fontFamily: "Poppins",
+                              color: Colors.white,
+                              fontFamily: 'Meta1',
                               fontWeight: FontWeight.normal),
                         )),
                   ],
@@ -514,7 +514,7 @@ class _signupState extends State<signup> {
           ),
         ),
       ),
-    ));
+    );
   }
 
   TextStyle textStyle = TextStyle(

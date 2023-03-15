@@ -11,6 +11,7 @@ import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/listingpage.dart';
+import 'package:pedrodap/screens/profile/userprofile%20screen.dart';
 import 'package:sizer/sizer.dart';
 
 class mainpage2 extends StatefulWidget {
@@ -48,14 +49,10 @@ class _mainpage2State extends State<mainpage2> {
     sachen1("assets/cr7.webp", "Cr 7", "al nssr"),
   ];
   List<Sachen> data = [
-    Sachen("assets/icons/players.png", "Player"),
-    Sachen("assets/icons/coach.png", "Coach"),
-    Sachen("assets/icons/club.png", "Club"),
-    Sachen("assets/icons/symbol.png", "Scouts"),
-    Sachen("assets/icons/hospital.png", "Medicals"),
-    Sachen("assets/icons/nutritionist.png", "Nutritionists"),
-    Sachen("assets/icons/coach (1).png", "Fitness Instructors"),
-    Sachen("assets/icons/trainers.png", " Personal Trainers"),
+    Sachen("assets/icons/coach (1).png", "Connect"),
+    Sachen("assets/icons/coach.png", "Training"),
+    Sachen("assets/icons/hospital.png", "Health"),
+    Sachen("assets/icons/sleeping.png", "Sleep"),
   ];
   int _current = 1;
 
@@ -78,7 +75,7 @@ class _mainpage2State extends State<mainpage2> {
       scaffold: Scaffold(
         key: _scaffoldKey,
         drawer: drawer(),
-        backgroundColor: Color(0xff131313),
+        backgroundColor: Colors.black,
         body: isloading
             ? Container()
             : Container(
@@ -99,7 +96,7 @@ class _mainpage2State extends State<mainpage2> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.sp,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 fontWeight: FontWeight.w500),
                           ),
                           Row(
@@ -124,14 +121,14 @@ class _mainpage2State extends State<mainpage2> {
                         ],
                       ),
                       SizedBox(
-                        height: 1.h,
+                        height: 4.h,
                       ),
                       Text(
                         "Hello " + userData!.userData!.name.toString() + ' !!',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.sp,
-                            fontFamily: "Poppins",
+                            fontFamily: 'Meta1',
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -142,7 +139,7 @@ class _mainpage2State extends State<mainpage2> {
                         style: TextStyle(
                             color: Colors.grey.shade500,
                             fontSize: 13.sp,
-                            fontFamily: "Poppins",
+                            fontFamily: 'Meta1',
                             fontWeight: FontWeight.w500),
                       ),
                       SizedBox(
@@ -168,7 +165,7 @@ class _mainpage2State extends State<mainpage2> {
                                 keyboardType: TextInputType.text,
                                 decoration: inputDecoration(
                                     hintText: "Search",
-                                    col: Colors.white.withOpacity(0.15),
+                                    col: Colors.grey.withOpacity(0.20),
                                     icon: Icon(
                                       Icons.search,
                                       color: Colors.white,
@@ -179,24 +176,24 @@ class _mainpage2State extends State<mainpage2> {
                         ],
                       ),
                       SizedBox(
-                        height: 2.h,
+                        height: 8.h,
                       ),
                       CarouselSlider(
                         carouselController: _controller,
                         items: playerdata!.players!.map((item) {
                           return GestureDetector(
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => listingpage()));
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (context) => Userprofile(udid: ,)));
                             },
                             child: SingleChildScrollView(
                               child: Container(
                                 // padding:EdgeInsets.all(5.w),
-                                height: 40.h,
+                                height: 37.h,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: Colors.white.withOpacity(0.15),
+                                      color: Colors.grey,
                                     ),
                                     borderRadius: BorderRadius.circular(20.0)),
                                 child: Column(
@@ -204,7 +201,7 @@ class _mainpage2State extends State<mainpage2> {
                                     Container(
                                       padding: EdgeInsets.all(5.w),
                                       decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.15),
+                                          color: Colors.black,
                                           borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(20.0),
                                               topRight: Radius.circular(20.0))),
@@ -236,7 +233,7 @@ class _mainpage2State extends State<mainpage2> {
                                                       fontSize: 16.sp,
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: 'Meta1',
                                                       color: Colors.white),
                                                 ),
                                                 Text(
@@ -248,7 +245,7 @@ class _mainpage2State extends State<mainpage2> {
                                                       fontSize: 12.sp,
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: 'Meta1',
                                                       color: Colors.white),
                                                 )
                                               ],
@@ -257,13 +254,10 @@ class _mainpage2State extends State<mainpage2> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 2.h,
-                                    ),
                                     Container(
                                       padding: EdgeInsets.all(5.w),
                                       decoration: BoxDecoration(
-                                          // color: Colors.white.withOpacity(0.15),
+                                          // color: Colors.black,
                                           borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(20.0),
                                               bottomRight:
@@ -283,7 +277,7 @@ class _mainpage2State extends State<mainpage2> {
                                                 style: TextStyle(
                                                   fontSize: 6.w,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: 'Meta1',
                                                   color: Color(0xffffffff),
                                                 ),
                                               ),
@@ -292,7 +286,7 @@ class _mainpage2State extends State<mainpage2> {
                                                 style: TextStyle(
                                                   fontSize: 3.5.w,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: 'Meta1',
                                                   color: Color(0xffb4b4b4),
                                                 ),
                                               ),
@@ -307,7 +301,7 @@ class _mainpage2State extends State<mainpage2> {
                                                 style: TextStyle(
                                                   fontSize: 6.w,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: 'Meta1',
                                                   color: Color(0xffffffff),
                                                 ),
                                               ),
@@ -316,7 +310,7 @@ class _mainpage2State extends State<mainpage2> {
                                                 style: TextStyle(
                                                   fontSize: 3.5.w,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: 'Meta1',
                                                   color: Color(0xffb4b4b4),
                                                 ),
                                               ),
@@ -331,7 +325,7 @@ class _mainpage2State extends State<mainpage2> {
                                                 style: TextStyle(
                                                   fontSize: 6.w,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: 'Meta1',
                                                   color: Color(0xffffffff),
                                                 ),
                                               ),
@@ -340,7 +334,7 @@ class _mainpage2State extends State<mainpage2> {
                                                 style: TextStyle(
                                                   fontSize: 3.5.w,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: 'Meta1',
                                                   color: Color(0xffb4b4b4),
                                                 ),
                                               ),
@@ -360,7 +354,7 @@ class _mainpage2State extends State<mainpage2> {
                                         height: 6.h,
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Color(0xff0DF5E3),
+                                              color: Colors.white,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(20.sp)),
@@ -369,7 +363,7 @@ class _mainpage2State extends State<mainpage2> {
                                           style: TextStyle(
                                               fontSize: 14.sp,
                                               color: Colors.white,
-                                              fontFamily: "Poppins",
+                                              fontFamily: 'Meta1',
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
@@ -398,42 +392,42 @@ class _mainpage2State extends State<mainpage2> {
                         ),
                       ),
                       SizedBox(
-                        height: 3.h,
+                        height: 6.h,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Search For?",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.sp,
-                                  fontFamily: "Poppins",
-                                  fontWeight: FontWeight.w600),
-                              textAlign: TextAlign.center,
-                            ),
-                            // TextButton(
-                            //     onPressed: () {
-                            //       // click();
-                            //     },
-                            //     child: Text(
-                            //       "Show all",
-                            //       style: TextStyle(
-                            //           color: Color(0xff0DF5E3),
-                            //           fontSize: 12.sp,
-                            //           fontFamily: "Poppins",
-                            //           fontWeight: FontWeight.w600),
-                            //     ))
-                          ],
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Text(
+                      //         "Search For?",
+                      //         style: TextStyle(
+                      //             color: Colors.white,
+                      //             fontSize: 18.sp,
+                      //             fontFamily: 'Meta1',
+                      //             fontWeight: FontWeight.w600),
+                      //         textAlign: TextAlign.center,
+                      //       ),
+                      //       // TextButton(
+                      //       //     onPressed: () {
+                      //       //       // click();
+                      //       //     },
+                      //       //     child: Text(
+                      //       //       "Show all",
+                      //       //       style: TextStyle(
+                      //       //           color: Colors.white,
+                      //       //           fontSize: 12.sp,
+                      //       //            fontFamily: 'Meta1',
+                      //       //           fontWeight: FontWeight.w600),
+                      //       //     ))
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(
-                        height: 1.h,
+                        height: 5.h,
                       ),
                       Container(
-                        height: 16.h,
+                        height: 10.h,
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.only(left: 5.w, top: 2.h),
                         decoration: BoxDecoration(
@@ -489,7 +483,7 @@ class _mainpage2State extends State<mainpage2> {
                                           style: TextStyle(
                                               color: Colors.grey.shade200,
                                               fontSize: 10.sp,
-                                              fontFamily: "Poppins",
+                                              fontFamily: 'Meta1',
                                               fontWeight: FontWeight.normal),
                                           textAlign: TextAlign.center,
                                         ),
@@ -499,9 +493,6 @@ class _mainpage2State extends State<mainpage2> {
                                 ),
                               );
                             }),
-                      ),
-                      SizedBox(
-                        height: 1.h,
                       ),
                     ],
                   ),
@@ -513,7 +504,7 @@ class _mainpage2State extends State<mainpage2> {
   }
 
   TextStyle textStyle =
-      TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: "Poppins");
+      TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: 'Meta1');
 
   InputDecoration inputDecoration(
       {required String hintText, required Color col, required Icon icon}) {
@@ -582,7 +573,7 @@ class _mainpage2State extends State<mainpage2> {
   //         title: Container(
   //           padding: EdgeInsets.only(left: 3.w, right: 0.w),
   //           decoration: BoxDecoration(
-  //               color: Color(0xff131313),
+  //               color: Colors.black,
   //               // color: Color(0xffb4776e6),
   //               borderRadius: BorderRadius.only(
   //                   topRight: Radius.circular(10.0),
@@ -595,7 +586,7 @@ class _mainpage2State extends State<mainpage2> {
   //                 style: TextStyle(
   //                     color: Colors.white,
   //                     fontWeight: FontWeight.bold,
-  //                     fontFamily: "Poppins"),
+  //                      fontFamily: 'Meta1'),
   //               ),
   //               IconButton(
   //                   onPressed: () {
@@ -653,7 +644,7 @@ class _mainpage2State extends State<mainpage2> {
   //                         style: TextStyle(
   //                             fontSize: 10.sp,
   //                             fontWeight: FontWeight.bold,
-  //                             fontFamily: "Poppins",
+  //                              fontFamily: 'Meta1',
   //                             color: Colors.white),
   //                       ),
   //                     ],
@@ -676,7 +667,7 @@ class _mainpage2State extends State<mainpage2> {
 //             child: ClipRRect(
 //               borderRadius: BorderRadius.circular(30),
 //               child: BottomAppBar(
-//                 color: Colors.white.withOpacity(0.15),
+//                 color: Colors.black,
 //                 shape: CircularNotchedRectangle(), //shape of notch
 //                 notchMargin:
 //                     20, //notche margin between floating button and bottom appbar
@@ -692,7 +683,7 @@ class _mainpage2State extends State<mainpage2> {
 //                       IconButton(
 //                         icon: Icon(
 //                           Icons.home,
-//                           color: Colors.cyanAccent,
+//                           color: Colors.white,
 //                           size: 3.h,
 //                         ),
 //                         onPressed: () {},

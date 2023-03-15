@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-buildErrorDialog(BuildContext context,String title, String contant,
+buildErrorDialog(BuildContext context, String title, String contant,
     {VoidCallback? callback, String? buttonname}) {
   Widget okButton = TextButton(
     child: Container(
@@ -13,13 +13,12 @@ buildErrorDialog(BuildContext context,String title, String contant,
       decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(20.0),
-          color: Color(0xff0DF5E3)
-      ),
+          color: Colors.white),
       child: Center(
         child: Text(buttonname ?? 'OK',
             // textAlign: TextAlign.center,
             style: const TextStyle(
-              fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w700,
                 color: Colors.black,
                 decorationColor: Colors.black,
                 fontFamily: 'poppins')),
@@ -35,12 +34,13 @@ buildErrorDialog(BuildContext context,String title, String contant,
   );
 
   if (Platform.isAndroid) {
-    AlertDialog alert = AlertDialog(backgroundColor: Color(0xff131313),
+    AlertDialog alert = AlertDialog(
+      backgroundColor: Colors.black,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      titlePadding: EdgeInsets.only(left:5.w,top:3.w),
-      contentPadding: EdgeInsets.only(top: 0.0,bottom: 0.0,left: 20.0),
+      titlePadding: EdgeInsets.only(left: 5.w, top: 3.w),
+      contentPadding: EdgeInsets.only(top: 0.0, bottom: 0.0, left: 20.0),
       title: Text(title,
           style: const TextStyle(
               color: Colors.white,

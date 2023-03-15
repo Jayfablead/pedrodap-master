@@ -38,28 +38,28 @@ class _MultiSelectState extends State<MultiSelect> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color(0xff131313),
-
+      backgroundColor: Colors.black,
       content: SingleChildScrollView(
         child: ListBody(
           children: widget.items
-              .map((item) => Theme(data: Theme.of(context).copyWith(
-            unselectedWidgetColor: Colors.white,
-          ),
-                child: CheckboxListTile(
+              .map((item) => Theme(
+                    data: Theme.of(context).copyWith(
+                      unselectedWidgetColor: Colors.white,
+                    ),
+                    child: CheckboxListTile(
                       value: _selectedItems.contains(item),
                       title: Text(
                         item,
                         style: TextStyle(
                             color: Colors.white,
-                            fontFamily: "Poppins",
+                            fontFamily: 'Meta1',
                             fontWeight: FontWeight.w500,
                             fontSize: 11.sp),
                       ),
                       controlAffinity: ListTileControlAffinity.leading,
                       onChanged: (isChecked) => _itemChange(item, isChecked!),
                     ),
-              ))
+                  ))
               .toList(),
         ),
       ),
@@ -70,7 +70,7 @@ class _MultiSelectState extends State<MultiSelect> {
             'Cancel',
             style: TextStyle(
                 color: Colors.grey,
-                fontFamily: "Poppins",
+                fontFamily: 'Meta1',
                 fontWeight: FontWeight.w500,
                 fontSize: 11.sp),
           ),
@@ -80,8 +80,7 @@ class _MultiSelectState extends State<MultiSelect> {
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.cyanAccent),
+                borderRadius: BorderRadius.circular(12), color: Colors.white),
             height: 4.5.h,
             width: MediaQuery.of(context).size.width * 0.25,
             child: Text(
@@ -90,7 +89,7 @@ class _MultiSelectState extends State<MultiSelect> {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   color: Colors.black,
-                  fontFamily: "Poppins",
+                  fontFamily: 'Meta1',
                   fontWeight: FontWeight.normal,
                   fontSize: 13.sp),
             ),

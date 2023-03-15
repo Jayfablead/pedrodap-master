@@ -27,7 +27,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
       child: Scaffold(
         key: _scaffoldKey,
         drawer: drawer(),
-        backgroundColor: Color(0xff131313),
+        backgroundColor: Colors.black,
         body: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.w),
@@ -53,7 +53,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.sp,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
@@ -72,7 +72,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.15),
+                      color: Colors.black,
                       borderRadius: BorderRadius.circular(15.0)),
                   height: 13.h,
                   width: MediaQuery.of(context).size.width,
@@ -97,7 +97,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                               style: TextStyle(
                                 fontSize: 5.w,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
+                                fontFamily: 'Meta1',
                                 color: Color(0xffffffff),
                               ),
                             ),
@@ -107,8 +107,8 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                             style: TextStyle(
                               fontSize: 4.w,
                               fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                              color: Colors.cyanAccent,
+                              fontFamily: 'Meta1',
+                              color: Colors.white,
                             ),
                           ),
                           Row(
@@ -118,7 +118,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                                 style: TextStyle(
                                   fontSize: 4.w,
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
+                                  fontFamily: 'Meta1',
                                   color: Colors.white,
                                 ),
                               ),
@@ -127,7 +127,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                                 style: TextStyle(
                                   fontSize: 4.w,
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
+                                  fontFamily: 'Meta1',
                                   color: Colors.white,
                                 ),
                               ),
@@ -153,7 +153,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.white,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
@@ -167,7 +167,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                       padding: EdgeInsets.symmetric(horizontal: 3.w),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.white.withOpacity(0.15),
+                        color: Colors.black,
                       ),
                       child: Text(
                         'Trainings',
@@ -188,7 +188,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.white,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
@@ -202,7 +202,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                       padding: EdgeInsets.symmetric(horizontal: 3.w),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.white.withOpacity(0.15),
+                        color: Colors.black,
                       ),
                       child: Text(
                         'Great',
@@ -210,7 +210,8 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                       ),
                     ),
                   ],
-                ), SizedBox(
+                ),
+                SizedBox(
                   height: 3.h,
                 ),
                 Column(
@@ -222,7 +223,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.white,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
@@ -238,10 +239,13 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                           padding: EdgeInsets.symmetric(horizontal: 3.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.black,
                           ),
-                          child: RatingBar.builder(glow: false,ignoreGestures: true,
-                            initialRating: 3,itemSize: 5.w,
+                          child: RatingBar.builder(
+                            glow: false,
+                            ignoreGestures: true,
+                            initialRating: 3,
+                            itemSize: 5.w,
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
@@ -252,10 +256,12 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                               color: Colors.amber,
                             ),
                             glowColor: Colors.amberAccent,
-                           onRatingUpdate: (context){},
+                            onRatingUpdate: (context) {},
                           ),
                         ),
-                        SizedBox(width: 10.w,),
+                        SizedBox(
+                          width: 10.w,
+                        ),
                         Container(
                           alignment: Alignment.center,
                           height: 6.h,
@@ -263,7 +269,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                           padding: EdgeInsets.symmetric(horizontal: 3.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.black,
                           ),
                           child: Text(
                             '3 ☆',
@@ -286,7 +292,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.white,
-                          fontFamily: "Poppins",
+                          fontFamily: 'Meta1',
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
@@ -300,7 +306,7 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
                           EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.white.withOpacity(0.15),
+                        color: Colors.black,
                       ),
                       child: Text(
                         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
@@ -318,8 +324,8 @@ class _ViewFeedBackState extends State<ViewFeedBack> {
   }
 
   TextStyle textStyle =
-      TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: "Poppins");
+      TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: 'Meta1');
 
   TextStyle textStyle1 =
-      TextStyle(color: Colors.grey, fontSize: 12.sp, fontFamily: "Poppins");
+      TextStyle(color: Colors.grey, fontSize: 12.sp, fontFamily: 'Meta1');
 }

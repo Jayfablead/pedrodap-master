@@ -28,7 +28,6 @@ class _MytraineesState extends State<Mytrainees> {
     Sachen("assets/lewa.webp", "Lewandoski", "Manchester united"),
     Sachen("assets/10.png", "Lionel Messi", "paris saint german"),
     Sachen("assets/10.png", "Lionel Messi", "paris saint german"),
-
   ];
   List<Sachen> reqest = [
     Sachen("assets/10.png", "Lionel Messi", "paris saint german"),
@@ -45,7 +44,7 @@ class _MytraineesState extends State<Mytrainees> {
       child: Scaffold(
         drawer: drawer(),
         key: _scaffoldKey,
-        backgroundColor: Color(0xff131313),
+        backgroundColor: Colors.black,
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 4.w),
           child: SingleChildScrollView(
@@ -68,7 +67,7 @@ class _MytraineesState extends State<Mytrainees> {
                       style: TextStyle(
                         fontSize: 5.5.w,
                         fontWeight: FontWeight.w500,
-                        fontFamily: "Poppins",
+                        fontFamily: 'Meta1',
                         color: Color(0xffffffff),
                       ),
                     ),
@@ -97,7 +96,7 @@ class _MytraineesState extends State<Mytrainees> {
                           height: 10.h,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.15),
+                              color: Colors.black,
                               borderRadius: BorderRadius.circular(10)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,7 +105,7 @@ class _MytraineesState extends State<Mytrainees> {
                                 width: 87.w,
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -119,7 +118,11 @@ class _MytraineesState extends State<Mytrainees> {
                                         SizedBox(
                                           width: 4.w,
                                         ),
-                                        Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.start,
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               profile[index].name.toString(),
@@ -128,10 +131,12 @@ class _MytraineesState extends State<Mytrainees> {
                                               style: TextStyle(
                                                   fontSize: 14.sp,
                                                   fontWeight: FontWeight.bold,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: 'Meta1',
                                                   color: Colors.white),
                                             ),
-                                            SizedBox(height: 0.5.h,),
+                                            SizedBox(
+                                              height: 0.5.h,
+                                            ),
                                             Text(
                                               profile[index].club.toString(),
                                               maxLines: 2,
@@ -139,7 +144,7 @@ class _MytraineesState extends State<Mytrainees> {
                                               style: TextStyle(
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w500,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: 'Meta1',
                                                   color: Colors.white70),
                                             ),
                                           ],
@@ -149,8 +154,7 @@ class _MytraineesState extends State<Mytrainees> {
                                     PopupMenuButton(
                                       offset: Offset(0.0, 0.0),
                                       shape: RoundedRectangleBorder(
-                                        side: BorderSide(
-                                            color: Colors.cyanAccent),
+                                        side: BorderSide(color: Colors.white),
                                         borderRadius: BorderRadius.only(
                                           bottomLeft: Radius.circular(8.0),
                                           bottomRight: Radius.circular(8.0),
@@ -181,10 +185,10 @@ class _MytraineesState extends State<Mytrainees> {
                                                     color: Colors.grey
                                                         .withOpacity(0.05),
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        30),
+                                                        BorderRadius.circular(
+                                                            30),
                                                     border: Border.all(
-                                                      color: Color(0xff0DF5E3),
+                                                      color: Colors.white,
                                                     ),
                                                   ),
                                                   child: Text(
@@ -192,8 +196,8 @@ class _MytraineesState extends State<Mytrainees> {
                                                     style: TextStyle(
                                                       fontSize: 4.w,
                                                       fontWeight:
-                                                      FontWeight.w500,
-                                                      fontFamily: "Poppins",
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
                                                       color: Colors.white,
                                                     ),
                                                   ),
@@ -217,10 +221,10 @@ class _MytraineesState extends State<Mytrainees> {
                                                     color: Colors.grey
                                                         .withOpacity(0.05),
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        30),
+                                                        BorderRadius.circular(
+                                                            30),
                                                     border: Border.all(
-                                                      color: Color(0xff0DF5E3),
+                                                      color: Colors.white,
                                                     ),
                                                   ),
                                                   child: Text(
@@ -228,8 +232,8 @@ class _MytraineesState extends State<Mytrainees> {
                                                     style: TextStyle(
                                                       fontSize: 4.w,
                                                       fontWeight:
-                                                      FontWeight.w500,
-                                                      fontFamily: "Poppins",
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
                                                       color: Colors.white,
                                                     ),
                                                   ),
@@ -269,7 +273,7 @@ class _MytraineesState extends State<Mytrainees> {
   }
 
   TextStyle textStyle = TextStyle(
-      color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: "Poppins");
+      color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: 'Meta1');
 
   InputDecoration inputDecoration(
       {required String hintText, required Color col, required Icon icon}) {
