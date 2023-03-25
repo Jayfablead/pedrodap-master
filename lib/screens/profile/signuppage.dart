@@ -532,8 +532,8 @@ class _signupState extends State<signup> {
         color: Colors.red,
       ),
       hintText: hintText,
-      prefixIcon: icon,
-      contentPadding: EdgeInsets.symmetric(vertical: 0.0),
+      prefixIcon: Padding(padding: EdgeInsets.only(bottom: 3.h), child: icon),
+      contentPadding: EdgeInsets.symmetric(vertical: 3.h),
       prefixIconColor: Colors.purple,
       hintStyle: textStyle,
       border: OutlineInputBorder(

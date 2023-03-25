@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pedrodap/Widget/CustomExpection.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
+
 responses(http.Response response) {
-  switch (response.statusCode)
-  {
+  switch (response.statusCode) {
     case 200:
       {
         if (jsonDecode(response.body)['statusCode'] == 101) {

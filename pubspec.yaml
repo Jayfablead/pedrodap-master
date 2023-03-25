@@ -1,5 +1,5 @@
 name: pedrodap
-description: A new Flutter project.
+description: Pedro Community Working App With Todo And chat replies.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -55,6 +55,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   emoji_picker_flutter:
   video_player: ^2.5.3
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:
@@ -106,10 +107,10 @@ flutter:
         - asset: assets/fonts/poppinsregular.ttf
     - family: Meta
       fonts:
-        - asset: assets/fonts/OdisseiaTest-Regular.otf
+        - asset: assets/fonts/OdisseiaTest-Regular.ttf
     - family: Meta1
       fonts:
-        - asset: assets/fonts/TypewalkMono1915-Medium-Demo.otf
+        - asset: assets/fonts/TypewalkMono1915-Medium-Demo.ttf
 
   # fonts:
   #   - family: Schyler

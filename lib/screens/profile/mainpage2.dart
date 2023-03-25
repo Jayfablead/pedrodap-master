@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:pedrodap/Model/allplayersmodal.dart';
 import 'package:pedrodap/Model/playermodal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/buildErrorDialog.dart';
@@ -10,9 +13,15 @@ import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
+import 'package:pedrodap/screens/profile/DiscoverPage.dart';
+import 'package:pedrodap/screens/profile/SleepSchedule.dart';
 import 'package:pedrodap/screens/profile/listingpage.dart';
+import 'package:pedrodap/screens/profile/messagePage.dart';
+import 'package:pedrodap/screens/profile/trainningnotes.dart';
 import 'package:pedrodap/screens/profile/userprofile%20screen.dart';
 import 'package:sizer/sizer.dart';
+
+import 'viewnutrition.dart';
 
 class mainpage2 extends StatefulWidget {
   const mainpage2({Key? key}) : super(key: key);
@@ -149,15 +158,37 @@ class _mainpage2State extends State<mainpage2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CircleAvatar(
-                              radius: 6.w,
-                              backgroundImage: NetworkImage(
-                                  "https://icdn.football-espana.net/wp-content/uploads/2022/06/Neymar-Junior2.jpeg")),
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 1.w),
+                            height: 6.h,
+                            width: 13.w,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(90),
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: profiledata!
+                                    .viewProfileDetails!.profilePic
+                                    .toString(),
+                                progressIndicatorBuilder:
+                                    (context, url, progress) =>
+                                        CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  'assets/icons/user.png',
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          // CircleAvatar(
+                          //     radius: 6.w,
+                          //     backgroundImage: NetworkImage(
+                          //         "https://icdn.football-espana.net/wp-content/uploads/2022/06/Neymar-Junior2.jpeg")),
                           SizedBox(
                             width: 5.w,
                           ),
                           Container(
-                            width: 72.w,
+                            width: 69.w,
                             child: SizedBox(
                               height: 16.w,
                               child: TextField(
@@ -180,7 +211,7 @@ class _mainpage2State extends State<mainpage2> {
                       ),
                       CarouselSlider(
                         carouselController: _controller,
-                        items: playerdata!.players!.map((item) {
+                        items: alldata!.allUsers!.map((item) {
                           return GestureDetector(
                             onTap: () {
                               // Navigator.of(context).push(MaterialPageRoute(
@@ -189,186 +220,239 @@ class _mainpage2State extends State<mainpage2> {
                             child: SingleChildScrollView(
                               child: Container(
                                 // padding:EdgeInsets.all(5.w),
-                                height: 37.h,
+                                height: 40.h,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                       color: Colors.grey,
                                     ),
                                     borderRadius: BorderRadius.circular(20.0)),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(5.w),
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(20.0),
-                                              topRight: Radius.circular(20.0))),
-                                      child: Row(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 10.5.w,
-                                            backgroundColor: Colors.white,
-                                            child: CircleAvatar(
-                                                radius: 10.w,
-                                                backgroundImage: AssetImage(
-                                                  'assets/messi.png',
-                                                )),
-                                          ),
-                                          SizedBox(
-                                            width: 5.w,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  item.name.toString(),
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize: 16.sp,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontFamily: 'Meta1',
-                                                      color: Colors.white),
-                                                ),
-                                                Text(
-                                                  item.clubName.toString(),
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontFamily: 'Meta1',
-                                                      color: Colors.white),
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.all(5.w),
-                                      decoration: BoxDecoration(
-                                          // color: Colors.black,
-                                          borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(20.0),
-                                              bottomRight:
-                                                  Radius.circular(20.0))),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '28',
-                                                style: TextStyle(
-                                                  fontSize: 6.w,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Meta1',
-                                                  color: Color(0xffffffff),
-                                                ),
-                                              ),
-                                              Text(
-                                                'Posts',
-                                                style: TextStyle(
-                                                  fontSize: 3.5.w,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Meta1',
-                                                  color: Color(0xffb4b4b4),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '69',
-                                                style: TextStyle(
-                                                  fontSize: 6.w,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Meta1',
-                                                  color: Color(0xffffffff),
-                                                ),
-                                              ),
-                                              Text(
-                                                'Following',
-                                                style: TextStyle(
-                                                  fontSize: 3.5.w,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Meta1',
-                                                  color: Color(0xffb4b4b4),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '2.3B',
-                                                style: TextStyle(
-                                                  fontSize: 6.w,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Meta1',
-                                                  color: Color(0xffffffff),
-                                                ),
-                                              ),
-                                              Text(
-                                                'Followers',
-                                                style: TextStyle(
-                                                  fontSize: 3.5.w,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Meta1',
-                                                  color: Color(0xffb4b4b4),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 2.h,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        width: 50.w,
-                                        height: 6.h,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(5.w),
                                         decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: Colors.white,
+                                            color: Colors.black,
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20.0),
+                                                topRight:
+                                                    Radius.circular(20.0))),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 1.w),
+                                              height: 10.h,
+                                              width: 20.w,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(90),
+                                                child: CachedNetworkImage(
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: item.profilePic
+                                                      .toString(),
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              progress) =>
+                                                          CircularProgressIndicator(),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Image.asset(
+                                                    'assets/icons/user.png',
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(20.sp)),
-                                        child: Text(
-                                          "Connect",
-                                          style: TextStyle(
-                                              fontSize: 14.sp,
-                                              color: Colors.white,
-                                              fontFamily: 'Meta1',
-                                              fontWeight: FontWeight.bold),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    item.name.toString(),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 16.sp,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 0.8.h,
+                                                  ),
+                                                  item.clubName == null
+                                                      ? Container()
+                                                      : Column(
+                                                          children: [
+                                                            Text(
+                                                              item.clubName
+                                                                  .toString(),
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontFamily:
+                                                                      'Meta1',
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 0.8.h,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                  Text(
+                                                    item.position == null
+                                                        ? item.role == '2'
+                                                            ? 'Player'
+                                                            : item.role == '3'
+                                                                ? 'Coach'
+                                                                : item.role ==
+                                                                        '5'
+                                                                    ? 'Scouts'
+                                                                    : item.role ==
+                                                                            '6'
+                                                                        ? 'Medician'
+                                                                        : item.role ==
+                                                                                '7'
+                                                                            ? 'Nutritionist'
+                                                                            : item.role == '8'
+                                                                                ? 'Fitness Trainer'
+                                                                                : 'Personal Trainer'
+                                                        : item.position.toString(),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
-                                    )
-                                  ],
+                                      Container(
+                                        padding: EdgeInsets.all(5.w),
+                                        decoration: BoxDecoration(
+                                            // color: Colors.black,
+                                            borderRadius: BorderRadius.only(
+                                                bottomLeft:
+                                                    Radius.circular(20.0),
+                                                bottomRight:
+                                                    Radius.circular(20.0))),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  '18',
+                                                  style: TextStyle(
+                                                    fontSize: 6.w,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: 'Meta1',
+                                                    color: Color(0xffffffff),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Connections',
+                                                  style: TextStyle(
+                                                    fontSize: 3.5.w,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: 'Meta1',
+                                                    color: Color(0xffb4b4b4),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MessagePage(
+                                                            image:
+                                                                'assets/10.png',
+                                                            name: item.name),
+                                                  ),
+                                                );
+                                              },
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    CupertinoIcons.text_bubble,
+                                                    color: Colors.white,
+                                                    size: 19.sp,
+                                                  ),
+                                                  Text(
+                                                    'Chat',
+                                                    style: TextStyle(
+                                                      fontSize: 3.5.w,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
+                                                      color: Color(0xffb4b4b4),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 2.h,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          width: 50.w,
+                                          height: 6.h,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: Colors.white,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(20.sp)),
+                                          child: Text(
+                                            "Connect",
+                                            style: TextStyle(
+                                                fontSize: 14.sp,
+                                                color: Colors.white,
+                                                fontFamily: 'Meta1',
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -451,6 +535,28 @@ class _mainpage2State extends State<mainpage2> {
                                   setState(() {
                                     selectindex1 = index;
                                   });
+                                  index == 0
+                                      ? Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                          builder: (context) => DiscoverPage(),
+                                        ))
+                                      : index == 1
+                                          ? Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TrainningNotes(),
+                                            ))
+                                          : index == 2
+                                              ? Navigator.of(context)
+                                                  .push(MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ViewNutrition(),
+                                                ))
+                                              : Navigator.of(context)
+                                                  .push(MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SleepSchedule(),
+                                                ));
                                 },
                                 child: Container(
                                   width: 22.w,
@@ -533,12 +639,13 @@ class _mainpage2State extends State<mainpage2> {
 
   playerapi() {
     final Map<String, String> data = {};
-    data['action'] = 'all_players_app';
+    data['action'] = 'all_users_app';
+    data['uid'] = userData!.userData!.uid.toString();
 
     checkInternet().then((internet) async {
       if (internet) {
-        authprovider().playersApi(data).then((Response response) async {
-          playerdata = Playermodal.fromJson(json.decode(response.body));
+        authprovider().allplayersapi(data).then((Response response) async {
+          alldata = AllplayersModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && userData?.status == "success") {
             setState(() {
               isloading = false;

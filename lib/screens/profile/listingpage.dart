@@ -168,12 +168,10 @@ class _listingpageState extends State<listingpage> {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                            builder: (context) => Userprofile(
-                                                  udid: playerdata!
-                                                      .players![index].uid,
-                                                )));
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Userprofile()));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(3.w),

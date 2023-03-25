@@ -35,7 +35,7 @@ class _forgetpassState extends State<forgetpass> {
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         title: Text(
-          "Forget Password",
+          "Forgot Password",
           style: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
         ),
       ),
@@ -54,7 +54,7 @@ class _forgetpassState extends State<forgetpass> {
                 Column(
                   children: [
                     Text(
-                      "Forget Password",
+                      "Forgot Password",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -251,34 +251,13 @@ class _forgetpassState extends State<forgetpass> {
 
             if (response.statusCode == 200 &&
                 userData!.status == "Check your mail!") {
-              setState(() async {
-                EasyLoading.showSuccess(' Check Your Mailbox !');
-
-                // Fluttertoast.showToast(
-                //   msg: "Check Your MailBox",
-                //   textColor: Colors.black,
-                //   toastLength: Toast.LENGTH_SHORT,
-                //   timeInSecForIosWeb: 1,
-                //   gravity: ToastGravity.BOTTOM,
-                //   backgroundColor: Color.fromARGB(255, 102, 181, 63),
-                // );
-                _email.clear();
-                Navigator.pop(context);
-                isLodaing = false;
-              });
-
+              EasyLoading.showSuccess(' Check Your Mailbox !');
+              _email.clear();
+              Navigator.pop(context);
+              isLodaing = false;
               _email.text = "";
             } else {
               EasyLoading.showError("Enter A Valid Email Address !!");
-
-              // Fluttertoast.showToast(
-              //   msg: "Enter A Valid Email Address",
-              //   textColor: Colors.white,
-              //   toastLength: Toast.LENGTH_SHORT,
-              //   timeInSecForIosWeb: 1,
-              //   gravity: ToastGravity.BOTTOM,
-              //   backgroundColor: Colors.indigo,
-              // );
             }
           });
         } else {

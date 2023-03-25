@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
+import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
 import 'package:pedrodap/screens/profile/Nutri.dart';
 import 'package:pedrodap/screens/profile/SleepSchedule.dart';
@@ -13,12 +18,13 @@ import 'package:pedrodap/screens/profile/viewfitnessprograme.dart';
 import 'package:pedrodap/screens/profile/viewnutrition.dart';
 import 'package:pedrodap/statichomepage.dart';
 import 'package:sizer/sizer.dart';
+import '../Model/profileModal.dart';
 import '../screens/profile/listingpage.dart';
 import '../screens/profile/loginpage.dart';
-import '../screens/profile/mainpage.dart';
 import '../screens/profile/mainpage2.dart';
 import '../screens/profile/myprofile.dart';
 import '../screens/profile/userprofile screen.dart';
+import 'buildErrorDialog.dart';
 
 class drawer extends StatefulWidget {
   const drawer({Key? key}) : super(key: key);
@@ -27,83 +33,132 @@ class drawer extends StatefulWidget {
   State<drawer> createState() => _drawerState();
 }
 
+bool isloading = true;
+
 class _drawerState extends State<drawer> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    playerapi();
+  }
+
   Widget build(BuildContext context) {
     double widthDrawer = MediaQuery.of(context).size.width * 0.75;
     return SafeArea(
       child: Drawer(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: widthDrawer,
-          color: Colors.black,
-          child: ListView(
-            //padding: EdgeInsets.all(2.w),
-            children: [
-              SizedBox(
-                height: 2.h,
-              ),
-              Container(
-                height: 12.h,
-                padding: EdgeInsets.all(1.w),
-                width: widthDrawer,
-                // color: Colors.black.withOpacity(0.3),
-                decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    //     fit: BoxFit.fill,
-                    //     image: AssetImage("assets/splash2.jpg"))
-                    // image: NetworkImage(
-                    //     'https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg')),
-                    ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        child: isloading
+            ? Container(
+                color: Colors.black,
+                child: Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                        radius: 9.w,
-                        backgroundImage: NetworkImage(
-                            "https://icdn.football-espana.net/wp-content/uploads/2022/06/Neymar-Junior2.jpeg")),
+                    Text(
+                      'Loading .. ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontSize: 15.sp),
+                    ),
+                    SizedBox(height: 3.h),
+                    CircularProgressIndicator()
+                  ],
+                )),
+              )
+            : Container(
+                height: MediaQuery.of(context).size.height,
+                width: widthDrawer,
+                color: Colors.black,
+                child: ListView(
+                  //padding: EdgeInsets.all(2.w),
+                  children: [
                     SizedBox(
-                      width: 7.w,
+                      height: 2.h,
+                    ),
+                    Container(
+                      height: 12.h,
+                      padding: EdgeInsets.all(1.w),
+                      width: widthDrawer,
+                      // color: Colors.black.withOpacity(0.3),
+                      decoration: BoxDecoration(
+                          // image: DecorationImage(
+                          //     fit: BoxFit.fill,
+                          //     image: AssetImage("assets/splash2.jpg"))
+                          // image: NetworkImage(
+                          //     'https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg')),
+                          ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 1.w),
+                            height: 10.h,
+                            width: 20.w,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(90),
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: profiledata!
+                                    .viewProfileDetails!.profilePic
+                                    .toString(),
+                                progressIndicatorBuilder:
+                                    (context, url, progress) =>
+                                        CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  'assets/icons/user.png',
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          // CircleAvatar(
+                          //     radius: 9.w,
+                          //     backgroundImage: NetworkImage(
+                          //         "https://icdn.football-espana.net/wp-content/uploads/2022/06/Neymar-Junior2.jpeg")),
+                          SizedBox(
+                            width: 7.w,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 0.5.h,
+                              ),
+                              Text(
+                                userData!.userData!.name.toString(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontFamily: 'Meta1',
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(
+                                height: 0.5.h,
+                              ),
+                              SizedBox(
+                                width: 42.w,
+                                child: Text(
+                                    userData!.userData!.email.toString(),
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Meta1',
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.grey,
+                    ),
+                    SizedBox(
+                      height: 1.5.h,
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 0.5.h,
-                        ),
-                        Text(
-                          userData!.userData!.name.toString(),
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontFamily: 'Meta1',
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          height: 0.5.h,
-                        ),
-                        SizedBox(
-                          width: 45.w,
-                          child: Text(userData!.userData!.email.toString(),
-                              maxLines: 2,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Meta1',
-                                  fontWeight: FontWeight.w600)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: 1.5.h,
-              ),
-              userData!.userData!.role == '2'
-                  ? Column(
                       children: [
                         InkWell(
                           onTap: () {
@@ -158,418 +213,424 @@ class _drawerState extends State<drawer> {
                           height: 2.h,
                         ),
                       ],
-                    )
-                  : Container(),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyProfile(),
                     ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => MyProfile(),
+                          ),
+                        );
+                      },
+                      child: Container(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            SizedBox(
+                              width: 6.w,
+                            ),
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.person_outline_rounded,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("My Profile",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Meta1',
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => DiscoverPage(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 6.w,
+                            ),
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.person_add_alt,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("My Connections",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Meta1',
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ChatPage(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 6.w,
+                            ),
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.chat_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("Messages",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Meta1',
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    userData!.userData!.role == '2'
+                        ? Column(
+                            children: [
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => TrainningNotes(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 6.w,
+                                      ),
+                                      Container(
+                                        width: 66.w,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons
+                                                      .transfer_within_a_station_outlined,
+                                                  color: Colors.white,
+                                                ),
+                                                SizedBox(
+                                                  width: 2.w,
+                                                ),
+                                                Text("Training & Notes",
+                                                    style: TextStyle(
+                                                      fontSize: 4.w,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
+                                                      color: Colors.white,
+                                                    )),
+                                              ],
+                                            ),
+                                            Icon(
+                                              Icons.chevron_right_rounded,
+                                              color: Colors.white,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ViewFitness(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 6.w,
+                                      ),
+                                      Container(
+                                        width: 66.w,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.fitness_center_rounded,
+                                                  color: Colors.white,
+                                                ),
+                                                SizedBox(
+                                                  width: 2.w,
+                                                ),
+                                                Text("Fitness Programme",
+                                                    style: TextStyle(
+                                                      fontSize: 4.w,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
+                                                      color: Colors.white,
+                                                    )),
+                                              ],
+                                            ),
+                                            Icon(
+                                              Icons.chevron_right_rounded,
+                                              color: Colors.white,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ViewNutrition(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 6.w,
+                                      ),
+                                      Container(
+                                        width: 66.w,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  CupertinoIcons.heart_circle,
+                                                  color: Colors.white,
+                                                ),
+                                                SizedBox(
+                                                  width: 2.w,
+                                                ),
+                                                Text("Nutrition & Health",
+                                                    style: TextStyle(
+                                                      fontSize: 4.w,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
+                                                      color: Colors.white,
+                                                    )),
+                                              ],
+                                            ),
+                                            Icon(
+                                              Icons.chevron_right_rounded,
+                                              color: Colors.white,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => SleepSchedule(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 6.w,
+                                      ),
+                                      Container(
+                                        width: 66.w,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  CupertinoIcons.house_alt,
+                                                  color: Colors.white,
+                                                ),
+                                                SizedBox(
+                                                  width: 2.w,
+                                                ),
+                                                Text("Sleep Schedule",
+                                                    style: TextStyle(
+                                                      fontSize: 4.w,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
+                                                      color: Colors.white,
+                                                    )),
+                                              ],
+                                            ),
+                                            Icon(
+                                              Icons.chevron_right_rounded,
+                                              color: Colors.white,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Container(),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        await SaveDataLocal.clearUserData();
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => loginpage(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 6.w,
+                            ),
                             Row(
                               children: [
                                 Icon(
-                                  Icons.person_outline_rounded,
-                                  color: Colors.white,
+                                  Icons.logout_rounded,
+                                  color: Colors.red,
                                 ),
                                 SizedBox(
                                   width: 2.w,
                                 ),
-                                Text("My Profile",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Meta1',
-                                      color: Colors.white,
-                                    )),
+                                Text(
+                                  "Logout",
+                                  style: TextStyle(
+                                    fontSize: 4.w,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Meta1',
+                                    color: Colors.red,
+                                  ),
+                                ),
                               ],
                             ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => DiscoverPage(),
                     ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.person_add_alt,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("My Connections",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Meta1',
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 2.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ChatPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Container(
-                        width: 66.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.chat_outlined,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Text("Messages",
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Meta1',
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                            Icon(
-                              Icons.chevron_right_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              userData!.userData!.role == '2'
-                  ? Column(
-                      children: [
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => TrainningNotes(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons
-                                                .transfer_within_a_station_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Training & Notes",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Meta1',
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ViewFitness(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.fitness_center_rounded,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Fitness Programme",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Meta1',
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ViewNutrition(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            CupertinoIcons.heart_circle,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Nutrition & Health",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Meta1',
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => SleepSchedule(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 6.w,
-                                ),
-                                Container(
-                                  width: 66.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            CupertinoIcons.house_alt,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 2.w,
-                                          ),
-                                          Text("Sleep Schedule",
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Meta1',
-                                                color: Colors.white,
-                                              )),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              SizedBox(
-                height: 5.h,
-              ),
-              InkWell(
-                onTap: () async {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => loginpage(),
-                    ),
-                  );
-                  await SaveDataLocal.clearUserData();
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.logout_rounded,
-                            color: Colors.red,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Text(
-                            "Logout",
-                            style: TextStyle(
-                              fontSize: 4.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Meta1',
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -579,6 +640,40 @@ class _drawerState extends State<drawer> {
       fontSize: 12.sp,
       fontFamily: 'Meta1',
       fontWeight: FontWeight.w600);
+  playerapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'view_profile_details';
+    data['uid'] = userData!.userData!.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().profileapi(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && userData?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
 }
 
 

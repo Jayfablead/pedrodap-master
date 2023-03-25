@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
+import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:sizer/sizer.dart';
 
 class MyConnections extends StatefulWidget {
@@ -165,32 +167,161 @@ class _MyConnectionsState extends State<MyConnections> {
                                           ),
                                         ],
                                       ),
-                                      InkWell(
-                                        onTap: () {},
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 5.h,
-                                          width: 23.w,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.grey.withOpacity(0.05),
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            border: Border.all(
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      AlertDialog(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white)),
+                                                    backgroundColor:
+                                                        Color.fromARGB(
+                                                            255, 0, 0, 0),
+                                                    scrollable: true,
+                                                    content: Column(
+                                                      children: [
+                                                        Text(
+                                                          'Are you Sure You Want To Disconnect ?',
+                                                          style: TextStyle(
+                                                            fontSize: 13.sp,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontFamily: 'Meta1',
+                                                            color: Color(
+                                                                0xffffffff),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 3.h,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      bottom:
+                                                                          1.h),
+                                                              width: 20.w,
+                                                              child:
+                                                                  ElevatedButton(
+                                                                child: Text(
+                                                                  'Yes',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Color(
+                                                                        0xffffffff),
+                                                                  ),
+                                                                ),
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                style: ElevatedButton.styleFrom(
+                                                                    backgroundColor: Colors
+                                                                        .grey
+                                                                        .withOpacity(
+                                                                            0.20),
+                                                                    minimumSize:
+                                                                        Size(
+                                                                            40.w,
+                                                                            5.h),
+                                                                    elevation: 00),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      bottom:
+                                                                          1.h),
+                                                              width: 20.w,
+                                                              child:
+                                                                  ElevatedButton(
+                                                                child: Text(
+                                                                  'No',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Color(
+                                                                        0xffffffff),
+                                                                  ),
+                                                                ),
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                style: ElevatedButton.styleFrom(
+                                                                    primary: Colors
+                                                                        .grey
+                                                                        .withOpacity(
+                                                                            0.20),
+                                                                    minimumSize:
+                                                                        Size(
+                                                                            40.w,
+                                                                            5.h),
+                                                                    elevation: 00),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              icon: Icon(
+                                                CupertinoIcons
+                                                    .person_badge_minus,
+                                                color: Colors.white,
+                                              )),
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MessagePage(
+                                                        image: profile[index]
+                                                            .image
+                                                            .toString(),
+                                                        name: profile[index]
+                                                            .name
+                                                            .toString()),
+                                              ));
+                                            },
+                                            icon: Icon(
+                                              CupertinoIcons.text_bubble,
                                               color: Colors.white,
                                             ),
                                           ),
-                                          child: Text(
-                                            'Message',
-                                            style: TextStyle(
-                                              fontSize: 4.w,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: 'Meta1',
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                        ],
+                                      )
                                     ],
                                   ),
                                 ),

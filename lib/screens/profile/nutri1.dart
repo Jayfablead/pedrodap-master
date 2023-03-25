@@ -77,18 +77,18 @@ import 'package:sizer/sizer.dart';
 import '../../Widget/Drawer.dart';
 import '../../Widget/color.dart';
 
-class Home extends StatefulWidget {
+class Nutri extends StatefulWidget {
   String? title;
   String? desc;
   String? tile;
 
-  Home({Key? key, this.desc, this.title, this.tile}) : super(key: key);
+  Nutri({Key? key, this.desc, this.title, this.tile}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Nutri> createState() => _NutriState();
 }
 
-class _HomeState extends State<Home> {
+class _NutriState extends State<Nutri> {
   final todosList = ToDo.todoList();
   List<ToDo> _foundToDo = [];
   final _todoController = TextEditingController();
@@ -100,24 +100,32 @@ class _HomeState extends State<Home> {
     'Lorem Ipsum is simply dummy text.',
   ];
   List subtitle = [
+    '5 cal - 3 fat',
+    '5 cal - 3 fat',
+    '5 cal - 3 fat',
+    '5 cal - 3 fat',
+    '5 cal - 3 fat',
+  ];
+  List date = [
     '8 pm',
     '6 pm',
     '4 pm',
     '12 pm',
     '8 am',
   ];
-  List date = [
-    '17-03-23',
-    '17-03-23',
-    '16-03-23',
-    '15-03-23',
-    '14-03-23',
-  ];
   bool istap = false;
   int? select;
   TextEditingController _title = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController _time = TextEditingController();
+  TextEditingController _desc = TextEditingController();
+  TextEditingController _cal = TextEditingController();
+  TextEditingController _protine = TextEditingController();
+  TextEditingController _fat = TextEditingController();
+  TextEditingController _carb = TextEditingController();
+  TextEditingController _Quantity = TextEditingController();
+  TextEditingController _mealname = TextEditingController();
+  TextEditingController _foodname = TextEditingController();
 
   @override
   void initState() {
@@ -329,212 +337,282 @@ class _HomeState extends State<Home> {
             alignment: Alignment.bottomCenter,
             child: Container(
               color: Colors.black,
-              child: Container(
-                child: ElevatedButton(
-                  child: SizedBox(
-                    width: 82.w,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Add Todo',
-                          style: TextStyle(
-                            fontFamily: 'Meta1',
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                        Text(
-                          ' +',
-                          style: TextStyle(
-                            fontFamily: 'Meta1',
-                            fontSize: 19.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: BorderSide(color: Colors.white)),
-                        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                        scrollable: true,
-                        content: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: InkWell(
-                                  onTap: () => Navigator.of(context).pop(),
-                                  child: Icon(
-                                    CupertinoIcons.clear,
-                                    color: Colors.white,
-                                    size: 15.sp,
-                                  )),
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                bottom: 20,
-                                right: 5,
-                                left: 5,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.20),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: TextField(
-                                controller: _title,
-                                style: TextStyle(color: Colors.white),
-                                decoration: InputDecoration(
-                                    prefixIcon: Icon(
-                                      CupertinoIcons.info,
-                                      color: Colors.white,
-                                    ),
-                                    hintText: '   Title ',
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    border: InputBorder.none),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                bottom: 20,
-                                right: 5,
-                                left: 5,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.20),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: TextField(
-                                controller: dateController,
-                                readOnly: true,
-                                onTap: () async {
-                                  DateTime? pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate:
-                                          DateTime.now(), //get today's date
-                                      firstDate: DateTime(
-                                          2000), //DateTime.now() - not to allow to choose before today.
-                                      lastDate: DateTime(2101));
-
-                                  if (pickedDate != null) {
-                                    print(
-                                        pickedDate); //get the picked date in the format => 2022-07-04 00:00:00.000
-                                    String formattedDate =
-                                        DateFormat('yyyy-MM-dd').format(
-                                            pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
-                                    print(
-                                        formattedDate); //formatted date output using intl package =>  2022-07-04
-                                    //You can format date as per your need
-
-                                    setState(() {
-                                      dateController.text =
-                                          formattedDate; //set foratted date to TextField value.
-                                    });
-                                  } else {
-                                    print("Date is not selected");
-                                  }
-                                },
-                                style: TextStyle(color: Colors.white),
-                                decoration: InputDecoration(
-                                    prefixIcon: Icon(
-                                      CupertinoIcons.calendar_badge_plus,
-                                      color: Colors.white,
-                                    ),
-                                    hintText: '   Date',
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    border: InputBorder.none),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                bottom: 20,
-                                right: 5,
-                                left: 5,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.20),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: TextField(
-                                controller: _time,
-                                readOnly: true,
-                                onTap: () {
-                                  timepicker();
-                                },
-                                style: TextStyle(color: Colors.white),
-                                decoration: InputDecoration(
-                                    prefixIcon: Icon(
-                                      CupertinoIcons.timer,
-                                      color: Colors.white,
-                                    ),
-                                    hintText: '   Time',
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    border: InputBorder.none),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 1.h),
-                              padding: EdgeInsets.symmetric(horizontal: 2.w),
-                              child: ElevatedButton(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      '+',
-                                      style: TextStyle(
-                                        fontSize: 20.sp,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Add',
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Meta1',
-                                        color: Color(0xffffffff),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.grey.withOpacity(0.20),
-                                    minimumSize: Size(40.w, 7.h),
-                                    elevation: 00),
-                              ),
-                            ),
-                          ],
-                        ),
+              margin: EdgeInsets.only(bottom: 1.h),
+              width: 90.w,
+              child: ElevatedButton(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      '+',
+                      style: TextStyle(
+                        fontSize: 20.sp,
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey.withOpacity(0.20),
-                    minimumSize: Size(7.h, 13.w),
-                    elevation: 10,
-                  ),
+                    ),
+                    Text(
+                      'Add Details',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Meta1',
+                        color: Color(0xffffffff),
+                      ),
+                    ),
+                  ],
+                ),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: BorderSide(color: Colors.white)),
+                      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                      scrollable: true,
+                      content: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: InkWell(
+                                onTap: () => Navigator.of(context).pop(),
+                                child: Icon(
+                                  CupertinoIcons.clear,
+                                  color: Colors.white,
+                                  size: 15.sp,
+                                )),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(
+                              bottom: 20,
+                              right: 5,
+                              left: 5,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.20),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: TextField(
+                              controller: _mealname,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  hintText: 'Meal Name',
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  border: InputBorder.none),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(
+                              bottom: 20,
+                              right: 5,
+                              left: 5,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.20),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: TextField(
+                              controller: _foodname,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  hintText: 'Food Name',
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  border: InputBorder.none),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 25.w,
+                                margin: EdgeInsets.only(
+                                  bottom: 20,
+                                  right: 5,
+                                  // left: 5,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withOpacity(0.20),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: _cal,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      hintText: 'Calorie',
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      border: InputBorder.none),
+                                ),
+                              ),
+                              Container(
+                                width: 25.w,
+                                margin: EdgeInsets.only(
+                                  bottom: 20,
+                                  right: 5,
+                                  // left: 5,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withOpacity(0.20),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: _protine,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      hintText: 'Protine',
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      border: InputBorder.none),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 25.w,
+                                margin: EdgeInsets.only(
+                                  bottom: 20,
+                                  right: 5,
+                                  // left: 5,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withOpacity(0.20),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: _Quantity,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      hintText: 'Quantity',
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      border: InputBorder.none),
+                                ),
+                              ),
+                              Container(
+                                width: 25.w,
+                                margin: EdgeInsets.only(
+                                  bottom: 20,
+                                  right: 5,
+                                  // left: 5,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withOpacity(0.20),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: _fat,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      hintText: 'Fat',
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      border: InputBorder.none),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(
+                              bottom: 20,
+                              right: 5,
+                              left: 5,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.20),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: TextField(
+                              controller: _time,
+                              readOnly: true,
+                              onTap: () {
+                                timepicker();
+                              },
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  prefixIcon: Icon(
+                                    CupertinoIcons.calendar_badge_plus,
+                                    color: Colors.white,
+                                  ),
+                                  hintText: '  Time',
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  border: InputBorder.none),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 1.h),
+                            child: ElevatedButton(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    '+',
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Add',
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Meta1',
+                                      color: Color(0xffffffff),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.grey.withOpacity(0.20),
+                                  minimumSize: Size(40.w, 7.h),
+                                  elevation: 00),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.grey.withOpacity(0.20),
+                  minimumSize: Size(60.w, 7.h),
+                  elevation: 10,
                 ),
               ),
             ),

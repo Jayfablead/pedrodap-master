@@ -53,7 +53,7 @@ class _StaticHomePageState extends State<StaticHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 7.h,
+                height: 3.5.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +100,9 @@ class _StaticHomePageState extends State<StaticHomePage> {
                         height: 0.5.h,
                       ),
                       Text(
-                        userData!.userData!.age.toString() + ' yrs old',
+                        userData!.userData!.age == 0
+                            ? 'N/A'
+                            : userData!.userData!.age.toString() + ' yrs old',
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Meta',
@@ -108,39 +110,47 @@ class _StaticHomePageState extends State<StaticHomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  Container(
-                    height: 4.h,
-                    width: 0.2.w,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Club',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontFamily: 'Meta',
-                            fontSize: 11.sp),
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Text(
-                        userData!.userData!.clubName.toString(),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Meta',
-                            fontSize: 13.sp),
-                      ),
-                    ],
-                  ),
+                  userData!.userData!.role == '2'
+                      ? Row(
+                          children: [
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Container(
+                              height: 4.h,
+                              width: 0.2.w,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Club',
+                                  style: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: 'Meta',
+                                      fontSize: 11.sp),
+                                ),
+                                SizedBox(
+                                  height: 0.5.h,
+                                ),
+                                Text(
+                                  userData!.userData!.clubName == null
+                                      ? 'N/A'
+                                      : userData!.userData!.clubName.toString(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Meta',
+                                      fontSize: 13.sp),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      : Container(),
                 ],
               ),
               SizedBox(
@@ -265,83 +275,89 @@ class _StaticHomePageState extends State<StaticHomePage> {
                   ],
                 ),
               ),
-              Container(
-                height: 12.h,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(left: 5.w, top: 2.h),
-                decoration: BoxDecoration(),
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectindex1 = index;
-                          });
-                          index == 0
-                              ? Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => DiscoverPage(),
-                                ))
-                              : index == 1
-                                  ? Navigator.of(context)
-                                      .push(MaterialPageRoute(
-                                      builder: (context) => TrainningNotes(),
-                                    ))
-                                  : index == 2
-                                      ? Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                          builder: (context) => ViewNutrition(),
-                                        ))
-                                      : Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                          builder: (context) => SleepSchedule(),
-                                        ));
-                        },
-                        child: Container(
-                          width: 22.w,
-                          child: Column(
-                            children: [
-                              Container(
-                                  height: 9.w,
-                                  width: 22.w,
-                                  alignment: Alignment.center,
-                                  margin: EdgeInsets.only(right: 5.w),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 1.w, vertical: 0.h),
-                                  child: Image.asset(
-                                      data[index].image.toString(),
-                                      fit: BoxFit.fill,
-                                      height: 8.w,
-                                      width: 8.w,
-                                      color: Colors.grey.shade200)),
-                              SizedBox(
-                                height: 0.7.h,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.only(right: 4.w),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 1.w, vertical: 0.h),
-                                child: Text(
-                                  data[index].name.toString(),
-                                  maxLines: 4,
-                                  style: TextStyle(
-                                      color: Colors.grey.shade200,
-                                      fontSize: 10.sp,
-                                      fontFamily: 'Meta1',
-                                      fontWeight: FontWeight.normal),
-                                  textAlign: TextAlign.center,
+              userData!.userData!.role == '2'
+                  ? Container(
+                      height: 12.h,
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left: 5.w, top: 2.h),
+                      decoration: BoxDecoration(),
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectindex1 = index;
+                                });
+                                index == 0
+                                    ? Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                        builder: (context) => DiscoverPage(),
+                                      ))
+                                    : index == 1
+                                        ? Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                            builder: (context) =>
+                                                TrainningNotes(),
+                                          ))
+                                        : index == 2
+                                            ? Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ViewNutrition(),
+                                              ))
+                                            : Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SleepSchedule(),
+                                              ));
+                              },
+                              child: Container(
+                                width: 22.w,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        height: 9.w,
+                                        width: 22.w,
+                                        alignment: Alignment.center,
+                                        margin: EdgeInsets.only(right: 5.w),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 1.w, vertical: 0.h),
+                                        child: Image.asset(
+                                            data[index].image.toString(),
+                                            fit: BoxFit.fill,
+                                            height: 8.w,
+                                            width: 8.w,
+                                            color: Colors.grey.shade200)),
+                                    SizedBox(
+                                      height: 0.7.h,
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      margin: EdgeInsets.only(right: 4.w),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 1.w, vertical: 0.h),
+                                      child: Text(
+                                        data[index].name.toString(),
+                                        maxLines: 4,
+                                        style: TextStyle(
+                                            color: Colors.grey.shade200,
+                                            fontSize: 10.sp,
+                                            fontFamily: 'Meta1',
+                                            fontWeight: FontWeight.normal),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-              ),
+                            );
+                          }),
+                    )
+                  : Container(),
             ],
           ),
         )),

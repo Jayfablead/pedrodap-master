@@ -1,9 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
+import 'package:pedrodap/Model/profileModal.dart';
+import 'package:pedrodap/Widget/buildErrorDialog.dart';
+import 'package:pedrodap/Widget/sharedpreferance.dart';
+import 'package:pedrodap/provider/authprovider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Widget/Drawer.dart';
+import '../../Widget/const.dart';
 
 class ReplyPage extends StatefulWidget {
   String? title;
@@ -17,6 +26,11 @@ class ReplyPage extends StatefulWidget {
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 TextEditingController _reply = TextEditingController();
+List msg = [
+  "Or-less normal distribution of letters, as opposed to using Content.",
+  "Or-less normal distribution of letters, as opposed to using Content.",
+];
+List time = ['10:00pm', '11:00pm'];
 
 class _ReplyPageState extends State<ReplyPage> {
   @override

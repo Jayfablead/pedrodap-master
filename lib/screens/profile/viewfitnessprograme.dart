@@ -1,9 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
+import 'package:pedrodap/Widget/const.dart';
+import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/fitnessProgramme.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:pedrodap/screens/profile/replypage.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../Model/fitnessmodal.dart';
+import '../../Widget/buildErrorDialog.dart';
+import '../../Widget/sharedpreferance.dart';
 
 class ViewFitness extends StatefulWidget {
   const ViewFitness({Key? key}) : super(key: key);
@@ -42,231 +52,336 @@ List time = [
 ];
 var islikes = false;
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+bool isloading = true;
 
 class _ViewFitnessState extends State<ViewFitness> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    playerapi();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: drawer(),
-      key: _scaffoldKey,
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4.w),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 3.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      _scaffoldKey.currentState?.openDrawer();
-                    },
-                    icon: Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Fitness Programme',
-                    style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Meta1',
-                      color: Color(0xffffffff),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.search,
-                      color: Colors.white70,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Container(
-                height: 80.h,
-                child: ListView.builder(
-                  itemCount: prof.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {},
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 3.h),
-                        child: Container(
-                          padding: EdgeInsets.all(3.w),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.white),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 89.w,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      name[index],
-                                      style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Meta1',
-                                          color: Colors.white),
-                                    ),
-                                    Text(
-                                      time[index],
-                                      style: TextStyle(
-                                          fontSize: 10.sp,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Meta1',
-                                          color:
-                                              Colors.white.withOpacity(0.90)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Divider(
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 89.w,
-                                child: Text(
-                                  msg[index],
-                                  maxLines: 7,
-                                  style: TextStyle(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Meta1',
-                                      color: Colors.grey.shade500),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 1.h,
-                              ),
-                              Divider(
-                                color: Colors.white,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    width: 25.w,
-                                    child: IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) => ReplyPage(
-                                                  tile: 'Fitness Programme',
-                                                  title: name[index].toString(),
-                                                  desc: msg[index].toString()),
-                                            ),
-                                          );
-                                        },
-                                        icon: Row(
-                                          children: [
-                                            Icon(
-                                              size: 22.sp,
-                                              Icons.reply_all_rounded,
-                                              color: Colors.white,
-                                            ),
-                                            SizedBox(
-                                              width: 1.5.w,
-                                            ),
-                                            Text(
-                                              'Reply',
-                                              style: TextStyle(
-                                                  fontSize: 11.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: 'Meta1',
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    height: 4.h,
-                                    width: 0.1.w,
-                                  ),
-                                  SizedBox(
-                                    width: 25.w,
-                                    child: IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) => Home(
-                                                  tile: 'Fitness Programme',
-                                                  title: name[index].toString(),
-                                                  desc: msg[index].toString()),
-                                            ),
-                                          );
-                                        },
-                                        icon: Row(
-                                          children: [
-                                            Icon(
-                                              size: 20.sp,
-                                              Icons.today_outlined,
-                                              color: Colors.white,
-                                            ),
-                                            SizedBox(
-                                              width: 1.5.w,
-                                            ),
-                                            Text(
-                                              'To-Do',
-                                              style: TextStyle(
-                                                  fontSize: 11.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: 'Meta1',
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+    return commanScreen(
+      isLoading: isloading,
+      scaffold: Scaffold(
+        drawer: drawer(),
+        key: _scaffoldKey,
+        backgroundColor: Colors.black,
+        body: isloading
+            ? Container()
+            : Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.w),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 3.h,
                       ),
-                    );
-                  },
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(context);
+                            },
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              _scaffoldKey.currentState?.openDrawer();
+                            },
+                            icon: Icon(
+                              Icons.menu,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Fitness Programme',
+                            style: TextStyle(
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Meta1',
+                              color: Color(0xffffffff),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.search,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      allfitness!.allFitnessProgrammesDetails == null
+                          ? Container(
+                              height: 70.h,
+                              alignment: Alignment.center,
+                              child: Text(
+                                'No Fitness Programmes Available',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 15.sp,
+                                  fontFamily: 'Meta1',
+                                  color: Color(0xffffffff),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              height: 80.h,
+                              child: ListView.builder(
+                                itemCount: allfitness!
+                                    .allFitnessProgrammesDetails!.length,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 3.h),
+                                      child: Container(
+                                        padding: EdgeInsets.all(3.w),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          border:
+                                              Border.all(color: Colors.white),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 89.w,
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    allfitness!
+                                                        .allFitnessProgrammesDetails![
+                                                            index]
+                                                        .taskName
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 16.sp,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white),
+                                                  ),
+                                                  Text(
+                                                    allfitness!
+                                                        .allFitnessProgrammesDetails![
+                                                            index]
+                                                        .time
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 10.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white
+                                                            .withOpacity(0.90)),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Divider(
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(
+                                              width: 89.w,
+                                              child: Text(
+                                                allfitness!
+                                                    .allFitnessProgrammesDetails![
+                                                        index]
+                                                    .taskDesc
+                                                    .toString(),
+                                                maxLines: 7,
+                                                style: TextStyle(
+                                                    fontSize: 10.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Meta1',
+                                                    color:
+                                                        Colors.grey.shade500),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
+                                            Divider(
+                                              color: Colors.white,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                SizedBox(
+                                                  width: 25.w,
+                                                  child: IconButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          MaterialPageRoute(
+                                                            builder: (context) => ReplyPage(
+                                                                tile:
+                                                                    'Fitness Programme',
+                                                                title: name[
+                                                                        index]
+                                                                    .toString(),
+                                                                desc: msg[index]
+                                                                    .toString()),
+                                                          ),
+                                                        );
+                                                      },
+                                                      icon: Row(
+                                                        children: [
+                                                          Icon(
+                                                            size: 22.sp,
+                                                            Icons
+                                                                .reply_all_rounded,
+                                                            color: Colors.white,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 1.5.w,
+                                                          ),
+                                                          Text(
+                                                            'Reply',
+                                                            style: TextStyle(
+                                                                fontSize: 11.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontFamily:
+                                                                    'Meta1',
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                        ],
+                                                      )),
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 4.h,
+                                                  width: 0.1.w,
+                                                ),
+                                                SizedBox(
+                                                  width: 25.w,
+                                                  child: IconButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          MaterialPageRoute(
+                                                            builder: (context) => Home(
+                                                                tile:
+                                                                    'Fitness Programme',
+                                                                title: name[
+                                                                        index]
+                                                                    .toString(),
+                                                                desc: msg[index]
+                                                                    .toString()),
+                                                          ),
+                                                        );
+                                                      },
+                                                      icon: Row(
+                                                        children: [
+                                                          Icon(
+                                                            size: 20.sp,
+                                                            Icons
+                                                                .today_outlined,
+                                                            color: Colors.white,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 1.5.w,
+                                                          ),
+                                                          Text(
+                                                            'To-Do',
+                                                            style: TextStyle(
+                                                                fontSize: 11.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontFamily:
+                                                                    'Meta1',
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                        ],
+                                                      )),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
-        ),
       ),
     );
+  }
+
+  playerapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'all_fitness_programmes_details_app';
+    data['player_id'] = userData!.userData!.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().fitnessapi(data).then((Response response) async {
+          allfitness = FitnessModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && allfitness?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
   }
 }

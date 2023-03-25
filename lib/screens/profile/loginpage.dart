@@ -28,12 +28,14 @@ class _loginpageState extends State<loginpage> {
   final _formKey = GlobalKey<FormState>();
   int setup = 1;
   bool secure = false;
+  bool visible = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     setup == 0;
+    visible = true;
   }
 
   @override
@@ -147,6 +149,8 @@ class _loginpageState extends State<loginpage> {
                               }
                             },
                             decoration: inputDecoration(
+                              ico: IconButton(
+                                  onPressed: () {}, icon: Icon(null)),
                               hintText: "Email",
                               icon: Icon(
                                 Icons.email_outlined,
@@ -186,18 +190,14 @@ class _loginpageState extends State<loginpage> {
                       SizedBox(
                         height: 4.h,
                         child: TextFormField(
+                            obscureText: visible,
+                            obscuringCharacter: '*',
                             controller: _pass,
                             keyboardType: TextInputType.text,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Meta1',
                                 fontSize: 12.sp),
-                            onTap: () {
-                              setState(() {
-                                setup = 1;
-                              });
-                              print(setup);
-                            },
                             validator: (value) {
                               setState(() {
                                 value;
@@ -209,9 +209,29 @@ class _loginpageState extends State<loginpage> {
                             },
                             decoration: inputDecoration(
                               hintText: "Password",
+                              ico: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    visible = !visible;
+                                    print(visible);
+                                    print('Ouch');
+                                  });
+                                },
+                                icon: visible
+                                    ? Icon(
+                                        Icons.visibility,
+                                        size: 15.sp,
+                                        color: Colors.white,
+                                      )
+                                    : Icon(
+                                        Icons.visibility_off,
+                                        size: 15.sp,
+                                        color: Colors.white,
+                                      ),
+                              ),
                               icon: Icon(
                                 Icons.lock,
-                                color: Colors.grey.shade500,
+                                color: Colors.white,
                               ),
                             )),
                       ),
@@ -318,8 +338,11 @@ class _loginpageState extends State<loginpage> {
   TextStyle textStyle = TextStyle(
       color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: 'Meta1');
 
-  InputDecoration inputDecoration(
-      {required String hintText, required Icon icon}) {
+  InputDecoration inputDecoration({
+    required String hintText,
+    required Icon icon,
+    required IconButton ico,
+  }) {
     return InputDecoration(
       // fillColor: Colors.red,
       hoverColor: Colors.white,
@@ -331,9 +354,11 @@ class _loginpageState extends State<loginpage> {
       ),
       isDense: true,
       hintText: hintText,
+      suffixIconColor: Colors.white,
+      suffix: ico,
 
-      prefixIcon: icon,
-      contentPadding: EdgeInsets.symmetric(vertical: 0.0),
+      prefixIcon: Padding(padding: EdgeInsets.only(bottom: 3.3.h), child: icon),
+      contentPadding: EdgeInsets.symmetric(vertical: 3.h),
       prefixIconColor: Colors.purple,
       hintStyle: textStyle,
       border: OutlineInputBorder(
@@ -358,10 +383,6 @@ class _loginpageState extends State<loginpage> {
           authprovider().loginapi(data).then((Response response) async {
             userData = UserModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && userData?.status == "success") {
-              setState(() {
-                // isLoading = false;
-              });
-
               await SaveDataLocal.saveLogInData(userData!);
               print(userData?.status);
 

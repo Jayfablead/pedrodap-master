@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -98,10 +99,23 @@ class _MessagePageState extends State<MessagePage> {
             children: [
               Row(
                 children: [
-                  CircleAvatar(
-                    radius: 20.sp,
-                    backgroundImage: AssetImage(
-                      widget.image.toString(),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 1.w),
+                    height: 7.h,
+                    width: 15.w,
+                    padding: EdgeInsets.all(1.w),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(90),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: widget.image.toString(),
+                        progressIndicatorBuilder: (context, url, progress) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Image.asset(
+                          'assets/icons/user.png',
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(
