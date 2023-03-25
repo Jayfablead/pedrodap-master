@@ -9,9 +9,7 @@ import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/mainpages/trainingandnotestodo.dart';
 import 'package:pedrodap/mainpages/trainingsreply.dart';
 import 'package:pedrodap/provider/authprovider.dart';
-import 'package:pedrodap/screens/profile/fitnessProgramme.dart';
-import 'package:pedrodap/screens/profile/messagePage.dart';
-import 'package:pedrodap/screens/profile/replypage.dart';
+
 import 'package:sizer/sizer.dart';
 
 import '../../Widget/buildErrorDialog.dart';
@@ -53,7 +51,6 @@ bool isloading = true;
 class _TrainningNotesState extends State<TrainningNotes> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     playerapi();
   }
@@ -63,7 +60,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
     return commanScreen(
       isLoading: isloading,
       scaffold: Scaffold(
-        drawer: drawer(),
+        drawer: const drawer(),
         key: _scaffoldKey,
         backgroundColor: Colors.black,
         body: isloading
@@ -84,7 +81,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                               onPressed: () {
                                 Navigator.of(context).pop(context);
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.arrow_back,
                                 color: Colors.white,
                               ),
@@ -93,7 +90,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                               onPressed: () {
                                 _scaffoldKey.currentState?.openDrawer();
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.menu,
                                 color: Colors.white,
                               ),
@@ -112,7 +109,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                 fontSize: 22.sp,
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Meta1',
-                                color: Color(0xffffffff),
+                                color: const Color(0xffffffff),
                               ),
                             ),
                           ],
@@ -131,11 +128,11 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                   style: TextStyle(
                                     fontSize: 15.sp,
                                     fontFamily: 'Meta1',
-                                    color: Color(0xffffffff),
+                                    color: const Color(0xffffffff),
                                   ),
                                 ),
                               )
-                            : Container(
+                            : SizedBox(
                                 height: 73.h,
                                 child: ListView.builder(
                                   itemCount: alltrainings
@@ -157,7 +154,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Container(
+                                              SizedBox(
                                                 width: 89.w,
                                                 child: Row(
                                                   crossAxisAlignment:
@@ -197,7 +194,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                                   ],
                                                 ),
                                               ),
-                                              Divider(
+                                              const Divider(
                                                 color: Colors.white,
                                               ),
                                               SizedBox(
@@ -221,7 +218,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                               SizedBox(
                                                 height: 1.h,
                                               ),
-                                              Divider(
+                                              const Divider(
                                                 color: Colors.white,
                                               ),
                                               Row(
@@ -379,12 +376,12 @@ class _TrainningNotesState extends State<TrainningNotes> {
 
   Widget searchBox() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.20),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: TextField(
+      child: const TextField(
         style: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0),
@@ -421,8 +418,6 @@ class _TrainningNotesState extends State<TrainningNotes> {
             });
 
             await SaveDataLocal.saveLogInData(userData!);
-            print(userData?.status);
-            print(userData!.userData!.uid);
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
