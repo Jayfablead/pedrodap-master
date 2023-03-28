@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'package:pedrodap/Model/searchtodoModal.dart';
 import 'package:pedrodap/Model/todo.dart';
 import 'package:pedrodap/Model/viewtodoModal.dart';
 import 'package:pedrodap/Widget/const.dart';
@@ -42,6 +43,7 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
   final todosList = ToDo.todoList();
   List<ToDo> _foundToDo = [];
   final _todoController = TextEditingController();
+
   List title = [
     'Lorem Ipsum is simply dummy text.',
     'typesetting industry Lorem Ipsum.',
@@ -71,8 +73,9 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
   int? select;
   TextEditingController _title = TextEditingController();
   TextEditingController dateController = TextEditingController();
-  TextEditingController _time = TextEditingController();
+  TextEditingController _search = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     _foundToDo = todosList;
@@ -81,6 +84,7 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
         "Id = " +
         widget.tid.toString());
     viewtodo();
+    _search.text = '';
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -208,25 +212,277 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
                               ],
                             ),
                           ),
-                          alltodo!.trainningAndNoteTodos == null
-                              ? Container(
-                                  height: 70.h,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'No Task Available',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      fontFamily: 'Meta1',
-                                      color: Color(0xffffffff),
-                                    ),
-                                  ),
-                                )
+                          _search.text == ''
+                              ? alltodo!.trainningAndNoteTodos == null
+                                  ? Container(
+                                      height: 70.h,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'No Task Available',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontFamily: 'Meta1',
+                                          color: Color(0xffffffff),
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox(
+                                      height: 60.h,
+                                      child: ListView.builder(
+                                        itemCount: alltodo
+                                            ?.trainningAndNoteTodos?.length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 2.h),
+                                            child: ListTile(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              title: Text(
+                                                alltodo!
+                                                    .trainningAndNoteTodos![
+                                                        index]
+                                                    .title
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    decoration: alltodo!
+                                                                .trainningAndNoteTodos![
+                                                                    index]
+                                                                .isComplete ==
+                                                            1
+                                                        ? TextDecoration
+                                                            .lineThrough
+                                                        : TextDecoration.none,
+                                                    fontSize: 13.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Meta1',
+                                                    color: Colors.white),
+                                              ),
+                                              subtitle: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    alltodo!
+                                                        .trainningAndNoteTodos![
+                                                            index]
+                                                        .date
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        decoration: alltodo!
+                                                                    .trainningAndNoteTodos![
+                                                                        index]
+                                                                    .isComplete ==
+                                                                1
+                                                            ? TextDecoration
+                                                                .lineThrough
+                                                            : TextDecoration
+                                                                .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                  Text(
+                                                    ' - ',
+                                                    style: TextStyle(
+                                                        decoration:
+                                                            select == index
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                  Text(
+                                                    alltodo!
+                                                        .trainningAndNoteTodos![
+                                                            index]
+                                                        .time
+                                                        .toString(),
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                    style: TextStyle(
+                                                        decoration: alltodo!
+                                                                    .trainningAndNoteTodos![
+                                                                        index]
+                                                                    .isComplete ==
+                                                                1
+                                                            ? TextDecoration
+                                                                .lineThrough
+                                                            : TextDecoration
+                                                                .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                ],
+                                              ),
+                                              leading: IconButton(
+                                                onPressed: () {
+                                                  alltodo!
+                                                              .trainningAndNoteTodos![
+                                                                  index]
+                                                              .isComplete ==
+                                                          1
+                                                      ? Incompleteapi(index)
+                                                      : Completeapi(index);
+                                                },
+                                                icon: alltodo!
+                                                            .trainningAndNoteTodos![
+                                                                index]
+                                                            .isComplete ==
+                                                        1
+                                                    ? Icon(
+                                                        Icons.check_box_rounded,
+                                                        color: Colors.white)
+                                                    : Icon(
+                                                        Icons
+                                                            .check_box_outline_blank_rounded,
+                                                        color: Colors.white),
+                                              ),
+                                              trailing: IconButton(
+                                                  onPressed: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white)),
+                                                        backgroundColor:
+                                                            Color.fromARGB(
+                                                                255, 0, 0, 0),
+                                                        scrollable: true,
+                                                        content: Text(
+                                                          'Are You Sure You Want to to Delete ?',
+                                                          style: TextStyle(
+                                                              fontSize: 11.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        actions: [
+                                                          InkWell(
+                                                            onTap: () {
+                                                              deletetodo(index);
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(2.w),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(1.h),
+                                                              child: Text(
+                                                                'Yes',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .green),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .green,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                            ),
+                                                          ),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(1.w),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(1.h),
+                                                              child: Text(
+                                                                'No',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .red),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .red,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                  )),
+                                              tileColor:
+                                                  Colors.grey.withOpacity(0.20),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    )
                               : SizedBox(
                                   height: 60.h,
                                   child: ListView.builder(
-                                    itemCount:
-                                        alltodo?.trainningAndNoteTodos?.length,
+                                    itemCount: searchtodotraining
+                                        ?.trainningAndNoteTodos?.length,
                                     itemBuilder: (context, index) {
                                       return Padding(
                                         padding: EdgeInsets.only(bottom: 2.h),
@@ -235,12 +491,12 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           title: Text(
-                                            alltodo!
+                                            searchtodotraining!
                                                 .trainningAndNoteTodos![index]
                                                 .title
                                                 .toString(),
                                             style: TextStyle(
-                                                decoration: alltodo!
+                                                decoration: searchtodotraining!
                                                             .trainningAndNoteTodos![
                                                                 index]
                                                             .isComplete ==
@@ -257,15 +513,15 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Text(
-                                                alltodo!
+                                                searchtodotraining!
                                                     .trainningAndNoteTodos![
                                                         index]
                                                     .date
                                                     .toString(),
                                                 style: TextStyle(
-                                                    decoration: alltodo!
-                                                                .trainningAndNoteTodos![
-                                                                    index]
+                                                    decoration:searchtodotraining!
+                                                        .trainningAndNoteTodos![
+                                                    index]
                                                                 .isComplete ==
                                                             1
                                                         ? TextDecoration
@@ -289,16 +545,15 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
                                                     color: Colors.white70),
                                               ),
                                               Text(
-                                                alltodo!
+                                                searchtodotraining!
                                                     .trainningAndNoteTodos![
-                                                        index]
-                                                    .time
-                                                    .toString(),
+                                                index]
+                                                        .time.toString(),
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
-                                                    decoration: alltodo!
-                                                                .trainningAndNoteTodos![
-                                                                    index]
+                                                    decoration:  searchtodotraining!
+                                                        .trainningAndNoteTodos![
+                                                    index]
                                                                 .isComplete ==
                                                             1
                                                         ? TextDecoration
@@ -313,17 +568,17 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
                                           ),
                                           leading: IconButton(
                                             onPressed: () {
-                                              alltodo!
-                                                          .trainningAndNoteTodos![
-                                                              index]
+                                              searchtodotraining!
+                                                  .trainningAndNoteTodos![
+                                              index]
                                                           .isComplete ==
                                                       1
                                                   ? Incompleteapi(index)
                                                   : Completeapi(index);
                                             },
-                                            icon: alltodo!
-                                                        .trainningAndNoteTodos![
-                                                            index]
+                                            icon:  searchtodotraining!
+                                                .trainningAndNoteTodos![
+                                            index]
                                                         .isComplete ==
                                                     1
                                                 ? Icon(Icons.check_box_rounded,
@@ -577,14 +832,17 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
 
   Widget searchBox() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.20),
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(
-        style: TextStyle(color: Colors.white),
-        onChanged: (value) => _runFilter(value),
+        controller: _search,
+        onChanged: (value) {
+          searchapi();
+        },
+        style: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0),
           prefixIcon: Icon(
@@ -598,7 +856,7 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
           ),
           border: InputBorder.none,
           hintText: 'Search',
-          hintStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
         ),
       ),
     );
@@ -802,6 +1060,44 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
     });
   }
 
+  searchapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'training_and_notes_to_do_search';
+    data['player_id'] = userData!.userData!.uid.toString();
+    data['search_text'] = _search.text.trim().toString();
+    print(data);
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().searchtodotrainapi(data).then((Response response) async {
+          searchtodotraining =
+              SearchtodoModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 &&
+              searchtodotraining?.status == "success") {
+         
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
   Incompleteapi(int index) {
     final Map<String, String> data = {};
     data['action'] = 'to_do_is_incomplete';
@@ -844,28 +1140,5 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
         buildErrorDialog(context, 'Error', "Internate Required");
       }
     });
-  }
-
-  void timepicker() async {
-    TimeOfDay? pickedTime = await showTimePicker(
-      initialTime: TimeOfDay.now(),
-      context: context, //context of current state
-    );
-
-    if (pickedTime != null) {
-      print(pickedTime.format(context)); //output 10:51 PM
-      DateTime parsedTime =
-          DateFormat.jm().parse(pickedTime.format(context).toString());
-      //converting to DateTime so that we can further format on different pattern.
-      print(parsedTime); //output 1970-01-01 22:53:00.000
-      String formattedTime = DateFormat('HH:mm').format(parsedTime);
-      print(formattedTime); //output 14:59:00
-      //DateFormat() is from intl package, you can format the time on any pattern you need.
-      setState(() {
-        _time.text = formattedTime;
-      });
-    } else {
-      print("Time is not selected");
-    }
   }
 }

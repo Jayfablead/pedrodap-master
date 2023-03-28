@@ -182,7 +182,7 @@ class _TrainingReplyPageState extends State<TrainingReplyPage> {
                                   height: 70.h,
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'No Task Available',
+                                    'No Replies Available',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 15.sp,

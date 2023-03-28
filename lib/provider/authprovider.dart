@@ -9,6 +9,7 @@ class authprovider with ChangeNotifier {
   Map<String, String> headers = {
     'Authorization': 'hXuRUGsEGuhGf6KG',
   };
+
   Future<http.Response> signupapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=signup_app';
     var responseJson;
@@ -242,6 +243,22 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
+  Future<http.Response> NutriCompleteapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=nutrition_and_health_to_do_is_completed';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
   Future<http.Response> Incompleteapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=to_do_is_incomplete';
     var responseJson;
@@ -276,6 +293,185 @@ class authprovider with ChangeNotifier {
 
   Future<http.Response> viewreplyapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=replies_trainings_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> searchtrainapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=search_training_and_notes_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> viewfittodoapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=to_do_fitness_programme_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> fitviewreplyapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=replies_fitness_programme_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> searchtodotrainapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=training_and_notes_to_do_search';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> viewallnutrireplyapi(
+      Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=replies_nutrition_and_health_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> addnutritodo(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=add_to_do_nutrition_and_health_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> viewnutritodo(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=to_do_nutrition_and_health_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> nutritodoincomplete(
+      Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=nutrition_and_health_to_do_is_incomplete';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> SearchFitnessapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=search_fitness_programme_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> SearchFitnesstodoapi(
+      Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=fitness_programme_to_do_search';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> SearchNutriapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=search_nutrition_and_health_app';
     var responseJson;
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)

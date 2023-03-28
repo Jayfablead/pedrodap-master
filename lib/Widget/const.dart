@@ -1,16 +1,25 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:pedrodap/Model/FitreplyModal.dart';
 import 'package:pedrodap/Model/UserModal.dart';
 import 'package:pedrodap/Model/allplayersmodal.dart';
 import 'package:pedrodap/Model/fitnessmodal.dart';
+import 'package:pedrodap/Model/fittodoModal.dart';
 import 'package:pedrodap/Model/nutrimodal.dart';
+import 'package:pedrodap/Model/nutrireplyModal.dart';
+import 'package:pedrodap/Model/nutritodoModal.dart';
 import 'package:pedrodap/Model/playermodal.dart';
 import 'package:pedrodap/Model/profileModal.dart';
 import 'package:pedrodap/Model/relymodal.dart';
+import 'package:pedrodap/Model/searchnutriModal.dart';
+import 'package:pedrodap/Model/searchtodoModal.dart';
+import 'package:pedrodap/Model/searchtrainmodal.dart';
 import 'package:pedrodap/Model/sleepmodal.dart';
 import 'package:pedrodap/Model/userprofileModal.dart';
 import 'package:pedrodap/Model/viewtodoModal.dart';
 
 import '../Model/fetchplayermodal.dart';
+import '../Model/searchfittModal.dart';
+import '../Model/searchfittodoModal.dart';
 import '../Model/trainingsModal.dart';
 
 Future<bool> checkInternet() async {
@@ -34,6 +43,14 @@ NutritionModal? allnutri;
 SleepModal? allsleep;
 ViewtodoModal? alltodo;
 ReplyModal? viewreply;
-
+FitalltodoModal? fittodoall;
+FitreplyModal? fitviewreply;
+SearchtrainModal? searchtraining;
+SearchtodoModal? searchtodotraining;
+NutriallreplyModal? nutriviewreply;
+NutritodoModal? nutrialltodo;
+SearchfitModal? searchfitness;
+SearchfittodoModal? searchfittodo;
+SearchNutModal? searchnutri;
 Fetchplayermodal? fetchplayermodal;
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';
