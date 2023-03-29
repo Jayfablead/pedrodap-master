@@ -78,7 +78,7 @@ class _ViewNutritionState extends State<ViewNutrition> {
         body: isloading
             ? Container()
             : SingleChildScrollView(
-              child: Center(
+                child: Center(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 4.w),
                     child: Column(
@@ -124,482 +124,552 @@ class _ViewNutritionState extends State<ViewNutrition> {
                                 color: Color(0xffffffff),
                               ),
                             ),
-
                           ],
                         ),
                         SizedBox(
                           height: 2.h,
-                        ),searchBox(),
+                        ),
+                        searchBox(),
                         _search.text == ''
-                            ? allnutri!.allNutritionAndHealthDetails!.length == 0
-                            ? Container(
-                          height: 70.h,
-                          alignment: Alignment.center,
-                          child: Text(
-                            'No Trainings Available By This Title',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              fontFamily: 'Meta1',
-                              color: const Color(0xffffffff),
-                            ),
-                          ),
-                        )
-                            :   allnutri!.allNutritionAndHealthDetails == null
-                            ? Container(
-                                height: 70.h,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'No Nutrition Data Available',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontFamily: 'Meta1',
-                                    color: Color(0xffffffff),
+                            ? allnutri!.allNutritionAndHealthDetails == null
+                                ? Container(
+                                    height: 70.h,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'No Nutrition Data Available',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontFamily: 'Meta1',
+                                        color: Color(0xffffffff),
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 80.h,
+                                    child: ListView.builder(
+                                      itemCount: allnutri!
+                                          .allNutritionAndHealthDetails!.length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {},
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 3.h),
+                                            child: Container(
+                                              padding: EdgeInsets.all(3.w),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                    color: Colors.white),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: 89.w,
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          allnutri!
+                                                              .allNutritionAndHealthDetails![
+                                                                  index]
+                                                              .taskTitle
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        Text(
+                                                          allnutri!
+                                                              .allNutritionAndHealthDetails![
+                                                                  index]
+                                                              .time
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 10.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.90)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(
+                                                    color: Colors.white,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 89.w,
+                                                    child: Text(
+                                                      allnutri!
+                                                          .allNutritionAndHealthDetails![
+                                                              index]
+                                                          .taskDesc
+                                                          .toString(),
+                                                      maxLines: 7,
+                                                      style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily: 'Meta1',
+                                                          color: Colors
+                                                              .grey.shade500),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 1.h,
+                                                  ),
+                                                  Divider(
+                                                    color: Colors.white,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 25.w,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          NutriReplyPage(
+                                                                    time: allnutri!
+                                                                        .allNutritionAndHealthDetails![
+                                                                            index]
+                                                                        .time
+                                                                        .toString(),
+                                                                    tile:
+                                                                        "Nutrition & Health",
+                                                                    title: allnutri!
+                                                                        .allNutritionAndHealthDetails![
+                                                                            index]
+                                                                        .taskTitle
+                                                                        .toString(),
+                                                                    desc: allnutri!
+                                                                        .allNutritionAndHealthDetails![
+                                                                            index]
+                                                                        .taskDesc
+                                                                        .toString(),
+                                                                    tid: allnutri!
+                                                                        .allNutritionAndHealthDetails![
+                                                                            index]
+                                                                        .id
+                                                                        .toString(),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                            icon: Row(
+                                                              children: [
+                                                                Icon(
+                                                                  size: 22.sp,
+                                                                  Icons
+                                                                      .reply_all_rounded,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 1.5.w,
+                                                                ),
+                                                                Text(
+                                                                  'Reply',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                      ),
+                                                      Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 4.h,
+                                                        width: 0.1.w,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 25.w,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          Nutri(
+                                                                    time: allnutri!
+                                                                        .allNutritionAndHealthDetails![
+                                                                            index]
+                                                                        .time
+                                                                        .toString(),
+                                                                    tile:
+                                                                        "Nutrition & Health",
+                                                                    title: allnutri!
+                                                                        .allNutritionAndHealthDetails![
+                                                                            index]
+                                                                        .taskTitle
+                                                                        .toString(),
+                                                                    desc: allnutri!
+                                                                        .allNutritionAndHealthDetails![
+                                                                            index]
+                                                                        .taskDesc
+                                                                        .toString(),
+                                                                    tid: allnutri!
+                                                                        .allNutritionAndHealthDetails![
+                                                                            index]
+                                                                        .id
+                                                                        .toString(),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                            icon: Row(
+                                                              children: [
+                                                                Icon(
+                                                                  size: 20.sp,
+                                                                  Icons
+                                                                      .today_outlined,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 1.5.w,
+                                                                ),
+                                                                Text(
+                                                                  'To-Do',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                            : searchnutri!
+                                        .allNutritionAndHealthSearch!.length ==
+                                    0
+                                ? Container(
+                                    height: 70.h,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'No Nutrition Details Available By This Title',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontFamily: 'Meta1',
+                                        color: const Color(0xffffffff),
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 80.h,
+                                    child: ListView.builder(
+                                      itemCount: searchnutri
+                                          ?.allNutritionAndHealthSearch?.length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {},
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 3.h),
+                                            child: Container(
+                                              padding: EdgeInsets.all(3.w),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                    color: Colors.white),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width: 89.w,
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          searchnutri!
+                                                              .allNutritionAndHealthSearch![
+                                                                  index]
+                                                              .title
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        Text(
+                                                          searchnutri!
+                                                              .allNutritionAndHealthSearch![
+                                                                  index]
+                                                              .time
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 10.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.90)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(
+                                                    color: Colors.white,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 89.w,
+                                                    child: Text(
+                                                      searchnutri!
+                                                          .allNutritionAndHealthSearch![
+                                                              index]
+                                                          .description
+                                                          .toString(),
+                                                      maxLines: 7,
+                                                      style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily: 'Meta1',
+                                                          color: Colors
+                                                              .grey.shade500),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 1.h,
+                                                  ),
+                                                  Divider(
+                                                    color: Colors.white,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 25.w,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          NutriReplyPage(
+                                                                    time: searchnutri!
+                                                                        .allNutritionAndHealthSearch![
+                                                                            index]
+                                                                        .time
+                                                                        .toString(),
+                                                                    tile:
+                                                                        "Nutrition & Health",
+                                                                    title: searchnutri!
+                                                                        .allNutritionAndHealthSearch![
+                                                                            index]
+                                                                        .title
+                                                                        .toString(),
+                                                                    desc: searchnutri!
+                                                                        .allNutritionAndHealthSearch![
+                                                                            index]
+                                                                        .description
+                                                                        .toString(),
+                                                                    tid: searchnutri!
+                                                                        .allNutritionAndHealthSearch![
+                                                                            index]
+                                                                        .id
+                                                                        .toString(),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                            icon: Row(
+                                                              children: [
+                                                                Icon(
+                                                                  size: 22.sp,
+                                                                  Icons
+                                                                      .reply_all_rounded,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 1.5.w,
+                                                                ),
+                                                                Text(
+                                                                  'Reply',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                      ),
+                                                      Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 4.h,
+                                                        width: 0.1.w,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 25.w,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          Nutri(
+                                                                    time: searchnutri!
+                                                                        .allNutritionAndHealthSearch![
+                                                                            index]
+                                                                        .time
+                                                                        .toString(),
+                                                                    tile:
+                                                                        "Nutrition & Health",
+                                                                    title: searchnutri!
+                                                                        .allNutritionAndHealthSearch![
+                                                                            index]
+                                                                        .title
+                                                                        .toString(),
+                                                                    desc: searchnutri!
+                                                                        .allNutritionAndHealthSearch![
+                                                                            index]
+                                                                        .description
+                                                                        .toString(),
+                                                                    tid: searchnutri!
+                                                                        .allNutritionAndHealthSearch![
+                                                                            index]
+                                                                        .id
+                                                                        .toString(),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                            icon: Row(
+                                                              children: [
+                                                                Icon(
+                                                                  size: 20.sp,
+                                                                  Icons
+                                                                      .today_outlined,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 1.5.w,
+                                                                ),
+                                                                Text(
+                                                                  'To-Do',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
-                                ),
-                              )
-                            : Container(
-                                height: 80.h,
-                                child: ListView.builder(
-                                  itemCount: allnutri!
-                                      .allNutritionAndHealthDetails!.length,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding: EdgeInsets.only(bottom: 3.h),
-                                        child: Container(
-                                          padding: EdgeInsets.all(3.w),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            border:
-                                                Border.all(color: Colors.white),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                width: 89.w,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      allnutri!
-                                                          .allNutritionAndHealthDetails![
-                                                              index]
-                                                          .taskTitle
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white),
-                                                    ),
-                                                    Text(
-                                                      allnutri!
-                                                          .allNutritionAndHealthDetails![
-                                                              index]
-                                                          .time
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 10.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white
-                                                              .withOpacity(0.90)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Divider(
-                                                color: Colors.white,
-                                              ),
-                                              SizedBox(
-                                                width: 89.w,
-                                                child: Text(
-                                                  allnutri!
-                                                      .allNutritionAndHealthDetails![
-                                                          index]
-                                                      .taskDesc
-                                                      .toString(),
-                                                  maxLines: 7,
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontFamily: 'Meta1',
-                                                      color:
-                                                          Colors.grey.shade500),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 1.h,
-                                              ),
-                                              Divider(
-                                                color: Colors.white,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
-                                                children: [
-                                                  SizedBox(
-                                                    width: 25.w,
-                                                    child: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .push(
-                                                            MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      NutriReplyPage(time:  allnutri!
-                                                                          .allNutritionAndHealthDetails![
-                                                                      index].time
-                                                                          .toString(),
-                                                                tile:
-                                                                    "Nutrition & Health",
-                                                                title:  allnutri!
-                                                                    .allNutritionAndHealthDetails![
-                                                                index].taskTitle
-                                                                    .toString(),
-                                                                desc: allnutri!
-                                                                    .allNutritionAndHealthDetails![
-                                                                index].taskDesc
-                                                                    .toString(),
-                                                                tid: allnutri!
-                                                                    .allNutritionAndHealthDetails![
-                                                                index].id.toString(),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                        icon: Row(
-                                                          children: [
-                                                            Icon(
-                                                              size: 22.sp,
-                                                              Icons
-                                                                  .reply_all_rounded,
-                                                              color: Colors.white,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 1.5.w,
-                                                            ),
-                                                            Text(
-                                                              'Reply',
-                                                              style: TextStyle(
-                                                                  fontSize: 11.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ],
-                                                        )),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                5)),
-                                                    height: 4.h,
-                                                    width: 0.1.w,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 25.w,
-                                                    child: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .push(
-                                                            MaterialPageRoute(
-                                                              builder: (context) => Nutri(time:  allnutri!
-                                                                  .allNutritionAndHealthDetails![
-                                                              index].time
-                                                                  .toString(),
-                                                                tile:
-                                                                "Nutrition & Health",
-                                                                title:  allnutri!
-                                                                    .allNutritionAndHealthDetails![
-                                                                index].taskTitle
-                                                                    .toString(),
-                                                                desc: allnutri!
-                                                                    .allNutritionAndHealthDetails![
-                                                                index].taskDesc
-                                                                    .toString(),
-                                                                tid: allnutri!
-                                                                    .allNutritionAndHealthDetails![
-                                                                index].id.toString(),),
-                                                            ),
-                                                          );
-                                                        },
-                                                        icon: Row(
-                                                          children: [
-                                                            Icon(
-                                                              size: 20.sp,
-                                                              Icons
-                                                                  .today_outlined,
-                                                              color: Colors.white,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 1.5.w,
-                                                            ),
-                                                            Text(
-                                                              'To-Do',
-                                                              style: TextStyle(
-                                                                  fontSize: 11.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ],
-                                                        )),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ): Container(
-                                height: 80.h,
-                                child: ListView.builder(
-                                  itemCount: searchnutri?.allNutritionAndHealthSearch?.length,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding: EdgeInsets.only(bottom: 3.h),
-                                        child: Container(
-                                          padding: EdgeInsets.all(3.w),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            border:
-                                                Border.all(color: Colors.white),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                width: 89.w,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      searchnutri!
-                                                          .allNutritionAndHealthSearch![
-                                                              index]
-                                                          .title
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white),
-                                                    ),
-                                                    Text(
-                                                      searchnutri!
-                                                          .allNutritionAndHealthSearch![
-                                                              index]
-                                                          .time
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 10.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white
-                                                              .withOpacity(0.90)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Divider(
-                                                color: Colors.white,
-                                              ),
-                                              SizedBox(
-                                                width: 89.w,
-                                                child: Text(
-                                                  searchnutri!
-                                                      .allNutritionAndHealthSearch![
-                                                          index]
-                                                      .description
-                                                      .toString(),
-                                                  maxLines: 7,
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontFamily: 'Meta1',
-                                                      color:
-                                                          Colors.grey.shade500),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 1.h,
-                                              ),
-                                              Divider(
-                                                color: Colors.white,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
-                                                children: [
-                                                  SizedBox(
-                                                    width: 25.w,
-                                                    child: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .push(
-                                                            MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      NutriReplyPage(time:  searchnutri!
-                                                                          .allNutritionAndHealthSearch![
-                                                                      index].time
-                                                                          .toString(),
-                                                                tile:
-                                                                    "Nutrition & Health",
-                                                                title:  searchnutri!
-                                                                    .allNutritionAndHealthSearch![
-                                                                index].title
-                                                                    .toString(),
-                                                                desc:searchnutri!
-                                                                    .allNutritionAndHealthSearch![
-                                                                index].description
-                                                                    .toString(),
-                                                                tid: searchnutri!
-                                                                    .allNutritionAndHealthSearch![
-                                                                index].id.toString(),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                        icon: Row(
-                                                          children: [
-                                                            Icon(
-                                                              size: 22.sp,
-                                                              Icons
-                                                                  .reply_all_rounded,
-                                                              color: Colors.white,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 1.5.w,
-                                                            ),
-                                                            Text(
-                                                              'Reply',
-                                                              style: TextStyle(
-                                                                  fontSize: 11.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ],
-                                                        )),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                5)),
-                                                    height: 4.h,
-                                                    width: 0.1.w,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 25.w,
-                                                    child: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .push(
-                                                            MaterialPageRoute(
-                                                              builder: (context) => Nutri(time:  searchnutri!
-                                                                  .allNutritionAndHealthSearch![
-                                                              index].time
-                                                                  .toString(),
-                                                                tile:
-                                                                "Nutrition & Health",
-                                                                title:  searchnutri!
-                                                                    .allNutritionAndHealthSearch![
-                                                                index].title
-                                                                    .toString(),
-                                                                desc: searchnutri!
-                                                                    .allNutritionAndHealthSearch![
-                                                                index].description
-                                                                    .toString(),
-                                                                tid: searchnutri!
-                                                                    .allNutritionAndHealthSearch![
-                                                                index].id.toString(),),
-                                                            ),
-                                                          );
-                                                        },
-                                                        icon: Row(
-                                                          children: [
-                                                            Icon(
-                                                              size: 20.sp,
-                                                              Icons
-                                                                  .today_outlined,
-                                                              color: Colors.white,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 1.5.w,
-                                                            ),
-                                                            Text(
-                                                              'To-Do',
-                                                              style: TextStyle(
-                                                                  fontSize: 11.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ],
-                                                        )),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
                       ],
                     ),
                   ),
                 ),
-            ),
+              ),
       ),
     );
   }
@@ -638,6 +708,7 @@ class _ViewNutritionState extends State<ViewNutrition> {
       }
     });
   }
+
   Widget searchBox() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -680,11 +751,9 @@ class _ViewNutritionState extends State<ViewNutrition> {
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().SearchNutriapi(data).then((Response response) async {
-          searchnutri =
-              SearchNutModal.fromJson(json.decode(response.body));
+          searchnutri = SearchNutModal.fromJson(json.decode(response.body));
 
-          if (response.statusCode == 200 &&
-              searchnutri?.status == "success") {
+          if (response.statusCode == 200 && searchnutri?.status == "success") {
             print(alltrainings!.allTrainingsAndNotes!.length);
             setState(() {
               isloading = false;

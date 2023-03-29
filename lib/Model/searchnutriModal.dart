@@ -39,14 +39,14 @@ class AllNutritionAndHealthSearch {
 
   AllNutritionAndHealthSearch(
       {this.id,
-        this.playerId,
-        this.playerName,
-        this.title,
-        this.noteFile,
-        this.description,
-        this.isCompleted,
-        this.time,
-        this.createdAt});
+      this.playerId,
+      this.playerName,
+      this.title,
+      this.noteFile,
+      this.description,
+      this.isCompleted,
+      this.time,
+      this.createdAt});
 
   AllNutritionAndHealthSearch.fromJson(Map<String, dynamic> json) {
     id = json['id'];

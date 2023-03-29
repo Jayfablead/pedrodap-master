@@ -222,20 +222,6 @@ class _NutriState extends State<Nutri> {
                           ),
                           _search.text == ''
                               ? nutrialltodo!.nutritionAndHealthTodos == null
-                              ? Container(
-                            height: 70.h,
-                            alignment: Alignment.center,
-                            child: Text(
-                              'No Task Available',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                fontFamily: 'Meta1',
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          )
-                              : nutrialltodo!.nutritionAndHealthTodos == null
                                   ? Container(
                                       height: 70.h,
                                       alignment: Alignment.center,
@@ -249,165 +235,489 @@ class _NutriState extends State<Nutri> {
                                         ),
                                       ),
                                     )
-                                  :
-                          SizedBox(
-                                      height: 60.h,
-                                      child: ListView.builder(
-                                        itemCount: nutrialltodo?.nutritionAndHealthTodos?.length,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding:
-                                                EdgeInsets.only(bottom: 2.h),
-                                            child: ListTile(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              title: Text(
-                                                nutrialltodo!.nutritionAndHealthTodos![
-                                                        index]
-                                                    .mealName
-                                                    .toString(),
+                                  : nutrialltodo!.nutritionAndHealthTodos ==
+                                          null
+                                      ? Container(
+                                          height: 70.h,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'No Task Available',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 15.sp,
+                                              fontFamily: 'Meta1',
+                                              color: Color(0xffffffff),
+                                            ),
+                                          ),
+                                        )
+                                      : SizedBox(
+                                          height: 60.h,
+                                          child: ListView.builder(
+                                            itemCount: nutrialltodo
+                                                ?.nutritionAndHealthTodos
+                                                ?.length,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: 2.h),
+                                                child: ListTile(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  title: Text(
+                                                    nutrialltodo!
+                                                        .nutritionAndHealthTodos![
+                                                            index]
+                                                        .mealName
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        decoration: nutrialltodo!
+                                                                    .nutritionAndHealthTodos![
+                                                                        index]
+                                                                    .isComplete ==
+                                                                1
+                                                            ? TextDecoration
+                                                                .lineThrough
+                                                            : TextDecoration
+                                                                .none,
+                                                        fontSize: 13.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white),
+                                                  ),
+                                                  subtitle: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        nutrialltodo!
+                                                                .nutritionAndHealthTodos![
+                                                                    index]
+                                                                .fat
+                                                                .toString() +
+                                                            " fat",
+                                                        style: TextStyle(
+                                                            decoration: nutrialltodo!
+                                                                        .nutritionAndHealthTodos![
+                                                                            index]
+                                                                        .isComplete ==
+                                                                    1
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                            fontSize: 11.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily: 'Meta1',
+                                                            color:
+                                                                Colors.white70),
+                                                      ),
+                                                      Text(
+                                                        ' - ',
+                                                        style: TextStyle(
+                                                            decoration: select ==
+                                                                    index
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                            fontSize: 11.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily: 'Meta1',
+                                                            color:
+                                                                Colors.white70),
+                                                      ),
+                                                      Text(
+                                                        nutrialltodo!
+                                                                .nutritionAndHealthTodos![
+                                                                    index]
+                                                                .protein
+                                                                .toString() +
+                                                            " pro",
+                                                        textAlign:
+                                                            TextAlign.justify,
+                                                        style: TextStyle(
+                                                            decoration: nutrialltodo!
+                                                                        .nutritionAndHealthTodos![
+                                                                            index]
+                                                                        .isComplete ==
+                                                                    1
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                            fontSize: 11.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily: 'Meta1',
+                                                            color:
+                                                                Colors.white70),
+                                                      ),
+                                                      Text(
+                                                        ' - ',
+                                                        style: TextStyle(
+                                                            decoration: select ==
+                                                                    index
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                            fontSize: 11.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily: 'Meta1',
+                                                            color:
+                                                                Colors.white70),
+                                                      ),
+                                                      Text(
+                                                        nutrialltodo!
+                                                                .nutritionAndHealthTodos![
+                                                                    index]
+                                                                .calories
+                                                                .toString() +
+                                                            " Cal",
+                                                        textAlign:
+                                                            TextAlign.justify,
+                                                        style: TextStyle(
+                                                            decoration: nutrialltodo!
+                                                                        .nutritionAndHealthTodos![
+                                                                            index]
+                                                                        .isComplete ==
+                                                                    1
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                            fontSize: 11.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily: 'Meta1',
+                                                            color:
+                                                                Colors.white70),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  leading: IconButton(
+                                                    onPressed: () {
+                                                      nutrialltodo!
+                                                                  .nutritionAndHealthTodos![
+                                                                      index]
+                                                                  .isComplete ==
+                                                              1
+                                                          ? Incompleteapi(index)
+                                                          : Completeapi(index);
+                                                    },
+                                                    icon: nutrialltodo!
+                                                                .nutritionAndHealthTodos![
+                                                                    index]
+                                                                .isComplete ==
+                                                            1
+                                                        ? Icon(
+                                                            Icons
+                                                                .check_box_rounded,
+                                                            color: Colors.white)
+                                                        : Icon(
+                                                            Icons
+                                                                .check_box_outline_blank_rounded,
+                                                            color:
+                                                                Colors.white),
+                                                  ),
+                                                  trailing: IconButton(
+                                                      onPressed: () {
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              AlertDialog(
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                                side: BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                            backgroundColor:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    0,
+                                                                    0),
+                                                            scrollable: true,
+                                                            content: Text(
+                                                              'Are You Sure You Want to to Delete ?',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      11.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontFamily:
+                                                                      'Meta1',
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            actions: [
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  deletetodo(
+                                                                      index);
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  margin:
+                                                                      EdgeInsets
+                                                                          .all(2
+                                                                              .w),
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .h),
+                                                                  child: Text(
+                                                                    'Yes',
+                                                                    style: TextStyle(
+                                                                        fontSize: 13
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontFamily:
+                                                                            'Meta1',
+                                                                        color: Colors
+                                                                            .green),
+                                                                  ),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          border: Border
+                                                                              .all(
+                                                                            color:
+                                                                                Colors.green,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10)),
+                                                                ),
+                                                              ),
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  margin:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .w),
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .h),
+                                                                  child: Text(
+                                                                    'No',
+                                                                    style: TextStyle(
+                                                                        fontSize: 13
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontFamily:
+                                                                            'Meta1',
+                                                                        color: Colors
+                                                                            .red),
+                                                                  ),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          border: Border
+                                                                              .all(
+                                                                            color:
+                                                                                Colors.red,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10)),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.delete,
+                                                        color: Colors.red,
+                                                      )),
+                                                  tileColor: Colors.grey
+                                                      .withOpacity(0.20),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        )
+                              : SizedBox(
+                                  height: 60.h,
+                                  child: ListView.builder(
+                                    itemCount: nutrialltodo
+                                        ?.nutritionAndHealthTodos?.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(bottom: 2.h),
+                                        child: ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          title: Text(
+                                            nutrialltodo!
+                                                .nutritionAndHealthTodos![index]
+                                                .mealName
+                                                .toString(),
+                                            style: TextStyle(
+                                                decoration: nutrialltodo!
+                                                            .nutritionAndHealthTodos![
+                                                                index]
+                                                            .isComplete ==
+                                                        1
+                                                    ? TextDecoration.lineThrough
+                                                    : TextDecoration.none,
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'Meta1',
+                                                color: Colors.white),
+                                          ),
+                                          subtitle: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                nutrialltodo!
+                                                        .nutritionAndHealthTodos![
+                                                            index]
+                                                        .fat
+                                                        .toString() +
+                                                    " fat",
                                                 style: TextStyle(
-                                                    decoration: nutrialltodo!.nutritionAndHealthTodos![
+                                                    decoration: nutrialltodo!
+                                                                .nutritionAndHealthTodos![
                                                                     index]
                                                                 .isComplete ==
                                                             1
                                                         ? TextDecoration
                                                             .lineThrough
                                                         : TextDecoration.none,
-                                                    fontSize: 13.sp,
+                                                    fontSize: 11.sp,
                                                     fontWeight: FontWeight.w400,
                                                     fontFamily: 'Meta1',
-                                                    color: Colors.white),
+                                                    color: Colors.white70),
                                               ),
-                                              subtitle: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    nutrialltodo!.nutritionAndHealthTodos![
-                                                            index]
-                                                        .fat
-                                                        .toString() + " fat",
-                                                    style: TextStyle(
-                                                        decoration:nutrialltodo!.nutritionAndHealthTodos![
-                                                                        index]
-                                                                    .isComplete ==
-                                                                1
-                                                            ? TextDecoration
-                                                                .lineThrough
-                                                            : TextDecoration
-                                                                .none,
-                                                        fontSize: 11.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontFamily: 'Meta1',
-                                                        color: Colors.white70),
-                                                  ),
-                                                  Text(
-                                                    ' - ',
-                                                    style: TextStyle(
-                                                        decoration:
-                                                            select == index
-                                                                ? TextDecoration
-                                                                    .lineThrough
-                                                                : TextDecoration
-                                                                    .none,
-                                                        fontSize: 11.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontFamily: 'Meta1',
-                                                        color: Colors.white70),
-                                                  ),
-                                                  Text(
-                                                    nutrialltodo!.nutritionAndHealthTodos![
+                                              Text(
+                                                ' - ',
+                                                style: TextStyle(
+                                                    decoration: select == index
+                                                        ? TextDecoration
+                                                            .lineThrough
+                                                        : TextDecoration.none,
+                                                    fontSize: 11.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Meta1',
+                                                    color: Colors.white70),
+                                              ),
+                                              Text(
+                                                nutrialltodo!
+                                                        .nutritionAndHealthTodos![
                                                             index]
                                                         .protein
-                                                        .toString() + " pro",
-                                                    textAlign:
-                                                        TextAlign.justify,
-                                                    style: TextStyle(
-                                                        decoration: nutrialltodo!.nutritionAndHealthTodos![
-                                                                        index]
-                                                                    .isComplete ==
-                                                                1
-                                                            ? TextDecoration
-                                                                .lineThrough
-                                                            : TextDecoration
-                                                                .none,
-                                                        fontSize: 11.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontFamily: 'Meta1',
-                                                        color: Colors.white70),
-                                                  ),Text(
-                                                    ' - ',
-                                                    style: TextStyle(
-                                                        decoration:
-                                                            select == index
-                                                                ? TextDecoration
-                                                                    .lineThrough
-                                                                : TextDecoration
-                                                                    .none,
-                                                        fontSize: 11.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontFamily: 'Meta1',
-                                                        color: Colors.white70),
-                                                  ),
-                                                  Text(
-                                                    nutrialltodo!.nutritionAndHealthTodos![
+                                                        .toString() +
+                                                    " pro",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    decoration: nutrialltodo!
+                                                                .nutritionAndHealthTodos![
+                                                                    index]
+                                                                .isComplete ==
+                                                            1
+                                                        ? TextDecoration
+                                                            .lineThrough
+                                                        : TextDecoration.none,
+                                                    fontSize: 11.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Meta1',
+                                                    color: Colors.white70),
+                                              ),
+                                              Text(
+                                                ' - ',
+                                                style: TextStyle(
+                                                    decoration: select == index
+                                                        ? TextDecoration
+                                                            .lineThrough
+                                                        : TextDecoration.none,
+                                                    fontSize: 11.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Meta1',
+                                                    color: Colors.white70),
+                                              ),
+                                              Text(
+                                                nutrialltodo!
+                                                        .nutritionAndHealthTodos![
                                                             index]
                                                         .calories
-                                                        .toString() + " Cal",
-                                                    textAlign:
-                                                        TextAlign.justify,
-                                                    style: TextStyle(
-                                                        decoration: nutrialltodo!.nutritionAndHealthTodos![
-                                                                        index]
-                                                                    .isComplete ==
-                                                                1
-                                                            ? TextDecoration
-                                                                .lineThrough
-                                                            : TextDecoration
-                                                                .none,
-                                                        fontSize: 11.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontFamily: 'Meta1',
-                                                        color: Colors.white70),
-                                                  ),
-                                                ],
+                                                        .toString() +
+                                                    " Cal",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    decoration: nutrialltodo!
+                                                                .nutritionAndHealthTodos![
+                                                                    index]
+                                                                .isComplete ==
+                                                            1
+                                                        ? TextDecoration
+                                                            .lineThrough
+                                                        : TextDecoration.none,
+                                                    fontSize: 11.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Meta1',
+                                                    color: Colors.white70),
                                               ),
-                                              leading: IconButton(
-                                                onPressed: () {
-                                                  nutrialltodo!.nutritionAndHealthTodos![
-                                                                  index]
-                                                              .isComplete ==
-                                                          1
-                                                      ? Incompleteapi(index)
-                                                      : Completeapi(index);
-                                                },
-                                                icon: nutrialltodo!.nutritionAndHealthTodos![
-                                                                index]
-                                                            .isComplete ==
-                                                        1
-                                                    ? Icon(
-                                                        Icons.check_box_rounded,
-                                                        color: Colors.white)
-                                                    : Icon(
-                                                        Icons
-                                                            .check_box_outline_blank_rounded,
-                                                        color: Colors.white),
-                                              ),
-                                              trailing: IconButton(
-                                                  onPressed: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (context) =>
-                                                          AlertDialog(
-                                                        shape: RoundedRectangleBorder(
+                                            ],
+                                          ),
+                                          leading: IconButton(
+                                            onPressed: () {
+                                              nutrialltodo!
+                                                          .nutritionAndHealthTodos![
+                                                              index]
+                                                          .isComplete ==
+                                                      1
+                                                  ? Incompleteapi(index)
+                                                  : Completeapi(index);
+                                            },
+                                            icon: nutrialltodo!
+                                                        .nutritionAndHealthTodos![
+                                                            index]
+                                                        .isComplete ==
+                                                    1
+                                                ? Icon(Icons.check_box_rounded,
+                                                    color: Colors.white)
+                                                : Icon(
+                                                    Icons
+                                                        .check_box_outline_blank_rounded,
+                                                    color: Colors.white),
+                                          ),
+                                          trailing: IconButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      AlertDialog(
+                                                    shape:
+                                                        RoundedRectangleBorder(
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -415,630 +725,348 @@ class _NutriState extends State<Nutri> {
                                                             side: BorderSide(
                                                                 color: Colors
                                                                     .white)),
-                                                        backgroundColor:
-                                                            Color.fromARGB(
-                                                                255, 0, 0, 0),
-                                                        scrollable: true,
-                                                        content: Text(
-                                                          'Are You Sure You Want to to Delete ?',
-                                                          style: TextStyle(
-                                                              fontSize: 11.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              fontFamily:
-                                                                  'Meta1',
-                                                              color:
-                                                                  Colors.white),
+                                                    backgroundColor:
+                                                        Color.fromARGB(
+                                                            255, 0, 0, 0),
+                                                    scrollable: true,
+                                                    content: Text(
+                                                      'Are You Sure You Want to to Delete ?',
+                                                      style: TextStyle(
+                                                          fontSize: 11.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily: 'Meta1',
+                                                          color: Colors.white),
+                                                    ),
+                                                    actions: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          deletetodo(index);
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Container(
+                                                          margin:
+                                                              EdgeInsets.all(
+                                                                  2.w),
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  1.h),
+                                                          child: Text(
+                                                            'Yes',
+                                                            style: TextStyle(
+                                                                fontSize: 13.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontFamily:
+                                                                    'Meta1',
+                                                                color: Colors
+                                                                    .green),
+                                                          ),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: Colors
+                                                                        .green,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10)),
                                                         ),
-                                                        actions: [
-                                                          InkWell(
-                                                            onTap: () {
-                                                              deletetodo(index);
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            child: Container(
-                                                              margin: EdgeInsets
-                                                                  .all(2.w),
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(1.h),
-                                                              child: Text(
-                                                                'Yes',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        13.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontFamily:
-                                                                        'Meta1',
-                                                                    color: Colors
-                                                                        .green),
-                                                              ),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Colors
-                                                                            .green,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10)),
-                                                            ),
-                                                          ),
-                                                          InkWell(
-                                                            onTap: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            child: Container(
-                                                              margin: EdgeInsets
-                                                                  .all(1.w),
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(1.h),
-                                                              child: Text(
-                                                                'No',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        13.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontFamily:
-                                                                        'Meta1',
-                                                                    color: Colors
-                                                                        .red),
-                                                              ),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Colors
-                                                                            .red,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10)),
-                                                            ),
-                                                          ),
-                                                        ],
                                                       ),
-                                                    );
-                                                  },
-                                                  icon: Icon(
-                                                    Icons.delete,
-                                                    color: Colors.red,
-                                                  )),
-                                              tileColor:
-                                                  Colors.grey.withOpacity(0.20),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ):SizedBox(
-                            height: 60.h,
-                            child: ListView.builder(
-                              itemCount: nutrialltodo?.nutritionAndHealthTodos?.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding:
-                                  EdgeInsets.only(bottom: 2.h),
-                                  child: ListTile(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(
-                                            10)),
-                                    title: Text(
-                                      nutrialltodo!.nutritionAndHealthTodos![
-                                      index]
-                                          .mealName
-                                          .toString(),
-                                      style: TextStyle(
-                                          decoration: nutrialltodo!.nutritionAndHealthTodos![
-                                          index]
-                                              .isComplete ==
-                                              1
-                                              ? TextDecoration
-                                              .lineThrough
-                                              : TextDecoration.none,
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Meta1',
-                                          color: Colors.white),
-                                    ),
-                                    subtitle: Row(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          nutrialltodo!.nutritionAndHealthTodos![
-                                          index]
-                                              .fat
-                                              .toString() + " fat",
-                                          style: TextStyle(
-                                              decoration:nutrialltodo!.nutritionAndHealthTodos![
-                                              index]
-                                                  .isComplete ==
-                                                  1
-                                                  ? TextDecoration
-                                                  .lineThrough
-                                                  : TextDecoration
-                                                  .none,
-                                              fontSize: 11.sp,
-                                              fontWeight:
-                                              FontWeight.w400,
-                                              fontFamily: 'Meta1',
-                                              color: Colors.white70),
-                                        ),
-                                        Text(
-                                          ' - ',
-                                          style: TextStyle(
-                                              decoration:
-                                              select == index
-                                                  ? TextDecoration
-                                                  .lineThrough
-                                                  : TextDecoration
-                                                  .none,
-                                              fontSize: 11.sp,
-                                              fontWeight:
-                                              FontWeight.w400,
-                                              fontFamily: 'Meta1',
-                                              color: Colors.white70),
-                                        ),
-                                        Text(
-                                          nutrialltodo!.nutritionAndHealthTodos![
-                                          index]
-                                              .protein
-                                              .toString() + " pro",
-                                          textAlign:
-                                          TextAlign.justify,
-                                          style: TextStyle(
-                                              decoration: nutrialltodo!.nutritionAndHealthTodos![
-                                              index]
-                                                  .isComplete ==
-                                                  1
-                                                  ? TextDecoration
-                                                  .lineThrough
-                                                  : TextDecoration
-                                                  .none,
-                                              fontSize: 11.sp,
-                                              fontWeight:
-                                              FontWeight.w400,
-                                              fontFamily: 'Meta1',
-                                              color: Colors.white70),
-                                        ),Text(
-                                          ' - ',
-                                          style: TextStyle(
-                                              decoration:
-                                              select == index
-                                                  ? TextDecoration
-                                                  .lineThrough
-                                                  : TextDecoration
-                                                  .none,
-                                              fontSize: 11.sp,
-                                              fontWeight:
-                                              FontWeight.w400,
-                                              fontFamily: 'Meta1',
-                                              color: Colors.white70),
-                                        ),
-                                        Text(
-                                          nutrialltodo!.nutritionAndHealthTodos![
-                                          index]
-                                              .calories
-                                              .toString() + " Cal",
-                                          textAlign:
-                                          TextAlign.justify,
-                                          style: TextStyle(
-                                              decoration: nutrialltodo!.nutritionAndHealthTodos![
-                                              index]
-                                                  .isComplete ==
-                                                  1
-                                                  ? TextDecoration
-                                                  .lineThrough
-                                                  : TextDecoration
-                                                  .none,
-                                              fontSize: 11.sp,
-                                              fontWeight:
-                                              FontWeight.w400,
-                                              fontFamily: 'Meta1',
-                                              color: Colors.white70),
-                                        ),
-                                      ],
-                                    ),
-                                    leading: IconButton(
-                                      onPressed: () {
-                                        nutrialltodo!.nutritionAndHealthTodos![
-                                        index]
-                                            .isComplete ==
-                                            1
-                                            ? Incompleteapi(index)
-                                            : Completeapi(index);
-                                      },
-                                      icon: nutrialltodo!.nutritionAndHealthTodos![
-                                      index]
-                                          .isComplete ==
-                                          1
-                                          ? Icon(
-                                          Icons.check_box_rounded,
-                                          color: Colors.white)
-                                          : Icon(
-                                          Icons
-                                              .check_box_outline_blank_rounded,
-                                          color: Colors.white),
-                                    ),
-                                    trailing: IconButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) =>
-                                                AlertDialog(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius
-                                                          .circular(
-                                                          20),
-                                                      side: BorderSide(
-                                                          color: Colors
-                                                              .white)),
-                                                  backgroundColor:
-                                                  Color.fromARGB(
-                                                      255, 0, 0, 0),
-                                                  scrollable: true,
-                                                  content: Text(
-                                                    'Are You Sure You Want to to Delete ?',
-                                                    style: TextStyle(
-                                                        fontSize: 11.sp,
-                                                        fontWeight:
-                                                        FontWeight
-                                                            .w400,
-                                                        fontFamily:
-                                                        'Meta1',
-                                                        color:
-                                                        Colors.white),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Container(
+                                                          margin:
+                                                              EdgeInsets.all(
+                                                                  1.w),
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  1.h),
+                                                          child: Text(
+                                                            'No',
+                                                            style: TextStyle(
+                                                                fontSize: 13.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontFamily:
+                                                                    'Meta1',
+                                                                color:
+                                                                    Colors.red),
+                                                          ),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: Colors
+                                                                        .red,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10)),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  actions: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        deletetodo(index);
-                                                        Navigator.of(
-                                                            context)
-                                                            .pop();
-                                                      },
-                                                      child: Container(
-                                                        margin: EdgeInsets
-                                                            .all(2.w),
-                                                        padding:
-                                                        EdgeInsets
-                                                            .all(1.h),
-                                                        child: Text(
-                                                          'Yes',
-                                                          style: TextStyle(
-                                                              fontSize:
-                                                              13.sp,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w400,
-                                                              fontFamily:
-                                                              'Meta1',
-                                                              color: Colors
-                                                                  .green),
-                                                        ),
-                                                        decoration:
-                                                        BoxDecoration(
-                                                            color: Colors
-                                                                .black,
-                                                            border:
-                                                            Border
-                                                                .all(
-                                                              color: Colors
-                                                                  .green,
-                                                            ),
-                                                            borderRadius:
-                                                            BorderRadius.circular(
-                                                                10)),
-                                                      ),
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Navigator.of(
-                                                            context)
-                                                            .pop();
-                                                      },
-                                                      child: Container(
-                                                        margin: EdgeInsets
-                                                            .all(1.w),
-                                                        padding:
-                                                        EdgeInsets
-                                                            .all(1.h),
-                                                        child: Text(
-                                                          'No',
-                                                          style: TextStyle(
-                                                              fontSize:
-                                                              13.sp,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w400,
-                                                              fontFamily:
-                                                              'Meta1',
-                                                              color: Colors
-                                                                  .red),
-                                                        ),
-                                                        decoration:
-                                                        BoxDecoration(
-                                                            color: Colors
-                                                                .black,
-                                                            border:
-                                                            Border
-                                                                .all(
-                                                              color: Colors
-                                                                  .red,
-                                                            ),
-                                                            borderRadius:
-                                                            BorderRadius.circular(
-                                                                10)),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                          );
-                                        },
-                                        icon: Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
-                                        )),
-                                    tileColor:
-                                    Colors.grey.withOpacity(0.20),
+                                                );
+                                              },
+                                              icon: Icon(
+                                                Icons.delete,
+                                                color: Colors.red,
+                                              )),
+                                          tileColor:
+                                              Colors.grey.withOpacity(0.20),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                );
-                              },
-                            ),
-                          ),
-                              // : SizedBox(
-                              //     height: 60.h,
-                              //     child: ListView.builder(
-                              //       itemCount: searchtodotraining
-                              //           ?.trainningAndNoteTodos?.length,
-                              //       itemBuilder: (context, index) {
-                              //         return Padding(
-                              //           padding: EdgeInsets.only(bottom: 2.h),
-                              //           child: ListTile(
-                              //             shape: RoundedRectangleBorder(
-                              //                 borderRadius:
-                              //                     BorderRadius.circular(10)),
-                              //             title: Text(
-                              //               searchtodotraining!
-                              //                   .trainningAndNoteTodos![index]
-                              //                   .title
-                              //                   .toString(),
-                              //               style: TextStyle(
-                              //                   decoration: searchtodotraining!
-                              //                               .trainningAndNoteTodos![
-                              //                                   index]
-                              //                               .isComplete ==
-                              //                           1
-                              //                       ? TextDecoration.lineThrough
-                              //                       : TextDecoration.none,
-                              //                   fontSize: 13.sp,
-                              //                   fontWeight: FontWeight.w400,
-                              //                   fontFamily: 'Meta1',
-                              //                   color: Colors.white),
-                              //             ),
-                              //             subtitle: Row(
-                              //               crossAxisAlignment:
-                              //                   CrossAxisAlignment.center,
-                              //               children: [
-                              //                 Text(
-                              //                   searchtodotraining!
-                              //                       .trainningAndNoteTodos![
-                              //                           index]
-                              //                       .date
-                              //                       .toString(),
-                              //                   style: TextStyle(
-                              //                       decoration: searchtodotraining!
-                              //                                   .trainningAndNoteTodos![
-                              //                                       index]
-                              //                                   .isComplete ==
-                              //                               1
-                              //                           ? TextDecoration
-                              //                               .lineThrough
-                              //                           : TextDecoration.none,
-                              //                       fontSize: 11.sp,
-                              //                       fontWeight: FontWeight.w400,
-                              //                       fontFamily: 'Meta1',
-                              //                       color: Colors.white70),
-                              //                 ),
-                              //                 Text(
-                              //                   ' - ',
-                              //                   style: TextStyle(
-                              //                       decoration: select == index
-                              //                           ? TextDecoration
-                              //                               .lineThrough
-                              //                           : TextDecoration.none,
-                              //                       fontSize: 11.sp,
-                              //                       fontWeight: FontWeight.w400,
-                              //                       fontFamily: 'Meta1',
-                              //                       color: Colors.white70),
-                              //                 ),
-                              //                 Text(
-                              //                   searchtodotraining!
-                              //                       .trainningAndNoteTodos![
-                              //                           index]
-                              //                       .time
-                              //                       .toString(),
-                              //                   textAlign: TextAlign.justify,
-                              //                   style: TextStyle(
-                              //                       decoration: searchtodotraining!
-                              //                                   .trainningAndNoteTodos![
-                              //                                       index]
-                              //                                   .isComplete ==
-                              //                               1
-                              //                           ? TextDecoration
-                              //                               .lineThrough
-                              //                           : TextDecoration.none,
-                              //                       fontSize: 11.sp,
-                              //                       fontWeight: FontWeight.w400,
-                              //                       fontFamily: 'Meta1',
-                              //                       color: Colors.white70),
-                              //                 ),
-                              //               ],
-                              //             ),
-                              //             leading: IconButton(
-                              //               onPressed: () {
-                              //                 searchtodotraining!
-                              //                             .trainningAndNoteTodos![
-                              //                                 index]
-                              //                             .isComplete ==
-                              //                         1
-                              //                     ? Incompleteapi(index)
-                              //                     : Completeapi(index);
-                              //               },
-                              //               icon: searchtodotraining!
-                              //                           .trainningAndNoteTodos![
-                              //                               index]
-                              //                           .isComplete ==
-                              //                       1
-                              //                   ? Icon(Icons.check_box_rounded,
-                              //                       color: Colors.white)
-                              //                   : Icon(
-                              //                       Icons
-                              //                           .check_box_outline_blank_rounded,
-                              //                       color: Colors.white),
-                              //             ),
-                              //             trailing: IconButton(
-                              //                 onPressed: () {
-                              //                   showDialog(
-                              //                     context: context,
-                              //                     builder: (context) =>
-                              //                         AlertDialog(
-                              //                       shape:
-                              //                           RoundedRectangleBorder(
-                              //                               borderRadius:
-                              //                                   BorderRadius
-                              //                                       .circular(
-                              //                                           20),
-                              //                               side: BorderSide(
-                              //                                   color: Colors
-                              //                                       .white)),
-                              //                       backgroundColor:
-                              //                           Color.fromARGB(
-                              //                               255, 0, 0, 0),
-                              //                       scrollable: true,
-                              //                       content: Text(
-                              //                         'Are You Sure You Want to to Delete ?',
-                              //                         style: TextStyle(
-                              //                             fontSize: 11.sp,
-                              //                             fontWeight:
-                              //                                 FontWeight.w400,
-                              //                             fontFamily: 'Meta1',
-                              //                             color: Colors.white),
-                              //                       ),
-                              //                       actions: [
-                              //                         InkWell(
-                              //                           onTap: () {
-                              //                             deletetodo(index);
-                              //                             Navigator.of(context)
-                              //                                 .pop();
-                              //                           },
-                              //                           child: Container(
-                              //                             margin:
-                              //                                 EdgeInsets.all(
-                              //                                     2.w),
-                              //                             padding:
-                              //                                 EdgeInsets.all(
-                              //                                     1.h),
-                              //                             child: Text(
-                              //                               'Yes',
-                              //                               style: TextStyle(
-                              //                                   fontSize: 13.sp,
-                              //                                   fontWeight:
-                              //                                       FontWeight
-                              //                                           .w400,
-                              //                                   fontFamily:
-                              //                                       'Meta1',
-                              //                                   color: Colors
-                              //                                       .green),
-                              //                             ),
-                              //                             decoration:
-                              //                                 BoxDecoration(
-                              //                                     color: Colors
-                              //                                         .black,
-                              //                                     border: Border
-                              //                                         .all(
-                              //                                       color: Colors
-                              //                                           .green,
-                              //                                     ),
-                              //                                     borderRadius:
-                              //                                         BorderRadius
-                              //                                             .circular(
-                              //                                                 10)),
-                              //                           ),
-                              //                         ),
-                              //                         InkWell(
-                              //                           onTap: () {
-                              //                             Navigator.of(context)
-                              //                                 .pop();
-                              //                           },
-                              //                           child: Container(
-                              //                             margin:
-                              //                                 EdgeInsets.all(
-                              //                                     1.w),
-                              //                             padding:
-                              //                                 EdgeInsets.all(
-                              //                                     1.h),
-                              //                             child: Text(
-                              //                               'No',
-                              //                               style: TextStyle(
-                              //                                   fontSize: 13.sp,
-                              //                                   fontWeight:
-                              //                                       FontWeight
-                              //                                           .w400,
-                              //                                   fontFamily:
-                              //                                       'Meta1',
-                              //                                   color:
-                              //                                       Colors.red),
-                              //                             ),
-                              //                             decoration:
-                              //                                 BoxDecoration(
-                              //                                     color: Colors
-                              //                                         .black,
-                              //                                     border: Border
-                              //                                         .all(
-                              //                                       color: Colors
-                              //                                           .red,
-                              //                                     ),
-                              //                                     borderRadius:
-                              //                                         BorderRadius
-                              //                                             .circular(
-                              //                                                 10)),
-                              //                           ),
-                              //                         ),
-                              //                       ],
-                              //                     ),
-                              //                   );
-                              //                 },
-                              //                 icon: Icon(
-                              //                   Icons.delete,
-                              //                   color: Colors.red,
-                              //                 )),
-                              //             tileColor:
-                              //                 Colors.grey.withOpacity(0.20),
-                              //           ),
-                              //         );
-                              //       },
-                              //     ),
-                              //   ),
+                                ),
+                          // : SizedBox(
+                          //     height: 60.h,
+                          //     child: ListView.builder(
+                          //       itemCount: searchtodotraining
+                          //           ?.trainningAndNoteTodos?.length,
+                          //       itemBuilder: (context, index) {
+                          //         return Padding(
+                          //           padding: EdgeInsets.only(bottom: 2.h),
+                          //           child: ListTile(
+                          //             shape: RoundedRectangleBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(10)),
+                          //             title: Text(
+                          //               searchtodotraining!
+                          //                   .trainningAndNoteTodos![index]
+                          //                   .title
+                          //                   .toString(),
+                          //               style: TextStyle(
+                          //                   decoration: searchtodotraining!
+                          //                               .trainningAndNoteTodos![
+                          //                                   index]
+                          //                               .isComplete ==
+                          //                           1
+                          //                       ? TextDecoration.lineThrough
+                          //                       : TextDecoration.none,
+                          //                   fontSize: 13.sp,
+                          //                   fontWeight: FontWeight.w400,
+                          //                   fontFamily: 'Meta1',
+                          //                   color: Colors.white),
+                          //             ),
+                          //             subtitle: Row(
+                          //               crossAxisAlignment:
+                          //                   CrossAxisAlignment.center,
+                          //               children: [
+                          //                 Text(
+                          //                   searchtodotraining!
+                          //                       .trainningAndNoteTodos![
+                          //                           index]
+                          //                       .date
+                          //                       .toString(),
+                          //                   style: TextStyle(
+                          //                       decoration: searchtodotraining!
+                          //                                   .trainningAndNoteTodos![
+                          //                                       index]
+                          //                                   .isComplete ==
+                          //                               1
+                          //                           ? TextDecoration
+                          //                               .lineThrough
+                          //                           : TextDecoration.none,
+                          //                       fontSize: 11.sp,
+                          //                       fontWeight: FontWeight.w400,
+                          //                       fontFamily: 'Meta1',
+                          //                       color: Colors.white70),
+                          //                 ),
+                          //                 Text(
+                          //                   ' - ',
+                          //                   style: TextStyle(
+                          //                       decoration: select == index
+                          //                           ? TextDecoration
+                          //                               .lineThrough
+                          //                           : TextDecoration.none,
+                          //                       fontSize: 11.sp,
+                          //                       fontWeight: FontWeight.w400,
+                          //                       fontFamily: 'Meta1',
+                          //                       color: Colors.white70),
+                          //                 ),
+                          //                 Text(
+                          //                   searchtodotraining!
+                          //                       .trainningAndNoteTodos![
+                          //                           index]
+                          //                       .time
+                          //                       .toString(),
+                          //                   textAlign: TextAlign.justify,
+                          //                   style: TextStyle(
+                          //                       decoration: searchtodotraining!
+                          //                                   .trainningAndNoteTodos![
+                          //                                       index]
+                          //                                   .isComplete ==
+                          //                               1
+                          //                           ? TextDecoration
+                          //                               .lineThrough
+                          //                           : TextDecoration.none,
+                          //                       fontSize: 11.sp,
+                          //                       fontWeight: FontWeight.w400,
+                          //                       fontFamily: 'Meta1',
+                          //                       color: Colors.white70),
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //             leading: IconButton(
+                          //               onPressed: () {
+                          //                 searchtodotraining!
+                          //                             .trainningAndNoteTodos![
+                          //                                 index]
+                          //                             .isComplete ==
+                          //                         1
+                          //                     ? Incompleteapi(index)
+                          //                     : Completeapi(index);
+                          //               },
+                          //               icon: searchtodotraining!
+                          //                           .trainningAndNoteTodos![
+                          //                               index]
+                          //                           .isComplete ==
+                          //                       1
+                          //                   ? Icon(Icons.check_box_rounded,
+                          //                       color: Colors.white)
+                          //                   : Icon(
+                          //                       Icons
+                          //                           .check_box_outline_blank_rounded,
+                          //                       color: Colors.white),
+                          //             ),
+                          //             trailing: IconButton(
+                          //                 onPressed: () {
+                          //                   showDialog(
+                          //                     context: context,
+                          //                     builder: (context) =>
+                          //                         AlertDialog(
+                          //                       shape:
+                          //                           RoundedRectangleBorder(
+                          //                               borderRadius:
+                          //                                   BorderRadius
+                          //                                       .circular(
+                          //                                           20),
+                          //                               side: BorderSide(
+                          //                                   color: Colors
+                          //                                       .white)),
+                          //                       backgroundColor:
+                          //                           Color.fromARGB(
+                          //                               255, 0, 0, 0),
+                          //                       scrollable: true,
+                          //                       content: Text(
+                          //                         'Are You Sure You Want to to Delete ?',
+                          //                         style: TextStyle(
+                          //                             fontSize: 11.sp,
+                          //                             fontWeight:
+                          //                                 FontWeight.w400,
+                          //                             fontFamily: 'Meta1',
+                          //                             color: Colors.white),
+                          //                       ),
+                          //                       actions: [
+                          //                         InkWell(
+                          //                           onTap: () {
+                          //                             deletetodo(index);
+                          //                             Navigator.of(context)
+                          //                                 .pop();
+                          //                           },
+                          //                           child: Container(
+                          //                             margin:
+                          //                                 EdgeInsets.all(
+                          //                                     2.w),
+                          //                             padding:
+                          //                                 EdgeInsets.all(
+                          //                                     1.h),
+                          //                             child: Text(
+                          //                               'Yes',
+                          //                               style: TextStyle(
+                          //                                   fontSize: 13.sp,
+                          //                                   fontWeight:
+                          //                                       FontWeight
+                          //                                           .w400,
+                          //                                   fontFamily:
+                          //                                       'Meta1',
+                          //                                   color: Colors
+                          //                                       .green),
+                          //                             ),
+                          //                             decoration:
+                          //                                 BoxDecoration(
+                          //                                     color: Colors
+                          //                                         .black,
+                          //                                     border: Border
+                          //                                         .all(
+                          //                                       color: Colors
+                          //                                           .green,
+                          //                                     ),
+                          //                                     borderRadius:
+                          //                                         BorderRadius
+                          //                                             .circular(
+                          //                                                 10)),
+                          //                           ),
+                          //                         ),
+                          //                         InkWell(
+                          //                           onTap: () {
+                          //                             Navigator.of(context)
+                          //                                 .pop();
+                          //                           },
+                          //                           child: Container(
+                          //                             margin:
+                          //                                 EdgeInsets.all(
+                          //                                     1.w),
+                          //                             padding:
+                          //                                 EdgeInsets.all(
+                          //                                     1.h),
+                          //                             child: Text(
+                          //                               'No',
+                          //                               style: TextStyle(
+                          //                                   fontSize: 13.sp,
+                          //                                   fontWeight:
+                          //                                       FontWeight
+                          //                                           .w400,
+                          //                                   fontFamily:
+                          //                                       'Meta1',
+                          //                                   color:
+                          //                                       Colors.red),
+                          //                             ),
+                          //                             decoration:
+                          //                                 BoxDecoration(
+                          //                                     color: Colors
+                          //                                         .black,
+                          //                                     border: Border
+                          //                                         .all(
+                          //                                       color: Colors
+                          //                                           .red,
+                          //                                     ),
+                          //                                     borderRadius:
+                          //                                         BorderRadius
+                          //                                             .circular(
+                          //                                                 10)),
+                          //                           ),
+                          //                         ),
+                          //                       ],
+                          //                     ),
+                          //                   );
+                          //                 },
+                          //                 icon: Icon(
+                          //                   Icons.delete,
+                          //                   color: Colors.red,
+                          //                 )),
+                          //             tileColor:
+                          //                 Colors.grey.withOpacity(0.20),
+                          //           ),
+                          //         );
+                          //       },
+                          //     ),
+                          //   ),
                         ],
                       ),
                     ),
@@ -1528,7 +1556,8 @@ class _NutriState extends State<Nutri> {
     final Map<String, String> data = {};
     data['action'] = 'nutrition_and_health_to_do_delete';
 
-    data['to_do_id'] = nutrialltodo!.nutritionAndHealthTodos![index].id.toString();
+    data['to_do_id'] =
+        nutrialltodo!.nutritionAndHealthTodos![index].id.toString();
 
     checkInternet().then((internet) async {
       if (internet) {
@@ -1579,7 +1608,8 @@ class _NutriState extends State<Nutri> {
     final Map<String, String> data = {};
     data['action'] = 'nutrition_and_health_to_do_is_completed';
 
-    data['to_do_id'] = nutrialltodo!.nutritionAndHealthTodos![index].id.toString();
+    data['to_do_id'] =
+        nutrialltodo!.nutritionAndHealthTodos![index].id.toString();
 
     checkInternet().then((internet) async {
       if (internet) {
@@ -1635,7 +1665,9 @@ class _NutriState extends State<Nutri> {
 
     checkInternet().then((internet) async {
       if (internet) {
-        authprovider().SearchFitnesstodoapi(data).then((Response response) async {
+        authprovider()
+            .SearchFitnesstodoapi(data)
+            .then((Response response) async {
           searchfittodo =
               SearchfittodoModal.fromJson(json.decode(response.body));
 
@@ -1667,11 +1699,14 @@ class _NutriState extends State<Nutri> {
     final Map<String, String> data = {};
     data['action'] = 'nutrition_and_health_to_do_is_incomplete';
 
-    data['to_do_id'] = nutrialltodo!.nutritionAndHealthTodos![index].id.toString();
+    data['to_do_id'] =
+        nutrialltodo!.nutritionAndHealthTodos![index].id.toString();
 
     checkInternet().then((internet) async {
       if (internet) {
-        authprovider().nutritodoincomplete(data).then((Response response) async {
+        authprovider()
+            .nutritodoincomplete(data)
+            .then((Response response) async {
           nutrialltodo = NutritodoModal.fromJson(json.decode(response.body));
 
           if (response.statusCode == 200 && alltodo?.status == "success") {

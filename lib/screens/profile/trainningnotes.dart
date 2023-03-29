@@ -122,7 +122,265 @@ class _TrainningNotesState extends State<TrainningNotes> {
                         ),
                         searchBox(),
                         _search.text == ''
-                            ? alltrainings!.allTrainingsAndNotes!.length == 0
+                            ? alltrainings!.allTrainingsAndNotes == null
+                                ? Container(
+                                    height: 70.h,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'No Trainings Available',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontFamily: 'Meta1',
+                                        color: const Color(0xffffffff),
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox(
+                                    height: 73.h,
+                                    child: ListView.builder(
+                                      itemCount: alltrainings
+                                          ?.allTrainingsAndNotes?.length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {},
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 3.h),
+                                            child: Container(
+                                              padding: EdgeInsets.all(3.w),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                    color: Colors.white),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 89.w,
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          alltrainings!
+                                                              .allTrainingsAndNotes![
+                                                                  index]
+                                                              .title
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        Text(
+                                                          alltrainings!
+                                                              .allTrainingsAndNotes![
+                                                                  index]
+                                                              .time
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 10.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.90)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const Divider(
+                                                    color: Colors.white,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 89.w,
+                                                    child: Text(
+                                                      alltrainings!
+                                                          .allTrainingsAndNotes![
+                                                              index]
+                                                          .description
+                                                          .toString(),
+                                                      maxLines: 7,
+                                                      style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily: 'Meta1',
+                                                          color: Colors
+                                                              .grey.shade500),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 1.h,
+                                                  ),
+                                                  const Divider(
+                                                    color: Colors.white,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 25.w,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder: (context) => TrainingReplyPage(
+                                                                      time: alltrainings!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .time,
+                                                                      tid: alltrainings!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .id
+                                                                          .toString(),
+                                                                      tile:
+                                                                          'Trainings & Notes',
+                                                                      title: alltrainings!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .title
+                                                                          .toString(),
+                                                                      desc: alltrainings!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .description
+                                                                          .toString()),
+                                                                ),
+                                                              );
+                                                            },
+                                                            icon: Row(
+                                                              children: [
+                                                                Icon(
+                                                                  size: 22.sp,
+                                                                  Icons
+                                                                      .reply_all_rounded,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 1.5.w,
+                                                                ),
+                                                                Text(
+                                                                  'Reply',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                      ),
+                                                      Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 4.h,
+                                                        width: 0.1.w,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 25.w,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder: (context) => Trainingnotespagetodo(
+                                                                      time: alltrainings!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .time,
+                                                                      tid: alltrainings!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .id
+                                                                          .toString(),
+                                                                      tile:
+                                                                          "Trainings & Notes",
+                                                                      title: alltrainings!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .title
+                                                                          .toString(),
+                                                                      desc: alltrainings!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .description
+                                                                          .toString()),
+                                                                ),
+                                                              );
+                                                            },
+                                                            icon: Row(
+                                                              children: [
+                                                                Icon(
+                                                                  size: 20.sp,
+                                                                  Icons
+                                                                      .today_outlined,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 1.5.w,
+                                                                ),
+                                                                Text(
+                                                                  'To-Do',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                            : searchtraining?.allTrainingsAndNotes?.length == 0
                                 ? Container(
                                     height: 70.h,
                                     alignment: Alignment.center,
@@ -136,106 +394,61 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                       ),
                                     ),
                                   )
-                                : alltrainings!.allTrainingsAndNotes == null
-                                    ? Container(
-                                        height: 70.h,
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'No Trainings Available',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 15.sp,
-                                            fontFamily: 'Meta1',
-                                            color: const Color(0xffffffff),
-                                          ),
-                                        ),
-                                      )
-                                    : SizedBox(
-                                        height: 73.h,
-                                        child: ListView.builder(
-                                          itemCount: alltrainings
-                                              ?.allTrainingsAndNotes?.length,
-                                          itemBuilder: (context, index) {
-                                            return InkWell(
-                                              onTap: () {},
-                                              child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    bottom: 3.h),
-                                                child: Container(
-                                                  padding: EdgeInsets.all(3.w),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    border: Border.all(
-                                                        color: Colors.white),
-                                                  ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 89.w,
-                                                        child: Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Text(
-                                                              alltrainings!
-                                                                  .allTrainingsAndNotes![
+                                : SizedBox(
+                                    height: 73.h,
+                                    child: ListView.builder(
+                                      itemCount: searchtraining
+                                          ?.allTrainingsAndNotes?.length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {},
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 3.h),
+                                            child: Container(
+                                              padding: EdgeInsets.all(3.w),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                    color: Colors.white),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 89.w,
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          searchtraining
+                                                                  ?.allTrainingsAndNotes?[
                                                                       index]
-                                                                  .title
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      16.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                            Text(
-                                                              alltrainings!
-                                                                  .allTrainingsAndNotes![
-                                                                      index]
-                                                                  .time
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      10.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .white
-                                                                      .withOpacity(
-                                                                          0.90)),
-                                                            ),
-                                                          ],
+                                                                  .title ??
+                                                              "",
+                                                          style: TextStyle(
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
                                                         ),
-                                                      ),
-                                                      const Divider(
-                                                        color: Colors.white,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 89.w,
-                                                        child: Text(
-                                                          alltrainings!
+                                                        Text(
+                                                          searchtraining!
                                                               .allTrainingsAndNotes![
                                                                   index]
-                                                              .description
+                                                              .time
                                                               .toString(),
-                                                          maxLines: 7,
                                                           style: TextStyle(
                                                               fontSize: 10.sp,
                                                               fontWeight:
@@ -243,397 +456,188 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                                                       .w400,
                                                               fontFamily:
                                                                   'Meta1',
-                                                              color: Colors.grey
-                                                                  .shade500),
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.90)),
                                                         ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 1.h,
-                                                      ),
-                                                      const Divider(
-                                                        color: Colors.white,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 25.w,
-                                                            child: IconButton(
-                                                                onPressed: () {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .push(
-                                                                    MaterialPageRoute(
-                                                                      builder: (context) => TrainingReplyPage(
-                                                                          time: alltrainings!
-                                                                              .allTrainingsAndNotes![
-                                                                                  index]
-                                                                              .time,
-                                                                          tid: alltrainings!
-                                                                              .allTrainingsAndNotes![
-                                                                                  index]
-                                                                              .id
-                                                                              .toString(),
-                                                                          tile:
-                                                                              'Trainings & Notes',
-                                                                          title: alltrainings!
-                                                                              .allTrainingsAndNotes![
-                                                                                  index]
-                                                                              .title
-                                                                              .toString(),
-                                                                          desc: alltrainings!
-                                                                              .allTrainingsAndNotes![index]
-                                                                              .description
-                                                                              .toString()),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                                icon: Row(
-                                                                  children: [
-                                                                    Icon(
-                                                                      size:
-                                                                          22.sp,
-                                                                      Icons
-                                                                          .reply_all_rounded,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width:
-                                                                          1.5.w,
-                                                                    ),
-                                                                    Text(
-                                                                      'Reply',
-                                                                      style: TextStyle(
-                                                                          fontSize: 11
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w400,
-                                                                          fontFamily:
-                                                                              'Meta1',
-                                                                          color:
-                                                                              Colors.white),
-                                                                    ),
-                                                                  ],
-                                                                )),
-                                                          ),
-                                                          Container(
-                                                            decoration: BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5)),
-                                                            height: 4.h,
-                                                            width: 0.1.w,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 25.w,
-                                                            child: IconButton(
-                                                                onPressed: () {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .push(
-                                                                    MaterialPageRoute(
-                                                                      builder: (context) => Trainingnotespagetodo(
-                                                                          time: alltrainings!
-                                                                              .allTrainingsAndNotes![
-                                                                                  index]
-                                                                              .time,
-                                                                          tid: alltrainings!
-                                                                              .allTrainingsAndNotes![
-                                                                                  index]
-                                                                              .id
-                                                                              .toString(),
-                                                                          tile:
-                                                                              "Trainings & Notes",
-                                                                          title: alltrainings!
-                                                                              .allTrainingsAndNotes![
-                                                                                  index]
-                                                                              .title
-                                                                              .toString(),
-                                                                          desc: alltrainings!
-                                                                              .allTrainingsAndNotes![index]
-                                                                              .description
-                                                                              .toString()),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                                icon: Row(
-                                                                  children: [
-                                                                    Icon(
-                                                                      size:
-                                                                          20.sp,
-                                                                      Icons
-                                                                          .today_outlined,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width:
-                                                                          1.5.w,
-                                                                    ),
-                                                                    Text(
-                                                                      'To-Do',
-                                                                      style: TextStyle(
-                                                                          fontSize: 11
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w400,
-                                                                          fontFamily:
-                                                                              'Meta1',
-                                                                          color:
-                                                                              Colors.white),
-                                                                    ),
-                                                                  ],
-                                                                )),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      )
-                            : SizedBox(
-                                height: 73.h,
-                                child: ListView.builder(
-                                  itemCount: searchtraining
-                                      ?.allTrainingsAndNotes?.length,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding: EdgeInsets.only(bottom: 3.h),
-                                        child: Container(
-                                          padding: EdgeInsets.all(3.w),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            border:
-                                                Border.all(color: Colors.white),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                width: 89.w,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      searchtraining
-                                                              ?.allTrainingsAndNotes?[
-                                                                  index]
-                                                              .title ??
-                                                          "",
-                                                      style: TextStyle(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white),
+                                                      ],
                                                     ),
-                                                    Text(
+                                                  ),
+                                                  const Divider(
+                                                    color: Colors.white,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 89.w,
+                                                    child: Text(
                                                       searchtraining!
                                                           .allTrainingsAndNotes![
                                                               index]
-                                                          .time
+                                                          .description
                                                           .toString(),
+                                                      maxLines: 7,
                                                       style: TextStyle(
                                                           fontSize: 10.sp,
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           fontFamily: 'Meta1',
-                                                          color: Colors.white
-                                                              .withOpacity(
-                                                                  0.90)),
+                                                          color: Colors
+                                                              .grey.shade500),
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const Divider(
-                                                color: Colors.white,
-                                              ),
-                                              SizedBox(
-                                                width: 89.w,
-                                                child: Text(
-                                                  searchtraining!
-                                                      .allTrainingsAndNotes![
-                                                          index]
-                                                      .description
-                                                      .toString(),
-                                                  maxLines: 7,
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontFamily: 'Meta1',
-                                                      color:
-                                                          Colors.grey.shade500),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 1.h,
-                                              ),
-                                              const Divider(
-                                                color: Colors.white,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  SizedBox(
-                                                    width: 25.w,
-                                                    child: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .push(
-                                                            MaterialPageRoute(
-                                                              builder: (context) => TrainingReplyPage(
-                                                                  time: searchtraining!
-                                                                      .allTrainingsAndNotes![
-                                                                          index]
-                                                                      .time,
-                                                                  tid: searchtraining!
-                                                                      .allTrainingsAndNotes![
-                                                                          index]
-                                                                      .id
-                                                                      .toString(),
-                                                                  tile:
-                                                                      'Trainings & Notes',
-                                                                  title: searchtraining!
-                                                                      .allTrainingsAndNotes![
-                                                                          index]
-                                                                      .title
-                                                                      .toString(),
-                                                                  desc: searchtraining!
-                                                                      .allTrainingsAndNotes![
-                                                                          index]
-                                                                      .description
-                                                                      .toString()),
-                                                            ),
-                                                          );
-                                                        },
-                                                        icon: Row(
-                                                          children: [
-                                                            Icon(
-                                                              size: 22.sp,
-                                                              Icons
-                                                                  .reply_all_rounded,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 1.5.w,
-                                                            ),
-                                                            Text(
-                                                              'Reply',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      11.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ],
-                                                        )),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
-                                                    height: 4.h,
-                                                    width: 0.1.w,
                                                   ),
                                                   SizedBox(
-                                                    width: 25.w,
-                                                    child: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .push(
-                                                            MaterialPageRoute(
-                                                              builder: (context) => Trainingnotespagetodo(
-                                                                  time: searchtraining!
-                                                                      .allTrainingsAndNotes![
-                                                                          index]
-                                                                      .time,
-                                                                  tid: searchtraining!
-                                                                      .allTrainingsAndNotes![
-                                                                          index]
-                                                                      .id
-                                                                      .toString(),
-                                                                  tile:
-                                                                      "Trainings & Notes",
-                                                                  title: searchtraining!
-                                                                      .allTrainingsAndNotes![
-                                                                          index]
-                                                                      .title
-                                                                      .toString(),
-                                                                  desc: searchtraining!
-                                                                      .allTrainingsAndNotes![
-                                                                          index]
-                                                                      .description
-                                                                      .toString()),
-                                                            ),
-                                                          );
-                                                        },
-                                                        icon: Row(
-                                                          children: [
-                                                            Icon(
-                                                              size: 20.sp,
-                                                              Icons
-                                                                  .today_outlined,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 1.5.w,
-                                                            ),
-                                                            Text(
-                                                              'To-Do',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      11.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
+                                                    height: 1.h,
+                                                  ),
+                                                  const Divider(
+                                                    color: Colors.white,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 25.w,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder: (context) => TrainingReplyPage(
+                                                                      time: searchtraining!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .time,
+                                                                      tid: searchtraining!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .id
+                                                                          .toString(),
+                                                                      tile:
+                                                                          'Trainings & Notes',
+                                                                      title: searchtraining!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .title
+                                                                          .toString(),
+                                                                      desc: searchtraining!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .description
+                                                                          .toString()),
+                                                                ),
+                                                              );
+                                                            },
+                                                            icon: Row(
+                                                              children: [
+                                                                Icon(
+                                                                  size: 22.sp,
+                                                                  Icons
+                                                                      .reply_all_rounded,
                                                                   color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ],
-                                                        )),
+                                                                      .white,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 1.5.w,
+                                                                ),
+                                                                Text(
+                                                                  'Reply',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                      ),
+                                                      Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 4.h,
+                                                        width: 0.1.w,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 25.w,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder: (context) => Trainingnotespagetodo(
+                                                                      time: searchtraining!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .time,
+                                                                      tid: searchtraining!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .id
+                                                                          .toString(),
+                                                                      tile:
+                                                                          "Trainings & Notes",
+                                                                      title: searchtraining!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .title
+                                                                          .toString(),
+                                                                      desc: searchtraining!
+                                                                          .allTrainingsAndNotes![
+                                                                              index]
+                                                                          .description
+                                                                          .toString()),
+                                                                ),
+                                                              );
+                                                            },
+                                                            icon: Row(
+                                                              children: [
+                                                                Icon(
+                                                                  size: 20.sp,
+                                                                  Icons
+                                                                      .today_outlined,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 1.5.w,
+                                                                ),
+                                                                Text(
+                                                                  'To-Do',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          11.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
+                                        );
+                                      },
+                                    ),
+                                  ),
                       ],
                     ),
                   ),
@@ -642,7 +646,6 @@ class _TrainningNotesState extends State<TrainningNotes> {
       ),
     );
   }
-
 
   playerapi() {
     final Map<String, String> data = {};
@@ -676,6 +679,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
       }
     });
   }
+
   Widget searchBox() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -723,7 +727,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
 
           if (response.statusCode == 200 &&
               searchtraining?.status == "success") {
-            print(alltrainings!.allTrainingsAndNotes!.length);
+            print(searchtraining!.allTrainingsAndNotes!.length);
             setState(() {
               isloading = false;
             });
