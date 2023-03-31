@@ -1,10 +1,10 @@
-class SleepModal {
+class SleepsearchModal {
   String? status;
   List<SleepScheduleDetails>? sleepScheduleDetails;
 
-  SleepModal({this.status, this.sleepScheduleDetails});
+  SleepsearchModal({this.status, this.sleepScheduleDetails});
 
-  SleepModal.fromJson(Map<String, dynamic> json) {
+  SleepsearchModal.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['sleep_schedule_details'] != null) {
       sleepScheduleDetails = <SleepScheduleDetails>[];

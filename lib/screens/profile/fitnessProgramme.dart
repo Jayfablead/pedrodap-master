@@ -75,6 +75,7 @@ class _HomeState extends State<Home> {
   TextEditingController _search = TextEditingController();
   TextEditingController _time = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     _foundToDo = todosList;
@@ -213,500 +214,536 @@ class _HomeState extends State<Home> {
                           ),
                           _search.text == ''
                               ? fittodoall!.fitnessProgrammeTodos == null
-                              ? Container(
-                            height: 70.h,
-                            alignment: Alignment.center,
-                            child: Text(
-                              'No Task Available',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                fontFamily: 'Meta1',
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          )
-                              : fittodoall!.fitnessProgrammeTodos == null
-                              ? Container(
-                                  height: 70.h,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'No Task Available',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      fontFamily: 'Meta1',
-                                      color: Color(0xffffffff),
+                                  ? Container(
+                                      height: 70.h,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'No Task Available',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontFamily: 'Meta1',
+                                          color: Color(0xffffffff),
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox(
+                                      height: 60.h,
+                                      child: ListView.builder(
+                                        itemCount: fittodoall
+                                            ?.fitnessProgrammeTodos?.length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 2.h),
+                                            child: ListTile(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              title: Text(
+                                                fittodoall!
+                                                    .fitnessProgrammeTodos![
+                                                        index]
+                                                    .title
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    decoration: fittodoall!
+                                                                .fitnessProgrammeTodos![
+                                                                    index]
+                                                                .isComplete ==
+                                                            1
+                                                        ? TextDecoration
+                                                            .lineThrough
+                                                        : TextDecoration.none,
+                                                    fontSize: 13.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Meta1',
+                                                    color: Colors.white),
+                                              ),
+                                              subtitle: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    fittodoall!
+                                                        .fitnessProgrammeTodos![
+                                                            index]
+                                                        .date
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        decoration: fittodoall!
+                                                                    .fitnessProgrammeTodos![
+                                                                        index]
+                                                                    .isComplete ==
+                                                                1
+                                                            ? TextDecoration
+                                                                .lineThrough
+                                                            : TextDecoration
+                                                                .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                  Text(
+                                                    ' - ',
+                                                    style: TextStyle(
+                                                        decoration:
+                                                            select == index
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                  Text(
+                                                    fittodoall!
+                                                        .fitnessProgrammeTodos![
+                                                            index]
+                                                        .time
+                                                        .toString(),
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                    style: TextStyle(
+                                                        decoration: fittodoall!
+                                                                    .fitnessProgrammeTodos![
+                                                                        index]
+                                                                    .isComplete ==
+                                                                1
+                                                            ? TextDecoration
+                                                                .lineThrough
+                                                            : TextDecoration
+                                                                .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                ],
+                                              ),
+                                              leading: IconButton(
+                                                onPressed: () {
+                                                  fittodoall!
+                                                              .fitnessProgrammeTodos![
+                                                                  index]
+                                                              .isComplete ==
+                                                          1
+                                                      ? Incompleteapi(index)
+                                                      : Completeapi(index);
+                                                },
+                                                icon: fittodoall!
+                                                            .fitnessProgrammeTodos![
+                                                                index]
+                                                            .isComplete ==
+                                                        1
+                                                    ? Icon(
+                                                        Icons.check_box_rounded,
+                                                        color: Colors.white)
+                                                    : Icon(
+                                                        Icons
+                                                            .check_box_outline_blank_rounded,
+                                                        color: Colors.white),
+                                              ),
+                                              trailing: IconButton(
+                                                  onPressed: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white)),
+                                                        backgroundColor:
+                                                            Color.fromARGB(
+                                                                255, 0, 0, 0),
+                                                        scrollable: true,
+                                                        content: Text(
+                                                          'Are You Sure You Want to to Delete ?',
+                                                          style: TextStyle(
+                                                              fontSize: 11.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        actions: [
+                                                          InkWell(
+                                                            onTap: () {
+                                                              deletetodo(index);
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(2.w),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(1.h),
+                                                              child: Text(
+                                                                'Yes',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .green),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .green,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                            ),
+                                                          ),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(1.w),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(1.h),
+                                                              child: Text(
+                                                                'No',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .red),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .red,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                  )),
+                                              tileColor:
+                                                  Colors.grey.withOpacity(0.20),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    )
+                              : searchfittodo!.fitnessProgrammeTodos!.length ==
+                                      0
+                                  ? Container(
+                                      height: 70.h,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'No Task Available By This Title',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontFamily: 'Meta1',
+                                          color: Color(0xffffffff),
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox(
+                                      height: 60.h,
+                                      child: ListView.builder(
+                                        itemCount: searchfittodo
+                                            ?.fitnessProgrammeTodos?.length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 2.h),
+                                            child: ListTile(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              title: Text(
+                                                searchfittodo!
+                                                    .fitnessProgrammeTodos![
+                                                        index]
+                                                    .title
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    decoration: searchfittodo!
+                                                                .fitnessProgrammeTodos![
+                                                                    index]
+                                                                .isComplete ==
+                                                            1
+                                                        ? TextDecoration
+                                                            .lineThrough
+                                                        : TextDecoration.none,
+                                                    fontSize: 13.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Meta1',
+                                                    color: Colors.white),
+                                              ),
+                                              subtitle: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    searchfittodo!
+                                                        .fitnessProgrammeTodos![
+                                                            index]
+                                                        .date
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        decoration: searchfittodo!
+                                                                    .fitnessProgrammeTodos![
+                                                                        index]
+                                                                    .isComplete ==
+                                                                1
+                                                            ? TextDecoration
+                                                                .lineThrough
+                                                            : TextDecoration
+                                                                .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                  Text(
+                                                    ' - ',
+                                                    style: TextStyle(
+                                                        decoration:
+                                                            select == index
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                  Text(
+                                                    searchfittodo!
+                                                        .fitnessProgrammeTodos![
+                                                            index]
+                                                        .time
+                                                        .toString(),
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                    style: TextStyle(
+                                                        decoration: searchfittodo!
+                                                                    .fitnessProgrammeTodos![
+                                                                        index]
+                                                                    .isComplete ==
+                                                                1
+                                                            ? TextDecoration
+                                                                .lineThrough
+                                                            : TextDecoration
+                                                                .none,
+                                                        fontSize: 11.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1',
+                                                        color: Colors.white70),
+                                                  ),
+                                                ],
+                                              ),
+                                              leading: IconButton(
+                                                onPressed: () {
+                                                  searchfittodo!
+                                                              .fitnessProgrammeTodos![
+                                                                  index]
+                                                              .isComplete ==
+                                                          1
+                                                      ? Incompleteapi(index)
+                                                      : Completeapi(index);
+                                                },
+                                                icon: searchfittodo!
+                                                            .fitnessProgrammeTodos![
+                                                                index]
+                                                            .isComplete ==
+                                                        1
+                                                    ? Icon(
+                                                        Icons.check_box_rounded,
+                                                        color: Colors.white)
+                                                    : Icon(
+                                                        Icons
+                                                            .check_box_outline_blank_rounded,
+                                                        color: Colors.white),
+                                              ),
+                                              trailing: IconButton(
+                                                  onPressed: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white)),
+                                                        backgroundColor:
+                                                            Color.fromARGB(
+                                                                255, 0, 0, 0),
+                                                        scrollable: true,
+                                                        content: Text(
+                                                          'Are You Sure You Want to to Delete ?',
+                                                          style: TextStyle(
+                                                              fontSize: 11.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        actions: [
+                                                          InkWell(
+                                                            onTap: () {
+                                                              deletetodo(index);
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(2.w),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(1.h),
+                                                              child: Text(
+                                                                'Yes',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .green),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .green,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                            ),
+                                                          ),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(1.w),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(1.h),
+                                                              child: Text(
+                                                                'No',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .red),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .red,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                  )),
+                                              tileColor:
+                                                  Colors.grey.withOpacity(0.20),
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                )
-                              : SizedBox(
-                                  height: 60.h,
-                                  child: ListView.builder(
-                                    itemCount: fittodoall
-                                        ?.fitnessProgrammeTodos?.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: EdgeInsets.only(bottom: 2.h),
-                                        child: ListTile(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          title: Text(
-                                            fittodoall!
-                                                .fitnessProgrammeTodos![index]
-                                                .title
-                                                .toString(),
-                                            style: TextStyle(
-                                                decoration: fittodoall!
-                                                            .fitnessProgrammeTodos![
-                                                                index]
-                                                            .isComplete ==
-                                                        1
-                                                    ? TextDecoration.lineThrough
-                                                    : TextDecoration.none,
-                                                fontSize: 13.sp,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: 'Meta1',
-                                                color: Colors.white),
-                                          ),
-                                          subtitle: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                fittodoall!
-                                                    .fitnessProgrammeTodos![
-                                                        index]
-                                                    .date
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    decoration: fittodoall!
-                                                                .fitnessProgrammeTodos![
-                                                                    index]
-                                                                .isComplete ==
-                                                            1
-                                                        ? TextDecoration
-                                                            .lineThrough
-                                                        : TextDecoration.none,
-                                                    fontSize: 11.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: 'Meta1',
-                                                    color: Colors.white70),
-                                              ),
-                                              Text(
-                                                ' - ',
-                                                style: TextStyle(
-                                                    decoration: select == index
-                                                        ? TextDecoration
-                                                            .lineThrough
-                                                        : TextDecoration.none,
-                                                    fontSize: 11.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: 'Meta1',
-                                                    color: Colors.white70),
-                                              ),
-                                              Text(
-                                                fittodoall!
-                                                    .fitnessProgrammeTodos![
-                                                        index]
-                                                    .time
-                                                    .toString(),
-                                                textAlign: TextAlign.justify,
-                                                style: TextStyle(
-                                                    decoration: fittodoall!
-                                                                .fitnessProgrammeTodos![
-                                                                    index]
-                                                                .isComplete ==
-                                                            1
-                                                        ? TextDecoration
-                                                            .lineThrough
-                                                        : TextDecoration.none,
-                                                    fontSize: 11.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: 'Meta1',
-                                                    color: Colors.white70),
-                                              ),
-                                            ],
-                                          ),
-                                          leading: IconButton(
-                                            onPressed: () {
-                                              fittodoall!
-                                                          .fitnessProgrammeTodos![
-                                                              index]
-                                                          .isComplete ==
-                                                      1
-                                                  ? Incompleteapi(index)
-                                                  : Completeapi(index);
-                                            },
-                                            icon: fittodoall!
-                                                        .fitnessProgrammeTodos![
-                                                            index]
-                                                        .isComplete ==
-                                                    1
-                                                ? Icon(Icons.check_box_rounded,
-                                                    color: Colors.white)
-                                                : Icon(
-                                                    Icons
-                                                        .check_box_outline_blank_rounded,
-                                                    color: Colors.white),
-                                          ),
-                                          trailing: IconButton(
-                                              onPressed: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      AlertDialog(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20),
-                                                            side: BorderSide(
-                                                                color: Colors
-                                                                    .white)),
-                                                    backgroundColor:
-                                                        Color.fromARGB(
-                                                            255, 0, 0, 0),
-                                                    scrollable: true,
-                                                    content: Text(
-                                                      'Are You Sure You Want to to Delete ?',
-                                                      style: TextStyle(
-                                                          fontSize: 11.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white),
-                                                    ),
-                                                    actions: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                          deletetodo(index);
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.all(
-                                                                  2.w),
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  1.h),
-                                                          child: Text(
-                                                            'Yes',
-                                                            style: TextStyle(
-                                                                fontSize: 13.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontFamily:
-                                                                    'Meta1',
-                                                                color: Colors
-                                                                    .green),
-                                                          ),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: Colors
-                                                                        .green,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10)),
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.all(
-                                                                  1.w),
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  1.h),
-                                                          child: Text(
-                                                            'No',
-                                                            style: TextStyle(
-                                                                fontSize: 13.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontFamily:
-                                                                    'Meta1',
-                                                                color:
-                                                                    Colors.red),
-                                                          ),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: Colors
-                                                                        .red,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10)),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                              icon: Icon(
-                                                Icons.delete,
-                                                color: Colors.red,
-                                              )),
-                                          tileColor:
-                                              Colors.grey.withOpacity(0.20),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ): SizedBox(
-                                  height: 60.h,
-                                  child: ListView.builder(
-                                    itemCount: searchfittodo
-                                        ?.fitnessProgrammeTodos?.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: EdgeInsets.only(bottom: 2.h),
-                                        child: ListTile(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          title: Text(
-                                            searchfittodo!
-                                                .fitnessProgrammeTodos![index]
-                                                .title
-                                                .toString(),
-                                            style: TextStyle(
-                                                decoration: searchfittodo!
-                                                            .fitnessProgrammeTodos![
-                                                                index]
-                                                            .isComplete ==
-                                                        1
-                                                    ? TextDecoration.lineThrough
-                                                    : TextDecoration.none,
-                                                fontSize: 13.sp,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: 'Meta1',
-                                                color: Colors.white),
-                                          ),
-                                          subtitle: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                searchfittodo!
-                                                    .fitnessProgrammeTodos![
-                                                        index]
-                                                    .date
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    decoration: searchfittodo!
-                                                                .fitnessProgrammeTodos![
-                                                                    index]
-                                                                .isComplete ==
-                                                            1
-                                                        ? TextDecoration
-                                                            .lineThrough
-                                                        : TextDecoration.none,
-                                                    fontSize: 11.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: 'Meta1',
-                                                    color: Colors.white70),
-                                              ),
-                                              Text(
-                                                ' - ',
-                                                style: TextStyle(
-                                                    decoration: select == index
-                                                        ? TextDecoration
-                                                            .lineThrough
-                                                        : TextDecoration.none,
-                                                    fontSize: 11.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: 'Meta1',
-                                                    color: Colors.white70),
-                                              ),
-                                              Text(
-                                                searchfittodo!
-                                                    .fitnessProgrammeTodos![
-                                                        index]
-                                                    .time
-                                                    .toString(),
-                                                textAlign: TextAlign.justify,
-                                                style: TextStyle(
-                                                    decoration: searchfittodo!
-                                                                .fitnessProgrammeTodos![
-                                                                    index]
-                                                                .isComplete ==
-                                                            1
-                                                        ? TextDecoration
-                                                            .lineThrough
-                                                        : TextDecoration.none,
-                                                    fontSize: 11.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: 'Meta1',
-                                                    color: Colors.white70),
-                                              ),
-                                            ],
-                                          ),
-                                          leading: IconButton(
-                                            onPressed: () {
-                                              searchfittodo!
-                                                          .fitnessProgrammeTodos![
-                                                              index]
-                                                          .isComplete ==
-                                                      1
-                                                  ? Incompleteapi(index)
-                                                  : Completeapi(index);
-                                            },
-                                            icon: searchfittodo!
-                                                        .fitnessProgrammeTodos![
-                                                            index]
-                                                        .isComplete ==
-                                                    1
-                                                ? Icon(Icons.check_box_rounded,
-                                                    color: Colors.white)
-                                                : Icon(
-                                                    Icons
-                                                        .check_box_outline_blank_rounded,
-                                                    color: Colors.white),
-                                          ),
-                                          trailing: IconButton(
-                                              onPressed: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      AlertDialog(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20),
-                                                            side: BorderSide(
-                                                                color: Colors
-                                                                    .white)),
-                                                    backgroundColor:
-                                                        Color.fromARGB(
-                                                            255, 0, 0, 0),
-                                                    scrollable: true,
-                                                    content: Text(
-                                                      'Are You Sure You Want to to Delete ?',
-                                                      style: TextStyle(
-                                                          fontSize: 11.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white),
-                                                    ),
-                                                    actions: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                          deletetodo(index);
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.all(
-                                                                  2.w),
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  1.h),
-                                                          child: Text(
-                                                            'Yes',
-                                                            style: TextStyle(
-                                                                fontSize: 13.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontFamily:
-                                                                    'Meta1',
-                                                                color: Colors
-                                                                    .green),
-                                                          ),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: Colors
-                                                                        .green,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10)),
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.all(
-                                                                  1.w),
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  1.h),
-                                                          child: Text(
-                                                            'No',
-                                                            style: TextStyle(
-                                                                fontSize: 13.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontFamily:
-                                                                    'Meta1',
-                                                                color:
-                                                                    Colors.red),
-                                                          ),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: Colors
-                                                                        .red,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10)),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                              icon: Icon(
-                                                Icons.delete,
-                                                color: Colors.red,
-                                              )),
-                                          tileColor:
-                                              Colors.grey.withOpacity(0.20),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
                         ],
                       ),
                     ),
@@ -857,6 +894,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
   searchapi() {
     final Map<String, String> data = {};
     data['action'] = 'fitness_programme_to_do_search';
@@ -866,7 +904,9 @@ class _HomeState extends State<Home> {
 
     checkInternet().then((internet) async {
       if (internet) {
-        authprovider().SearchFitnesstodoapi(data).then((Response response) async {
+        authprovider()
+            .SearchFitnesstodoapi(data)
+            .then((Response response) async {
           searchfittodo =
               SearchfittodoModal.fromJson(json.decode(response.body));
 
@@ -893,6 +933,7 @@ class _HomeState extends State<Home> {
       }
     });
   }
+
   addtodo() {
     if (_title.text == '') {
       Fluttertoast.showToast(

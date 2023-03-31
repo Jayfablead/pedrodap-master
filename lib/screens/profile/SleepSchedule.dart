@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'package:pedrodap/Model/sleepsearchmodal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/color.dart';
 import 'package:pedrodap/Widget/const.dart';
@@ -28,6 +29,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 TextEditingController _time = TextEditingController();
 TextEditingController _title = TextEditingController();
 TextEditingController _desc = TextEditingController();
+TextEditingController _search = TextEditingController();
 List name = [
   'After Workout',
   'After dinner',
@@ -38,6 +40,7 @@ List msg = [
   'Go to Sleep after Dinner, Etc ...,',
   'Take Late Night nap, Etc ...,',
 ];
+
 // List prof = [
 //   'assets/10.png',
 //   'assets/cr7.webp',
@@ -54,6 +57,8 @@ List rem = [
   '6:00 am',
 ];
 bool isloading = true;
+bool switchvalue = true;
+int? selind;
 
 class _SleepScheduleState extends State<SleepSchedule> {
   @override
@@ -61,6 +66,9 @@ class _SleepScheduleState extends State<SleepSchedule> {
     // TODO: implement initState
     super.initState();
     playerapi();
+    List<bool> swi = [
+      allsleep!.sleepScheduleDetails![selind!].reminders as bool
+    ];
   }
 
   @override
@@ -121,180 +129,382 @@ class _SleepScheduleState extends State<SleepSchedule> {
                           SizedBox(
                             height: 2.h,
                           ),
-                          allsleep!.sleepScheduleDetails == null
-                              ? Container(
-                                  height: 70.h,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'No Schedules Available',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      fontFamily: 'Meta1',
-                                      color: Color(0xffffffff),
-                                    ),
-                                  ),
-                                )
-                              : Container(
-                                  height: 80.h,
-                                  child: ListView.builder(
-                                    itemCount:
-                                        allsleep!.sleepScheduleDetails!.length,
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                        onTap: () {},
-                                        child: Padding(
-                                          padding: EdgeInsets.only(bottom: 3.h),
-                                          child: Container(
-                                            padding: EdgeInsets.all(3.w),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              border: Border.all(
-                                                  color: Colors.white),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 89.w,
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        allsleep!
-                                                            .sleepScheduleDetails![
-                                                                index]
-                                                            .noteTitle
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 16.sp,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily: 'Meta1',
-                                                            color:
-                                                                Colors.white),
-                                                      ),
-                                                      Row(
+                          searchBox(),
+                          _search.text == ''
+                              ? allsleep!.sleepScheduleDetails == null
+                                  ? Container(
+                                      height: 70.h,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'No Schedules Available',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontFamily: 'Meta1',
+                                          color: Color(0xffffffff),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 80.h,
+                                      child: ListView.builder(
+                                        itemCount: allsleep!
+                                            .sleepScheduleDetails!.length,
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {},
+                                            child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 3.h),
+                                              child: Container(
+                                                padding: EdgeInsets.all(3.w),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  border: Border.all(
+                                                      color: Colors.white),
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      width: 89.w,
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
-                                                          Icon(
-                                                            CupertinoIcons
-                                                                .timer,
-                                                            color: Colors.white,
-                                                            size: 16.sp,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 1.w,
-                                                          ),
                                                           Text(
                                                             allsleep!
                                                                 .sleepScheduleDetails![
                                                                     index]
-                                                                .time
+                                                                .noteTitle
                                                                 .toString(),
                                                             style: TextStyle(
-                                                                fontSize: 10.sp,
+                                                                fontSize: 16.sp,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w400,
+                                                                        .bold,
                                                                 fontFamily:
                                                                     'Meta1',
                                                                 color: Colors
-                                                                    .white
-                                                                    .withOpacity(
-                                                                        0.90)),
+                                                                    .white),
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Icon(
+                                                                CupertinoIcons
+                                                                    .timer,
+                                                                color: Colors
+                                                                    .white,
+                                                                size: 16.sp,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 1.w,
+                                                              ),
+                                                              Text(
+                                                                allsleep!
+                                                                    .sleepScheduleDetails![
+                                                                        index]
+                                                                    .createTime
+                                                                    .toString(),
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withOpacity(
+                                                                            0.90)),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  color: Colors.white,
-                                                ),
-                                                SizedBox(
-                                                  width: 89.w,
-                                                  child: Text(
-                                                    allsleep!
-                                                        .sleepScheduleDetails![
-                                                            index]
-                                                        .note
-                                                        .toString(),
-                                                    maxLines: 7,
-                                                    style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontFamily: 'Meta1',
-                                                        color: Colors
-                                                            .grey.shade500),
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  color: Colors.white,
-                                                ),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      'Reminder Time : ',
-                                                      style: TextStyle(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white),
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.white,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 89.w,
+                                                      child: Text(
+                                                        allsleep!
+                                                            .sleepScheduleDetails![
+                                                                index]
+                                                            .note
+                                                            .toString(),
+                                                        maxLines: 7,
+                                                        style: TextStyle(
+                                                            fontSize: 10.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily: 'Meta1',
+                                                            color: Colors
+                                                                .grey.shade500),
+                                                      ),
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.white,
                                                     ),
                                                     Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                        Icon(
-                                                          CupertinoIcons.timer,
-                                                          color: Colors.white,
-                                                          size: 16.sp,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 1.w,
-                                                        ),
                                                         Text(
-                                                          allsleep!
-                                                              .sleepScheduleDetails![
-                                                                  index]
-                                                              .reminders
-                                                              .toString(),
+                                                          'Reminder : ',
                                                           style: TextStyle(
-                                                              fontSize: 11.sp,
+                                                              fontSize: 16.sp,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .w500,
+                                                                      .w600,
                                                               fontFamily:
                                                                   'Meta1',
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(
-                                                                      0.90)),
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              CupertinoIcons
+                                                                  .timer,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 16.sp,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 1.w,
+                                                            ),
+                                                            Text(
+                                                              allsleep!
+                                                                  .sleepScheduleDetails![
+                                                                      index]
+                                                                  .time
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      11.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontFamily:
+                                                                      'Meta1',
+                                                                  color: Colors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                          0.90)),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
                                                   ],
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
+                                          );
+                                        },
+                                      ),
+                                    )
+                              : searchsleep!
+                                          .sleepScheduleDetails!.length ==
+                                      0
+                                  ? Container(
+                                      height: 70.h,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'No Schedules Available By This Title',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontFamily: 'Meta1',
+                                          color: const Color(0xffffffff),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 80.h,
+                                      child: ListView.builder(
+                                        itemCount: searchsleep!
+                                            .sleepScheduleDetails!.length,
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {},
+                                            child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 3.h),
+                                              child: Container(
+                                                padding: EdgeInsets.all(3.w),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  border: Border.all(
+                                                      color: Colors.white),
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      width: 89.w,
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            searchsleep!
+                                                                .sleepScheduleDetails![
+                                                                    index]
+                                                                .noteTitle
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: 16.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily:
+                                                                    'Meta1',
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Icon(
+                                                                CupertinoIcons
+                                                                    .timer,
+                                                                color: Colors
+                                                                    .white,
+                                                                size: 16.sp,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 1.w,
+                                                              ),
+                                                              Text(
+                                                                searchsleep!
+                                                                    .sleepScheduleDetails![
+                                                                        index]
+                                                                    .createTime
+                                                                    .toString(),
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withOpacity(
+                                                                            0.90)),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.white,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 89.w,
+                                                      child: Text(
+                                                        searchsleep!
+                                                            .sleepScheduleDetails![
+                                                                index]
+                                                            .note
+                                                            .toString(),
+                                                        maxLines: 7,
+                                                        style: TextStyle(
+                                                            fontSize: 10.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily: 'Meta1',
+                                                            color: Colors
+                                                                .grey.shade500),
+                                                      ),
+                                                    ),
+                                                    Divider(
+                                                      color: Colors.white,
+                                                    ),
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          'Reminder : ',
+                                                          style: TextStyle(
+                                                              fontSize: 16.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              CupertinoIcons
+                                                                  .timer,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 16.sp,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 1.w,
+                                                            ),
+                                                            Text(
+                                                              searchsleep!
+                                                                  .sleepScheduleDetails![
+                                                                      index]
+                                                                  .time
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      11.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontFamily:
+                                                                      'Meta1',
+                                                                  color: Colors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                          0.90)),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
                         ],
                       ),
                     ),
@@ -326,6 +536,7 @@ class _SleepScheduleState extends State<SleepSchedule> {
                           ],
                         ),
                         onPressed: () {
+                          _time.text = '';
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
@@ -585,24 +796,83 @@ class _SleepScheduleState extends State<SleepSchedule> {
     );
   }
 
-  void timepicker() async {
-    TimeOfDay? pickedTime = await showTimePicker(
-      initialTime: TimeOfDay.now(),
-      context: context, //context of current state
+  Widget searchBox() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.20),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: TextField(
+        controller: _search,
+        onChanged: (value) {
+          searchapi();
+        },
+        style: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(0),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.white,
+            size: 20,
+          ),
+          prefixIconConstraints: BoxConstraints(
+            maxHeight: 20,
+            minWidth: 25,
+          ),
+          border: InputBorder.none,
+          hintText: 'Search',
+          hintStyle: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
+        ),
+      ),
     );
+  }
 
-    if (pickedTime != null) {
-      print(pickedTime.format(context)); //output 10:51 PM
-      DateTime parsedTime =
-          DateFormat.jm().parse(pickedTime.format(context).toString());
-      //converting to DateTime so that we can further format on different pattern.
-      print(parsedTime); //output 1970-01-01 22:53:00.000
-      String formattedTime = DateFormat('HH:mm').format(parsedTime);
-      print(formattedTime); //output 14:59:00
-      //DateFormat() is from intl package, you can format the time on any pattern you need.
-      _time.text = formattedTime;
-    } else {
-      print("Time is not selected");
+  searchapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'sleep_schedule_search_app';
+    data['player_id'] = userData!.userData!.uid.toString();
+    data['search_title'] = _search.text.trim().toString();
+    print(data);
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().SearchFitnessapi(data).then((Response response) async {
+          searchsleep = SleepsearchModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 &&
+              searchfitness?.status == "success") {
+            print(alltrainings!.allTrainingsAndNotes!.length);
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
+  void timepicker() async {
+    final TimeOfDay? time =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (time != null) {
+      setState(() {
+        _time.text = time.format(context);
+        print(_time.text);
+      });
     }
   }
 
@@ -617,6 +887,7 @@ class _SleepScheduleState extends State<SleepSchedule> {
           allsleep = SleepModal.fromJson(json.decode(response.body));
 
           if (response.statusCode == 200 && allsleep?.status == "success") {
+            print(allsleep!.sleepScheduleDetails![0].reminders);
             setState(() {
               isloading = false;
             });

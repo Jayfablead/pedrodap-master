@@ -12,6 +12,7 @@ import 'package:pedrodap/Model/profileModal.dart';
 import 'package:pedrodap/Model/relymodal.dart';
 import 'package:pedrodap/Model/searchnutriModal.dart';
 import 'package:pedrodap/Model/searchtodoModal.dart';
+import 'package:pedrodap/Model/searchtodonutri.dart';
 import 'package:pedrodap/Model/searchtrainmodal.dart';
 import 'package:pedrodap/Model/sleepmodal.dart';
 import 'package:pedrodap/Model/userprofileModal.dart';
@@ -20,6 +21,7 @@ import 'package:pedrodap/Model/viewtodoModal.dart';
 import '../Model/fetchplayermodal.dart';
 import '../Model/searchfittModal.dart';
 import '../Model/searchfittodoModal.dart';
+import '../Model/sleepsearchmodal.dart';
 import '../Model/trainingsModal.dart';
 
 Future<bool> checkInternet() async {
@@ -53,4 +55,6 @@ SearchfitModal? searchfitness;
 SearchfittodoModal? searchfittodo;
 SearchNutModal? searchnutri;
 Fetchplayermodal? fetchplayermodal;
+NutritodosearchModal? searchtodonutri;
+SleepsearchModal? searchsleep;
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';

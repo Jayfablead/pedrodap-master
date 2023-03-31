@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:pedrodap/Model/nutritodoModal.dart';
 import 'package:pedrodap/Model/searchfittodoModal.dart';
 import 'package:pedrodap/Model/searchtodoModal.dart';
+import 'package:pedrodap/Model/searchtodonutri.dart';
 import 'package:pedrodap/Model/todo.dart';
 import 'package:pedrodap/Model/viewtodoModal.dart';
 import 'package:pedrodap/Widget/const.dart';
@@ -221,21 +222,7 @@ class _NutriState extends State<Nutri> {
                             ),
                           ),
                           _search.text == ''
-                              ? nutrialltodo!.nutritionAndHealthTodos == null
-                                  ? Container(
-                                      height: 70.h,
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'No Task Available',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 15.sp,
-                                          fontFamily: 'Meta1',
-                                          color: Color(0xffffffff),
-                                        ),
-                                      ),
-                                    )
-                                  : nutrialltodo!.nutritionAndHealthTodos ==
+                              ? nutrialltodo!.nutritionAndHealthTodos ==
                                           null
                                       ? Container(
                                           height: 70.h,
@@ -563,10 +550,24 @@ class _NutriState extends State<Nutri> {
                                             },
                                           ),
                                         )
+                              : searchtodonutri!.nutritionAndHealthTodos!.length == 0
+                              ? Container(
+                            height: 70.h,
+                            alignment: Alignment.center,
+                            child: Text(
+                              'No Task Available By This Title',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                fontFamily: 'Meta1',
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                          )
                               : SizedBox(
                                   height: 60.h,
                                   child: ListView.builder(
-                                    itemCount: nutrialltodo
+                                    itemCount: searchtodonutri
                                         ?.nutritionAndHealthTodos?.length,
                                     itemBuilder: (context, index) {
                                       return Padding(
@@ -576,15 +577,15 @@ class _NutriState extends State<Nutri> {
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           title: Text(
-                                            nutrialltodo!
+                                            searchtodonutri!
                                                 .nutritionAndHealthTodos![index]
                                                 .mealName
                                                 .toString(),
                                             style: TextStyle(
-                                                decoration: nutrialltodo!
+                                                decoration: searchtodonutri!
                                                             .nutritionAndHealthTodos![
                                                                 index]
-                                                            .isComplete ==
+                                                            .completed ==
                                                         1
                                                     ? TextDecoration.lineThrough
                                                     : TextDecoration.none,
@@ -598,17 +599,17 @@ class _NutriState extends State<Nutri> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Text(
-                                                nutrialltodo!
+                                                searchtodonutri!
                                                         .nutritionAndHealthTodos![
                                                             index]
                                                         .fat
                                                         .toString() +
                                                     " fat",
                                                 style: TextStyle(
-                                                    decoration: nutrialltodo!
+                                                    decoration: searchtodonutri!
                                                                 .nutritionAndHealthTodos![
                                                                     index]
-                                                                .isComplete ==
+                                                                .completed ==
                                                             1
                                                         ? TextDecoration
                                                             .lineThrough
@@ -631,7 +632,7 @@ class _NutriState extends State<Nutri> {
                                                     color: Colors.white70),
                                               ),
                                               Text(
-                                                nutrialltodo!
+                                                searchtodonutri!
                                                         .nutritionAndHealthTodos![
                                                             index]
                                                         .protein
@@ -639,10 +640,10 @@ class _NutriState extends State<Nutri> {
                                                     " pro",
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
-                                                    decoration: nutrialltodo!
+                                                    decoration: searchtodonutri!
                                                                 .nutritionAndHealthTodos![
                                                                     index]
-                                                                .isComplete ==
+                                                                .completed ==
                                                             1
                                                         ? TextDecoration
                                                             .lineThrough
@@ -665,7 +666,7 @@ class _NutriState extends State<Nutri> {
                                                     color: Colors.white70),
                                               ),
                                               Text(
-                                                nutrialltodo!
+                                                searchtodonutri!
                                                         .nutritionAndHealthTodos![
                                                             index]
                                                         .calories
@@ -673,10 +674,10 @@ class _NutriState extends State<Nutri> {
                                                     " Cal",
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
-                                                    decoration: nutrialltodo!
+                                                    decoration: searchtodonutri!
                                                                 .nutritionAndHealthTodos![
                                                                     index]
-                                                                .isComplete ==
+                                                                .completed ==
                                                             1
                                                         ? TextDecoration
                                                             .lineThrough
@@ -690,18 +691,18 @@ class _NutriState extends State<Nutri> {
                                           ),
                                           leading: IconButton(
                                             onPressed: () {
-                                              nutrialltodo!
+                                              searchtodonutri!
                                                           .nutritionAndHealthTodos![
                                                               index]
-                                                          .isComplete ==
+                                                          .completed ==
                                                       1
                                                   ? Incompleteapi(index)
                                                   : Completeapi(index);
                                             },
-                                            icon: nutrialltodo!
+                                            icon: searchtodonutri!
                                                         .nutritionAndHealthTodos![
                                                             index]
-                                                        .isComplete ==
+                                                        .completed ==
                                                     1
                                                 ? Icon(Icons.check_box_rounded,
                                                     color: Colors.white)
@@ -1658,7 +1659,7 @@ class _NutriState extends State<Nutri> {
 
   searchapi() {
     final Map<String, String> data = {};
-    data['action'] = 'fitness_programme_to_do_search';
+    data['action'] = 'nutrition_and_health_to_do_search';
     data['player_id'] = userData!.userData!.uid.toString();
     data['search_text'] = _search.text.trim().toString();
     print(data);
@@ -1666,13 +1667,13 @@ class _NutriState extends State<Nutri> {
     checkInternet().then((internet) async {
       if (internet) {
         authprovider()
-            .SearchFitnesstodoapi(data)
+            .SearchNutritodoapi(data)
             .then((Response response) async {
-          searchfittodo =
-              SearchfittodoModal.fromJson(json.decode(response.body));
+          searchtodonutri =
+              NutritodosearchModal.fromJson(json.decode(response.body));
 
           if (response.statusCode == 200 &&
-              searchfittodo?.status == "success") {
+              searchtodonutri?.status == "success") {
             setState(() {
               isloading = false;
             });
