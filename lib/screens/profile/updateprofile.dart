@@ -1,12 +1,19 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pedrodap/screens/profile/myprofile.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../Model/profileModal.dart';
 import '../../Widget/Drawer.dart';
+import '../../Widget/buildErrorDialog.dart';
 import '../../Widget/const.dart';
+import '../../Widget/sharedpreferance.dart';
+import '../../provider/authprovider.dart';
 
 class EditProfile extends StatefulWidget {
   String? name;
@@ -40,12 +47,19 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _about = TextEditingController(text: "");
   ImagePicker _picker = ImagePicker();
   ImagePicker _picker1 = ImagePicker();
+  var imagesTemporary;
   File? imagefile;
+  File? imagefile1;
   TextEditingController _exp = TextEditingController(text: "");
   TextEditingController _pos = TextEditingController(text: "");
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isLoading = true;
   late VideoPlayerController _controller;
+  XFile? image;
+  List<XFile>? _imageFileList;
+  List<Path> images = [];
+  int? select;
+  String? it;
 
   @override
   void initState() {
@@ -71,7 +85,6 @@ class _EditProfileState extends State<EditProfile> {
       _controller.setLooping(true);
       _controller.setVolume(0.0);
       _about.text = profiledata!.viewProfileDetails!.about.toString();
-      isloading = false;
     });
   }
 
@@ -127,36 +140,41 @@ class _EditProfileState extends State<EditProfile> {
                 children: [
                   Stack(
                     children: [
+                      // Container(
+                      //   height: 15.h,
+                      //   width: 30.w,
+                      //   child: (imagefile != null)
+                      //       ? Image.file(imagefile!, width: 300.0)
+                      //       : Image.asset("assets/prof.jpg"),
+                      // ),
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 1.w),
                         height: 15.h,
                         width: 30.w,
                         padding: EdgeInsets.all(1.w),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(90),
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: widget.profile.toString(),
-                            progressIndicatorBuilder:
-                                (context, url, progress) =>
-                                    CircularProgressIndicator(),
-                            errorWidget: (context, url, error) => Image.asset(
-                              'assets/icons/user.png',
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
+                            borderRadius: BorderRadius.circular(90),
+                            child: (imagefile != null)
+                                ? Image.file(
+                                    imagefile!,
+                                    width: 300.0,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.network(
+                                    widget.profile.toString(),
+                                    fit: BoxFit.cover,
+                                  )),
                       ),
                       Positioned(
                           top: 9.5.h,
                           left: 23.w,
                           child: InkWell(
                               onTap: () async {
-                                final XFile? image = await _picker.pickImage(
+                                final image = await _picker.pickImage(
                                     source: ImageSource.gallery);
-                                print(
-                                    "========================================== " +
-                                        image!.path);
+                                setState(() {
+                                  imagefile = File(image!.path);
+                                });
                               },
                               child: Container(
                                   padding: EdgeInsets.all(2.w),
@@ -294,38 +312,54 @@ class _EditProfileState extends State<EditProfile> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: [InkWell(
-                              onTap: () async{final XFile? image = await _picker1.pickImage(
-                                  source: ImageSource.gallery);
-                              print(
-                                  "========================================== " +
-                                      image!.path);},
-                              child: Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                height: 20.h,
-                                width: 45.w,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(color: Colors.white)),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      height: 1.h,
-                                    ),
-                                    Text(
-                                      'Add Photo',
-                                      style: textStyle,
-                                    ),
-                                  ],
+                            children: [
+                              InkWell(
+                                onTap: () async {
+                                  final image1 = await _picker.pickImage(
+                                      source: ImageSource.gallery);
+                                  setState(() {
+                                    imagefile1 = File(image1!.path);
+                                  });
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                  height: 20.h,
+                                  width: 45.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(color: Colors.white)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
+                                      Text(
+                                        'Add Photo',
+                                        style: textStyle,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),SizedBox(width: 2.w,),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              (imagefile1 != null)
+                                  ? Image.file(
+                                      imagefile1!,
+                                      width: 300.0,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Container(),
+                              SizedBox(
+                                width: 2.w,
+                              ),
                               SizedBox(
                                 width: 80.w,
                                 child: GridView.builder(
@@ -342,12 +376,12 @@ class _EditProfileState extends State<EditProfile> {
                                             alignment: Alignment.center,
                                             margin: EdgeInsets.symmetric(
                                                 horizontal: 1.w),
-                                            height: 20.h,
-                                            width: 60.w,
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               child: CachedNetworkImage(
+                                                height: 20.h,
+                                                width: 60.w,
                                                 fit: BoxFit.cover,
                                                 imageUrl: profiledata!
                                                     .viewProfileDetails!
@@ -365,27 +399,44 @@ class _EditProfileState extends State<EditProfile> {
                                                         Padding(
                                                   padding: EdgeInsets.only(
                                                       top: 2.h, bottom: 2.h),
-                                                  child: Text(
-                                                    "No Images Available",
-                                                    style: textStyle,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Add Some Images",
+                                                      style: textStyle,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
                                           ),
                                           Positioned(
-                                            left: 38.w,
+                                            left: 39.w,
                                             bottom: 19.h,
-                                            child: Container(
-                                              padding: EdgeInsets.all(2.w),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.black,
-                                              ),
-                                              child: Icon(
-                                                Icons.close,
-                                                color: Colors.white,
+                                            child: InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  select = index;
+                                                });
+                                                var parts = profiledata!
+                                                    .viewProfileDetails!
+                                                    .images![index]
+                                                    .toString()
+                                                    .split('/');
+                                                it = parts.last.toString();
+
+                                                imgdlt();
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.all(2.w),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: Colors.black,
+                                                ),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -393,7 +444,6 @@ class _EditProfileState extends State<EditProfile> {
                                       );
                                     }),
                               ),
-
                             ],
                           ),
                         ),
@@ -436,79 +486,79 @@ class _EditProfileState extends State<EditProfile> {
                           borderRadius: BorderRadius.circular(15.0),
                           // color: Colors.white.withOpacity(0.15),
                         ),
-                        child: SingleChildScrollView(scrollDirection: Axis.horizontal,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: [InkWell(
-                              onTap: () async{final XFile? image = await _picker1.pickImage(
-                                  source: ImageSource.gallery);
-                              print(
-                                  "========================================== " +
-                                      image!.path);},
-                              child: Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                height: 20.h,
-                                width: 45.w,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(color: Colors.white)),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      height: 1.h,
-                                    ),
-                                    Text(
-                                      'Add Video',
-                                      style: textStyle,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),SizedBox(width: 2.w,),
-                              Stack(
-                                children: [
-                                  Container(
-                                    width: 70.w,
-                                    margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Container(
-                                          height: 42.h,
-                                          width: 220.w,
-                                          child: profiledata!
-                                                      .viewProfileDetails!.video! ==
-                                                  ''
-                                              ? Text(
-                                                  'No videos Availlable',
-                                                  style: textStyle,
-                                                )
-                                              : VideoPlayer(
-                                                  _controller,
-                                                )),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    left: 65.w,
-                                    bottom: 20.h,
-                                    child: Container(
-                                      padding: EdgeInsets.all(2.w),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.black,
-                                      ),
-                                      child: Icon(
-                                        Icons.close,
+                            children: [
+                              InkWell(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                  height: 20.h,
+                                  width: 45.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(color: Colors.white)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.add,
                                         color: Colors.white,
                                       ),
-                                    ),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
+                                      Text(
+                                        'Add Video',
+                                        style: textStyle,
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              // Stack(
+                              //   children: [
+                              //     Container(
+                              //       width: 70.w,
+                              //       margin: EdgeInsets.symmetric(horizontal: 1.w),
+                              //       child: ClipRRect(
+                              //         borderRadius: BorderRadius.circular(10),
+                              //         child: Container(
+                              //             height: 42.h,
+                              //             width: 220.w,
+                              //             child: profiledata!
+                              //                         .viewProfileDetails!.video! ==
+                              //                     ''
+                              //                 ? Text(
+                              //                     'No videos Availlable',
+                              //                     style: textStyle,
+                              //                   )
+                              //                 : VideoPlayer(
+                              //                     _controller,
+                              //                   )),
+                              //       ),
+                              //     ),
+                              //     Positioned(
+                              //       left: 65.w,
+                              //       bottom: 20.h,
+                              //       child: Container(
+                              //         padding: EdgeInsets.all(2.w),
+                              //         decoration: BoxDecoration(
+                              //           borderRadius: BorderRadius.circular(20),
+                              //           color: Colors.black,
+                              //         ),
+                              //         child: Icon(
+                              //           Icons.close,
+                              //           color: Colors.white,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                             ],
                           ),
                         ),
@@ -519,7 +569,8 @@ class _EditProfileState extends State<EditProfile> {
                       Center(
                         child: InkWell(
                           onTap: () async {
-
+                            playerapi();
+                            playerapi1();
                           },
                           child: Container(
                             padding: EdgeInsets.all(3.w),
@@ -602,43 +653,157 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-// profile() {
-//   final Map<String, String> data = {};
-//   data['user_id'] = ' ${userData?.data?.uId}';
-//   data['action'] = 'view_profile';
-//   print(' ${userData?.data?.uId}' + '================================');
-//   checkInternet().then((internet) async {
-//     if (internet) {
-//       authprovider().viewapi(data).then((Response response) async {
-//         viewdata = ViewModel.fromJson(json.decode(response.body));
-//         if (response.statusCode == 200 && viewdata?.status == 1) {
-//           setState(() {
-//             isLoading = false;
-//             _user.text = viewdata!.data!.fullname ?? "";
-//             _email.text = (viewdata?.data?.email) ?? "";
-//             _phone.text = (viewdata?.data?.phoneno) ?? "";
-//             _add.text = (viewdata?.data?.address) ?? "";
-//
-//             _gen.text = (viewdata?.data?.gender) ?? "";
-//             _date.text = (viewdata?.data?.dateOfBirth) ?? "";
-//           });
-//
-//           if (kDebugMode) {}
-//         } else {
-//           setState(() {
-//             isLoading = false;
-//           });
-//           buildErrorDialog(context, '', "No Agent Data");
-//         }
-//       });
-//     } else {
-//       setState(() {
-//         isLoading = false;
-//       });
-//       buildErrorDialog(context, 'Error', "Internate Required");
-//     }
-//   });
-// }
+  // name
+  // experience
+  // position
+  // age
+  // profile_image
+  // images
+  // videos
+  playerapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'update_profile_app';
+    data['uid'] = userData!.userData!.uid.toString();
+    data['name'] = _user.text.trim();
+    data['experience'] = _exp.text.trim();
+    data['age'] = _age.text.trim();
+    data['position'] = _pos.text.trim();
+    data['about'] = _about.text.trim();
+    data['profile_image'] =
+        imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
+    data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().updateprofileapi1(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && profiledata?.status == "success") {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => MyProfile(),
+              ),
+            );
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {});
+          }
+        });
+      } else {
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
+  playerapi1() {
+    final Map<String, String> data = {};
+    data['action'] = 'update_profile_app';
+    data['uid'] = userData!.userData!.uid.toString();
+    data['name'] = _user.text.trim();
+    data['experience'] = _exp.text.trim();
+    data['age'] = _age.text.trim();
+    data['position'] = _pos.text.trim();
+    data['about'] = _about.text.trim();
+    data['profile_image'] =
+        imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
+    data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().updateprofileapi(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && profiledata?.status == "success") {
+            await SaveDataLocal.saveLogInData(userData!);
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => MyProfile(),
+              ),
+            );
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {});
+          }
+        });
+      } else {
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
+  imgdlt() {
+    final Map<String, String> data = {};
+    data['action'] = 'delete_images';
+    data['uid'] = userData!.userData!.uid.toString();
+    data['image_name'] = it.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().deletephotoapi(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && profiledata?.status == "success") {
+            update();
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {});
+          }
+        });
+      } else {
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
+  update() {
+    final Map<String, String> data = {};
+    data['action'] = 'view_profile_details';
+    data['uid'] = userData!.userData!.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().profileapi(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && userData?.status == "success") {
+            print('======================' +
+                profiledata!.viewProfileDetails!.about!);
+            setState(() {
+              _about.text = profiledata!.viewProfileDetails!.about.toString();
+            });
+            print('===========================' +
+                profiledata!.viewProfileDetails!.video!);
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {});
+          }
+        });
+      } else {
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+}
 // view() {
 //   final Map<String, String> data = {};
 //   data['action'] = "view_profile";
@@ -649,7 +814,7 @@ class _EditProfileState extends State<EditProfile> {
 //         viewmodel = ViewModel.fromJson(json.decode(response.body));
 //         if (response.statusCode == 200 && viewmodel?.status == "1") {
 //           setState(() {
-//             // isLoading = false;
+//             //
 //           });
 //           // await SaveDataLocal.saveLogInData(userData!);
 //           _user.text = viewmodel?.data?.fullname ?? "";
@@ -673,10 +838,9 @@ class _EditProfileState extends State<EditProfile> {
 //       });
 //     } else {
 //       setState(() {
-//         // isLoading = false;
+//         //
 //       });
 //       buildErrorDialog(context, 'Error', "Internate Required");
 //     }
 //   });
 // }
-}

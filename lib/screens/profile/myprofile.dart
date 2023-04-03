@@ -14,6 +14,7 @@ import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/screens/profile/updateprofile.dart';
 import 'package:pedrodap/screens/profile/userprofile%20screen.dart';
+import 'package:pedrodap/video.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
 
@@ -633,11 +634,10 @@ class _MyProfileState extends State<MyProfile> {
                                       alignment: Alignment.center,
                                       margin:
                                           EdgeInsets.symmetric(horizontal: 1.w),
-                                      height: 20.h,
-                                      width: 60.w,
+
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: CachedNetworkImage(
+                                        child: CachedNetworkImage(height: 20.h,width: 60.w,
                                           fit: BoxFit.cover,
                                           imageUrl: profiledata!
                                               .viewProfileDetails!
@@ -652,9 +652,11 @@ class _MyProfileState extends State<MyProfile> {
                                               Padding(
                                             padding: EdgeInsets.only(
                                                 top: 2.h, bottom: 2.h),
-                                            child: Text(
-                                              "No Images Available",
-                                              style: textStyle,
+                                            child: Center(
+                                              child: Text(
+                                                "No Images Available",
+                                                style: textStyle,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -701,26 +703,40 @@ class _MyProfileState extends State<MyProfile> {
                                 borderRadius: BorderRadius.circular(15.0),
                                 // color: Colors.white.withOpacity(0.15),
                               ),
-                              child: Container(
-                                width: 70.w,
-                                margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                      height: 42.h,
-                                      width: 220.w,
-                                      child: profiledata!
-                                                  .viewProfileDetails!.video! ==
-                                              ''
-                                          ? Text(
-                                              'No videos Availlable',
-                                              style: textStyle,
-                                            )
-                                          : VideoPlayer(
-                                              _controller,
-                                            )),
-                                ),
-                              ),
+                              child: profiledata!
+                                  .viewProfileDetails!.video!.isNotEmpty?Container(child: Center(child: Text('No Videos Available',style: textStyle,)),):GridView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: profiledata!
+                                      .viewProfileDetails!.video!.length,
+                                  gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 1),
+                                  itemBuilder: (contex, index) {
+
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      margin:
+                                      EdgeInsets.symmetric(horizontal: 1.w),
+                                      height: 20.h,
+                                      width: 60.w,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child:videoplayer(video: profiledata!
+                                            .viewProfileDetails!.video![index],)
+                                      ),
+                                    );
+                                  }),
+                              // child: Container(
+                              //   width: 70.w,
+                              //   margin: EdgeInsets.symmetric(horizontal: 1.w),
+                              //   child: ClipRRect(
+                              //     borderRadius: BorderRadius.circular(10),
+                              //     child: Container(
+                              //         height: 42.h,
+                              //         width: 220.w,
+                              //         child: videoplayer()),
+                            //     ),
+                            //   ),
                             ),
                             SizedBox(
                               height: 4.h,
@@ -804,19 +820,6 @@ class _MyProfileState extends State<MyProfile> {
             print('======================' +
                 profiledata!.viewProfileDetails!.about!);
             setState(() {
-              _controller = VideoPlayerController.network(
-                  profiledata!.viewProfileDetails!.video!);
-              _controller.addListener(() {
-                if (!_controller.value.isPlaying &&
-                    _controller.value.isInitialized &&
-                    (_controller.value.duration ==
-                        _controller.value.position)) {}
-              });
-              _controller.initialize().then((_) => setState(() {}));
-              _controller.play();
-
-              _controller.setLooping(true);
-              _controller.setVolume(0.0);
               _about.text = profiledata!.viewProfileDetails!.about.toString();
               isloading = false;
             });

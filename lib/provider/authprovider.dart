@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pedrodap/Widget/CustomExpection.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/response.dart';
 
@@ -451,7 +452,9 @@ class authprovider with ChangeNotifier {
     responseJson = responses(response);
 
     return responseJson;
-  }Future<http.Response> Searchsleepapi(Map<String, String> bodyData) async {
+  }
+
+  Future<http.Response> Searchsleepapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=sleep_schedule_search_app';
     var responseJson;
     final response = await http
@@ -498,8 +501,92 @@ class authprovider with ChangeNotifier {
     responseJson = responses(response);
 
     return responseJson;
-  } Future<http.Response> SearchNutritodoapi(Map<String, String> bodyData) async {
+  }
+
+  Future<http.Response> SearchNutritodoapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=nutrition_and_health_to_do_search';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> updateprofileapi(Map<String, String> bodyData) async {
+    print(bodyData['profile_image']);
+    const url = '$baseUrl/?action=update_profile_app';
+    var responseJson;
+    try {
+      final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+      imageUploadRequest.headers.addAll(headers);
+
+      final file = await http.MultipartFile.fromPath(
+          'profile_image', bodyData['profile_image'] ?? '');
+      // final file1 = await http.MultipartFile.fromPath(
+      //     'images[]' , bodyData['images[]'] ?? '');
+      imageUploadRequest.files.add(file);
+      // imageUploadRequest.files.add(file1);
+
+      imageUploadRequest.fields.addAll(bodyData);
+      final streamResponse = await imageUploadRequest.send();
+
+      responseJson = responses(await http.Response.fromStream(streamResponse));
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+    return responseJson;
+  }
+
+  Future<http.Response> updateprofileapi1(Map<String, String> bodyData) async {
+    print(bodyData['profile_image']);
+    const url = '$baseUrl/?action=update_profile_app';
+    var responseJson;
+    try {
+      final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+      imageUploadRequest.headers.addAll(headers);
+
+      // final file = await http.MultipartFile.fromPath(
+      //     'profile_image' , bodyData['profile_image'] ?? '' );
+      final file1 = await http.MultipartFile.fromPath(
+          'images[]', bodyData['images[]'] ?? '');
+      //   imageUploadRequest.files.add(file);
+      imageUploadRequest.files.add(file1);
+
+      imageUploadRequest.fields.addAll(bodyData);
+      final streamResponse = await imageUploadRequest.send();
+
+      responseJson = responses(await http.Response.fromStream(streamResponse));
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+    return responseJson;
+  }
+
+  Future<http.Response> deletephotoapi(Map<String, String> bodyData) async {
+    print(bodyData['profile_image']);
+    const url = '$baseUrl/?action=delete_images';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }Future<http.Response> Changepassapi(Map<String, String> bodyData) async {
+    print(bodyData['profile_image']);
+    const url = '$baseUrl/?action=change_password_app';
     var responseJson;
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)

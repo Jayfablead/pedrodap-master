@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
+import 'package:pedrodap/mainpages/changepasswordpage.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
 import 'package:pedrodap/screens/profile/Nutri.dart';
@@ -586,6 +587,59 @@ class _drawerState extends State<drawer> {
                             ],
                           )
                         : Container(),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ChangePassword(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 6.w,
+                            ),
+                            Container(
+                              width: 66.w,
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        CupertinoIcons.lock_circle,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Text("Change Password",
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight:
+                                            FontWeight.w500,
+                                            fontFamily: 'Meta1',
+                                            color: Colors.white,
+                                          )),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 5.h,
                     ),
