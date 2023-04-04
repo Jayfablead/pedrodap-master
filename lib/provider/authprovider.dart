@@ -527,11 +527,14 @@ class authprovider with ChangeNotifier {
       final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
       imageUploadRequest.headers.addAll(headers);
 
-      final file = await http.MultipartFile.fromPath(
-          'profile_image', bodyData['profile_image'] ?? '');
       // final file1 = await http.MultipartFile.fromPath(
       //     'images[]' , bodyData['images[]'] ?? '');
-      imageUploadRequest.files.add(file);
+      imageUploadRequest.files.add(await http.MultipartFile.fromPath(
+          'profile_image', bodyData['profile_image'] ?? ''));
+      imageUploadRequest.files.add(
+          await http.MultipartFile.fromPath('video', bodyData['video'] ?? ''));
+      imageUploadRequest.files.add(
+          await http.MultipartFile.fromPath('images[]', bodyData['images[]'] ?? ''));
       // imageUploadRequest.files.add(file1);
 
       imageUploadRequest.fields.addAll(bodyData);
@@ -544,30 +547,30 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
-  Future<http.Response> updateprofileapi1(Map<String, String> bodyData) async {
-    print(bodyData['profile_image']);
-    const url = '$baseUrl/?action=update_profile_app';
-    var responseJson;
-    try {
-      final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
-      imageUploadRequest.headers.addAll(headers);
-
-      // final file = await http.MultipartFile.fromPath(
-      //     'profile_image' , bodyData['profile_image'] ?? '' );
-      final file1 = await http.MultipartFile.fromPath(
-          'images[]', bodyData['images[]'] ?? '');
-      //   imageUploadRequest.files.add(file);
-      imageUploadRequest.files.add(file1);
-
-      imageUploadRequest.fields.addAll(bodyData);
-      final streamResponse = await imageUploadRequest.send();
-
-      responseJson = responses(await http.Response.fromStream(streamResponse));
-    } on SocketException {
-      throw FetchDataException('No Internet connection');
-    }
-    return responseJson;
-  }
+  // Future<http.Response> updateprofileapi1(Map<String, String> bodyData) async {
+  //   print(bodyData['profile_image']);
+  //   const url = '$baseUrl/?action=update_profile_app';
+  //   var responseJson;
+  //   try {
+  //     final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+  //     imageUploadRequest.headers.addAll(headers);
+  //
+  //     // final file = await http.MultipartFile.fromPath(
+  //     //     'profile_image' , bodyData['profile_image'] ?? '' );
+  //     final file1 = await http.MultipartFile.fromPath(
+  //         'images[]', bodyData['images[]'] ?? '');
+  //     //   imageUploadRequest.files.add(file);
+  //     imageUploadRequest.files.add(file1);
+  //
+  //     imageUploadRequest.fields.addAll(bodyData);
+  //     final streamResponse = await imageUploadRequest.send();
+  //
+  //     responseJson = responses(await http.Response.fromStream(streamResponse));
+  //   } on SocketException {
+  //     throw FetchDataException('No Internet connection');
+  //   }
+  //   return responseJson;
+  // }
 
   Future<http.Response> deletephotoapi(Map<String, String> bodyData) async {
     print(bodyData['profile_image']);
@@ -584,9 +587,42 @@ class authprovider with ChangeNotifier {
     responseJson = responses(response);
 
     return responseJson;
-  }Future<http.Response> Changepassapi(Map<String, String> bodyData) async {
-    print(bodyData['profile_image']);
+  }
+
+  Future<http.Response> Changepassapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=change_password_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> pendingreqapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=pending_request_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> Connectionsapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=connected_users';
     var responseJson;
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)

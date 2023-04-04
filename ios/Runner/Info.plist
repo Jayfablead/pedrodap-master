@@ -23,7 +23,21 @@
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/>
+       	<true/>
+       	<key>NSCameraUsageDescription</key>
+       	<string>This app requires access to the camera.</string>
+       	<key>NSLocationAlwaysUsageDescription</key>
+       	<string>Escaping Plan location need location permission for getting location </string>
+       	<key>NSLocationUsageDescription</key>
+       	<string>Escaping Planlocation need location permission for getting location </string>
+       	<key>NSLocationWhenInUseUsageDescription</key>
+       	<string>Escaping Planlocation need location permission for getting location </string>
+       	<key>NSMicrophoneUsageDescription</key>
+       	<string>This app does not require access to the microphone.</string>
+       	<key>NSPhotoLibraryUsageDescription</key>
+       	<string>This app requires access to the photo library.</string>
+       	<key>UIApplicationSupportsIndirectInputEvents</key>
+       	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

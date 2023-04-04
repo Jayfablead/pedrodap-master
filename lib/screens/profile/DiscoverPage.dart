@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:pedrodap/Model/pendingreqModal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/loader.dart';
@@ -56,11 +57,13 @@ class _DiscoverPageState extends State<DiscoverPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int? select;
   bool isloading = true;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     playerapi();
+    pendingreqapi();
   }
 
   Widget build(BuildContext context) {
@@ -169,105 +172,144 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           height: 33.h,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: ListView.builder(
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 1.w,
+                            child: pending!.pendingRequests!.isEmpty
+                                ? Container(
+                                    child: Center(
+                                        child: Text(
+                                      'No Pending Reqests Available',
+                                      style: textStyle1,
+                                    )),
+                                  )
+                                : ListView.builder(
+                                    itemBuilder: (context, index) {
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 1.w,
+                                        ),
+                                        height: 11.h,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                                      height: 7.h,
+                                                      width: 14.w,
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.circular(90),
+                                                        child: CachedNetworkImage(
+                                                          fit: BoxFit.cover,
+                                                          imageUrl: pending?.pendingRequests?[index].profilePic ?? '',
+                                                          progressIndicatorBuilder:
+                                                              (context, url, progress) =>
+                                                              CircularProgressIndicator(),
+                                                          errorWidget: (context, url, error) =>
+                                                              Image.asset(
+                                                                'assets/icons/user.png',
+                                                                color: Colors.white,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    // CircleAvatar(
+                                                    //     radius: 8.w,
+                                                    //     backgroundImage:
+                                                    //         NetworkImage(pending!
+                                                    //             .pendingRequests![
+                                                    //                 index]
+                                                    //             .profilePic
+                                                    //             .toString())),
+                                                    SizedBox(
+                                                      width: 4.w,
+                                                    ),
+                                                    Text(
+                                                      pending?.pendingRequests?[index].name ?? '',
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontFamily: 'Meta1',
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    InkWell(
+                                                      child: Container(
+                                                        height: 5.5.h,
+                                                        width: 12.w,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white12
+                                                              .withOpacity(
+                                                                  0.10),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(90),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        child: Icon(
+                                                          Icons.done_rounded,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 4.w,
+                                                    ),
+                                                    InkWell(
+                                                      child: Container(
+                                                        height: 5.5.h,
+                                                        width: 12.w,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white12
+                                                              .withOpacity(
+                                                                  0.10),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(90),
+                                                          border: Border.all(
+                                                              color: Colors
+                                                                  .redAccent),
+                                                        ),
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          color:
+                                                              Colors.redAccent,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Divider(
+                                              color: Colors.white,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    itemCount: pending?.pendingRequests?.length,
                                   ),
-                                  height: 11.h,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 8.w,
-                                                backgroundImage: AssetImage(
-                                                  profile[index]
-                                                      .image
-                                                      .toString(),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 4.w,
-                                              ),
-                                              Text(
-                                                profile[index].name.toString(),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily: 'Meta1',
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              InkWell(
-                                                child: Container(
-                                                  height: 5.5.h,
-                                                  width: 12.w,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white12
-                                                        .withOpacity(0.10),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            90),
-                                                    border: Border.all(
-                                                        color: Colors.white),
-                                                  ),
-                                                  child: Icon(
-                                                    Icons.done_rounded,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 4.w,
-                                              ),
-                                              InkWell(
-                                                child: Container(
-                                                  height: 5.5.h,
-                                                  width: 12.w,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white12
-                                                        .withOpacity(0.10),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            90),
-                                                    border: Border.all(
-                                                        color:
-                                                            Colors.redAccent),
-                                                  ),
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    color: Colors.redAccent,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Divider(
-                                        color: Colors.white,
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                              itemCount: reqest.length,
-                            ),
                           ),
                         ),
                         SizedBox(
@@ -293,7 +335,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                     childAspectRatio: 2.4 / 4),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemCount: alldata!.allUsers!.length,
+                            itemCount: alldata?.allUsers?.length,
                             physics: ScrollPhysics(),
                             itemBuilder: (context, index) {
                               return InkWell(
@@ -326,9 +368,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                               BorderRadius.circular(90),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: alldata!
-                                                .allUsers![index].profilePic
-                                                .toString(),
+                                            imageUrl: alldata?.allUsers?[index].profilePic ?? '',
                                             progressIndicatorBuilder:
                                                 (context, url, progress) =>
                                                     CircularProgressIndicator(),
@@ -346,8 +386,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       ),
                                       Expanded(
                                           child: Text(
-                                        alldata!.allUsers![index].name
-                                            .toString(),
+                                        alldata?.allUsers?[index].name
+                                            ?? '',
                                         textAlign: TextAlign.center,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
@@ -360,12 +400,12 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       SizedBox(
                                         height: 0.5.h,
                                       ),
-                                      alldata!.allUsers![index].clubName == null
+                                      alldata?.allUsers?[index].clubName == null
                                           ? Container()
                                           : Expanded(
                                               child: Text(
-                                              alldata!.allUsers![index].clubName
-                                                  .toString(),
+                                              alldata?.allUsers?[index].clubName
+                                                  ?? '',
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
@@ -376,40 +416,37 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                             )),
                                       Expanded(
                                           child: Text(
-                                        alldata!.allUsers![index].position ==
+                                        alldata?.allUsers?[index].position ==
                                                 null
-                                            ? alldata!.allUsers![index].role ==
+                                            ? alldata?.allUsers![index].role ==
                                                     '2'
                                                 ? 'Player'
-                                                : alldata!.allUsers![index]
+                                                : alldata?.allUsers![index]
                                                             .role ==
                                                         '3'
                                                     ? 'Coach'
-                                                    : alldata!.allUsers![index]
+                                                    : alldata?.allUsers![index]
                                                                 .role ==
                                                             '5'
                                                         ? 'Scouts'
-                                                        : alldata!
-                                                                    .allUsers![
+                                                        : alldata?.allUsers![
                                                                         index]
                                                                     .role ==
                                                                 '6'
                                                             ? 'Medician'
-                                                            : alldata!
-                                                                        .allUsers![
+                                                            : alldata?.allUsers![
                                                                             index]
                                                                         .role ==
                                                                     '7'
                                                                 ? 'Nutritionist'
-                                                                : alldata!
-                                                                            .allUsers![
+                                                                : alldata?.allUsers![
                                                                                 index]
                                                                             .role ==
                                                                         '8'
                                                                     ? 'Fitness Trainer'
                                                                     : 'Personal Trainer'
-                                            : alldata!.allUsers![index].position
-                                                .toString(),
+                                            : alldata?.allUsers?[index].position
+                                                ?? '',
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
@@ -490,8 +527,41 @@ class _DiscoverPageState extends State<DiscoverPage> {
     });
   }
 
+  pendingreqapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'pending_request_app';
+    data['uid'] = userData!.userData!.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().pendingreqapi(data).then((Response response) async {
+          pending = PendingreqModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && pending?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            isloading = false;
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
   TextStyle textStyle = TextStyle(
       color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: 'Meta1');
+  TextStyle textStyle1 = TextStyle(
+      color: Colors.grey.shade400, fontSize: 14.sp, fontFamily: 'Meta1');
 
   InputDecoration inputDecoration(
       {required String hintText, required Color col, required Icon icon}) {

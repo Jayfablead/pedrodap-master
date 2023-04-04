@@ -4,15 +4,15 @@ class ProfileModal {
 
   ProfileModal({this.status, this.viewProfileDetails});
 
-  ProfileModal.fromJson(Map<dynamic, dynamic> json) {
+  ProfileModal.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     viewProfileDetails = json['view_profile_details'] != null
         ? new ViewProfileDetails.fromJson(json['view_profile_details'])
         : null;
   }
 
-  Map<dynamic, dynamic> toJson() {
-    final Map<dynamic, dynamic> data = new Map<dynamic, dynamic>();
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     if (this.viewProfileDetails != null) {
       data['view_profile_details'] = this.viewProfileDetails!.toJson();
@@ -36,34 +36,34 @@ class ViewProfileDetails {
   String? experience;
   List<String>? images;
   String? video;
-  String? socialLink;
-  String? occupation;
+  Null? socialLink;
+  Null? occupation;
   String? position;
   String? previousClub;
   String? currentClub;
 
   ViewProfileDetails(
       {this.name,
-      this.clubId,
-      this.email,
-      this.role,
-      this.uid,
-      this.profilePic,
-      this.phone,
-      this.address,
-      this.createdAt,
-      this.age,
-      this.about,
-      this.experience,
-      this.images,
-      this.video,
-      this.socialLink,
-      this.occupation,
-      this.position,
-      this.previousClub,
-      this.currentClub});
+        this.clubId,
+        this.email,
+        this.role,
+        this.uid,
+        this.profilePic,
+        this.phone,
+        this.address,
+        this.createdAt,
+        this.age,
+        this.about,
+        this.experience,
+        this.images,
+        this.video,
+        this.socialLink,
+        this.occupation,
+        this.position,
+        this.previousClub,
+        this.currentClub});
 
-  ViewProfileDetails.fromJson(Map<dynamic, dynamic> json) {
+  ViewProfileDetails.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     clubId = json['club_id'];
     email = json['email'];
@@ -85,8 +85,8 @@ class ViewProfileDetails {
     currentClub = json['current_club'];
   }
 
-  Map<dynamic, dynamic> toJson() {
-    final Map<dynamic, dynamic> data = new Map<dynamic, dynamic>();
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['name'] = this.name;
     data['club_id'] = this.clubId;
     data['email'] = this.email;

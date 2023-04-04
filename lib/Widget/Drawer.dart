@@ -100,9 +100,7 @@ class _drawerState extends State<drawer> {
                               borderRadius: BorderRadius.circular(90),
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
-                                imageUrl: profiledata!
-                                    .viewProfileDetails!.profilePic
-                                    .toString(),
+                                imageUrl: profiledata?.viewProfileDetails?.profilePic ?? '',
                                 progressIndicatorBuilder:
                                     (context, url, progress) =>
                                         CircularProgressIndicator(),
@@ -128,7 +126,7 @@ class _drawerState extends State<drawer> {
                                 height: 0.5.h,
                               ),
                               Text(
-                                userData!.userData!.name.toString(),
+                                profiledata?.viewProfileDetails?.name  ?? '',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 12.sp,

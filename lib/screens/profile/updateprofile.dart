@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pedrodap/screens/profile/myprofile.dart';
+import 'package:pedrodap/successdia.dart';
+import 'package:pedrodap/video.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
 
@@ -50,12 +52,14 @@ class _EditProfileState extends State<EditProfile> {
   var imagesTemporary;
   File? imagefile;
   File? imagefile1;
+  File? videofile;
   TextEditingController _exp = TextEditingController(text: "");
   TextEditingController _pos = TextEditingController(text: "");
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isLoading = true;
   late VideoPlayerController _controller;
   XFile? image;
+  XFile? video;
   List<XFile>? _imageFileList;
   List<Path> images = [];
   int? select;
@@ -72,8 +76,7 @@ class _EditProfileState extends State<EditProfile> {
     _about.text = widget.about.toString();
     _exp.text = widget.exp.toString();
     setState(() {
-      _controller = VideoPlayerController.network(
-          profiledata!.viewProfileDetails!.video!);
+      _controller = VideoPlayerController.network('');
       _controller.addListener(() {
         if (!_controller.value.isPlaying &&
             _controller.value.isInitialized &&
@@ -248,12 +251,17 @@ class _EditProfileState extends State<EditProfile> {
                     keyboardType: TextInputType.text,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Give Position";
+                        return userData!.userData!.role == '2'
+                            ? "Give Position"
+                            : 'Give Ocupation';
                       }
                       return null;
                     },
                     decoration: inputDecoration(
-                        lable: "Position", icon: Icon(Icons.person)),
+                        lable: userData!.userData!.role == '2'
+                            ? "Position "
+                            : "Ocupation ",
+                        icon: Icon(Icons.person)),
                   ),
                   SizedBox(
                     height: 4.h,
@@ -479,7 +487,7 @@ class _EditProfileState extends State<EditProfile> {
                         height: 1.h,
                       ),
                       Container(
-                        height: 25.h,
+                        height: 30.h,
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.all(1.h),
                         decoration: BoxDecoration(
@@ -491,6 +499,11 @@ class _EditProfileState extends State<EditProfile> {
                           child: Row(
                             children: [
                               InkWell(
+                                onTap: () async {
+                                  final video = await _picker.pickVideo(
+                                      source: ImageSource.gallery);
+                                  videofile = File(video!.path);
+                                },
                                 child: Container(
                                   alignment: Alignment.center,
                                   margin: EdgeInsets.symmetric(horizontal: 1.w),
@@ -519,6 +532,25 @@ class _EditProfileState extends State<EditProfile> {
                               ),
                               SizedBox(
                                 width: 2.w,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => videoplayer(
+                                      video: videofile!.path,
+                                    ),
+                                  ));
+                                },
+                                child: Container(
+                                  height: 30.h,
+                                  width: 90.w,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: videoplayer(
+                                      video: videofile?.path,
+                                    ),
+                                  ),
+                                ),
                               ),
                               // Stack(
                               //   children: [
@@ -570,7 +602,8 @@ class _EditProfileState extends State<EditProfile> {
                         child: InkWell(
                           onTap: () async {
                             playerapi();
-                            playerapi1();
+                            // playerapi1();
+                            // playerapi2();
                           },
                           child: Container(
                             padding: EdgeInsets.all(3.w),
@@ -672,46 +705,7 @@ class _EditProfileState extends State<EditProfile> {
     data['profile_image'] =
         imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
-
-    checkInternet().then((internet) async {
-      if (internet) {
-        authprovider().updateprofileapi1(data).then((Response response) async {
-          profiledata = ProfileModal.fromJson(json.decode(response.body));
-
-          if (response.statusCode == 200 && profiledata?.status == "success") {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => MyProfile(),
-              ),
-            );
-            await SaveDataLocal.saveLogInData(userData!);
-            print(userData?.status);
-            print(userData!.userData!.uid);
-
-            // buildErrorDialog(context, "", "Login Successfully");
-          } else {
-            setState(() {});
-          }
-        });
-      } else {
-        setState(() {});
-        buildErrorDialog(context, 'Error', "Internate Required");
-      }
-    });
-  }
-
-  playerapi1() {
-    final Map<String, String> data = {};
-    data['action'] = 'update_profile_app';
-    data['uid'] = userData!.userData!.uid.toString();
-    data['name'] = _user.text.trim();
-    data['experience'] = _exp.text.trim();
-    data['age'] = _age.text.trim();
-    data['position'] = _pos.text.trim();
-    data['about'] = _about.text.trim();
-    data['profile_image'] =
-        imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
-    data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
+    data['video'] = videofile != null ? videofile!.path : "";
 
     checkInternet().then((internet) async {
       if (internet) {
@@ -719,12 +713,127 @@ class _EditProfileState extends State<EditProfile> {
           profiledata = ProfileModal.fromJson(json.decode(response.body));
 
           if (response.statusCode == 200 && profiledata?.status == "success") {
+
+            SuccessDialog(context, 'Done','Profile Changed Successfully');
+            // showDialog(
+            //   context: context,
+            //   builder: (context) =>
+            //       AlertDialog(
+            //         shape: RoundedRectangleBorder(
+            //             borderRadius:
+            //             BorderRadius
+            //                 .circular(
+            //                 20),
+            //             side: BorderSide(
+            //                 color: Colors
+            //                     .white)),
+            //         backgroundColor:
+            //         Color.fromARGB(
+            //             255, 0, 0, 0),
+            //         scrollable: true,
+            //         content: Text(
+            //           'Are You Sure You Want to to Delete ?',
+            //           style: TextStyle(
+            //               fontSize: 11.sp,
+            //               fontWeight:
+            //               FontWeight
+            //                   .w400,
+            //               fontFamily:
+            //               'Meta1',
+            //               color:
+            //               Colors.white),
+            //         ),
+            //         actions: [
+            //           InkWell(
+            //             onTap: () {
+            //               deletetodo(index);
+            //               Navigator.of(
+            //                   context)
+            //                   .pop();
+            //             },
+            //             child: Container(
+            //               margin: EdgeInsets
+            //                   .all(2.w),
+            //               padding:
+            //               EdgeInsets
+            //                   .all(1.h),
+            //               child: Text(
+            //                 'Yes',
+            //                 style: TextStyle(
+            //                     fontSize:
+            //                     13.sp,
+            //                     fontWeight:
+            //                     FontWeight
+            //                         .w400,
+            //                     fontFamily:
+            //                     'Meta1',
+            //                     color: Colors
+            //                         .green),
+            //               ),
+            //               decoration:
+            //               BoxDecoration(
+            //                   color: Colors
+            //                       .black,
+            //                   border:
+            //                   Border
+            //                       .all(
+            //                     color: Colors
+            //                         .green,
+            //                   ),
+            //                   borderRadius:
+            //                   BorderRadius.circular(
+            //                       10)),
+            //             ),
+            //           ),
+            //           InkWell(
+            //             onTap: () {
+            //               Navigator.of(
+            //                   context)
+            //                   .pop();
+            //             },
+            //             child: Container(
+            //               margin: EdgeInsets
+            //                   .all(1.w),
+            //               padding:
+            //               EdgeInsets
+            //                   .all(1.h),
+            //               child: Text(
+            //                 'No',
+            //                 style: TextStyle(
+            //                     fontSize:
+            //                     13.sp,
+            //                     fontWeight:
+            //                     FontWeight
+            //                         .w400,
+            //                     fontFamily:
+            //                     'Meta1',
+            //                     color: Colors
+            //                         .red),
+            //               ),
+            //               decoration:
+            //               BoxDecoration(
+            //                   color: Colors
+            //                       .black,
+            //                   border:
+            //                   Border
+            //                       .all(
+            //                     color: Colors
+            //                         .red,
+            //                   ),
+            //                   borderRadius:
+            //                   BorderRadius.circular(
+            //                       10)),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            // );
+            // Navigator.of(context).pushReplacement(
+            //   MaterialPageRoute(
+            //     builder: (context) => MyProfile(),
+            //   ),
+            // );
             await SaveDataLocal.saveLogInData(userData!);
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => MyProfile(),
-              ),
-            );
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -739,6 +848,80 @@ class _EditProfileState extends State<EditProfile> {
       }
     });
   }
+
+  // playerapi1() {
+  //   final Map<String, String> data = {};
+  //   data['action'] = 'update_profile_app';
+  //
+  //   data['profile_image'] =
+  //       imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
+  //
+  //   data['video'] = videofile != null ? videofile!.path : "";
+  //
+  //   checkInternet().then((internet) async {
+  //     if (internet) {
+  //       authprovider().updateprofileapi(data).then((Response response) async {
+  //         profiledata = ProfileModal.fromJson(json.decode(response.body));
+  //
+  //         if (response.statusCode == 200 && profiledata?.status == "success") {
+  //           await SaveDataLocal.saveLogInData(userData!);
+  //           playerapi();
+  //           Navigator.of(context).pushReplacement(
+  //             MaterialPageRoute(
+  //               builder: (context) => MyProfile(),
+  //             ),
+  //           );
+  //           print(userData?.status);
+  //           print(userData!.userData!.uid);
+  //
+  //           // buildErrorDialog(context, "", "Login Successfully");
+  //         } else {
+  //           setState(() {});
+  //         }
+  //       });
+  //     } else {
+  //       setState(() {});
+  //       buildErrorDialog(context, 'Error', "Internate Required");
+  //     }
+  //   });
+  // }
+  //
+  // playerapi2() {
+  //   final Map<String, String> data = {};
+  //   data['action'] = 'update_profile_app';
+  //
+  //   data['profile_image'] =
+  //       imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
+  //
+  //   data['video'] = videofile != null ? videofile!.path : "";
+  //
+  //   checkInternet().then((internet) async {
+  //     if (internet) {
+  //       authprovider().updateprofileapi2(data).then((Response response) async {
+  //         profiledata = ProfileModal.fromJson(json.decode(response.body));
+  //
+  //         if (response.statusCode == 200 && profiledata?.status == "success") {
+  //           await SaveDataLocal.saveLogInData(userData!);
+  //           playerapi();playerapi2();
+  //           Navigator.of(context).pushReplacement(
+  //             MaterialPageRoute(
+  //               builder: (context) => MyProfile(),
+  //             ),
+  //           );
+  //           print(userData?.status);
+  //           print(userData!.userData!.uid);
+  //
+  //           // buildErrorDialog(context, "", "Login Successfully");
+  //         } else {
+  //           setState(() {});
+  //         }
+  //       });
+  //     } else {
+  //       setState(() {});
+  //       buildErrorDialog(context, 'Error', "Internate Required");
+  //     }
+  //   });
+  // }
 
   imgdlt() {
     final Map<String, String> data = {};
@@ -785,8 +968,6 @@ class _EditProfileState extends State<EditProfile> {
             setState(() {
               _about.text = profiledata!.viewProfileDetails!.about.toString();
             });
-            print('===========================' +
-                profiledata!.viewProfileDetails!.video!);
 
             await SaveDataLocal.saveLogInData(userData!);
             print(userData?.status);

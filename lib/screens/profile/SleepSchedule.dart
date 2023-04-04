@@ -66,9 +66,7 @@ class _SleepScheduleState extends State<SleepSchedule> {
     // TODO: implement initState
     super.initState();
     playerapi();
-    List<bool> swi = [
-      allsleep!.sleepScheduleDetails![selind!].reminders as bool
-    ];
+
   }
 
   @override

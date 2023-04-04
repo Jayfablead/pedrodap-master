@@ -5,7 +5,7 @@
 import FlutterMacOS
 import Foundation
 
-import connectivity_macos
+import connectivity_plus
 import emoji_picker_flutter
 import modal_progress_hud_nsn
 import path_provider_foundation

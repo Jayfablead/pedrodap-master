@@ -21,6 +21,7 @@ import 'package:pedrodap/screens/profile/trainningnotes.dart';
 import 'package:pedrodap/screens/profile/userprofile%20screen.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Model/profileModal.dart';
 import 'viewnutrition.dart';
 
 class mainpage2 extends StatefulWidget {
@@ -47,16 +48,7 @@ class Sachen {
 
 class _mainpage2State extends State<mainpage2> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<Sachen> profile = [
-    Sachen("assets/messi.png", "Lionel Messi"),
-    Sachen("assets/cr7.webp", "Cr 7"),
-    Sachen("assets/suarez.jpg", "Suarez"),
-    Sachen("assets/lewa.webp", "Lewandoski")
-  ];
-  List<sachen1> profile1 = [
-    sachen1("assets/messi.png", "Lionel Messi", "paris saint german"),
-    sachen1("assets/cr7.webp", "Cr 7", "al nssr"),
-  ];
+
   List<Sachen> data = [
     Sachen("assets/icons/coach (1).png", "Connect"),
     Sachen("assets/icons/coach.png", "Training"),
@@ -76,6 +68,7 @@ class _mainpage2State extends State<mainpage2> {
     super.initState();
     print(userData!.userData!.email);
     playerapi();
+    profile();
   }
 
   @override
@@ -133,7 +126,7 @@ class _mainpage2State extends State<mainpage2> {
                         height: 4.h,
                       ),
                       Text(
-                        "Hello " + userData!.userData!.name.toString() + ' !!',
+                        "Hello " +( profiledata?.viewProfileDetails?.name  ?? '')+ ' !!',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.sp,
@@ -370,7 +363,7 @@ class _mainpage2State extends State<mainpage2> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  '18',
+                                                  item.connections.toString(),
                                                   style: TextStyle(
                                                     fontSize: 6.w,
                                                     fontWeight: FontWeight.w500,
@@ -657,6 +650,44 @@ class _mainpage2State extends State<mainpage2> {
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
             isloading = false;
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }  profile() {
+    final Map<String, String> data = {};
+    data['action'] = 'view_profile_details';
+    data['uid'] = userData!.userData!.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().profileapi(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && userData?.status == "success") {
+            print('======================' +
+                profiledata!.viewProfileDetails!.about!);
+            setState(() {
+
+              isloading = false;
+            });
+            print('===========================' +
+                profiledata!.viewProfileDetails!.video![0]);
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
           }
         });
       } else {

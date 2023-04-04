@@ -1,4 +1,4 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:pedrodap/Model/FitreplyModal.dart';
 import 'package:pedrodap/Model/UserModal.dart';
 import 'package:pedrodap/Model/allplayersmodal.dart';
@@ -18,7 +18,9 @@ import 'package:pedrodap/Model/sleepmodal.dart';
 import 'package:pedrodap/Model/userprofileModal.dart';
 import 'package:pedrodap/Model/viewtodoModal.dart';
 
+import '../Model/connectedModal.dart';
 import '../Model/fetchplayermodal.dart';
+import '../Model/pendingreqModal.dart';
 import '../Model/searchfittModal.dart';
 import '../Model/searchfittodoModal.dart';
 import '../Model/sleepsearchmodal.dart';
@@ -57,4 +59,7 @@ SearchNutModal? searchnutri;
 Fetchplayermodal? fetchplayermodal;
 NutritodosearchModal? searchtodonutri;
 SleepsearchModal? searchsleep;
+PendingreqModal? pending;
+ConnectedModal? connections;
+
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';

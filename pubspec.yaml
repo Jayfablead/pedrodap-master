@@ -45,7 +45,7 @@ dependencies:
   file_picker: ^5.2.5
   intl_phone_field:
   http: ^0.13.5
-  connectivity: ^3.0.6
+  connectivity_plus:
   provider:
   shared_preferences:
   lottie: ^2.2.0

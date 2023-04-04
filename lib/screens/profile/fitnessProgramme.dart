@@ -759,7 +759,7 @@ class _HomeState extends State<Home> {
                           child: Row(
                             children: [
                               SizedBox(
-                                width: 78.w,
+                                width: 77.w,
                                 child: Container(
                                   margin: EdgeInsets.only(
                                     bottom: 20,

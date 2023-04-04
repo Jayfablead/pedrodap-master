@@ -277,7 +277,7 @@ class _NutriReplyPageState extends State<NutriReplyPage> {
               child: Row(
                 children: [
                   Container(
-                    height: 7.h,
+                    height: 9.h,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),

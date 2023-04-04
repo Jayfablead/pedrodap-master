@@ -1,30 +1,23 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-import 'Widget/const.dart';
 
-class videoplayer extends StatefulWidget {
+
+class profplayer extends StatefulWidget {
   String? video;
-   videoplayer({Key? key,this.video}) : super(key: key);
+  profplayer({Key? key,this.video}) : super(key: key);
 
   @override
-  State<videoplayer> createState() => _videoplayerState();
+  State<profplayer> createState() => _profplayerState();
 }
 late VideoPlayerController _controller;
-class _videoplayerState extends State<videoplayer> {
-
+class _profplayerState extends State<profplayer> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    File file = File(
+    _controller = VideoPlayerController.network(
         widget.video.toString());
-    _controller = VideoPlayerController.file(
-        file);
-    print('========================'+file.toString());
     _controller.addListener(() {
       if (!_controller.value.isPlaying &&
           _controller.value.isInitialized &&
@@ -40,9 +33,9 @@ class _videoplayerState extends State<videoplayer> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
-body: Center(child: _controller == ''?Container(child: Text('No Videos Available',style: TextStyle(color: Colors.white),),):VideoPlayer(
-  _controller,
-),),
+      body: Center(child: _controller == ''?Container(child: Text('No Videos Available',style: TextStyle(color: Colors.white),),):VideoPlayer(
+        _controller,
+      ),),
     );
   }
 }
