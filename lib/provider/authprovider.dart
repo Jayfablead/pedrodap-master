@@ -520,23 +520,24 @@ class authprovider with ChangeNotifier {
   }
 
   Future<http.Response> updateprofileapi(Map<String, String> bodyData) async {
-    print(bodyData['profile_image']);
     const url = '$baseUrl/?action=update_profile_app';
     var responseJson;
     try {
       final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
       imageUploadRequest.headers.addAll(headers);
 
-      // final file1 = await http.MultipartFile.fromPath(
-      //     'images[]' , bodyData['images[]'] ?? '');
-      imageUploadRequest.files.add(await http.MultipartFile.fromPath(
-          'profile_image', bodyData['profile_image'] ?? ''));
-      imageUploadRequest.files.add(
-          await http.MultipartFile.fromPath('video', bodyData['video'] ?? ''));
-      // imageUploadRequest.files.add(
-      //     await http.MultipartFile.fromPath('images[]', bodyData['images[]'] ?? ''));
-      // imageUploadRequest.files.add(file1);
-
+      if (bodyData['video']?.isNotEmpty ?? false) {
+        imageUploadRequest.files.add(await http.MultipartFile.fromPath(
+            'video', bodyData['video'] ?? ''));
+      }
+      if (bodyData['images[]']?.isNotEmpty ?? false) {
+        imageUploadRequest.files.add(await http.MultipartFile.fromPath(
+            'images[]', bodyData['images[]'] ?? ''));
+      }
+      if (bodyData['profile_image']?.isNotEmpty ?? false) {
+        imageUploadRequest.files.add(await http.MultipartFile.fromPath(
+            'profile_image', bodyData['profile_image'] ?? ''));
+      }
       imageUploadRequest.fields.addAll(bodyData);
       final streamResponse = await imageUploadRequest.send();
 
@@ -546,31 +547,6 @@ class authprovider with ChangeNotifier {
     }
     return responseJson;
   }
-
-  // Future<http.Response> updateprofileapi1(Map<String, String> bodyData) async {
-  //   print(bodyData['profile_image']);
-  //   const url = '$baseUrl/?action=update_profile_app';
-  //   var responseJson;
-  //   try {
-  //     final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
-  //     imageUploadRequest.headers.addAll(headers);
-  //
-  //     // final file = await http.MultipartFile.fromPath(
-  //     //     'profile_image' , bodyData['profile_image'] ?? '' );
-  //     final file1 = await http.MultipartFile.fromPath(
-  //         'images[]', bodyData['images[]'] ?? '');
-  //     //   imageUploadRequest.files.add(file);
-  //     imageUploadRequest.files.add(file1);
-  //
-  //     imageUploadRequest.fields.addAll(bodyData);
-  //     final streamResponse = await imageUploadRequest.send();
-  //
-  //     responseJson = responses(await http.Response.fromStream(streamResponse));
-  //   } on SocketException {
-  //     throw FetchDataException('No Internet connection');
-  //   }
-  //   return responseJson;
-  // }
 
   Future<http.Response> deletephotoapi(Map<String, String> bodyData) async {
     print(bodyData['profile_image']);
@@ -588,8 +564,9 @@ class authprovider with ChangeNotifier {
 
     return responseJson;
   }
+
   Future<http.Response> delevideoapi(Map<String, String> bodyData) async {
-    print(bodyData['profile_image']);
+    print(bodyData['delete_video']);
     const url = '$baseUrl/?action=delete_video';
     var responseJson;
     final response = await http

@@ -31,17 +31,16 @@ class EditProfile extends StatefulWidget {
   String? about;
   String? videos;
 
-  EditProfile({
-    super.key,
-    this.name,
-    this.profile,
-    this.email,
-    this.exp,
-    this.age,
-    this.about,
-    this.pos,
-    this.videos
-  });
+  EditProfile(
+      {super.key,
+      this.name,
+      this.profile,
+      this.email,
+      this.exp,
+      this.age,
+      this.about,
+      this.pos,
+      this.videos});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -85,7 +84,8 @@ class _EditProfileState extends State<EditProfile> {
     _about.text = widget.about.toString();
     _exp.text = widget.exp.toString();
     setState(() {
-      _controller = VideoPlayerController.network(profiledata?.viewProfileDetails?.video ?? '');
+      _controller = VideoPlayerController.network(
+          profiledata?.viewProfileDetails?.video ?? '');
       _controller.addListener(() {
         if (!_controller.value.isPlaying &&
             _controller.value.isInitialized &&
@@ -376,15 +376,15 @@ class _EditProfileState extends State<EditProfile> {
                                 width: 2.w,
                               ),
                               (imagefile1 != null)
-                                  ? ClipRRect(borderRadius:
-                              BorderRadius.circular(10),
-                                    child: Image.file(
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.file(
                                         imagefile1!,
-                                      height: 20.h,
-                                      width: 60.w,
-                                      fit: BoxFit.cover,
+                                        height: 20.h,
+                                        width: 60.w,
+                                        fit: BoxFit.cover,
                                       ),
-                                  )
+                                    )
                                   : Container(),
                               SizedBox(
                                 width: 2.w,
@@ -554,10 +554,19 @@ class _EditProfileState extends State<EditProfile> {
                               SizedBox(
                                 width: 2.w,
                               ),
+                              (videofile != null)
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: profplayer(
+                                        video: videofile?.path,
+                                      ),
+                                    )
+                                  : Container(),
+                              SizedBox(
+                                width: 2.w,
+                              ),
                               GestureDetector(
-                                onTap: () {
-
-                                },
+                                onTap: () {},
                                 child: Container(
                                   height: 20.h,
                                   width: 60.w,
@@ -565,24 +574,32 @@ class _EditProfileState extends State<EditProfile> {
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
-                                        child: videofile?.path == null ?profplayer(video:profiledata?.viewProfileDetails?.video ?? '',):profplayer(
-                                          video: videofile?.path,
-                                        ),
+                                        child: profiledata?.viewProfileDetails
+                                                    ?.video ==
+                                                null
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              )
+                                            : profplayer(
+                                                video: profiledata
+                                                        ?.viewProfileDetails
+                                                        ?.video ??
+                                                    '',
+                                              ),
                                       ),
                                       Positioned(
                                         left: 52.w,
                                         bottom: 17.h,
                                         child: InkWell(
                                           onTap: () {
-                                            setState(() {
-
-                                            });
+                                            viddlt();
                                           },
                                           child: Container(
                                             padding: EdgeInsets.all(2.w),
                                             decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(20),
+                                                  BorderRadius.circular(20),
                                               color: Colors.black,
                                             ),
                                             child: Icon(
@@ -750,8 +767,8 @@ class _EditProfileState extends State<EditProfile> {
           profiledata = ProfileModal.fromJson(json.decode(response.body));
 
           if (response.statusCode == 200 && userData?.status == "success") {
-
-            print('========================================== I\'m Here ===========');
+            print(
+                '========================================== I\'m Here ===========');
             setState(() {
               _about.text = profiledata?.viewProfileDetails?.about ?? '';
               isloading = false;
@@ -776,6 +793,7 @@ class _EditProfileState extends State<EditProfile> {
       }
     });
   }
+
   playerapi() {
     final Map<String, String> data = {};
     data['action'] = 'update_profile_app';
@@ -785,10 +803,9 @@ class _EditProfileState extends State<EditProfile> {
     data['age'] = _age.text.trim();
     data['position'] = _pos.text.trim();
     data['about'] = _about.text.trim();
-    data['profile_image'] =
-        imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
+    data['profile_image'] = imagefile != null ? imagefile!.path : "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
-    data['video'] = videofile != null ? videofile!.path : "";
+    data['video'] = videofile != null ? videofile?.path ?? '' : "";
 
     checkInternet().then((internet) async {
       if (internet) {
@@ -797,7 +814,7 @@ class _EditProfileState extends State<EditProfile> {
 
           if (response.statusCode == 200 && profiledata?.status == "success") {
             EasyLoading.showSuccess(' Profile Updated Successfully!');
-            SuccessDialog(context, 'Done','Profile Changed Successfully');
+            SuccessDialog(context, 'Done', 'Profile Changed Successfully');
 
             await SaveDataLocal.saveLogInData(userData!);
             print(userData?.status);
@@ -889,6 +906,33 @@ class _EditProfileState extends State<EditProfile> {
   //     }
   //   });
   // }
+  viddlt() {
+    final Map<String, String> data = {};
+    data['action'] = 'delete_video';
+    data['uid'] = userData!.userData!.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().delevideoapi(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && profiledata?.status == "success") {
+            update();
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {});
+          }
+        });
+      } else {
+        setState(() {});
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
 
   imgdlt() {
     final Map<String, String> data = {};

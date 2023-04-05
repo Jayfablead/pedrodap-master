@@ -69,757 +69,700 @@ class _MyProfileState extends State<MyProfile> {
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         body: isloading
             ? Container()
-            : WillPopScope(onWillPop: dialog,
-          child: SingleChildScrollView(
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.only(left: 4.w, right: 4.w),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
+            : WillPopScope(
+                onWillPop: dialog,
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 4.w, right: 4.w),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 3.h,
                           ),
-                        ),
-                        Text(
-                          'Profile',
-                          style: TextStyle(
-                            fontSize: 5.w,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: "Meta1",
-                            color: Color(0xffeaeaea),
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            _scaffoldKey.currentState?.openDrawer();
-                          },
-                          icon: Icon(
-                            Icons.menu,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 3.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: 2.w,
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 1.w),
-                          height: 12.h,
-                          width: 25.w,
-                          padding: EdgeInsets.all(1.w),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(90),
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: profiledata?.viewProfileDetails
-                                  ?.profilePic
-                                  ?? '',
-                              progressIndicatorBuilder:
-                                  (context, url, progress) =>
-                                  CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  Image.asset(
-                                    'assets/icons/user.png',
-                                    color: Colors.white,
-                                  ),
-                            ),
-                          ),
-                        ),
-                        // CircleAvatar(
-                        //   backgroundColor: Colors.white,
-                        //   radius: 6.1.h,
-                        //   child: CircleAvatar(
-                        //     backgroundColor: Color(0xff131313),
-                        //     radius: 5.7.h,
-                        //     child: CircleAvatar(
-                        //       backgroundColor: Colors.transparent,
-                        //       backgroundImage: NetworkImage(
-                        //         profiledata!.viewProfileDetails!.profilePic
-                        //            ?? '',
-                        //       ),
-                        //       radius: 7.h,
-                        //     ),
-                        //   ),
-                        // ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              width: 50.w,
-                              child: Text(
-                                profiledata?.viewProfileDetails?.name ==
-                                    null
-                                    ? 'N/A'
-                                    : profiledata?.viewProfileDetails?.name
-                                    ?? '',
-                                style: TextStyle(
-                                  fontSize: 6.w,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: "Meta1",
-                                  color: Color(0xffffffff),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 1.w,
-                            ),
-                            Container(
-                              width: 62.w,
-                              child: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        (connections?.totalConnectedUser)
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontSize: 6.w,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Meta1",
-                                          color: Color(0xffffffff),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Connections',
-                                        style: TextStyle(
-                                          fontSize: 3.5.w,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Meta1",
-                                          color: Color(0xffb4b4b4),
-                                        ),
-                                      ),
-                                    ],
+                              Text(
+                                'Profile',
+                                style: TextStyle(
+                                  fontSize: 5.w,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "Meta1",
+                                  color: Color(0xffeaeaea),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  _scaffoldKey.currentState?.openDrawer();
+                                },
+                                icon: Icon(
+                                  Icons.menu,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 3.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                height: 12.h,
+                                width: 25.w,
+                                padding: EdgeInsets.all(1.w),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(90),
+                                  child: CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: profiledata
+                                            ?.viewProfileDetails?.profilePic ??
+                                        '',
+                                    progressIndicatorBuilder:
+                                        (context, url, progress) =>
+                                            CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset(
+                                      'assets/icons/user.png',
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                  Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        profiledata?.viewProfileDetails?.age ==
-                                            null
-                                            ? 'N/A'
-                                            : profiledata?.viewProfileDetails
-                                            ?.age
-                                            ?? '',
-                                        style: TextStyle(
-                                          fontSize: 6.w,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Meta1",
-                                          color: Color(0xffffffff),
-                                        ),
+                                ),
+                              ),
+                              // CircleAvatar(
+                              //   backgroundColor: Colors.white,
+                              //   radius: 6.1.h,
+                              //   child: CircleAvatar(
+                              //     backgroundColor: Color(0xff131313),
+                              //     radius: 5.7.h,
+                              //     child: CircleAvatar(
+                              //       backgroundColor: Colors.transparent,
+                              //       backgroundImage: NetworkImage(
+                              //         profiledata!.viewProfileDetails!.profilePic
+                              //            ?? '',
+                              //       ),
+                              //       radius: 7.h,
+                              //     ),
+                              //   ),
+                              // ),
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    width: 50.w,
+                                    child: Text(
+                                      profiledata?.viewProfileDetails?.name ==
+                                              null
+                                          ? 'N/A'
+                                          : profiledata
+                                                  ?.viewProfileDetails?.name ??
+                                              '',
+                                      style: TextStyle(
+                                        fontSize: 6.w,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Meta1",
+                                        color: Color(0xffffffff),
                                       ),
-                                      Text(
-                                        'Age',
-                                        style: TextStyle(
-                                          fontSize: 3.5.w,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Meta1",
-                                          color: Color(0xffb4b4b4),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 1.w,
+                                  ),
+                                  Container(
+                                    width: 62.w,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              (connections?.totalConnectedUser)
+                                                  .toString(),
+                                              style: TextStyle(
+                                                fontSize: 6.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Meta1",
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Connections',
+                                              style: TextStyle(
+                                                fontSize: 3.5.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Meta1",
+                                                color: Color(0xffb4b4b4),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              profiledata?.viewProfileDetails
+                                                          ?.age ==
+                                                      null
+                                                  ? 'N/A'
+                                                  : profiledata
+                                                          ?.viewProfileDetails
+                                                          ?.age ??
+                                                      '',
+                                              style: TextStyle(
+                                                fontSize: 6.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Meta1",
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Age',
+                                              style: TextStyle(
+                                                fontSize: 3.5.w,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Meta1",
+                                                color: Color(0xffb4b4b4),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 3.w,
-                    ),
-                    Text(
-                      profiledata?.viewProfileDetails?.email == null
-                          ? 'N/A'
-                          : profiledata?.viewProfileDetails?.email
-                          ?? '',
-                      style: TextStyle(
-                        fontSize: 4.5.w,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Meta1",
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Center(
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      EditProfile(
-                                          about: profiledata!
-                                              .viewProfileDetails!.about
-                                              ?? '',
-                                          email: profiledata!
-                                              .viewProfileDetails!.email
-                                              ?? '',
-                                          name: profiledata!
-                                              .viewProfileDetails!.name
-                                              ?? '',
-                                          exp: profiledata!
-                                              .viewProfileDetails!.experience
-                                              ?? '',
-                                          age: profiledata!
-                                              .viewProfileDetails!.age
-                                              ?? '',
-                                          pos: profiledata!
-                                              .viewProfileDetails!.position
-                                              ?? '',
-                                          profile: profiledata!
-                                              .viewProfileDetails!.profilePic
-                                              ?? '',
-                                      videos: profiledata?.viewProfileDetails
-                                          ?.video ),
-                                ),
-                              );
-                            },
-                            child: Container(
-                                padding: EdgeInsets.all(3.w),
-                                decoration: BoxDecoration(
-                                    border:
-                                    Border.all(color: Colors.white),
-                                    borderRadius:
-                                    BorderRadius.circular(10)),
-                                child: Text(
-                                  'Edit Profile',
-                                  style: textStyle,
-                                )))),
-                    SizedBox(height: 1.h),
-
-                    Divider(
-                      color: Color(0xff7a7a7a),
-                    ),
-                    SizedBox(height: 0.2.h),
-                    userData!.userData!.role == '2'
-                        ? Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.sports_baseball_outlined,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 2.w),
-                            Text(
-                              "Current Club : ",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Meta1",
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13.sp),
-                            ),
-                            SizedBox(
-                              width: 6.w,
-                            ),
-                            Text(
-                              profiledata?.viewProfileDetails?.currentClub ==
-                                  null
-                                  ? 'N/A'
-                                  : profiledata?.viewProfileDetails?.currentClub
-                                  ?? '',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Meta1",
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13.sp),
-                            ),
-                          ],
-                        ),
-
-                        // SizedBox(
-                        //   height: 1.h,
-                        // ),
-                        // Container(
-                        //   height: 7.h,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        //   decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.circular(15.0),
-                        //     color: Colors.white.withOpacity(0.15),
-                        //   ),
-                        //   child: TextField(
-                        //     readOnly: true,
-                        //     controller: _CurrTeam,
-                        //     keyboardType: TextInputType.emailAddress,
-                        //     cursorColor: Colors.white,
-                        //     style: textStyle,
-                        //     decoration: InputDecoration(
-                        //         border: InputBorder.none,
-                        //         focusedBorder: InputBorder.none,
-                        //         hintText: 'Enter Your Current Club Name ',
-                        //         hintStyle: textStyle1),
-                        //   ),
-                        // ),
-                        SizedBox(
-                          height: 3.h,
-                        ),
-                        Row(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.sports_baseball_outlined,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 2.w),
-                            Text(
-                              "Previous Club : ",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Meta1",
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13.sp),
-                            ),
-                            SizedBox(
-                              width: 4.w,
-                            ),
-                            Text(
-                              profiledata?.viewProfileDetails?.previousClub ==
-                                  null
-                                  ? 'N/A'
-                                  : profiledata?.viewProfileDetails
-                                  ?.previousClub
-                                  ?? '',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Meta1",
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13.sp),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 3.h,
-                        ),
-                      ],
-                    )
-                        : Container(),
-                    // SizedBox(
-                    //   height: 1.h,
-                    // ),
-                    // Container(
-                    //   height: 7.h,
-                    //   width: MediaQuery.of(context).size.width,
-                    //   padding: EdgeInsets.symmetric(horizontal: 3.w),
-                    //   decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(15.0),
-                    //     color: Colors.white.withOpacity(0.15),
-                    //   ),
-                    //   child: TextField(
-                    //     readOnly: true,
-                    //     controller: _prevclub,
-                    //     keyboardType: TextInputType.emailAddress,
-                    //     cursorColor: Colors.white,
-                    //     style: textStyle,
-                    //     decoration: InputDecoration(
-                    //         border: InputBorder.none,
-                    //         focusedBorder: InputBorder.none,
-                    //         hintText: 'Enter Your Last Club Name ',
-                    //         hintStyle: textStyle1),
-                    //   ),
-                    // ),
-
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.person_4_outlined,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 2.w),
-                        Text(
-                          "Experince : ",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Meta1",
+                            ],
+                          ),
+                          SizedBox(
+                            height: 3.w,
+                          ),
+                          Text(
+                            profiledata?.viewProfileDetails?.email == null
+                                ? 'N/A'
+                                : profiledata?.viewProfileDetails?.email ?? '',
+                            style: TextStyle(
+                              fontSize: 4.5.w,
                               fontWeight: FontWeight.w500,
-                              fontSize: 13.sp),
-                        ),
-                        SizedBox(
-                          width: 12.3.w,
-                        ),
-                        Text(
-                          profiledata?.viewProfileDetails?.experience ==
-                              null
-                              ? 'N/A'
-                              : profiledata?.viewProfileDetails?.experience
-                              ?? '',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.white,
                               fontFamily: "Meta1",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 13.sp),
-                        ),
-                      ],
-                    ),
-                    // SizedBox(
-                    //   height: 1.h,
-                    // ),
-                    // Container(
-                    //   height: 7.h,
-                    //   width: MediaQuery.of(context).size.width,
-                    //   padding: EdgeInsets.symmetric(horizontal: 3.w),
-                    //   decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(15.0),
-                    //     color: Colors.white.withOpacity(0.15),
-                    //   ),
-                    //   child: TextField(
-                    //     readOnly: true,
-                    //     controller: _exp,
-                    //     keyboardType: TextInputType.emailAddress,
-                    //     cursorColor: Colors.white,
-                    //     style: textStyle,
-                    //     decoration: InputDecoration(
-                    //         border: InputBorder.none,
-                    //         focusedBorder: InputBorder.none,
-                    //         hintText: 'Enter Your Experince ',
-                    //         hintStyle: textStyle1),
-                    //   ),
-                    // ),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.personal_injury_outlined,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 2.w),
-                        Text(
-                          userData?.userData?.role == '2'
-                              ? "Position : "
-                              : "Ocupation :",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
                               color: Colors.white,
-                              fontFamily: "Meta1",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 13.sp),
-                        ),
-                        SizedBox(
-                          width: 17.w,
-                        ),
-                        Text(
-                          profiledata?.viewProfileDetails?.position == null
-                              ? 'N/A'
-                              : profiledata?.viewProfileDetails?.position
-                              ?? '',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Meta1",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 13.sp),
-                        ),
-                      ],
-                    ),
-                    // SizedBox(
-                    //   height: 1.h,
-                    // ),
-                    // Container(
-                    //   height: 7.h,
-                    //   width: MediaQuery.of(context).size.width,
-                    //   padding: EdgeInsets.symmetric(horizontal: 3.w),
-                    //   decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(15.0),
-                    //     color: Colors.white.withOpacity(0.15),
-                    //   ),
-                    //   child: TextField(
-                    //     readOnly: true,
-                    //     controller: _position,
-                    //     keyboardType: TextInputType.emailAddress,
-                    //     cursorColor: Colors.white,
-                    //     style: textStyle,
-                    //     decoration: InputDecoration(
-                    //         border: InputBorder.none,
-                    //         focusedBorder: InputBorder.none,
-                    //         hintText: 'Enter Your Position ',
-                    //         hintStyle: textStyle1),
-                    //   ),
-                    // ),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.info_outline_rounded,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 2.w),
-                            Text(
-                              "My Bio : ",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Meta1",
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13.sp),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 0.5.h,
-                        ),
-                        Divider(
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 0.5.h,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          padding: EdgeInsets.symmetric(horizontal: 2.w),
-                          child: profiledata?.viewProfileDetails?.about ==
-                              ''
-                              ? Padding(
-                            padding: EdgeInsets.only(
-                                top: 2.h, bottom: 2.h),
-                            child: Text(
-                              'N/A',
-                              style: textStyle,
-                            ),
-                          )
-                              : Padding(
-                            padding: EdgeInsets.only(
-                                top: 2.h, bottom: 2.h),
-                            child: Text(
-                              profiledata?.viewProfileDetails?.about
-                                  ?? '',
-                              style: textStyle,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.image_outlined,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 2.w),
-                            Text(
-                              "My Images : ",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Meta1",
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13.sp),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 25.h,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          padding: EdgeInsets.all(1.h),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            // color: Colors.white.withOpacity(0.15),
+                          SizedBox(
+                            height: 2.h,
                           ),
-                          child: profiledata?.viewProfileDetails?.images == null ?
                           Center(
-                            child: Text(
-                              'No Images Available',
-                              style: textStyle,
-                            ),
-                          ) :GridView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: profiledata?.viewProfileDetails?.images
-                                  ?.length,
-                              gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 1),
-                              itemBuilder: (contex, index) {
-                                return Container(
-                                  alignment: Alignment.center,
-                                  margin:
-                                  EdgeInsets.symmetric(horizontal: 1.w),
+                              child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => EditProfile(
+                                            about: profiledata!
+                                                    .viewProfileDetails!
+                                                    .about ??
+                                                '',
+                                            email: profiledata!
+                                                    .viewProfileDetails!
+                                                    .email ??
+                                                '',
+                                            name: profiledata!
+                                                    .viewProfileDetails!.name ??
+                                                '',
+                                            exp: profiledata!
+                                                    .viewProfileDetails!
+                                                    .experience ??
+                                                '',
+                                            age:
+                                                profiledata!.viewProfileDetails!.age ??
+                                                    '',
+                                            pos: profiledata!
+                                                    .viewProfileDetails!
+                                                    .position ??
+                                                '',
+                                            profile: profiledata!
+                                                    .viewProfileDetails!
+                                                    .profilePic ??
+                                                '',
+                                            videos: profiledata?.viewProfileDetails?.video),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                      padding: EdgeInsets.all(3.w),
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Text(
+                                        'Edit Profile',
+                                        style: textStyle,
+                                      )))),
+                          SizedBox(height: 1.h),
 
-                                  child:  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: CachedNetworkImage(height: 20.h,
-                                      width: 60.w,
-                                      fit: BoxFit.cover,
-                                      imageUrl: profiledata?.viewProfileDetails
-                                          ?.images?[index]
-                                          ?? '',
-                                      progressIndicatorBuilder: (context,
-                                          url, downloadProgress) =>
-                                          CircularProgressIndicator(
-                                              value: downloadProgress
-                                                  .progress),
-                                      errorWidget: (context, url, error) =>
-                                          Padding(
+                          Divider(
+                            color: Color(0xff7a7a7a),
+                          ),
+                          SizedBox(height: 0.2.h),
+                          userData!.userData!.role == '2'
+                              ? Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          Icons.sports_baseball_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(width: 2.w),
+                                        Text(
+                                          "Current Club : ",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Meta1",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 13.sp),
+                                        ),
+                                        SizedBox(
+                                          width: 6.w,
+                                        ),
+                                        Text(
+                                          profiledata?.viewProfileDetails
+                                                      ?.currentClub ==
+                                                  null
+                                              ? 'N/A'
+                                              : profiledata?.viewProfileDetails
+                                                      ?.currentClub ??
+                                                  '',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Meta1",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 13.sp),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          Icons.sports_baseball_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(width: 2.w),
+                                        Text(
+                                          "Previous Club : ",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Meta1",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 13.sp),
+                                        ),
+                                        SizedBox(
+                                          width: 4.w,
+                                        ),
+                                        Text(
+                                          profiledata?.viewProfileDetails
+                                                      ?.previousClub ==
+                                                  null
+                                              ? 'N/A'
+                                              : profiledata?.viewProfileDetails
+                                                      ?.previousClub ??
+                                                  '',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Meta1",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 13.sp),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3.h,
+                                    ),
+                                  ],
+                                )
+                              : Container(),
+
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.person_4_outlined,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 2.w),
+                              Text(
+                                "Experince : ",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                              SizedBox(
+                                width: 12.3.w,
+                              ),
+                              Text(
+                                profiledata?.viewProfileDetails?.experience ==
+                                        null
+                                    ? 'N/A'
+                                    : profiledata
+                                            ?.viewProfileDetails?.experience ??
+                                        '',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.personal_injury_outlined,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 2.w),
+                              Text(
+                                userData?.userData?.role == '2'
+                                    ? "Position : "
+                                    : "Ocupation :",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                              SizedBox(
+                                width: 17.w,
+                              ),
+                              Text(
+                                profiledata?.viewProfileDetails?.position ==
+                                        null
+                                    ? 'N/A'
+                                    : profiledata
+                                            ?.viewProfileDetails?.position ??
+                                        '',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                            ],
+                          ),
+                          // SizedBox(
+                          //   height: 1.h,
+                          // ),
+                          // Container(
+                          //   height: 7.h,
+                          //   width: MediaQuery.of(context).size.width,
+                          //   padding: EdgeInsets.symmetric(horizontal: 3.w),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(15.0),
+                          //     color: Colors.white.withOpacity(0.15),
+                          //   ),
+                          //   child: TextField(
+                          //     readOnly: true,
+                          //     controller: _position,
+                          //     keyboardType: TextInputType.emailAddress,
+                          //     cursorColor: Colors.white,
+                          //     style: textStyle,
+                          //     decoration: InputDecoration(
+                          //         border: InputBorder.none,
+                          //         focusedBorder: InputBorder.none,
+                          //         hintText: 'Enter Your Position ',
+                          //         hintStyle: textStyle1),
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.info_outline_rounded,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  Text(
+                                    "My Bio : ",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Meta1",
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13.sp),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 0.5.h,
+                              ),
+                              Divider(
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                height: 0.5.h,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                                child:
+                                    profiledata?.viewProfileDetails?.about == ''
+                                        ? Padding(
                                             padding: EdgeInsets.only(
                                                 top: 2.h, bottom: 2.h),
-                                            child: Center(
-                                              child: Text(
-                                                "Load Error!",
-                                                style: textStyle,
-                                              ),
+                                            child: Text(
+                                              'N/A',
+                                              style: textStyle,
+                                            ),
+                                          )
+                                        : Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 2.h, bottom: 2.h),
+                                            child: Text(
+                                              profiledata?.viewProfileDetails
+                                                      ?.about ??
+                                                  '',
+                                              style: textStyle,
                                             ),
                                           ),
-                                    ),
-                                  ),
-                                );
-                              }),
-                        ),
-                      ],
-                    ),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 3.h,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.video_camera_back_outlined,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 2.w),
-                            Text(
-                              "My Videos : ",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Meta1",
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13.sp),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Container(
-                          height: 30.h,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          padding: EdgeInsets.all(1.h),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            // color: Colors.white.withOpacity(0.15),
+                              ),
+                            ],
                           ),
-                          child: Container(
-
-                            margin:
-                            EdgeInsets.symmetric(horizontal: 1.w),
-                            height: 30.h,
-                            width: 70.w,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: profiledata?.viewProfileDetails?.video ==
-                                    null ? Center(
-                                  child: Text(
-                                    'No Video Available',
-                                    style: textStyle,
-                                  ),
-                                ): profplayer(
-                                  video: profiledata?.viewProfileDetails
-                                      ?.video,)
-                            ),
+                          SizedBox(
+                            height: 1.h,
                           ),
-                          // child: Container(
-                          //   width: 70.w,
-                          //   margin: EdgeInsets.symmetric(horizontal: 1.w),
-                          //   child: ClipRRect(
-                          //     borderRadius: BorderRadius.circular(10),
-                          //     child: Container(
-                          //         height: 42.h,
-                          //         width: 220.w,
-                          //         child: videoplayer()),
-                          //     ),
-                          //   ),
-                        ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.image_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  Text(
+                                    "My Images : ",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Meta1",
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13.sp),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                height: 25.h,
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.all(1.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  // color: Colors.white.withOpacity(0.15),
+                                ),
+                                child: profiledata?.viewProfileDetails?.images
+                                            ?.length ==
+                                        0
+                                    ? Center(
+                                        child: Text(
+                                          'No Images Available',
+                                          style: textStyle,
+                                        ),
+                                      )
+                                    : GridView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: profiledata
+                                            ?.viewProfileDetails
+                                            ?.images
+                                            ?.length,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 1),
+                                        itemBuilder: (contex, index) {
+                                          return Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 1.w),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: CachedNetworkImage(
+                                                height: 20.h,
+                                                width: 60.w,
+                                                fit: BoxFit.cover,
+                                                imageUrl: profiledata
+                                                        ?.viewProfileDetails
+                                                        ?.images?[index] ??
+                                                    '',
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                            downloadProgress) =>
+                                                        CircularProgressIndicator(
+                                                            value:
+                                                                downloadProgress
+                                                                    .progress),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 2.h, bottom: 2.h),
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Load Error!",
+                                                      style: textStyle,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                              ),
+                            ],
+                          ),
 
-                        SizedBox(
-                          height: 4.h,
-                        ),
-                      ],
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 3.h,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.video_camera_back_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  Text(
+                                    "My Videos : ",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Meta1",
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13.sp),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              Container(
+                                height: 30.h,
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.all(1.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  // color: Colors.white.withOpacity(0.15),
+                                ),
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                  height: 30.h,
+                                  width: 70.w,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: profiledata
+                                                  ?.viewProfileDetails?.video ==
+                                              ''
+                                          ? Center(
+                                              child: Text(
+                                                'No Video Available',
+                                                style: textStyle,
+                                              ),
+                                            )
+                                          : profplayer(
+                                              video: profiledata
+                                                  ?.viewProfileDetails?.video,
+                                            )),
+                                ),
+                                // child: Container(
+                                //   width: 70.w,
+                                //   margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                //   child: ClipRRect(
+                                //     borderRadius: BorderRadius.circular(10),
+                                //     child: Container(
+                                //         height: 42.h,
+                                //         width: 220.w,
+                                //         child: videoplayer()),
+                                //     ),
+                                //   ),
+                              ),
+                              SizedBox(
+                                height: 4.h,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }
 
   TextStyle textStyle =
-  TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: "Meta1");
+      TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: "Meta1");
 
   TextStyle textStyle1 =
-  TextStyle(color: Colors.grey, fontSize: 12.sp, fontFamily: "Meta1");
+      TextStyle(color: Colors.grey, fontSize: 12.sp, fontFamily: "Meta1");
 
   void loadvideo() {
     setState(() {});
