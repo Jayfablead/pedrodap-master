@@ -36,8 +36,8 @@ class ViewProfileDetails {
   String? experience;
   List<String>? images;
   String? video;
-  Null? socialLink;
-  Null? occupation;
+  String? socialLink;
+  String? occupation;
   String? position;
   String? previousClub;
   String? currentClub;

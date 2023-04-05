@@ -533,8 +533,8 @@ class authprovider with ChangeNotifier {
           'profile_image', bodyData['profile_image'] ?? ''));
       imageUploadRequest.files.add(
           await http.MultipartFile.fromPath('video', bodyData['video'] ?? ''));
-      imageUploadRequest.files.add(
-          await http.MultipartFile.fromPath('images[]', bodyData['images[]'] ?? ''));
+      // imageUploadRequest.files.add(
+      //     await http.MultipartFile.fromPath('images[]', bodyData['images[]'] ?? ''));
       // imageUploadRequest.files.add(file1);
 
       imageUploadRequest.fields.addAll(bodyData);
@@ -575,6 +575,22 @@ class authprovider with ChangeNotifier {
   Future<http.Response> deletephotoapi(Map<String, String> bodyData) async {
     print(bodyData['profile_image']);
     const url = '$baseUrl/?action=delete_images';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+  Future<http.Response> delevideoapi(Map<String, String> bodyData) async {
+    print(bodyData['profile_image']);
+    const url = '$baseUrl/?action=delete_video';
     var responseJson;
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
