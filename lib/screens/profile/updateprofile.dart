@@ -579,7 +579,7 @@ class _EditProfileState extends State<EditProfile> {
                                                 null
                                             ? Center(
                                                 child:
-                                                    CircularProgressIndicator(),
+                                                    Container(),
                                               )
                                             : profplayer(
                                                 video: profiledata

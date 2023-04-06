@@ -272,24 +272,18 @@ class _MyProfileState extends State<MyProfile> {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) => EditProfile(
-                                            about: profiledata!
-                                                    .viewProfileDetails!
-                                                    .about ??
+                                            about: profiledata!.viewProfileDetails!.about ??
                                                 '',
-                                            email: profiledata!
-                                                    .viewProfileDetails!
-                                                    .email ??
+                                            email: profiledata!.viewProfileDetails!.email ??
                                                 '',
-                                            name: profiledata!
-                                                    .viewProfileDetails!.name ??
+                                            name: profiledata!.viewProfileDetails!.name ??
                                                 '',
                                             exp: profiledata!
                                                     .viewProfileDetails!
                                                     .experience ??
                                                 '',
-                                            age:
-                                                profiledata!.viewProfileDetails!.age ??
-                                                    '',
+                                            age: profiledata!.viewProfileDetails!.age ??
+                                                '',
                                             pos: profiledata!
                                                     .viewProfileDetails!
                                                     .position ??
@@ -298,7 +292,10 @@ class _MyProfileState extends State<MyProfile> {
                                                     .viewProfileDetails!
                                                     .profilePic ??
                                                 '',
-                                            videos: profiledata?.viewProfileDetails?.video),
+                                            videos: profiledata?.viewProfileDetails?.video == '' ||
+                                                    profiledata?.viewProfileDetails?.video == null
+                                                ? null
+                                                : profiledata?.viewProfileDetails?.video),
                                       ),
                                     );
                                   },
@@ -717,9 +714,12 @@ class _MyProfileState extends State<MyProfile> {
                                   width: 70.w,
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
-                                      child: profiledata
-                                                  ?.viewProfileDetails?.video ==
-                                              ''
+                                      child: profiledata?.viewProfileDetails
+                                                      ?.video ==
+                                                  '' ||
+                                              profiledata?.viewProfileDetails
+                                                      ?.video ==
+                                                  null
                                           ? Center(
                                               child: Text(
                                                 'No Video Available',
