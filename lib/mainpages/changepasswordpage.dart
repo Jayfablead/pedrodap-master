@@ -51,9 +51,10 @@ class _ChangePasswordState extends State<ChangePassword> {
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [SizedBox(
-                height: 1.h,
-              ),
+              children: [
+                SizedBox(
+                  height: 1.h,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -216,8 +217,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                               }
                               return null;
                             },
-                            decoration: inputDecoration(ico: IconButton(
-                                onPressed: () {}, icon: Icon(null)),
+                            decoration: inputDecoration(
+                              ico: IconButton(
+                                  onPressed: () {}, icon: Icon(null)),
                               hintText: "New Password",
                               // ico: IconButton(
                               //   onPressed: () {
@@ -323,7 +325,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: () {changepass();},
+                    onTap: () {
+                      changepass();
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       width: 50.w,
@@ -385,8 +389,8 @@ class _ChangePasswordState extends State<ChangePassword> {
           borderSide: BorderSide.none),
     );
   }
-  changepass() {
 
+  changepass() {
     if (_formKey.currentState!.validate()) {
       final Map<String, String> data = {};
       data['old_password'] = _oldpass.text.trim().toString();
@@ -404,7 +408,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 // isLoading = false;
               });
               await SaveDataLocal.saveLogInData(userData!);
-              print("++++++++++++++++++++"+"${userData?.status}");
+              print("++++++++++++++++++++" + "${userData?.status}");
 
               // buildErrorDialog(context, "", "Login Successfully");
 
@@ -416,15 +420,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                 _newpass.text = '';
                 _confirmpass.text = '';
                 Fluttertoast.showToast(
-                    msg: "Password Changed Successfully Now Login With New Password",
-
-
+                    msg:
+                        "Password Changed Successfully Now Login With New Password",
                     timeInSecForIosWeb: 1,
                     backgroundColor: Colors.red,
                     textColor: Colors.white,
-                    fontSize: 16.0
-                );
-                print("================================================"+"ouch");
+                    fontSize: 16.0);
+                print("================================================" +
+                    "ouch");
               } else {
                 buildErrorDialog(context, "Error", "Password Dosen't Match");
               }

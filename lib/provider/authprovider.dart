@@ -100,6 +100,20 @@ class authprovider with ChangeNotifier {
     responseJson = responses(response);
     return responseJson;
   }
+  Future<http.Response> sendreqapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=create_connection_request';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    return responseJson;
+  }
 
   Future<http.Response> userprofapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=users_profile_details_app';

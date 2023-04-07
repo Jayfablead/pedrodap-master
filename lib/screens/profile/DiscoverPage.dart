@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/const.dart';
@@ -282,9 +283,116 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       Expanded(
                                         child: GestureDetector(
                                           onTap: () {
-                                            setState(() {
-                                              select = index;
-                                            });
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  AlertDialog(
+                                                    shape:
+                                                    RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            20),
+                                                        side: BorderSide(
+                                                            color: Colors
+                                                                .white)),
+                                                    backgroundColor:
+                                                    Color.fromARGB(
+                                                        255, 0, 0, 0),
+                                                    scrollable: true,
+                                                    content: Text(
+                                                      'Are You Sure You Want to Connect ?',
+                                                      style: TextStyle(
+                                                          fontSize: 11.sp,
+                                                          fontWeight:
+                                                          FontWeight.w400,
+                                                          fontFamily: 'Meta1',
+                                                          color: Colors.white),
+                                                    ),
+                                                    actions: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          sendreqapi(index);
+
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Container(
+                                                          margin:
+                                                          EdgeInsets.all(
+                                                              2.w),
+                                                          padding:
+                                                          EdgeInsets.all(
+                                                              1.h),
+                                                          child: Text(
+                                                            'Yes',
+                                                            style: TextStyle(
+                                                                fontSize: 13.sp,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                                fontFamily:
+                                                                'Meta1',
+                                                                color: Colors
+                                                                    .green),
+                                                          ),
+                                                          decoration:
+                                                          BoxDecoration(
+                                                              color: Colors
+                                                                  .black,
+                                                              border: Border
+                                                                  .all(
+                                                                color: Colors
+                                                                    .green,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                  10)),
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Container(
+                                                          margin:
+                                                          EdgeInsets.all(
+                                                              1.w),
+                                                          padding:
+                                                          EdgeInsets.all(
+                                                              1.h),
+                                                          child: Text(
+                                                            'No',
+                                                            style: TextStyle(
+                                                                fontSize: 13.sp,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                                fontFamily:
+                                                                'Meta1',
+                                                                color:
+                                                                Colors.red),
+                                                          ),
+                                                          decoration:
+                                                          BoxDecoration(
+                                                              color: Colors
+                                                                  .black,
+                                                              border: Border
+                                                                  .all(
+                                                                color: Colors
+                                                                    .red,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                  10)),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                            );
                                           },
                                           child: Container(
                                             alignment: Alignment.center,
@@ -330,6 +438,45 @@ class _DiscoverPageState extends State<DiscoverPage> {
         authprovider().allplayersapi(data).then((Response response) async {
           alldata = AllplayersModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && userData?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            isloading = false;
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+  sendreqapi(int index) {
+    final Map<String, String> data = {};
+    data['action'] = 'create_connection_request';
+    data['login_user_id'] = userData!.userData!.uid.toString();
+    data['uid'] = alldata?.allUsers?[index].uid ?? '';
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().sendreqapi(data).then((Response response) async {
+          alldata = AllplayersModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && userData?.status == "success") {
+
+            Fluttertoast.showToast(
+                msg:
+                "Request Send Successfully",
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.greenAccent,
+                textColor: Colors.black,
+                fontSize: 16.0);
             setState(() {
               isloading = false;
             });

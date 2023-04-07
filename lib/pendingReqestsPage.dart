@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
@@ -468,6 +469,13 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
           pending = PendingreqModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && pending?.status == "success") {
             pendingreqapi();
+            Fluttertoast.showToast(
+                msg:
+                "Request Accepted",
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.greenAccent,
+                textColor: Colors.black,
+                fontSize: 16.0);
             setState(() {
               isloading = false;
             });
@@ -500,6 +508,13 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
         authprovider().acceptreqapi(data).then((Response response) async {
           pending = PendingreqModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && pending?.status == "success") {
+            Fluttertoast.showToast(
+                msg:
+                "Request Rejected",
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
             pendingreqapi();
             setState(() {
               isloading = false;
