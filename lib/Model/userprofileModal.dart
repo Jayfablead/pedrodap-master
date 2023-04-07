@@ -6,7 +6,7 @@ class Userprofilemodal {
 
   Userprofilemodal.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    userProfileDetails = json['user_profile_details'] != String
+    userProfileDetails = json['user_profile_details'] != null
         ? new UserProfileDetails.fromJson(json['user_profile_details'])
         : null;
   }
@@ -14,7 +14,7 @@ class Userprofilemodal {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    if (this.userProfileDetails != String) {
+    if (this.userProfileDetails != null) {
       data['user_profile_details'] = this.userProfileDetails!.toJson();
     }
     return data;
@@ -38,28 +38,32 @@ class UserProfileDetails {
   String? position;
   String? previousClub;
   String? previousClubImage;
+  List<String>? images;
+  String? video;
   String? clubName;
   String? currentClubImage;
 
   UserProfileDetails(
       {this.uid,
-      this.role,
-      this.clubId,
-      this.name,
-      this.email,
-      this.createdAt,
-      this.phone,
-      this.address,
-      this.about,
-      this.profilePic,
-      this.availability,
-      this.experience,
-      this.age,
-      this.position,
-      this.previousClub,
-      this.previousClubImage,
-      this.clubName,
-      this.currentClubImage});
+        this.role,
+        this.clubId,
+        this.name,
+        this.email,
+        this.createdAt,
+        this.phone,
+        this.address,
+        this.about,
+        this.profilePic,
+        this.availability,
+        this.experience,
+        this.age,
+        this.position,
+        this.previousClub,
+        this.previousClubImage,
+        this.images,
+        this.video,
+        this.clubName,
+        this.currentClubImage});
 
   UserProfileDetails.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
@@ -78,6 +82,8 @@ class UserProfileDetails {
     position = json['position'];
     previousClub = json['previous_club'];
     previousClubImage = json['previous_club_image'];
+    images = json['images'].cast<String>();
+    video = json['video'];
     clubName = json['club_name'];
     currentClubImage = json['current_club_image'];
   }
@@ -100,6 +106,8 @@ class UserProfileDetails {
     data['position'] = this.position;
     data['previous_club'] = this.previousClub;
     data['previous_club_image'] = this.previousClubImage;
+    data['images'] = this.images;
+    data['video'] = this.video;
     data['club_name'] = this.clubName;
     data['current_club_image'] = this.currentClubImage;
     return data;

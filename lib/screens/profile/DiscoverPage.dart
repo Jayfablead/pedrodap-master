@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/const.dart';
@@ -130,7 +129,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                     mainAxisSpacing: 4.w,
                                     crossAxisSpacing: 5.w,
                                     crossAxisCount: 2,
-                                    childAspectRatio: 2.4 / 4),
+                                    childAspectRatio: 2.3 / 4),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: alldata?.allUsers?.length,
@@ -157,23 +156,27 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 1.w),
                                         height: 10.h,
                                         width: 20.w,
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(90),
+                                          borderRadius:
+                                              BorderRadius.circular(90),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: alldata?.allUsers?[index].profilePic ??
+                                            imageUrl: alldata?.allUsers?[index]
+                                                    .profilePic ??
                                                 '',
                                             progressIndicatorBuilder:
                                                 (context, url, progress) =>
-                                                CircularProgressIndicator(),
-                                            errorWidget: (context, url, error) =>
-                                                Image.asset(
-                                                  'assets/icons/user.png',
-                                                  color: Colors.white,
-                                                ),
+                                                    CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Image.asset(
+                                              'assets/icons/user.png',
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -218,7 +221,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                             color: Colors.white),
                                       )),
                                       SizedBox(
-                                        height: 0.5.h,
+                                        height: 1.h,
                                       ),
                                       alldata?.allUsers?[index].clubName == null
                                           ? Container()
@@ -239,22 +242,34 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                           child: Text(
                                         alldata?.allUsers?[index].position ==
                                                 null
-                                            ? (alldata?.allUsers?[index].role)==
+                                            ? (alldata?.allUsers?[index]
+                                                        .role) ==
                                                     '2'
                                                 ? 'Player'
-                                                : (alldata?.allUsers?[index].role) ==
+                                                : (alldata?.allUsers?[index]
+                                                            .role) ==
                                                         '3'
                                                     ? 'Coach'
-                                                    : (alldata?.allUsers?[index].role) ==
+                                                    : (alldata?.allUsers?[index]
+                                                                .role) ==
                                                             '5'
                                                         ? 'Scouts'
-                                                        : (alldata?.allUsers?[ index].role) ==
+                                                        : (alldata
+                                                                    ?.allUsers?[
+                                                                        index]
+                                                                    .role) ==
                                                                 '6'
                                                             ? 'Medician'
-                                                            : (alldata?.allUsers?[index].role) ==
+                                                            : (alldata
+                                                                        ?.allUsers?[
+                                                                            index]
+                                                                        .role) ==
                                                                     '7'
                                                                 ? 'Nutritionist'
-                                                                : (alldata?.allUsers?[index].role) ==
+                                                                : (alldata
+                                                                            ?.allUsers?[
+                                                                                index]
+                                                                            .role) ==
                                                                         '8'
                                                                     ? 'Fitness Trainer'
                                                                     : 'Personal Trainer'
@@ -272,7 +287,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       Expanded(
                                         child: GestureDetector(
                                           onTap: () {
-Navigator.push(context, MaterialPageRoute(builder: (context) => Userprofile(uid:alldata?.allUsers?[index].uid,),));
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Userprofile(
+                                                    uid: alldata
+                                                        ?.allUsers?[index].uid,
+                                                  ),
+                                                ));
                                           },
                                           child: Container(
                                             alignment: Alignment.center,
@@ -338,7 +361,6 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Userprofile(uid:
       }
     });
   }
-
 
   TextStyle textStyle = TextStyle(
       color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: 'Meta1');

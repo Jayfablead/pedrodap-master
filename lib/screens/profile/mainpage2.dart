@@ -207,7 +207,7 @@ class _mainpage2State extends State<mainpage2> {
                       ),
                       CarouselSlider(
                         carouselController: _controller,
-                        items: alldata!.allUsers!.map((item) {
+                        items: alldata?.allUsers?.map((item) {
                           return GestureDetector(
                             onTap: () {
                               // Navigator.of(context).push(MaterialPageRoute(

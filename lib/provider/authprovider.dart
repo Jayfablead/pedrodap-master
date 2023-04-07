@@ -85,6 +85,20 @@ class authprovider with ChangeNotifier {
     responseJson = responses(response);
     return responseJson;
   }
+  Future<http.Response> chatpageapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=messages_list_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    return responseJson;
+  }
 
   Future<http.Response> allplayersapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=all_users_app';
