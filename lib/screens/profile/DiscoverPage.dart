@@ -300,7 +300,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                           child: Container(
                                             alignment: Alignment.center,
                                             width: 40.w,
-                                            height: 5.h,
+                                            height: 3.h,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -309,7 +309,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                                   color: Colors.white,
                                                 )),
                                             child: Text(
-                                              "View",
+                                              "View Profile",
                                               style: TextStyle(
                                                   fontSize: 14.sp,
                                                   color: Colors.white,
