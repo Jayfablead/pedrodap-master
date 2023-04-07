@@ -239,33 +239,22 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                           child: Text(
                                         alldata?.allUsers?[index].position ==
                                                 null
-                                            ? alldata?.allUsers![index].role ==
+                                            ? (alldata?.allUsers?[index].role)==
                                                     '2'
                                                 ? 'Player'
-                                                : alldata?.allUsers![index]
-                                                            .role ==
+                                                : (alldata?.allUsers?[index].role) ==
                                                         '3'
                                                     ? 'Coach'
-                                                    : alldata?.allUsers![index]
-                                                                .role ==
+                                                    : (alldata?.allUsers?[index].role) ==
                                                             '5'
                                                         ? 'Scouts'
-                                                        : alldata
-                                                                    ?.allUsers![
-                                                                        index]
-                                                                    .role ==
+                                                        : (alldata?.allUsers?[ index].role) ==
                                                                 '6'
                                                             ? 'Medician'
-                                                            : alldata
-                                                                        ?.allUsers![
-                                                                            index]
-                                                                        .role ==
+                                                            : (alldata?.allUsers?[index].role) ==
                                                                     '7'
                                                                 ? 'Nutritionist'
-                                                                : alldata
-                                                                            ?.allUsers![
-                                                                                index]
-                                                                            .role ==
+                                                                : (alldata?.allUsers?[index].role) ==
                                                                         '8'
                                                                     ? 'Fitness Trainer'
                                                                     : 'Personal Trainer'
@@ -283,116 +272,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       Expanded(
                                         child: GestureDetector(
                                           onTap: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  AlertDialog(
-                                                    shape:
-                                                    RoundedRectangleBorder(
-                                                        borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                            20),
-                                                        side: BorderSide(
-                                                            color: Colors
-                                                                .white)),
-                                                    backgroundColor:
-                                                    Color.fromARGB(
-                                                        255, 0, 0, 0),
-                                                    scrollable: true,
-                                                    content: Text(
-                                                      'Are You Sure You Want to Connect ?',
-                                                      style: TextStyle(
-                                                          fontSize: 11.sp,
-                                                          fontWeight:
-                                                          FontWeight.w400,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white),
-                                                    ),
-                                                    actions: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                          sendreqapi(index);
-
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          margin:
-                                                          EdgeInsets.all(
-                                                              2.w),
-                                                          padding:
-                                                          EdgeInsets.all(
-                                                              1.h),
-                                                          child: Text(
-                                                            'Yes',
-                                                            style: TextStyle(
-                                                                fontSize: 13.sp,
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .w400,
-                                                                fontFamily:
-                                                                'Meta1',
-                                                                color: Colors
-                                                                    .green),
-                                                          ),
-                                                          decoration:
-                                                          BoxDecoration(
-                                                              color: Colors
-                                                                  .black,
-                                                              border: Border
-                                                                  .all(
-                                                                color: Colors
-                                                                    .green,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  10)),
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          margin:
-                                                          EdgeInsets.all(
-                                                              1.w),
-                                                          padding:
-                                                          EdgeInsets.all(
-                                                              1.h),
-                                                          child: Text(
-                                                            'No',
-                                                            style: TextStyle(
-                                                                fontSize: 13.sp,
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .w400,
-                                                                fontFamily:
-                                                                'Meta1',
-                                                                color:
-                                                                Colors.red),
-                                                          ),
-                                                          decoration:
-                                                          BoxDecoration(
-                                                              color: Colors
-                                                                  .black,
-                                                              border: Border
-                                                                  .all(
-                                                                color: Colors
-                                                                    .red,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  10)),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                            );
+Navigator.push(context, MaterialPageRoute(builder: (context) => Userprofile(uid:alldata?.allUsers?[index].uid,),));
                                           },
                                           child: Container(
                                             alignment: Alignment.center,
@@ -406,7 +286,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                                   color: Colors.white,
                                                 )),
                                             child: Text(
-                                              "Connect",
+                                              "View",
                                               style: TextStyle(
                                                   fontSize: 14.sp,
                                                   color: Colors.white,
@@ -458,45 +338,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
       }
     });
   }
-  sendreqapi(int index) {
-    final Map<String, String> data = {};
-    data['action'] = 'create_connection_request';
-    data['login_user_id'] = userData!.userData!.uid.toString();
-    data['uid'] = alldata?.allUsers?[index].uid ?? '';
 
-    checkInternet().then((internet) async {
-      if (internet) {
-        authprovider().sendreqapi(data).then((Response response) async {
-          alldata = AllplayersModal.fromJson(json.decode(response.body));
-          if (response.statusCode == 200 && userData?.status == "success") {
-
-            Fluttertoast.showToast(
-                msg:
-                "Request Send Successfully",
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.greenAccent,
-                textColor: Colors.black,
-                fontSize: 16.0);
-            setState(() {
-              isloading = false;
-            });
-
-            await SaveDataLocal.saveLogInData(userData!);
-            print(userData?.status);
-
-            // buildErrorDialog(context, "", "Login Successfully");
-          } else {
-            isloading = false;
-          }
-        });
-      } else {
-        setState(() {
-          isloading = false;
-        });
-        buildErrorDialog(context, 'Error', "Internate Required");
-      }
-    });
-  }
 
   TextStyle textStyle = TextStyle(
       color: Colors.grey.shade500, fontSize: 12.sp, fontFamily: 'Meta1');

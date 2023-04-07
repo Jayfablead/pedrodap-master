@@ -62,6 +62,7 @@ class _mainpage2State extends State<mainpage2> {
 
   TextEditingController _search = TextEditingController();
   bool isloading = true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -126,7 +127,9 @@ class _mainpage2State extends State<mainpage2> {
                         height: 4.h,
                       ),
                       Text(
-                        "Hello " +( profiledata?.viewProfileDetails?.name  ?? '')+ ' !!',
+                        "Hello " +
+                            (profiledata?.viewProfileDetails?.name ?? '') +
+                            ' !!',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.sp,
@@ -423,7 +426,16 @@ class _mainpage2State extends State<mainpage2> {
                                         height: 2.h,
                                       ),
                                       GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Userprofile(
+                                                  uid: item.uid,
+                                                ),
+                                              ));
+                                        },
                                         child: Container(
                                           alignment: Alignment.center,
                                           width: 50.w,
@@ -435,7 +447,7 @@ class _mainpage2State extends State<mainpage2> {
                                               borderRadius:
                                                   BorderRadius.circular(20.sp)),
                                           child: Text(
-                                            "Connect",
+                                            "View",
                                             style: TextStyle(
                                                 fontSize: 14.sp,
                                                 color: Colors.white,
@@ -659,7 +671,9 @@ class _mainpage2State extends State<mainpage2> {
         buildErrorDialog(context, 'Error', "Internate Required");
       }
     });
-  }  profile() {
+  }
+
+  profile() {
     final Map<String, String> data = {};
     data['action'] = 'view_profile_details';
     data['uid'] = userData!.userData!.uid.toString();
@@ -673,11 +687,8 @@ class _mainpage2State extends State<mainpage2> {
             print('======================' +
                 profiledata!.viewProfileDetails!.about!);
             setState(() {
-
               isloading = false;
             });
-            print('===========================' +
-                profiledata!.viewProfileDetails!.video![0]);
 
             await SaveDataLocal.saveLogInData(userData!);
             print(userData?.status);
@@ -699,103 +710,102 @@ class _mainpage2State extends State<mainpage2> {
     });
   }
 
-  // click() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         titlePadding: EdgeInsets.only(bottom: 0.h),
-  //         // insetPadding: EdgeInsets.zero,
-  //         shape: RoundedRectangleBorder(
-  //             borderRadius: BorderRadius.all(Radius.circular(10.0))),
-  //         title: Container(
-  //           padding: EdgeInsets.only(left: 3.w, right: 0.w),
-  //           decoration: BoxDecoration(
-  //               color: Colors.black,
-  //               // color: Color(0xffb4776e6),
-  //               borderRadius: BorderRadius.only(
-  //                   topRight: Radius.circular(10.0),
-  //                   topLeft: Radius.circular(10.0))),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Text(
-  //                 "Search For?",
-  //                 style: TextStyle(
-  //                     color: Colors.white,
-  //                     fontWeight: FontWeight.bold,
-  //                      fontFamily: 'Meta1'),
-  //               ),
-  //               IconButton(
-  //                   onPressed: () {
-  //                     Navigator.of(context).pop();
-  //                   },
-  //                   icon: Icon(
-  //                     Icons.close,
-  //                     color: Colors.white,
-  //                   ))
-  //             ],
-  //           ),
-  //         ),
-  //         contentPadding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-  //         content: Container(
-  //           color: Colors.grey.shade800,
-  //           padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-  //           // height: 38.h,
-  //           child: GridView.builder(
-  //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //                   mainAxisSpacing: 2.w,
-  //                   crossAxisSpacing: 2.w,
-  //                   crossAxisCount: 3,
-  //                   childAspectRatio: 3 / 4),
-  //               shrinkWrap: true,
-  //               scrollDirection: Axis.vertical,
-  //               itemCount: data.length,
-  //               physics: ScrollPhysics(),
-  //               itemBuilder: (context, index) {
-  //                 return Container(
-  //                   padding: EdgeInsets.all(2.w),
-  //                   width: MediaQuery.of(context).size.width,
-  //                   child: Column(
-  //                     children: [
-  //                       Container(
-  //                         height: 12.w,
-  //                         width: 12.w,
-  //                         child: Image.asset(
-  //                           data[index].image.toString(),
-  //                           color: Colors.white,
-  //                         ),
-  //                       ),
-  //                       // CircleAvatar(
-  //                       //   backgroundColor: Colors.transparent,
-  //                       //     radius: 5.w,
-  //                       //     backgroundImage: AssetImage(
-  //                       //       data[index].image.toString(),
-  //                       //     )),
-  //                       SizedBox(
-  //                         height: 1.h,
-  //                       ),
-  //                       Text(
-  //                         data[index].name.toString(),
-  //                         maxLines: 2,
-  //                         overflow: TextOverflow.ellipsis,
-  //                         style: TextStyle(
-  //                             fontSize: 10.sp,
-  //                             fontWeight: FontWeight.bold,
-  //                              fontFamily: 'Meta1',
-  //                             color: Colors.white),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 );
-  //               }),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+// click() {
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return AlertDialog(
+//         titlePadding: EdgeInsets.only(bottom: 0.h),
+//         // insetPadding: EdgeInsets.zero,
+//         shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.all(Radius.circular(10.0))),
+//         title: Container(
+//           padding: EdgeInsets.only(left: 3.w, right: 0.w),
+//           decoration: BoxDecoration(
+//               color: Colors.black,
+//               // color: Color(0xffb4776e6),
+//               borderRadius: BorderRadius.only(
+//                   topRight: Radius.circular(10.0),
+//                   topLeft: Radius.circular(10.0))),
+//           child: Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               Text(
+//                 "Search For?",
+//                 style: TextStyle(
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                      fontFamily: 'Meta1'),
+//               ),
+//               IconButton(
+//                   onPressed: () {
+//                     Navigator.of(context).pop();
+//                   },
+//                   icon: Icon(
+//                     Icons.close,
+//                     color: Colors.white,
+//                   ))
+//             ],
+//           ),
+//         ),
+//         contentPadding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
+//         content: Container(
+//           color: Colors.grey.shade800,
+//           padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+//           // height: 38.h,
+//           child: GridView.builder(
+//               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                   mainAxisSpacing: 2.w,
+//                   crossAxisSpacing: 2.w,
+//                   crossAxisCount: 3,
+//                   childAspectRatio: 3 / 4),
+//               shrinkWrap: true,
+//               scrollDirection: Axis.vertical,
+//               itemCount: data.length,
+//               physics: ScrollPhysics(),
+//               itemBuilder: (context, index) {
+//                 return Container(
+//                   padding: EdgeInsets.all(2.w),
+//                   width: MediaQuery.of(context).size.width,
+//                   child: Column(
+//                     children: [
+//                       Container(
+//                         height: 12.w,
+//                         width: 12.w,
+//                         child: Image.asset(
+//                           data[index].image.toString(),
+//                           color: Colors.white,
+//                         ),
+//                       ),
+//                       // CircleAvatar(
+//                       //   backgroundColor: Colors.transparent,
+//                       //     radius: 5.w,
+//                       //     backgroundImage: AssetImage(
+//                       //       data[index].image.toString(),
+//                       //     )),
+//                       SizedBox(
+//                         height: 1.h,
+//                       ),
+//                       Text(
+//                         data[index].name.toString(),
+//                         maxLines: 2,
+//                         overflow: TextOverflow.ellipsis,
+//                         style: TextStyle(
+//                             fontSize: 10.sp,
+//                             fontWeight: FontWeight.bold,
+//                              fontFamily: 'Meta1',
+//                             color: Colors.white),
+//                       ),
+//                     ],
+//                   ),
+//                 );
+//               }),
+//         ),
+//       );
+//     },
+//   );
+// }
 }
-
 
 // ============================== Bottom NavigationBar incase if need ===================
 

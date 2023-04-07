@@ -659,6 +659,21 @@ class authprovider with ChangeNotifier {
 
     return responseJson;
   }
+  Future<http.Response> unfriendapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=disconnect_user';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
 
   Future<http.Response> rejectreqapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=reject_request_app';

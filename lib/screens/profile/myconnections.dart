@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Model/connectedModal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
@@ -11,6 +12,7 @@ import 'package:pedrodap/screens/profile/Chatpage.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Model/pendingreqModal.dart';
 import '../../Widget/buildErrorDialog.dart';
 import '../../Widget/const.dart';
 import '../../Widget/sharedpreferance.dart';
@@ -273,6 +275,7 @@ class _MyConnectionsState extends State<MyConnections> {
                                                                     ),
                                                                   ),
                                                                   onPressed: () {
+                                                                    unfriendapi(index);
                                                                     Navigator.of(
                                                                             context)
                                                                         .pop();
@@ -399,6 +402,45 @@ class _MyConnectionsState extends State<MyConnections> {
         authprovider().Connectionsapi(data).then((Response response) async {
           connections = ConnectedModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && connections?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            isloading = false;
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+  unfriendapi(int index) {
+    final Map<String, String> data = {};
+    data['action'] = 'disconnect_user';
+    data['uid'] = connections?.connectedUsers?[index].uid ?? '';
+    data['login_user_id'] = userData!.userData!.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().unfriendapi(data).then((Response response) async {
+          pending = PendingreqModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && pending?.status == "success") {
+            Fluttertoast.showToast(
+                msg:
+                "User Disconnected Successfully",
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
+           connectionsapi();
             setState(() {
               isloading = false;
             });

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Model/fetchplayermodal.dart';
 import 'package:pedrodap/Widget/buildErrorDialog.dart';
@@ -15,6 +16,7 @@ import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Model/allplayersmodal.dart';
 import '../../Model/userprofileModal.dart';
 import '../../Widget/Drawer.dart';
 import '../../Widget/const.dart';
@@ -253,7 +255,7 @@ class _UserprofileState extends State<Userprofile> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () {sendreqapi();},
                                 child: Container(
                                   alignment: Alignment.center,
                                   height: 9.h,
@@ -705,6 +707,45 @@ class _UserprofileState extends State<Userprofile> {
         authprovider().userprofapi(data).then((Response response) async {
           userprofile = Userprofilemodal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && userData?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            isloading = false;
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+  sendreqapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'create_connection_request';
+    data['login_user_id'] = userData!.userData!.uid.toString();
+    data['uid'] = widget.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().sendreqapi(data).then((Response response) async {
+          alldata = AllplayersModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && alldata?.status == "success") {
+
+            Fluttertoast.showToast(
+                msg:
+                "Request Send Successfully",
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.greenAccent,
+                textColor: Colors.black,
+                fontSize: 16.0);
             setState(() {
               isloading = false;
             });
