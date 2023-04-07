@@ -341,21 +341,23 @@ class _MyProfileState extends State<MyProfile> {
                                         SizedBox(
                                           width: 6.w,
                                         ),
-                                        Text(
-                                          profiledata?.viewProfileDetails
-                                                      ?.currentClub ==
-                                                  null
-                                              ? 'N/A'
-                                              : profiledata?.viewProfileDetails
-                                                      ?.currentClub ??
-                                                  '',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Meta1",
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 13.sp),
+                                        SizedBox(width: 40.w,
+                                          child: Text(
+                                            profiledata?.viewProfileDetails
+                                                        ?.currentClub ==
+                                                    null
+                                                ? 'N/A'
+                                                : profiledata?.viewProfileDetails
+                                                        ?.currentClub ??
+                                                    '',
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Meta1",
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 13.sp),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -384,21 +386,23 @@ class _MyProfileState extends State<MyProfile> {
                                         SizedBox(
                                           width: 4.w,
                                         ),
-                                        Text(
-                                          profiledata?.viewProfileDetails
-                                                      ?.previousClub ==
-                                                  null
-                                              ? 'N/A'
-                                              : profiledata?.viewProfileDetails
-                                                      ?.previousClub ??
-                                                  '',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Meta1",
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 13.sp),
+                                        SizedBox(width: 40.w,
+                                          child: Text(
+                                            profiledata?.viewProfileDetails
+                                                        ?.previousClub ==
+                                                    null
+                                                ? 'N/A'
+                                                : profiledata?.viewProfileDetails
+                                                        ?.previousClub ??
+                                                    '',
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Meta1",
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 13.sp),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -412,7 +416,7 @@ class _MyProfileState extends State<MyProfile> {
                           Row(
                             children: [
                               Icon(
-                                Icons.person_4_outlined,
+                                Icons.person_outline,
                                 color: Colors.white,
                               ),
                               SizedBox(width: 2.w),
@@ -489,30 +493,7 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                             ],
                           ),
-                          // SizedBox(
-                          //   height: 1.h,
-                          // ),
-                          // Container(
-                          //   height: 7.h,
-                          //   width: MediaQuery.of(context).size.width,
-                          //   padding: EdgeInsets.symmetric(horizontal: 3.w),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(15.0),
-                          //     color: Colors.white.withOpacity(0.15),
-                          //   ),
-                          //   child: TextField(
-                          //     readOnly: true,
-                          //     controller: _position,
-                          //     keyboardType: TextInputType.emailAddress,
-                          //     cursorColor: Colors.white,
-                          //     style: textStyle,
-                          //     decoration: InputDecoration(
-                          //         border: InputBorder.none,
-                          //         focusedBorder: InputBorder.none,
-                          //         hintText: 'Enter Your Position ',
-                          //         hintStyle: textStyle1),
-                          //   ),
-                          // ),
+
                           SizedBox(
                             height: 3.h,
                           ),
@@ -648,10 +629,12 @@ class _MyProfileState extends State<MyProfile> {
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                             downloadProgress) =>
-                                                        CircularProgressIndicator(
-                                                            value:
-                                                                downloadProgress
-                                                                    .progress),
+                                                        Container(height: 5.h,width: 10.w,
+                                                          child: CircularProgressIndicator(
+                                                              value:
+                                                                  downloadProgress
+                                                                      .progress),
+                                                        ),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Padding(

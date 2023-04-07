@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:pedrodap/Model/sleepsearchmodal.dart';
@@ -144,7 +145,7 @@ class _SleepScheduleState extends State<SleepSchedule> {
                                       ),
                                     )
                                   : Container(
-                                      height: 80.h,
+                                      height: 72.h,
                                       child: ListView.builder(
                                         itemCount: allsleep!
                                             .sleepScheduleDetails!.length,
@@ -332,7 +333,7 @@ class _SleepScheduleState extends State<SleepSchedule> {
                                       ),
                                     )
                                   : Container(
-                                      height: 80.h,
+                                      height: 60.h,
                                       child: ListView.builder(
                                         itemCount: searchsleep!
                                             .sleepScheduleDetails!.length,
@@ -420,7 +421,7 @@ class _SleepScheduleState extends State<SleepSchedule> {
                                                       color: Colors.white,
                                                     ),
                                                     SizedBox(
-                                                      width: 89.w,
+                                                      width: 80.w,
                                                       child: Text(
                                                         searchsleep!
                                                             .sleepScheduleDetails![
@@ -714,6 +715,7 @@ class _SleepScheduleState extends State<SleepSchedule> {
                                                           ),
                                                         ),
                                                         onPressed: () {
+                                                          addseep();
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
@@ -886,6 +888,63 @@ class _SleepScheduleState extends State<SleepSchedule> {
 
           if (response.statusCode == 200 && allsleep?.status == "success") {
             print(allsleep!.sleepScheduleDetails![0].reminders);
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
+  addseep() {
+    final Map<String, String> data = {};
+    data['action'] = 'add_sleep_schedule_app';
+    data['player_id'] = userData!.userData!.uid.toString();
+    data['time'] = _time.text.trim().toString();
+    data['note_title'] = _title.text.trim().toString();
+    data['note'] = _desc.text.trim().toString();
+    data['reminder'] = "1";
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().addsleepapi(data).then((Response response) async {
+          allsleep = SleepModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && allsleep?.status == "success") {
+
+           _title.text == '' || _desc.text == '' || _time.text == ''? Fluttertoast.showToast(
+             msg: 'Please Add Values',
+             toastLength: Toast.LENGTH_SHORT,
+             timeInSecForIosWeb: 1,
+             backgroundColor: Colors.black,
+             textColor: Colors.white,
+             fontSize: 11.sp,
+           ):
+           playerapi();
+           Fluttertoast.showToast(
+             msg: 'Schedule Added Successfully',
+             toastLength: Toast.LENGTH_SHORT,
+             timeInSecForIosWeb: 1,
+             backgroundColor: Colors.black,
+             textColor: Colors.white,
+             fontSize: 11.sp,
+           );
             setState(() {
               isloading = false;
             });

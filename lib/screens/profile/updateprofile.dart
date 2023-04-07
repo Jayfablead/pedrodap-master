@@ -240,7 +240,7 @@ class _EditProfileState extends State<EditProfile> {
                       },
                       onTap: null,
                       decoration: inputDecoration(
-                        icon: Icon(Icons.date_range),
+                        icon: Icon(Icons.date_range,color: Colors.grey,),
                         lable: "Experince",
                       )),
                   SizedBox(
@@ -257,7 +257,7 @@ class _EditProfileState extends State<EditProfile> {
                       return null;
                     },
                     decoration:
-                        inputDecoration(lable: "Age", icon: Icon(Icons.person)),
+                        inputDecoration(lable: "Age", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
                   ),
                   SizedBox(
                     height: 4.h,
@@ -278,7 +278,7 @@ class _EditProfileState extends State<EditProfile> {
                         lable: userData!.userData!.role == '2'
                             ? "Position "
                             : "Ocupation ",
-                        icon: Icon(Icons.person)),
+                        icon: Icon(Icons.person,color: Colors.grey,)),
                   ),
                   SizedBox(
                     height: 4.h,
@@ -295,7 +295,7 @@ class _EditProfileState extends State<EditProfile> {
                       return null;
                     },
                     decoration: inputDecoration(
-                        lable: "About", icon: Icon(Icons.info_outline_rounded)),
+                        lable: "About", icon: Icon(Icons.info_outline_rounded,color: Colors.grey,)),
                   ),
                   SizedBox(
                     height: 4.h,
@@ -453,7 +453,119 @@ class _EditProfileState extends State<EditProfile> {
                                                     .split('/');
                                                 it = parts.last.toString();
 
-                                                imgdlt();
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      AlertDialog(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                20),
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white)),
+                                                        backgroundColor:
+                                                        Color.fromARGB(
+                                                            255, 0, 0, 0),
+                                                        scrollable: true,
+                                                        content: Text(
+                                                          'Are You Sure You Want to Delete this Image? This Can\'t be Undone .',
+                                                          style: TextStyle(
+                                                              fontSize: 11.sp,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w400,
+                                                              fontFamily:
+                                                              'Meta1',
+                                                              color:
+                                                              Colors.white),
+                                                        ),
+                                                        actions: [
+                                                          InkWell(
+                                                            onTap: () {
+                                                             imgdlt();
+                                                              Navigator.of(
+                                                                  context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(2.w),
+                                                              padding:
+                                                              EdgeInsets
+                                                                  .all(1.h),
+                                                              child: Text(
+                                                                'Yes',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                    13.sp,
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                    fontFamily:
+                                                                    'Meta1',
+                                                                    color: Colors
+                                                                        .green),
+                                                              ),
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  border:
+                                                                  Border
+                                                                      .all(
+                                                                    color: Colors
+                                                                        .green,
+                                                                  ),
+                                                                  borderRadius:
+                                                                  BorderRadius.circular(
+                                                                      10)),
+                                                            ),
+                                                          ),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator.of(
+                                                                  context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(1.w),
+                                                              padding:
+                                                              EdgeInsets
+                                                                  .all(1.h),
+                                                              child: Text(
+                                                                'No',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                    13.sp,
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                    fontFamily:
+                                                                    'Meta1',
+                                                                    color: Colors
+                                                                        .red),
+                                                              ),
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  border:
+                                                                  Border
+                                                                      .all(
+                                                                    color: Colors
+                                                                        .red,
+                                                                  ),
+                                                                  borderRadius:
+                                                                  BorderRadius.circular(
+                                                                      10)),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                );
                                               },
                                               child: Container(
                                                 padding: EdgeInsets.all(2.w),
@@ -581,19 +693,126 @@ class _EditProfileState extends State<EditProfile> {
                                                 child:
                                                     Container(),
                                               )
-                                            : profplayer(
-                                                video: profiledata
-                                                        ?.viewProfileDetails
-                                                        ?.video ??
-                                                    '',
-                                              ),
+                                            : VideoPlayer(_controller)
                                       ),
                                       Positioned(
                                         left: 52.w,
                                         bottom: 17.h,
                                         child: InkWell(
                                           onTap: () {
-                                            viddlt();
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  AlertDialog(
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            20),
+                                                        side: BorderSide(
+                                                            color: Colors
+                                                                .white)),
+                                                    backgroundColor:
+                                                    Color.fromARGB(
+                                                        255, 0, 0, 0),
+                                                    scrollable: true,
+                                                    content: Text(
+                                                      'Are You Sure You Want to Delete this Video ? This Can\'t be Undone.',
+                                                      style: TextStyle(
+                                                          fontSize: 11.sp,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w400,
+                                                          fontFamily:
+                                                          'Meta1',
+                                                          color:
+                                                          Colors.white),
+                                                    ),
+                                                    actions: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                         viddlt();
+                                                          Navigator.of(
+                                                              context)
+                                                              .pop();
+                                                        },
+                                                        child: Container(
+                                                          margin: EdgeInsets
+                                                              .all(2.w),
+                                                          padding:
+                                                          EdgeInsets
+                                                              .all(1.h),
+                                                          child: Text(
+                                                            'Yes',
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                13.sp,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                                fontFamily:
+                                                                'Meta1',
+                                                                color: Colors
+                                                                    .green),
+                                                          ),
+                                                          decoration:
+                                                          BoxDecoration(
+                                                              color: Colors
+                                                                  .black,
+                                                              border:
+                                                              Border
+                                                                  .all(
+                                                                color: Colors
+                                                                    .green,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(
+                                                                  10)),
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Navigator.of(
+                                                              context)
+                                                              .pop();
+                                                        },
+                                                        child: Container(
+                                                          margin: EdgeInsets
+                                                              .all(1.w),
+                                                          padding:
+                                                          EdgeInsets
+                                                              .all(1.h),
+                                                          child: Text(
+                                                            'No',
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                13.sp,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                                fontFamily:
+                                                                'Meta1',
+                                                                color: Colors
+                                                                    .red),
+                                                          ),
+                                                          decoration:
+                                                          BoxDecoration(
+                                                              color: Colors
+                                                                  .black,
+                                                              border:
+                                                              Border
+                                                                  .all(
+                                                                color: Colors
+                                                                    .red,
+                                                              ),
+                                                              borderRadius:
+                                                              BorderRadius.circular(
+                                                                  10)),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                            );
                                           },
                                           child: Container(
                                             padding: EdgeInsets.all(2.w),
@@ -662,10 +881,9 @@ class _EditProfileState extends State<EditProfile> {
                       Center(
                         child: InkWell(
                           onTap: () async {
-                            playerapi();
-                            // playerapi1();
-                            // playerapi2();
-                            EasyLoading.show(status: 'Updating Profile ...');
+                         _user.text == '' || _pos.text == '' || _about.text == '' || _age.text == '' || _exp.text == '' ?buildErrorDialog(context, "Error", 'Please Add All Details'):   playerapi();
+
+
                           },
                           child: Container(
                             padding: EdgeInsets.all(3.w),
@@ -795,6 +1013,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   playerapi() {
+
     final Map<String, String> data = {};
     data['action'] = 'update_profile_app';
     data['uid'] = userData!.userData!.uid.toString();
@@ -809,6 +1028,7 @@ class _EditProfileState extends State<EditProfile> {
 
     checkInternet().then((internet) async {
       if (internet) {
+        EasyLoading.show(status: 'Updating Profile ...');
         authprovider().updateprofileapi(data).then((Response response) async {
           profiledata = ProfileModal.fromJson(json.decode(response.body));
 
@@ -833,79 +1053,7 @@ class _EditProfileState extends State<EditProfile> {
     });
   }
 
-  // playerapi1() {
-  //   final Map<String, String> data = {};
-  //   data['action'] = 'update_profile_app';
-  //
-  //   data['profile_image'] =
-  //       imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
-  //
-  //   data['video'] = videofile != null ? videofile!.path : "";
-  //
-  //   checkInternet().then((internet) async {
-  //     if (internet) {
-  //       authprovider().updateprofileapi(data).then((Response response) async {
-  //         profiledata = ProfileModal.fromJson(json.decode(response.body));
-  //
-  //         if (response.statusCode == 200 && profiledata?.status == "success") {
-  //           await SaveDataLocal.saveLogInData(userData!);
-  //           playerapi();
-  //           Navigator.of(context).pushReplacement(
-  //             MaterialPageRoute(
-  //               builder: (context) => MyProfile(),
-  //             ),
-  //           );
-  //           print(userData?.status);
-  //           print(userData!.userData!.uid);
-  //
-  //           // buildErrorDialog(context, "", "Login Successfully");
-  //         } else {
-  //           setState(() {});
-  //         }
-  //       });
-  //     } else {
-  //       setState(() {});
-  //       buildErrorDialog(context, 'Error', "Internate Required");
-  //     }
-  //   });
-  // }
-  //
-  // playerapi2() {
-  //   final Map<String, String> data = {};
-  //   data['action'] = 'update_profile_app';
-  //
-  //   data['profile_image'] =
-  //       imagefile != null ? imagefile!.path : widget.profile?.toString() ?? "";
-  //
-  //   data['video'] = videofile != null ? videofile!.path : "";
-  //
-  //   checkInternet().then((internet) async {
-  //     if (internet) {
-  //       authprovider().updateprofileapi2(data).then((Response response) async {
-  //         profiledata = ProfileModal.fromJson(json.decode(response.body));
-  //
-  //         if (response.statusCode == 200 && profiledata?.status == "success") {
-  //           await SaveDataLocal.saveLogInData(userData!);
-  //           playerapi();playerapi2();
-  //           Navigator.of(context).pushReplacement(
-  //             MaterialPageRoute(
-  //               builder: (context) => MyProfile(),
-  //             ),
-  //           );
-  //           print(userData?.status);
-  //           print(userData!.userData!.uid);
-  //
-  //           // buildErrorDialog(context, "", "Login Successfully");
-  //         } else {
-  //           setState(() {});
-  //         }
-  //       });
-  //     } else {
-  //       setState(() {});
-  //       buildErrorDialog(context, 'Error', "Internate Required");
-  //     }
-  //   });
-  // }
+
   viddlt() {
     final Map<String, String> data = {};
     data['action'] = 'delete_video';
@@ -996,43 +1144,3 @@ class _EditProfileState extends State<EditProfile> {
     });
   }
 }
-// view() {
-//   final Map<String, String> data = {};
-//   data['action'] = "view_profile";
-//   data['user_id'] = (userData?.data?.uId).toString();
-//   checkInternet().then((internet) async {
-//     if (internet) {
-//       authprovider().viewapi(data).then((Response response) async {
-//         viewmodel = ViewModel.fromJson(json.decode(response.body));
-//         if (response.statusCode == 200 && viewmodel?.status == "1") {
-//           setState(() {
-//             //
-//           });
-//           // await SaveDataLocal.saveLogInData(userData!);
-//           _user.text = viewmodel?.data?.fullname ?? "";
-//           _email.text = (viewmodel?.data?.email) ?? "";
-//           _phone.text = (viewmodel?.data?.phoneno) ?? "";
-//           _add.text = (viewmodel?.data?.address) ?? "";
-//           _expertise.text = (viewmodel?.data?.expertise) ?? "";
-//           _emergency_contact.text = (viewmodel?.data?.emergencyContact) ?? "";
-//           _additionaltravel.text =
-//               (viewmodel?.data?.additionalTraveller) ?? "";
-//           _date.text = (viewmodel?.data?.dateOfBirth) ?? "";
-//           // await SaveDataLocal.getDataFromLocal(userData!);
-//           if (kDebugMode) {}
-//           // buildErrorDialog(context, "","Login Successfully");
-//           //
-//           //
-//           // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>login()));
-//         } else {
-//           // buildErrorDialog(context, "","Invalid login");
-//         }
-//       });
-//     } else {
-//       setState(() {
-//         //
-//       });
-//       buildErrorDialog(context, 'Error', "Internate Required");
-//     }
-//   });
-// }

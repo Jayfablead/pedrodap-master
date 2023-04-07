@@ -19,6 +19,7 @@ import 'package:pedrodap/screens/profile/viewnutrition.dart';
 import 'package:sizer/sizer.dart';
 
 import 'Model/connectedModal.dart';
+import 'Model/profileModal.dart';
 import 'Widget/buildErrorDialog.dart';
 import 'Widget/const.dart';
 import 'Widget/sharedpreferance.dart';
@@ -53,6 +54,7 @@ class _StaticHomePageState extends State<StaticHomePage> {
     // TODO: implement initState
     super.initState();
     connectionsapi();
+    playerapi();
   }
 
   @override
@@ -120,9 +122,10 @@ class _StaticHomePageState extends State<StaticHomePage> {
                                 height: 0.5.h,
                               ),
                               Text(
-                                userData!.userData!.age == 0
+                                profiledata?.viewProfileDetails?.age == null
                                     ? 'N/A'
-                                    : userData!.userData!.age.toString() +
+                                    : profiledata?.viewProfileDetails?.age ??
+                                    '' +
                                         ' yrs old',
                                 style: TextStyle(
                                     color: Colors.white,
@@ -422,6 +425,41 @@ class _StaticHomePageState extends State<StaticHomePage> {
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
             isloading = false;
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+  playerapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'view_profile_details';
+    data['uid'] = userData?.userData?.uid ?? '';
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().profileapi(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && userData?.status == "success") {
+            setState(() {
+
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData?.userData?.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
           }
         });
       } else {

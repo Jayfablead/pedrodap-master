@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -21,23 +23,23 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
-       	<true/>
-       	<key>NSCameraUsageDescription</key>
-       	<string>This app requires access to the camera.</string>
-       	<key>NSLocationAlwaysUsageDescription</key>
-       	<string>Escaping Plan location need location permission for getting location </string>
-       	<key>NSLocationUsageDescription</key>
-       	<string>Escaping Planlocation need location permission for getting location </string>
-       	<key>NSLocationWhenInUseUsageDescription</key>
-       	<string>Escaping Planlocation need location permission for getting location </string>
-       	<key>NSMicrophoneUsageDescription</key>
-       	<string>This app does not require access to the microphone.</string>
-       	<key>NSPhotoLibraryUsageDescription</key>
-       	<string>This app requires access to the photo library.</string>
-       	<key>UIApplicationSupportsIndirectInputEvents</key>
-       	<true/>
+	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Escaping Plan location need location permission for getting location </string>
+	<key>NSLocationUsageDescription</key>
+	<string>Escaping Planlocation need location permission for getting location </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Escaping Planlocation need location permission for getting location </string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app does not require access to the microphone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -57,9 +59,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>

@@ -112,7 +112,7 @@ class _MyConnectionsState extends State<MyConnections> {
                   height: 3.h,
                 ),
                 connections!.connectedUsers!.isEmpty
-                    ? Container(
+                    ? Container(height: 80.h,
                   child: Center(
                       child: Text(
                         'No Connections Available',

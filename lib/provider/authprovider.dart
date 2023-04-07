@@ -180,6 +180,22 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
+  Future<http.Response> addsleepapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=add_sleep_schedule_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
   Future<http.Response> addtraintodoapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=add_to_do_tr_n_notes_app';
     var responseJson;
@@ -600,6 +616,38 @@ class authprovider with ChangeNotifier {
 
   Future<http.Response> pendingreqapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=pending_request_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> acceptreqapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=accept_request_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> rejectreqapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=reject_request_app';
     var responseJson;
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
