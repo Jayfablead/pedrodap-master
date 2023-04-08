@@ -22,6 +22,7 @@ import '../Model/chatmodal.dart';
 import '../Model/connectedModal.dart';
 import '../Model/fetchplayermodal.dart';
 import '../Model/pendingreqModal.dart';
+import '../Model/searchchatModal.dart';
 import '../Model/searchfittModal.dart';
 import '../Model/searchfittodoModal.dart';
 import '../Model/sleepsearchmodal.dart';
@@ -63,5 +64,6 @@ SleepsearchModal? searchsleep;
 PendingreqModal? pending;
 ConnectedModal? connections;
 chatPageModal? allchats;
+SearchchatModal? searchchat;
 
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';

@@ -181,7 +181,14 @@ class _UserprofileState extends State<Userprofile> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              '18',
+                                              userprofile?.userProfileDetails
+                                                          ?.age ==
+                                                      null
+                                                  ? 'N/A'
+                                                  : userprofile
+                                                          ?.userProfileDetails
+                                                          ?.age ??
+                                                      '',
                                               style: TextStyle(
                                                 fontSize: 6.w,
                                                 fontWeight: FontWeight.w500,
@@ -205,7 +212,9 @@ class _UserprofileState extends State<Userprofile> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              '18',
+                                              (userprofile?.userProfileDetails
+                                                      ?.connections)
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontSize: 6.w,
                                                 fontWeight: FontWeight.w500,
@@ -288,7 +297,9 @@ class _UserprofileState extends State<Userprofile> {
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => MessagePage(
+                                      builder: (context) => MessagePage(uid:userprofile!
+                                          .userProfileDetails!.uid
+                                          .toString(),
                                         image: userprofile!
                                             .userProfileDetails!.profilePic
                                             .toString(),
@@ -336,49 +347,105 @@ class _UserprofileState extends State<Userprofile> {
                           Divider(
                             color: Colors.white54,
                           ),
+
+
                           userprofile?.userProfileDetails?.role == "2"
                               ? Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Position : ',
-                                    style: TextStyle(
-                                      fontSize: 4.w,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Meta1',
-                                      color: Color(0xffc7c6c6),
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Position : ',
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Meta1',
+                                            color: Color(0xffc7c6c6),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 1.h),
-                              Container(
-                                // height: 25.h,
-                                width: MediaQuery.of(context).size.width,
-                                child: Text(
-                                  userprofile?.userProfileDetails
-                                      ?.position ==
-                                      null
-                                      ? 'N/A'
-                                      : userprofile?.userProfileDetails
-                                      ?.position ??
-                                      '',
-                                  style: textStyle,
-                                ),
-                              ),
-                            ],
-                          )
+                                    SizedBox(height: 1.h),
+                                    Container(
+                                      // height: 25.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Text(
+                                        userprofile?.userProfileDetails
+                                                    ?.position ==
+                                                null
+                                            ? 'N/A'
+                                            : userprofile?.userProfileDetails
+                                                    ?.position ??
+                                                '',
+                                        style: textStyle,
+                                      ),
+                                    ),
+                                  ],
+                                )
                               : Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Ocupation : ',
+                                          style: TextStyle(
+                                            fontSize: 4.w,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Meta1',
+                                            color: Color(0xffc7c6c6),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 1.h),
+                                    Container(
+                                      // height: 25.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Text(
+                                        (userprofile?.userProfileDetails
+                                                    ?.role) ==
+                                                '3'
+                                            ? 'Coach'
+                                            : (userprofile?.userProfileDetails
+                                                        ?.role) ==
+                                                    '5'
+                                                ? 'Scouts'
+                                                : (userprofile
+                                                            ?.userProfileDetails
+                                                            ?.role) ==
+                                                        '6'
+                                                    ? 'Medician'
+                                                    : (userprofile
+                                                                ?.userProfileDetails
+                                                                ?.role) ==
+                                                            '7'
+                                                        ? 'Nutritionist'
+                                                        : (userprofile
+                                                                    ?.userProfileDetails
+                                                                    ?.role) ==
+                                                                '8'
+                                                            ? 'Fitness Trainer'
+                                                            : 'Personal Trainer',
+                                        style: textStyle,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Column(
                             children: [
                               Row(
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Ocupation : ',
+                                    'Experience : ',
                                     style: TextStyle(
                                       fontSize: 4.w,
                                       fontWeight: FontWeight.w500,
@@ -393,30 +460,10 @@ class _UserprofileState extends State<Userprofile> {
                                 // height: 25.h,
                                 width: MediaQuery.of(context).size.width,
                                 child: Text(
-                                  (userprofile?.userProfileDetails
-                                      ?.role) ==
-                                      '3'
-                                      ? 'Coach'
-                                      : (userprofile?.userProfileDetails
-                                      ?.role) ==
-                                      '5'
-                                      ? 'Scouts'
-                                      : (userprofile
-                                      ?.userProfileDetails
-                                      ?.role) ==
-                                      '6'
-                                      ? 'Medician'
-                                      : (userprofile
-                                      ?.userProfileDetails
-                                      ?.role) ==
-                                      '7'
-                                      ? 'Nutritionist'
-                                      : (userprofile
-                                      ?.userProfileDetails
-                                      ?.role) ==
-                                      '8'
-                                      ? 'Fitness Trainer'
-                                      : 'Personal Trainer',
+                                  userprofile!.userProfileDetails!.experience == null
+                                      ? 'N/A'
+                                      : userprofile!.userProfileDetails!.experience
+                                      .toString(),
                                   style: textStyle,
                                 ),
                               ),
@@ -456,7 +503,6 @@ class _UserprofileState extends State<Userprofile> {
                               ),
                             ],
                           ),
-
                           SizedBox(height: 1.h),
                           userprofile!.userProfileDetails!.role == '2'
                               ? Column(

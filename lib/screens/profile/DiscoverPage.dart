@@ -129,23 +129,17 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                     mainAxisSpacing: 4.w,
                                     crossAxisSpacing: 5.w,
                                     crossAxisCount: 2,
-                                    childAspectRatio: 2.3 / 4),
+                                    childAspectRatio: 2.1 / 3.6),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: alldata?.allUsers?.length,
                             physics: ScrollPhysics(),
                             itemBuilder: (context, index) {
                               return InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Userprofile(
-                                      uid: alldata?.allUsers?[index].uid,
-                                    ),
-                                  ));
-                                },
+
                                 child: Container(
                                   padding: EdgeInsets.all(3.w),
-                                  height: 100.h,
+                                  height: 10.h,
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                       border: Border.all(
@@ -225,7 +219,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       ),
                                       alldata?.allUsers?[index].clubName == null
                                           ? Container()
-                                          : Expanded(
+                                          : alldata?.allUsers?[index].role == '2' ?Expanded(
                                               child: Text(
                                               alldata?.allUsers?[index]
                                                       .clubName ??
@@ -237,7 +231,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                                   fontWeight: FontWeight.w400,
                                                   fontFamily: 'Meta1',
                                                   color: Colors.grey.shade500),
-                                            )),
+                                            )):Container(),
                                       Expanded(
                                           child: Text(
                                         alldata?.allUsers?[index].position ==
@@ -284,38 +278,34 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                             fontFamily: 'Meta1',
                                             color: Colors.grey.shade500),
                                       )),
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Userprofile(
-                                                    uid: alldata
-                                                        ?.allUsers?[index].uid,
-                                                  ),
-                                                ));
-                                          },
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            width: 40.w,
-                                            height: 3.h,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        20.sp),
-                                                border: Border.all(
-                                                  color: Colors.white,
-                                                )),
-                                            child: Text(
-                                              "View Profile",
-                                              style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                  color: Colors.white,
-                                                  fontFamily: 'Meta1',
-                                                  fontWeight: FontWeight.w600),
-                                            ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Userprofile(
+                                                  uid: alldata
+                                                      ?.allUsers?[index].uid,
+                                                ),
+                                              ));
+                                        },
+                                        child: Container(height: 5.5.h,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      20.sp),
+                                              border: Border.all(
+                                                color: Colors.white,
+                                              )),
+                                          child: Text(
+                                            "View Profile",
+                                            style: TextStyle(
+                                                fontSize: 14.sp,
+                                                color: Colors.white,
+                                                fontFamily: 'Meta1',
+                                                fontWeight: FontWeight.w600),
                                           ),
                                         ),
                                       )

@@ -36,10 +36,11 @@ class ViewProfileDetails {
   String? experience;
   List<String>? images;
   String? video;
-  String? socialLink;
-  String? occupation;
+  Null? socialLink;
+  Null? occupation;
   String? position;
   String? previousClub;
+  int? messagesCount;
   String? currentClub;
 
   ViewProfileDetails(
@@ -61,6 +62,7 @@ class ViewProfileDetails {
         this.occupation,
         this.position,
         this.previousClub,
+        this.messagesCount,
         this.currentClub});
 
   ViewProfileDetails.fromJson(Map<String, dynamic> json) {
@@ -82,6 +84,7 @@ class ViewProfileDetails {
     occupation = json['occupation'];
     position = json['position'];
     previousClub = json['previous_club'];
+    messagesCount = json['messages_count'];
     currentClub = json['current_club'];
   }
 
@@ -105,6 +108,7 @@ class ViewProfileDetails {
     data['occupation'] = this.occupation;
     data['position'] = this.position;
     data['previous_club'] = this.previousClub;
+    data['messages_count'] = this.messagesCount;
     data['current_club'] = this.currentClub;
     return data;
   }

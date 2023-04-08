@@ -269,7 +269,7 @@ class _MyProfileState extends State<MyProfile> {
                           Center(
                               child: InkWell(
                                   onTap: () {
-                                    Navigator.of(context).push(
+                                    Navigator.push(context,
                                       MaterialPageRoute(
                                         builder: (context) => EditProfile(
                                             about: profiledata!.viewProfileDetails!.about ??

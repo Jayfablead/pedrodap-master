@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -9,6 +10,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -17,10 +19,17 @@ import 'package:intl/intl.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Model/profileModal.dart';
+import '../../Widget/buildErrorDialog.dart';
+import '../../Widget/const.dart';
+import '../../Widget/sharedpreferance.dart';
+import '../../provider/authprovider.dart';
+
 class MessagePage extends StatefulWidget {
   String? image;
   String? name;
-  MessagePage({this.image, this.name});
+  String? uid;
+  MessagePage({required this.image,required this.name, required this.uid} );
 
   @override
   State<MessagePage> createState() => _MessagePageState();
@@ -37,6 +46,7 @@ class _MessagePageState extends State<MessagePage> {
   String? date;
   int? diff;
   bool emojiShowing = false;
+  bool isloading = true;
   File? file;
   Timer? timer;
 
@@ -816,7 +826,41 @@ class _MessagePageState extends State<MessagePage> {
       ),
     );
   }
+  playerapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'view_profile_details';
+    data['login_user_id'] = userData?.userData?.uid ?? '';
+    data['uid'] = userData?.userData?.uid ?? '';
 
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().profileapi(data).then((Response response) async {
+          profiledata = ProfileModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && userData?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+            print(userData?.userData?.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
   // void permission() async {
   //   Map<Permission, PermissionStatus> map =
   //       await [Permission.storage, Permission.camera].request();

@@ -390,7 +390,7 @@ class _mainpage2State extends State<mainpage2> {
                                                 Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        MessagePage(
+                                                        MessagePage(uid:'121',
                                                             image:
                                                                 'assets/10.png',
                                                             name: item.name),

@@ -720,4 +720,36 @@ class authprovider with ChangeNotifier {
 
     return responseJson;
   }
+
+  Future<http.Response> Chatapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=chat_messages_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> Searchchatapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=search_messages';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
 }

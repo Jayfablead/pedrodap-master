@@ -274,7 +274,7 @@ class _StaticHomePageState extends State<StaticHomePage> {
                                     height: 0.5.h,
                                   ),
                                   Text(
-                                    '5',
+                                    (profiledata?.viewProfileDetails?.messagesCount).toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'Meta',

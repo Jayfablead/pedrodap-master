@@ -27,7 +27,7 @@ SuccessDialog(BuildContext context, String title, String contant,
     ),
     onPressed: () {
       // if (callback == null) {
-      Navigator.of(context).pushReplacement(
+      Navigator.pushReplacement(context,
         MaterialPageRoute(
           builder: (context) => MyProfile(),
         ),
