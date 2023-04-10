@@ -192,7 +192,7 @@ class _TrainingReplyPageState extends State<TrainingReplyPage> {
                                   ),
                                 )
                               : SizedBox(
-                                  height: 67.h,
+                                  height: 65.h,
                                   child: ListView.builder(
                                     itemBuilder: (context, index) {
                                       return Padding(
