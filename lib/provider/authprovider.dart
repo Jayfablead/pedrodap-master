@@ -85,6 +85,7 @@ class authprovider with ChangeNotifier {
     responseJson = responses(response);
     return responseJson;
   }
+
   Future<http.Response> chatpageapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=messages_list_app';
     var responseJson;
@@ -114,6 +115,7 @@ class authprovider with ChangeNotifier {
     responseJson = responses(response);
     return responseJson;
   }
+
   Future<http.Response> sendreqapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=create_connection_request';
     var responseJson;
@@ -673,6 +675,7 @@ class authprovider with ChangeNotifier {
 
     return responseJson;
   }
+
   Future<http.Response> unfriendapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=disconnect_user';
     var responseJson;
@@ -721,8 +724,24 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
-  Future<http.Response> Chatapi(Map<String, String> bodyData) async {
+  Future<http.Response> Showchatapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=chat_messages_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
+  Future<http.Response> Sendchatapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=send_message_app';
     var responseJson;
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)

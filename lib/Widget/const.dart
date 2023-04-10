@@ -18,6 +18,7 @@ import 'package:pedrodap/Model/sleepmodal.dart';
 import 'package:pedrodap/Model/userprofileModal.dart';
 import 'package:pedrodap/Model/viewtodoModal.dart';
 
+import '../Model/Viewmsgmodal.dart';
 import '../Model/chatmodal.dart';
 import '../Model/connectedModal.dart';
 import '../Model/fetchplayermodal.dart';
@@ -65,5 +66,6 @@ PendingreqModal? pending;
 ConnectedModal? connections;
 chatPageModal? allchats;
 SearchchatModal? searchchat;
+ViewchatmsgModal? viewmsgs;
 
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';
