@@ -740,20 +740,43 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
-  Future<http.Response> Sendchatapi(Map<String, String> bodyData) async {
+  Future<http.Response> Sendchatapi(Map<String,String>bodyData) async {
     const url = '$baseUrl/?action=send_message_app';
     var responseJson;
-    final response = await http
-        .post(Uri.parse(url), body: bodyData, headers: headers)
-        .timeout(
-      const Duration(seconds: 30),
-      onTimeout: () {
-        throw const SocketException('Something went wrong');
-      },
-    );
-    responseJson = responses(response);
+    if (bodyData['type'] == "1")
+    {
+      final response = await http.post(Uri.parse(url), body:bodyData , headers:headers )
+          .timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          throw const SocketException('Something went wrong');
+        },
+      );
+      responseJson = responses(response);
+      return responseJson;
+    }
+    else{
+      try {
 
-    return responseJson;
+
+        final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+        imageUploadRequest.headers.addAll(headers);
+        if (bodyData['message']?.isNotEmpty ?? false) {
+          final file = await http.MultipartFile.fromPath(
+              'message', bodyData['message']?? '');
+          imageUploadRequest.files.add(file);
+        }
+
+        imageUploadRequest.fields.addAll(bodyData);
+        final streamResponse = await imageUploadRequest.send();
+
+        responseJson = responses(await http.Response.fromStream(streamResponse));
+
+      } on SocketException {
+        throw FetchDataException('No Internet connection');
+      }
+      return responseJson;
+    }
   }
 
   Future<http.Response> Searchchatapi(Map<String, String> bodyData) async {

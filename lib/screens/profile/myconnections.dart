@@ -373,14 +373,16 @@ class _MyConnectionsState extends State<MyConnections> {
                                                         builder: (context) =>
                                                             MessagePage(
                                                                 uid: connections?.connectedUsers?[index].uid ?? '',
-                                                                image: profile[
-                                                                        index]
-                                                                    .image
-                                                                    .toString(),
-                                                                name: profile[
-                                                                        index]
-                                                                    .name
-                                                                    .toString()),
+                                                                image: connections
+                                                                    ?.connectedUsers?[
+                                                                index]
+                                                                    .profilePic ??
+                                                                    '',
+                                                                name: connections
+                                                                    ?.connectedUsers?[
+                                                                index]
+                                                                    .name ??
+                                                                    ''),
                                                       ));
                                                     },
                                                     icon: Icon(

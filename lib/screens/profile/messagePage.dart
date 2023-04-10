@@ -19,6 +19,7 @@ import 'package:intl/intl.dart';
 import 'package:intl/intl.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
+import 'package:pedrodap/screens/profile/chatvideo.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Model/Viewmsgmodal.dart';
@@ -42,7 +43,7 @@ class MessagePage extends StatefulWidget {
 class _MessagePageState extends State<MessagePage> {
   TextEditingController _chat = TextEditingController();
   int? type;
-
+  File? _pickedFile = null;
   File? imagefile;
   File? pdffile;
   ImagePicker _picker = ImagePicker();
@@ -90,8 +91,13 @@ class _MessagePageState extends State<MessagePage> {
     showmessageapi();
     print(widget.uid ?? '');
     senderid = userData?.userData?.uid.toString();
-   
 
+    // _scrollController.animateTo(
+    //     _scrollController.position.minScrollExtent,
+    //     duration: Duration(milliseconds: 200),
+    //     curve: Curves.easeInOut
+    // );
+    // _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   }
 
   @override
@@ -107,7 +113,11 @@ class _MessagePageState extends State<MessagePage> {
           automaticallyImplyLeading: false,
           leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatPage(),));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatPage(),
+                  ));
             },
             icon: Icon(
               Icons.arrow_back_ios_new_rounded,
@@ -169,220 +179,250 @@ class _MessagePageState extends State<MessagePage> {
                         children: [
                           Column(
                             children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(30.0),
-                                        topLeft: Radius.circular(30.0))),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 80.h,
-                                          child: ListView.builder(
-                                              itemCount: viewmsgs?.data?.length,
-                                              itemBuilder: (context, index) {
-                                                return (senderid ==
-                                                        viewmsgs?.data?[index]
-                                                            .fromUserId
-                                                            .toString())
-                                                    ? Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 26.w,
-                                                                right: 3.w,
-                                                                top: 1.h),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      left: 2.w,
-                                                                      top: 2.h,
-                                                                      right:
-                                                                          2.w),
-                                                              padding: EdgeInsets
-                                                                  .symmetric(
-                                                                      horizontal:
-                                                                          5.w,
-                                                                      vertical:
-                                                                          1.h),
-                                                              // width: 75.w,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                borderRadius: BorderRadius.only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            20.0),
-                                                                    topLeft:
-                                                                        Radius.circular(
-                                                                            20.0),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            20.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            0.0)),
-                                                                shape: BoxShape
-                                                                    .rectangle,
-                                                              ),
-                                                              child: Text(
-                                                                  (viewmsgs
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .message)
-                                                                      .toString(),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontFamily:
-                                                                          'Meta1',
-                                                                      fontSize:
-                                                                          12.sp)),
-                                                            ),
-                                                            Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          1.w),
-                                                              child: Text(
-                                                                (viewmsgs
-                                                                        ?.data?[
-                                                                            index]
-                                                                        .time)
-                                                                    .toString(),
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white70,
-                                                                    fontFamily:
-                                                                        'Meta1',
-                                                                    fontSize:
-                                                                        10.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal,
-                                                                    fontStyle:
-                                                                        FontStyle
-                                                                            .normal),
-                                                              ),
-                                                            ),
-                                                            // Image.asset("assets/profile.png",height: 5.w,width: 5.w,fit: BoxFit.cover,),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    : Padding(
-                                                        padding:
-                                                            EdgeInsets.only(right: 25.w,
-                                                                left: 3.w,
-                                                                top: 1.h),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      left: 2.w,
-                                                                      top: 2.h,
-                                                                      right:
-                                                                          2.w),
-                                                              padding: EdgeInsets
-                                                                  .symmetric(
-                                                                      horizontal:
-                                                                          5.w,
-                                                                      vertical:
-                                                                          1.h),
-                                                              // width: 40.w,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Colors
-                                                                    .white12,
-                                                                borderRadius: BorderRadius.only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            0.0),
-                                                                    topLeft:
-                                                                        Radius.circular(
-                                                                            20.0),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            20.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            20.0)),
-                                                                shape: BoxShape
-                                                                    .rectangle,
-                                                              ),
-                                                              child: Text(
-                                                                  (viewmsgs
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .message)
-                                                                      .toString(),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontFamily:
-                                                                          'Meta1',
-                                                                      fontSize:
-                                                                          12.sp)),
-                                                            ),
-                                                            Padding(
+                              viewmsgs?.data?.length == 0
+                                  ? Container(
+                                      height: 85.h,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'No Messages Available',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontFamily: 'Meta1',
+                                          color: Color(0xffffffff),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(30.0),
+                                              topLeft: Radius.circular(30.0))),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 80.h,
+                                                child: ListView.builder(
+                                                    controller:
+                                                        _scrollController,
+                                                    itemCount:
+                                                        viewmsgs?.data?.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return (senderid ==
+                                                              viewmsgs
+                                                                  ?.data?[index]
+                                                                  .fromUserId
+                                                                  .toString())
+                                                          ? Padding(
                                                               padding: EdgeInsets
                                                                   .only(
                                                                       left:
-                                                                          1.w),
-                                                              child: Text(
-                                                                (viewmsgs
-                                                                        ?.data?[
-                                                                            index]
-                                                                        .time)
-                                                                    .toString(),
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white70,
-                                                                    fontFamily:
-                                                                        'Meta1',
-                                                                    fontSize:
-                                                                        10.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal,
-                                                                    fontStyle:
-                                                                        FontStyle
-                                                                            .normal),
+                                                                          26.w,
+                                                                      right:
+                                                                          3.w,
+                                                                      top: 1.h),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Container(
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            2.w,
+                                                                        top:
+                                                                            2.h,
+                                                                        right: 2
+                                                                            .w),
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            5.w,
+                                                                        vertical:
+                                                                            1.h),
+                                                                    // width: 75.w,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      borderRadius: BorderRadius.only(
+                                                                          bottomLeft: Radius.circular(
+                                                                              20.0),
+                                                                          topLeft: Radius.circular(
+                                                                              20.0),
+                                                                          topRight: Radius.circular(
+                                                                              20.0),
+                                                                          bottomRight:
+                                                                              Radius.circular(0.0)),
+                                                                      shape: BoxShape
+                                                                          .rectangle,
+                                                                    ),
+                                                                    child: viewmsgs?.data?[index].messageType ==
+                                                                           "1"
+                                                                        ? Text(
+                                                                            (viewmsgs?.data?[index].message)
+                                                                                .toString(),
+                                                                            textAlign: TextAlign
+                                                                                .left,
+                                                                            style: TextStyle(
+                                                                                color: Colors.black,
+                                                                                fontFamily: 'Meta1',
+                                                                                fontSize: 12.sp))
+                                                                        : (viewmsgs?.data?[index].messageType) == '2'
+                                                                            ? ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                                child: CachedNetworkImage(
+                                                                                  fit: BoxFit.cover,
+                                                                                  imageUrl: (viewmsgs?.data?[index].message).toString(),
+                                                                                  progressIndicatorBuilder: (context, url, progress) => CircularProgressIndicator(),
+                                                                                  errorWidget: (context, url, error) => Image.asset(
+                                                                                    'assets/icons/user.png',
+                                                                                    color: Colors.white,
+                                                                                  ),
+                                                                                ),
+                                                                              )
+                                                                            : (viewmsgs?.data?[index].messageType) == '3'
+                                                                                ? Container(height: 35.h,child: ClipRRect(borderRadius: BorderRadius.circular(20),child: addvideo(vid:(viewmsgs?.data?[index].message).toString(),)))
+                                                                                : Container(),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        right: 1
+                                                                            .w),
+                                                                    child: Text(
+                                                                      (viewmsgs
+                                                                              ?.data?[index]
+                                                                              .time)
+                                                                          .toString(),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white70,
+                                                                          fontFamily:
+                                                                              'Meta1',
+                                                                          fontSize: 10
+                                                                              .sp,
+                                                                          fontWeight: FontWeight
+                                                                              .normal,
+                                                                          fontStyle:
+                                                                              FontStyle.normal),
+                                                                    ),
+                                                                  ),
+                                                                  // Image.asset("assets/profile.png",height: 5.w,width: 5.w,fit: BoxFit.cover,),
+                                                                ],
                                                               ),
                                                             )
-                                                          ],
-                                                        ),
-                                                      );
-                                              }),
-                                        ),
-                                        SizedBox(
-                                          height: 2.h,
-                                        )
-                                      ],
+                                                          : Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      right:
+                                                                          25.w,
+                                                                      left: 3.w,
+                                                                      top: 1.h),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Container(
+                                                                    margin: EdgeInsets.only(
+                                                                        left:
+                                                                            2.w,
+                                                                        top:
+                                                                            2.h,
+                                                                        right: 2
+                                                                            .w),
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            5.w,
+                                                                        vertical:
+                                                                            1.h),
+                                                                    // width: 40.w,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Colors
+                                                                          .white12,
+                                                                      borderRadius: BorderRadius.only(
+                                                                          bottomLeft: Radius.circular(
+                                                                              0.0),
+                                                                          topLeft: Radius.circular(
+                                                                              20.0),
+                                                                          topRight: Radius.circular(
+                                                                              20.0),
+                                                                          bottomRight:
+                                                                              Radius.circular(20.0)),
+                                                                      shape: BoxShape
+                                                                          .rectangle,
+                                                                    ),
+                                                                    child: viewmsgs?.data?[index].messageType ==
+                                                                        "1"
+                                                                        ? Text(
+                                                                        (viewmsgs?.data?[index].message)
+                                                                            .toString(),
+                                                                        textAlign: TextAlign
+                                                                            .left,
+                                                                        style: TextStyle(
+                                                                            color: Colors.white,
+                                                                            fontFamily: 'Meta1',
+                                                                            fontSize: 12.sp))
+                                                                        : (viewmsgs?.data?[index].messageType) == '2'
+                                                                        ? ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(10),
+                                                                      child: CachedNetworkImage(
+                                                                        fit: BoxFit.cover,
+                                                                        imageUrl: (viewmsgs?.data?[index].message).toString(),
+                                                                        progressIndicatorBuilder: (context, url, progress) => CircularProgressIndicator(),
+                                                                        errorWidget: (context, url, error) => Image.asset(
+                                                                          'assets/place.jpeg',
+                                                                          color: Colors.white,
+                                                                        ),
+                                                                      ),
+                                                                    )
+                                                                        : (viewmsgs?.data?[index].messageType) == '3'
+                                                                        ? Container(height: 35.h,child: ClipRRect(borderRadius: BorderRadius.circular(20),child: addvideo(vid:(viewmsgs?.data?[index].message).toString(),)))
+                                                                        : Container(),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        left: 1
+                                                                            .w),
+                                                                    child: Text(
+                                                                      (viewmsgs
+                                                                              ?.data?[index]
+                                                                              .time)
+                                                                          .toString(),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white70,
+                                                                          fontFamily:
+                                                                              'Meta1',
+                                                                          fontSize: 10
+                                                                              .sp,
+                                                                          fontWeight: FontWeight
+                                                                              .normal,
+                                                                          fontStyle:
+                                                                              FontStyle.normal),
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            );
+                                                    }),
+                                              ),
+                                              SizedBox(
+                                                height: 2.h,
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              ),
                             ],
                           ),
                           SizedBox(
@@ -395,246 +435,287 @@ class _MessagePageState extends State<MessagePage> {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 5, right: 6),
+                      padding: EdgeInsets.only(left: 1.w, right: 1.w),
+
                       child: Container(
                         height: 10.h,
                         width: MediaQuery.of(context).size.width,
                         color: Colors.black,
-                        child: Row(
+                        child: Column(
                           children: [
-                            IconButton(
-                              onPressed: () async {
-                                final content = Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      height: 30.h,
-                                      width: MediaQuery.of(context).size.width,
-                                      padding: EdgeInsets.all(10.0),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.white),
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                      ),
-                                      child: GridView(
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3,
+                            SizedBox(height: 2.h,),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () async {
+                                    final content = Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          height: 30.h,
+                                          width: MediaQuery.of(context).size.width,
+                                          padding: EdgeInsets.all(10.0),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.white),
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            borderRadius: const BorderRadius.all(
+                                                Radius.circular(10.0)),
                                           ),
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () async {
-                                                final XFile? image =
-                                                    await _picker.pickImage(
-                                                        source: ImageSource
-                                                            .gallery);
-
-                                                imagefile = File(image!.path);
-
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    height: 60.0,
-                                                    width: 60.0,
-                                                    decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color:
-                                                            Colors.cyanAccent),
-                                                    child: Icon(
-                                                      Icons.photo,
-                                                      color: Colors.black,
-                                                      size: 30.0,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Text(
-                                                    "Photos",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
+                                          child: GridView(
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 3,
                                               ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: () async {
-                                                final XFile? image =
-                                                    await _picker.pickVideo(
-                                                        source: ImageSource
-                                                            .gallery);
-                                                imagefile = File(image!.path);
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    final XFile? image =
+                                                        await _picker.pickImage(
+                                                            source: ImageSource
+                                                                .gallery);
 
-                                                Navigator.of(context).pop();
+                                                    setState(() {
+                                                      EasyLoading.show(status: 'Sending Image ...');
+                                                      imagefile = File(image!.path);
+                                                      type = 2;
+                                                      EasyLoading.showSuccess('Image Sent');
+                                                      sendmessageapi();
+                                                    });
 
-                                                // FilePickerResult? imagefile =
-                                                // await FilePicker.platform
-                                                //     .pickFiles(
-                                                //     type: FileType.any,
-                                                //     allowMultiple:
-                                                //     false);
-                                                //
-                                                // if (imagefile == null) return;
-                                                // final path = imagefile
-                                                //     .files.single.path!;
-                                                // setState(() {
-                                                //   file=File(path);
-                                                // });
-                                                // // final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-                                                // imagefile = File(image!.path);
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 60.0,
+                                                        width: 60.0,
+                                                        decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            color:
+                                                                Colors.cyanAccent),
+                                                        child: Icon(
+                                                          Icons.photo,
+                                                          color: Colors.black,
+                                                          size: 30.0,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Text(
+                                                        "Photos",
+                                                        style: TextStyle(
+                                                            color: Colors.white),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    final XFile? image =
+                                                        await _picker.pickVideo(
+                                                            source: ImageSource
+                                                                .gallery);
+                                                    setState(() {
+                                                      EasyLoading.show(status: 'Sendind Video ...');
+                                                      imagefile = File(image!.path);
+                                                      type = 3;
+                                                      EasyLoading.showSuccess('Video Sent');
+                                                      sendmessageapi();
+                                                    });
 
-                                                // video();
-                                                // showFilePicker(
-                                                //     FileType.video);
-                                              },
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    height: 60.0,
-                                                    width: 60.0,
-                                                    decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color:
-                                                            Colors.cyanAccent),
-                                                    child: Icon(
-                                                      Icons
-                                                          .video_camera_back_outlined,
-                                                      color: Colors.black,
-                                                      size: 30.0,
-                                                    ),
+                                                    Navigator.of(context).pop();
+
+                                                    // FilePickerResult? imagefile =
+                                                    // await FilePicker.platform
+                                                    //     .pickFiles(
+                                                    //     type: FileType.any,
+                                                    //     allowMultiple:
+                                                    //     false);
+                                                    //
+                                                    // if (imagefile == null) return;
+                                                    // final path = imagefile
+                                                    //     .files.single.path!;
+                                                    // setState(() {
+                                                    //   file=File(path);
+                                                    // });
+                                                    // // final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+                                                    // imagefile = File(image!.path);
+
+                                                    // video();
+                                                    // showFilePicker(
+                                                    //     FileType.video);
+                                                  },
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 60.0,
+                                                        width: 60.0,
+                                                        decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            color:
+                                                                Colors.cyanAccent),
+                                                        child: Icon(
+                                                          Icons
+                                                              .video_camera_back_outlined,
+                                                          color: Colors.black,
+                                                          size: 30.0,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Text(
+                                                        "Videos",
+                                                        style: TextStyle(
+                                                            color: Colors.white),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 10,
+                                                ),
+                                                InkWell(
+                                                  onTap: () async {
+                                                    FilePickerResult? result =
+                                                        await FilePicker.platform
+                                                            .pickFiles();
+
+                                                    if (result != null) {
+                                                      setState(() {
+                                                        type = 5;
+                                                        _pickedFile = File(result
+                                                            .files.single.path
+                                                            .toString());
+                                                        sendmessageapi();
+                                                      });
+                                                    } else {
+                                                      // User canceled the picker
+                                                    }
+                                                  },
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 60.0,
+                                                        width: 60.0,
+                                                        decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            color:
+                                                                Colors.cyanAccent),
+                                                        child: Icon(
+                                                          Icons.file_open_outlined,
+                                                          color: Colors.black,
+                                                          size: 30.0,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Text(
+                                                        "File",
+                                                        style: TextStyle(
+                                                            color: Colors.white),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    "Videos",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            InkWell(
-                                              onTap: () async {},
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    height: 60.0,
-                                                    width: 60.0,
-                                                    decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color:
-                                                            Colors.cyanAccent),
-                                                    child: Icon(
-                                                      Icons.file_open_outlined,
-                                                      color: Colors.black,
-                                                      size: 30.0,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Text(
-                                                    "File",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                  ],
-                                );
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) {
-                                      return FractionallySizedBox(
-                                        widthFactor: 0.9,
-                                        child: Material(
-                                          type: MaterialType.transparency,
-                                          child: content,
+                                                ),
+                                              ]),
                                         ),
-                                      );
-                                    });
-                              },
-                              icon: Icon(
-                                Icons.attach_file_rounded,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  // borderRadius: BorderRadius.only(
-                                  //   topRight: Radius.circular(25),
-                                  //   topLeft: Radius.circular(25),
-                                  // ),
-                                  color: Colors.black),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: 10.h,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.68,
-                                      child: TextField(
-                                        style: TextStyle(color: Colors.white),
-                                        cursorColor:
-                                            Color.fromARGB(153, 190, 190, 190),
-                                        keyboardType: TextInputType.text,
-                                        controller: _chat,
-                                        decoration: InputDecoration(
-                                          hintText: 'Enter Message',
-                                          hintStyle: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 126, 126, 126)),
-                                          contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 4.w,
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white,
-                                                width: 2.0),
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white,
-                                                width: 2.0),
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                          ),
+                                        SizedBox(
+                                          height: 10,
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          type = 1;
+                                      ],
+                                    );
+                                    showDialog(
+                                        context: context,
+                                        builder: (ctx) {
+                                          return FractionallySizedBox(
+                                            widthFactor: 0.9,
+                                            child: Material(
+                                              type: MaterialType.transparency,
+                                              child: content,
+                                            ),
+                                          );
                                         });
-
-                                        sendmessageapi();
-                                      },
-                                      icon: Icon(
-                                        Icons.send,
-                                        color:
-                                            Color.fromARGB(255, 210, 210, 210),
-                                      )),
-                                ],
-                              ),
+                                  },
+                                  icon: Icon(
+                                    Icons.attach_file_rounded,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Container(
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      // borderRadius: BorderRadius.only(
+                                      //   topRight: Radius.circular(25),
+                                      //   topLeft: Radius.circular(25),
+                                      // ),
+                                      color: Colors.black),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Container(
+                                          height: 10.h,
+                                          width: MediaQuery.of(context).size.width *
+                                              0.68,
+                                          child: TextField(
+                                            style: TextStyle(color: Colors.white),
+                                            cursorColor:
+                                                Color.fromARGB(153, 190, 190, 190),
+                                            keyboardType: TextInputType.text,
+                                            controller: _chat,
+                                            decoration: InputDecoration(
+                                              hintText: 'Enter Message',
+                                              hintStyle: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 126, 126, 126)),
+                                              contentPadding: EdgeInsets.symmetric(
+                                                horizontal: 4.w,
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 2.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 2.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              type = 1;
+                                            });
+                                            _chat.text == ''
+                                                ? Fluttertoast.showToast(
+                                                    msg: "Please add Some Text",
+                                                    toastLength: Toast.LENGTH_SHORT,
+                                                    timeInSecForIosWeb: 1,
+                                                    backgroundColor: Colors.black,
+                                                    textColor: Colors.white,
+                                                    fontSize: 11.sp)
+                                                : sendmessageapi();
+                                          },
+                                          icon: Icon(
+                                            Icons.send,
+                                            color:
+                                                Color.fromARGB(255, 210, 210, 210),
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -722,12 +803,19 @@ class _MessagePageState extends State<MessagePage> {
     data['login_user_id'] = userData?.userData?.uid ?? '';
     data['uid'] = widget.uid.toString();
     data['type'] = type.toString();
-    data['message'] = _chat.text.toString();
+    data['message'] = (type == 1)
+        ? _chat.text.toString()
+        : (type == 2)
+            ? imagefile!.path
+            : (type == 3)
+                ? imagefile!.path
+                : _pickedFile!.path;
+    print(data);
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().Sendchatapi(data).then((Response response) async {
           profiledata = ProfileModal.fromJson(json.decode(response.body));
-
+          print(profiledata?.status);
           if (response.statusCode == 200 && profiledata?.status == "success") {
             _chat.text = '';
             showmessageapi();
