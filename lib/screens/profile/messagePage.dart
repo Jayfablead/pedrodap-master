@@ -260,233 +260,233 @@ class _MessagePageState extends State<MessagePage> {
                                     ],
                                   ),
                                 ),
-                                // Padding(
-                                //   padding: EdgeInsets.only(left: 3.w, top: 1.h),
-                                //   child: Column(
-                                //     crossAxisAlignment:
-                                //         CrossAxisAlignment.start,
-                                //     children: [
-                                //       Container(
-                                //         margin: EdgeInsets.only(
-                                //             left: 2.w, top: 2.h, right: 2.w),
-                                //         padding: EdgeInsets.symmetric(
-                                //             horizontal: 5.w, vertical: 1.h),
-                                //         width: 60.w,
-                                //         decoration: BoxDecoration(
-                                //           color: Colors.white12,
-                                //           borderRadius: BorderRadius.only(
-                                //               bottomLeft: Radius.circular(0.0),
-                                //               topLeft: Radius.circular(20.0),
-                                //               topRight: Radius.circular(20.0),
-                                //               bottomRight:
-                                //                   Radius.circular(20.0)),
-                                //           shape: BoxShape.rectangle,
-                                //         ),
-                                //         child: Text(
-                                //             "Will be distracted by the readable",
-                                //             textAlign: TextAlign.left,
-                                //             style: TextStyle(
-                                //                 color: Colors.white,
-                                //                 fontFamily: 'Meta1',
-                                //                 fontSize: 12.sp)),
-                                //       ),
-                                //       Padding(
-                                //         padding: EdgeInsets.only(left: 1.w),
-                                //         child: Text(
-                                //           "11:25".toString(),
-                                //           style: TextStyle(
-                                //               color: Colors.white70,
-                                //               fontFamily: 'Meta1',
-                                //               fontSize: 10.sp,
-                                //               fontWeight: FontWeight.normal,
-                                //               fontStyle: FontStyle.normal),
-                                //         ),
-                                //       )
-                                //     ],
-                                //   ),
-                                // ),
-                                // Padding(
-                                //   padding: EdgeInsets.only(
-                                //       left: 26.w, right: 3.w, top: 1.h),
-                                //   child: Column(
-                                //     crossAxisAlignment: CrossAxisAlignment.end,
-                                //     children: [
-                                //       Container(
-                                //         margin: EdgeInsets.only(
-                                //             left: 2.w, top: 2.h, right: 2.w),
-                                //         padding: EdgeInsets.symmetric(
-                                //             horizontal: 5.w, vertical: 1.h),
-                                //         width: 75.w,
-                                //         decoration: BoxDecoration(
-                                //           color: Colors.white,
-                                //           borderRadius: BorderRadius.only(
-                                //               bottomLeft: Radius.circular(20.0),
-                                //               topLeft: Radius.circular(20.0),
-                                //               topRight: Radius.circular(20.0),
-                                //               bottomRight:
-                                //                   Radius.circular(0.0)),
-                                //           shape: BoxShape.rectangle,
-                                //         ),
-                                //         child: Text(
-                                //             "Content of a page when looking at its layout.",
-                                //             textAlign: TextAlign.left,
-                                //             style: TextStyle(
-                                //                 color: Colors.black,
-                                //                 fontFamily: 'Meta1',
-                                //                 fontSize: 12.sp)),
-                                //       ),
-                                //       Padding(
-                                //         padding: EdgeInsets.only(right: 1.w),
-                                //         child: Text(
-                                //           "11:27".toString(),
-                                //           style: TextStyle(
-                                //               color: Colors.white70,
-                                //               fontFamily: 'Meta1',
-                                //               fontSize: 10.sp,
-                                //               fontWeight: FontWeight.normal,
-                                //               fontStyle: FontStyle.normal),
-                                //         ),
-                                //       ),
-                                //       // Image.asset("assets/profile.png",height: 5.w,width: 5.w,fit: BoxFit.cover,),
-                                //     ],
-                                //   ),
-                                // ),
-                                // Padding(
-                                //   padding: EdgeInsets.only(left: 3.w, top: 1.h),
-                                //   child: Column(
-                                //     crossAxisAlignment:
-                                //         CrossAxisAlignment.start,
-                                //     children: [
-                                //       Container(
-                                //         margin: EdgeInsets.only(
-                                //             left: 2.w, top: 2.h, right: 2.w),
-                                //         padding: EdgeInsets.symmetric(
-                                //             horizontal: 5.w, vertical: 1.h),
-                                //         width: 75.w,
-                                //         decoration: BoxDecoration(
-                                //           color: Colors.white12,
-                                //           borderRadius: BorderRadius.only(
-                                //               bottomLeft: Radius.circular(0.0),
-                                //               topLeft: Radius.circular(20.0),
-                                //               topRight: Radius.circular(20.0),
-                                //               bottomRight:
-                                //                   Radius.circular(20.0)),
-                                //           shape: BoxShape.rectangle,
-                                //         ),
-                                //         child: Text(
-                                //             "The point of using Lorem Ipsum is that it has a more.",
-                                //             textAlign: TextAlign.left,
-                                //             style: TextStyle(
-                                //                 color: Colors.white,
-                                //                 fontFamily: 'Meta1',
-                                //                 fontSize: 12.sp)),
-                                //       ),
-                                //       Padding(
-                                //         padding: EdgeInsets.only(left: 1.w),
-                                //         child: Text(
-                                //           "11:30".toString(),
-                                //           style: TextStyle(
-                                //               color: Colors.white70,
-                                //               fontFamily: 'Meta1',
-                                //               fontSize: 10.sp,
-                                //               fontWeight: FontWeight.normal,
-                                //               fontStyle: FontStyle.normal),
-                                //         ),
-                                //       )
-                                //     ],
-                                //   ),
-                                // ),
-                                // Padding(
-                                //   padding: EdgeInsets.only(
-                                //       left: 26.w, right: 3.w, top: 1.h),
-                                //   child: Column(
-                                //     crossAxisAlignment: CrossAxisAlignment.end,
-                                //     children: [
-                                //       Container(
-                                //         margin: EdgeInsets.only(
-                                //             left: 2.w, top: 2.h, right: 2.w),
-                                //         padding: EdgeInsets.symmetric(
-                                //             horizontal: 5.w, vertical: 1.h),
-                                //         width: 75.w,
-                                //         decoration: BoxDecoration(
-                                //           color: Colors.white,
-                                //           borderRadius: BorderRadius.only(
-                                //               bottomLeft: Radius.circular(20.0),
-                                //               topLeft: Radius.circular(20.0),
-                                //               topRight: Radius.circular(20.0),
-                                //               bottomRight:
-                                //                   Radius.circular(0.0)),
-                                //           shape: BoxShape.rectangle,
-                                //         ),
-                                //         child: Text(
-                                //             "Or-less normal distribution of letters, as opposed to using Content.",
-                                //             textAlign: TextAlign.left,
-                                //             style: TextStyle(
-                                //                 color: Colors.black,
-                                //                 fontFamily: 'Meta1',
-                                //                 fontSize: 12.sp)),
-                                //       ),
-                                //       Padding(
-                                //         padding: EdgeInsets.only(right: 1.w),
-                                //         child: Text(
-                                //           "11:33".toString(),
-                                //           style: TextStyle(
-                                //               color: Colors.white70,
-                                //               fontFamily: 'Meta1',
-                                //               fontSize: 10.sp,
-                                //               fontWeight: FontWeight.normal,
-                                //               fontStyle: FontStyle.normal),
-                                //         ),
-                                //       ),
-                                //       // Image.asset("assets/profile.png",height: 5.w,width: 5.w,fit: BoxFit.cover,),
-                                //     ],
-                                //   ),
-                                // ),
-                                // Padding(
-                                //   padding: EdgeInsets.only(left: 3.w, top: 1.h),
-                                //   child: Column(
-                                //     crossAxisAlignment:
-                                //         CrossAxisAlignment.start,
-                                //     children: [
-                                //       Container(
-                                //         margin: EdgeInsets.only(
-                                //             left: 2.w, top: 2.h, right: 2.w),
-                                //         padding: EdgeInsets.symmetric(
-                                //             horizontal: 5.w, vertical: 1.h),
-                                //         width: 75.w,
-                                //         decoration: BoxDecoration(
-                                //           color: Colors.white12,
-                                //           borderRadius: BorderRadius.only(
-                                //               bottomLeft: Radius.circular(0.0),
-                                //               topLeft: Radius.circular(20.0),
-                                //               topRight: Radius.circular(20.0),
-                                //               bottomRight:
-                                //                   Radius.circular(20.0)),
-                                //           shape: BoxShape.rectangle,
-                                //         ),
-                                //         child: Text(
-                                //             "Here, content here, making it look like readable English.",
-                                //             textAlign: TextAlign.left,
-                                //             style: TextStyle(
-                                //                 color: Colors.white,
-                                //                 fontFamily: 'Meta1',
-                                //                 fontSize: 12.sp)),
-                                //       ),
-                                //       Padding(
-                                //         padding: EdgeInsets.only(left: 1.w),
-                                //         child: Text(
-                                //           "11:42".toString(),
-                                //           style: TextStyle(
-                                //               color: Colors.white70,
-                                //               fontFamily: 'Meta1',
-                                //               fontSize: 10.sp,
-                                //               fontWeight: FontWeight.normal,
-                                //               fontStyle: FontStyle.normal),
-                                //         ),
-                                //       )
-                                //     ],
-                                //   ),
-                                // ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 3.w, top: 1.h),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: 2.w, top: 2.h, right: 2.w),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5.w, vertical: 1.h),
+                                        width: 60.w,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white12,
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0.0),
+                                              topLeft: Radius.circular(20.0),
+                                              topRight: Radius.circular(20.0),
+                                              bottomRight:
+                                                  Radius.circular(20.0)),
+                                          shape: BoxShape.rectangle,
+                                        ),
+                                        child: Text(
+                                            "Will be distracted by the readable",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'Meta1',
+                                                fontSize: 12.sp)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 1.w),
+                                        child: Text(
+                                          "11:25".toString(),
+                                          style: TextStyle(
+                                              color: Colors.white70,
+                                              fontFamily: 'Meta1',
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.normal),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 26.w, right: 3.w, top: 1.h),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: 2.w, top: 2.h, right: 2.w),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5.w, vertical: 1.h),
+                                        width: 75.w,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(20.0),
+                                              topLeft: Radius.circular(20.0),
+                                              topRight: Radius.circular(20.0),
+                                              bottomRight:
+                                                  Radius.circular(0.0)),
+                                          shape: BoxShape.rectangle,
+                                        ),
+                                        child: Text(
+                                            "Content of a page when looking at its layout.",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Meta1',
+                                                fontSize: 12.sp)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(right: 1.w),
+                                        child: Text(
+                                          "11:27".toString(),
+                                          style: TextStyle(
+                                              color: Colors.white70,
+                                              fontFamily: 'Meta1',
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.normal),
+                                        ),
+                                      ),
+                                      // Image.asset("assets/profile.png",height: 5.w,width: 5.w,fit: BoxFit.cover,),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 3.w, top: 1.h),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: 2.w, top: 2.h, right: 2.w),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5.w, vertical: 1.h),
+                                        width: 75.w,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white12,
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0.0),
+                                              topLeft: Radius.circular(20.0),
+                                              topRight: Radius.circular(20.0),
+                                              bottomRight:
+                                                  Radius.circular(20.0)),
+                                          shape: BoxShape.rectangle,
+                                        ),
+                                        child: Text(
+                                            "The point of using Lorem Ipsum is that it has a more.",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'Meta1',
+                                                fontSize: 12.sp)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 1.w),
+                                        child: Text(
+                                          "11:30".toString(),
+                                          style: TextStyle(
+                                              color: Colors.white70,
+                                              fontFamily: 'Meta1',
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.normal),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 26.w, right: 3.w, top: 1.h),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: 2.w, top: 2.h, right: 2.w),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5.w, vertical: 1.h),
+                                        width: 75.w,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(20.0),
+                                              topLeft: Radius.circular(20.0),
+                                              topRight: Radius.circular(20.0),
+                                              bottomRight:
+                                                  Radius.circular(0.0)),
+                                          shape: BoxShape.rectangle,
+                                        ),
+                                        child: Text(
+                                            "Or-less normal distribution of letters, as opposed to using Content.",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Meta1',
+                                                fontSize: 12.sp)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(right: 1.w),
+                                        child: Text(
+                                          "11:33".toString(),
+                                          style: TextStyle(
+                                              color: Colors.white70,
+                                              fontFamily: 'Meta1',
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.normal),
+                                        ),
+                                      ),
+                                      // Image.asset("assets/profile.png",height: 5.w,width: 5.w,fit: BoxFit.cover,),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 3.w, top: 1.h),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: 2.w, top: 2.h, right: 2.w),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5.w, vertical: 1.h),
+                                        width: 75.w,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white12,
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0.0),
+                                              topLeft: Radius.circular(20.0),
+                                              topRight: Radius.circular(20.0),
+                                              bottomRight:
+                                                  Radius.circular(20.0)),
+                                          shape: BoxShape.rectangle,
+                                        ),
+                                        child: Text(
+                                            "Here, content here, making it look like readable English.",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'Meta1',
+                                                fontSize: 12.sp)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 1.w),
+                                        child: Text(
+                                          "11:42".toString(),
+                                          style: TextStyle(
+                                              color: Colors.white70,
+                                              fontFamily: 'Meta1',
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.normal),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                                 Padding(
                                   padding: EdgeInsets.only(
                                       left: 23.w, right: 3.w, top: 1.h),
