@@ -301,7 +301,7 @@ class _drawerState extends State<drawer> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Text("All Players",
+                                      Text("All Users",
                                           style: TextStyle(
                                             fontSize: 4.w,
                                             fontWeight: FontWeight.w500,
