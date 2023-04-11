@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -48,11 +49,17 @@ class _StaticHomePageState extends State<StaticHomePage> {
   int selectindex1 = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isloading = true;
-
+  Timer? _timer;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    // _timer = Timer.periodic(const Duration(milliseconds: 200), (timer) {
+    //
+    //
+    //   connectionsapi();
+    //   playerapi();
+    // });
     connectionsapi();
     playerapi();
   }

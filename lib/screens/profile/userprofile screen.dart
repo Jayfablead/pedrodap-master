@@ -293,52 +293,7 @@ class _UserprofileState extends State<Userprofile> {
                                   ),
                                 ),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => MessagePage(uid:userprofile!
-                                          .userProfileDetails!.uid
-                                          .toString(),
-                                        image: userprofile!
-                                            .userProfileDetails!.profilePic
-                                            .toString(),
-                                        name: userprofile!
-                                            .userProfileDetails!.name
-                                            .toString(),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 9.h,
-                                  width: 25.w,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.10),
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(color: Colors.white)),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        size: 9.w,
-                                        Icons.chat_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        'Message',
-                                        style: TextStyle(
-                                          fontSize: 4.w,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Meta1',
-                                          color: Color(0xffeaeaea),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
+
                             ],
                           ),
                           SizedBox(

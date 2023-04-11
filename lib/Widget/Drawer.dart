@@ -767,8 +767,7 @@ class _drawerState extends State<drawer> {
             });
 
             await SaveDataLocal.saveLogInData(userData!);
-            print(userData?.status);
-            print(userData!.userData!.uid);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
@@ -1170,7 +1169,7 @@ class _drawerState extends State<drawer> {
 //             SizedBox(
 //               width: 2.w,
 //             ),
-//             Text("All Players",
+//             Text("All Users",
 //                 style: TextStyle(
 //                   fontSize: 4.w,
 //                   fontWeight: FontWeight.w500,
