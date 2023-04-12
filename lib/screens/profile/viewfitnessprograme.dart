@@ -16,6 +16,7 @@ import '../../Model/fitnessmodal.dart';
 import '../../Model/searchtrainmodal.dart';
 import '../../Widget/buildErrorDialog.dart';
 import '../../Widget/sharedpreferance.dart';
+import '../../statichomepage.dart';
 
 class ViewFitness extends StatefulWidget {
   const ViewFitness({Key? key}) : super(key: key);
@@ -90,7 +91,7 @@ class _ViewFitnessState extends State<ViewFitness> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.of(context).pop(context);
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
                               },
                               icon: Icon(
                                 Icons.arrow_back,

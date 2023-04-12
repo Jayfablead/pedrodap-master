@@ -18,6 +18,7 @@ import '../../Model/sleepmodal.dart';
 import '../../Widget/buildErrorDialog.dart';
 import '../../Widget/sharedpreferance.dart';
 import '../../provider/authprovider.dart';
+import '../../statichomepage.dart';
 
 class SleepSchedule extends StatefulWidget {
   const SleepSchedule({super.key});
@@ -98,7 +99,7 @@ class _SleepScheduleState extends State<SleepSchedule> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.of(context).pop(context);
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
                                 },
                                 icon: Icon(
                                   Icons.arrow_back,

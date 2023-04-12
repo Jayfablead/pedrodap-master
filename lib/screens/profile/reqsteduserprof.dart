@@ -11,21 +11,23 @@ import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
+import 'package:pedrodap/screens/profile/myrequesteds.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Model/allplayersmodal.dart';
+import '../../Model/pendingreqModal.dart';
 import '../../Model/userprofileModal.dart';
 import '../../Widget/Drawer.dart';
 import '../../Widget/const.dart';
 import '../../Widget/videoprof.dart';
 
-class Userprofile extends StatefulWidget {
+class RqstdUser extends StatefulWidget {
   String? uid;
 
-  Userprofile({Key? key, this.uid}) : super(key: key);
+  RqstdUser({Key? key, this.uid}) : super(key: key);
 
   @override
-  State<Userprofile> createState() => _UserprofileState();
+  State<RqstdUser> createState() => _RqstdUserState();
 }
 
 List img = [
@@ -70,7 +72,7 @@ List prof = [
 
 bool isloading = true;
 
-class _UserprofileState extends State<Userprofile> {
+class _RqstdUserState extends State<RqstdUser> {
   @override
   void initState() {
     // TODO: implement initState
@@ -102,9 +104,10 @@ class _UserprofileState extends State<Userprofile> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(context,
+                                  Navigator.pushReplacement(
+                                    context,
                                     MaterialPageRoute(
-                                      builder: (context) => DiscoverPage(),
+                                      builder: (context) => MyRequested(),
                                     ),
                                   );
                                 },
@@ -265,80 +268,113 @@ class _UserprofileState extends State<Userprofile> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              userprofile?.userProfileDetails?.requestStatus ==
-                                      1
-                                  ? InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 9.h,
-                                        width: 25.w,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.10),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                                color: Colors.white)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              size: 9.w,
-                                              Icons.person_search_outlined,
-                                              color: Colors.white,
-                                            ),
-                                            Text(
-                                              'Requested',
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Meta1',
-                                                color: Color(0xffeaeaea),
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          side:
+                                              BorderSide(color: Colors.white)),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 0, 0, 0),
+                                      scrollable: true,
+                                      content: Text(
+                                        'Are You Sure You Want to Cancel the Request ? This Can\'t be Undone .',
+                                        style: TextStyle(
+                                            fontSize: 11.sp,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Meta1',
+                                            color: Colors.white),
                                       ),
-                                    )
-                                  : InkWell(
-                                      onTap: () {
-                                        sendreqapi();
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 9.h,
-                                        width: 25.w,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.10),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                                color: Colors.white)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              size: 9.w,
-                                              Icons.join_inner,
-                                              color: Colors.white,
-                                            ),
-                                            Text(
-                                              'Connect',
+                                      actions: [
+                                        InkWell(
+                                          onTap: () {
+                                            rejectapi();
+                                            setState(() {
+                                              isloading = true;
+                                            });
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.all(2.w),
+                                            padding: EdgeInsets.all(1.h),
+                                            child: Text(
+                                              'Yes',
                                               style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Meta1',
-                                                color: Color(0xffeaeaea),
-                                              ),
-                                            )
-                                          ],
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: 'Meta1',
+                                                  color: Colors.green),
+                                            ),
+                                            decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                border: Border.all(
+                                                  color: Colors.green,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                          ),
                                         ),
-                                      ),
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.all(1.w),
+                                            padding: EdgeInsets.all(1.h),
+                                            child: Text(
+                                              'No',
+                                              style: TextStyle(
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: 'Meta1',
+                                                  color: Colors.red),
+                                            ),
+                                            decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                border: Border.all(
+                                                  color: Colors.red,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                  );
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 9.h,
+                                  width: 25.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.10),
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(color: Colors.white)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        size: 9.w,
+                                        Icons.person_search_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        'Requested',
+                                        style: TextStyle(
+                                          fontSize: 4.w,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Meta1',
+                                          color: Color(0xffeaeaea),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                           SizedBox(
@@ -1002,24 +1038,29 @@ class _UserprofileState extends State<Userprofile> {
     });
   }
 
-  sendreqapi() {
+  rejectapi() {
     final Map<String, String> data = {};
-    data['action'] = 'create_connection_request';
+    data['action'] = 'delete_requested_users';
+    data['uid'] = userprofile?.userProfileDetails?.uid ?? '';
     data['login_user_id'] = userData!.userData!.uid.toString();
-    data['uid'] = widget.uid.toString();
 
     checkInternet().then((internet) async {
       if (internet) {
-        authprovider().sendreqapi(data).then((Response response) async {
-          alldata = AllplayersModal.fromJson(json.decode(response.body));
-          if (response.statusCode == 200 && alldata?.status == "success") {
-            userapi();
+        authprovider().acceptreqapi(data).then((Response response) async {
+          pending = PendingreqModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && pending?.status == "success") {
             Fluttertoast.showToast(
-                msg: "Request Send Successfully",
+                msg: "Request Canceled",
                 timeInSecForIosWeb: 1,
-                backgroundColor: Colors.greenAccent,
-                textColor: Colors.black,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
                 fontSize: 16.0);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MyRequested(),
+              ),
+            );
             setState(() {
               isloading = false;
             });

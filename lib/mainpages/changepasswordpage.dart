@@ -12,6 +12,7 @@ import '../Widget/const.dart';
 import '../Widget/sharedpreferance.dart';
 import '../provider/authprovider.dart';
 import '../screens/profile/loginpage.dart';
+import '../statichomepage.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
                       },
                       icon: Icon(
                         Icons.arrow_back,

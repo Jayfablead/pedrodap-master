@@ -418,6 +418,22 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
+  Future<http.Response> searchuserapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=search_users_app';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
   Future<http.Response> viewallnutrireplyapi(
       Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=replies_nutrition_and_health_app';
@@ -660,6 +676,22 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
+  Future<http.Response> allreqstuserapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=all_requested_users';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+
   Future<http.Response> acceptreqapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=accept_request_app';
     var responseJson;
@@ -740,12 +772,12 @@ class authprovider with ChangeNotifier {
     return responseJson;
   }
 
-  Future<http.Response> Sendchatapi(Map<String,String>bodyData) async {
+  Future<http.Response> Sendchatapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=send_message_app';
     var responseJson;
-    if (bodyData['type'] == "1")
-    {
-      final response = await http.post(Uri.parse(url), body:bodyData , headers:headers )
+    if (bodyData['type'] == "1") {
+      final response = await http
+          .post(Uri.parse(url), body: bodyData, headers: headers)
           .timeout(
         const Duration(seconds: 30),
         onTimeout: () {
@@ -754,24 +786,22 @@ class authprovider with ChangeNotifier {
       );
       responseJson = responses(response);
       return responseJson;
-    }
-    else{
+    } else {
       try {
-
-
-        final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
+        final imageUploadRequest =
+            http.MultipartRequest('POST', Uri.parse(url));
         imageUploadRequest.headers.addAll(headers);
         if (bodyData['message']?.isNotEmpty ?? false) {
           final file = await http.MultipartFile.fromPath(
-              'message', bodyData['message']?? '');
+              'message', bodyData['message'] ?? '');
           imageUploadRequest.files.add(file);
         }
 
         imageUploadRequest.fields.addAll(bodyData);
         final streamResponse = await imageUploadRequest.send();
 
-        responseJson = responses(await http.Response.fromStream(streamResponse));
-
+        responseJson =
+            responses(await http.Response.fromStream(streamResponse));
       } on SocketException {
         throw FetchDataException('No Internet connection');
       }

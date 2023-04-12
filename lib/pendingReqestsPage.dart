@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/myconnections.dart';
+import 'package:pedrodap/statichomepage.dart';
 import 'package:sizer/sizer.dart';
 
 import 'Model/pendingreqModal.dart';
@@ -53,7 +54,7 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.of(context).pop(context);
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
                               },
                               icon: Icon(
                                 Icons.arrow_back,
@@ -61,7 +62,7 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
                               ),
                             ),
                             Text(
-                              'My Requests',
+                              'Pending Requests',
                               style: TextStyle(
                                 fontSize: 5.5.w,
                                 fontWeight: FontWeight.w500,
@@ -153,7 +154,7 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
                                         padding: EdgeInsets.symmetric(
                                           horizontal: 1.w,
                                         ),
-                                        height: 75.h,
+                                        height: 12.h,
                                         width:
                                             MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
@@ -240,7 +241,7 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
                                                       },
                                                       child: Container(
                                                         height: 5.5.h,
-                                                        width: 12.w,
+                                                        width: 11.w,
                                                         decoration:
                                                             BoxDecoration(
                                                           color: Colors.white12
@@ -384,7 +385,7 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
                                                       },
                                                       child: Container(
                                                         height: 5.5.h,
-                                                        width: 12.w,
+                                                        width: 11.w,
                                                         decoration:
                                                             BoxDecoration(
                                                           color: Colors.white12

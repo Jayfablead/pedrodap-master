@@ -15,6 +15,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../Widget/buildErrorDialog.dart';
 import '../../Widget/sharedpreferance.dart';
+import '../../statichomepage.dart';
 
 class TrainningNotes extends StatefulWidget {
   const TrainningNotes({Key? key}) : super(key: key);
@@ -82,7 +83,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.of(context).pop(context);
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
                               },
                               icon: const Icon(
                                 Icons.arrow_back,

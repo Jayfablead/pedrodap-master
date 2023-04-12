@@ -14,6 +14,7 @@ import '../../Widget/buildErrorDialog.dart';
 import '../../Widget/const.dart';
 import '../../Widget/sharedpreferance.dart';
 import '../../provider/authprovider.dart';
+import '../../statichomepage.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -98,7 +99,7 @@ class _ChatPageState extends State<ChatPage> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.of(context).pop(context);
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
                               },
                               icon: Icon(
                                 Icons.arrow_back,

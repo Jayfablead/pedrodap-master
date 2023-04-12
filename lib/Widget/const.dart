@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:pedrodap/Model/FitreplyModal.dart';
+import 'package:pedrodap/Model/ReqModal.dart';
 import 'package:pedrodap/Model/UserModal.dart';
 import 'package:pedrodap/Model/allplayersmodal.dart';
 import 'package:pedrodap/Model/fitnessmodal.dart';
@@ -26,6 +27,7 @@ import '../Model/pendingreqModal.dart';
 import '../Model/searchchatModal.dart';
 import '../Model/searchfittModal.dart';
 import '../Model/searchfittodoModal.dart';
+import '../Model/searchusersmodal.dart';
 import '../Model/sleepsearchmodal.dart';
 import '../Model/trainingsModal.dart';
 
@@ -67,5 +69,7 @@ ConnectedModal? connections;
 chatPageModal? allchats;
 SearchchatModal? searchchat;
 ViewchatmsgModal? viewmsgs;
+searchUsersModal? searchuser;
+ReqModal? reqsts;
 
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';

@@ -9,6 +9,7 @@ import 'package:pedrodap/Model/connectedModal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
+import 'package:pedrodap/screens/profile/freindPage.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:sizer/sizer.dart';
 
@@ -168,241 +169,254 @@ class _MyConnectionsState extends State<MyConnections> {
                                 decoration: BoxDecoration(
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(10)),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          width: 87.w,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 1.w),
-                                                    height: 7.h,
-                                                    width: 14.w,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              90),
-                                                      child: CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: connections
-                                                                ?.connectedUsers?[
-                                                                    index]
-                                                                .profilePic ??
-                                                            '',
-                                                        progressIndicatorBuilder:
-                                                            (context, url,
-                                                                    progress) =>
-                                                                CircularProgressIndicator(),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Image.asset(
-                                                          'assets/icons/user.png',
-                                                          color: Colors.white,
+                                child: InkWell(onTap: (){Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          FriendView(
+                                            uid: connections
+                                                ?.connectedUsers?[
+                                            index]
+                                                .uid ??
+                                                '',
+                                          ),
+                                    ));},
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            width: 87.w,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 1.w),
+                                                      height: 7.h,
+                                                      width: 14.w,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                90),
+                                                        child: CachedNetworkImage(
+                                                          fit: BoxFit.cover,
+                                                          imageUrl: connections
+                                                                  ?.connectedUsers?[
+                                                                      index]
+                                                                  .profilePic ??
+                                                              '',
+                                                          progressIndicatorBuilder:
+                                                              (context, url,
+                                                                      progress) =>
+                                                                  CircularProgressIndicator(),
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              Image.asset(
+                                                            'assets/icons/user.png',
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 4.w,
-                                                  ),
-                                                  Text(
-                                                    connections
-                                                            ?.connectedUsers?[
-                                                                index]
-                                                            .name ??
-                                                        '',
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontFamily: 'Meta1',
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (context) =>
-                                                              AlertDialog(
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20),
-                                                                side: BorderSide(
-                                                                    color: Colors
-                                                                        .white)),
-                                                            backgroundColor:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    0,
-                                                                    0,
-                                                                    0),
-                                                            scrollable: true,
-                                                            content: Column(
-                                                              children: [
-                                                                Text(
-                                                                  'Are you Sure You Want To Disconnect ?',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        13.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontFamily:
-                                                                        'Meta1',
-                                                                    color: Color(
-                                                                        0xffffffff),
+                                                    SizedBox(
+                                                      width: 4.w,
+                                                    ),
+                                                    Text(
+                                                      connections
+                                                              ?.connectedUsers?[
+                                                                  index]
+                                                              .name ??
+                                                          '',
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontFamily: 'Meta1',
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    IconButton(
+                                                        onPressed: () {
+                                                          showDialog(
+                                                            context: context,
+                                                            builder: (context) =>
+                                                                AlertDialog(
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20),
+                                                                  side: BorderSide(
+                                                                      color: Colors
+                                                                          .white)),
+                                                              backgroundColor:
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      0,
+                                                                      0,
+                                                                      0),
+                                                              scrollable: true,
+                                                              content: Column(
+                                                                children: [
+                                                                  Text(
+                                                                    'Are you Sure You Want To Disconnect ?',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          13.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontFamily:
+                                                                          'Meta1',
+                                                                      color: Color(
+                                                                          0xffffffff),
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 3.h,
-                                                                ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceEvenly,
-                                                                  children: [
-                                                                    Container(
-                                                                      margin: EdgeInsets.only(
-                                                                          bottom:
-                                                                              1.h),
-                                                                      width:
-                                                                          20.w,
-                                                                      child:
-                                                                          ElevatedButton(
+                                                                  SizedBox(
+                                                                    height: 3.h,
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceEvenly,
+                                                                    children: [
+                                                                      Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            bottom:
+                                                                                1.h),
+                                                                        width:
+                                                                            20.w,
                                                                         child:
-                                                                            Text(
-                                                                          'Yes',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            fontSize:
-                                                                                12.sp,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                            fontFamily:
-                                                                                'Meta1',
-                                                                            color:
-                                                                                Color(0xffffffff),
+                                                                            ElevatedButton(
+                                                                          child:
+                                                                              Text(
+                                                                            'Yes',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontSize:
+                                                                                  12.sp,
+                                                                              fontWeight:
+                                                                                  FontWeight.w500,
+                                                                              fontFamily:
+                                                                                  'Meta1',
+                                                                              color:
+                                                                                  Color(0xffffffff),
+                                                                            ),
                                                                           ),
+                                                                          onPressed:
+                                                                              () {
+                                                                            unfriendapi(
+                                                                                index);
+                                                                            Navigator.of(context)
+                                                                                .pop();
+                                                                          },
+                                                                          style: ElevatedButton.styleFrom(
+                                                                              backgroundColor:
+                                                                                  Colors.grey.withOpacity(0.20),
+                                                                              minimumSize: Size(40.w, 5.h),
+                                                                              elevation: 00),
                                                                         ),
-                                                                        onPressed:
-                                                                            () {
-                                                                          unfriendapi(
-                                                                              index);
-                                                                          Navigator.of(context)
-                                                                              .pop();
-                                                                        },
-                                                                        style: ElevatedButton.styleFrom(
-                                                                            backgroundColor:
-                                                                                Colors.grey.withOpacity(0.20),
-                                                                            minimumSize: Size(40.w, 5.h),
-                                                                            elevation: 00),
                                                                       ),
-                                                                    ),
-                                                                    Container(
-                                                                      margin: EdgeInsets.only(
-                                                                          bottom:
-                                                                              1.h),
-                                                                      width:
-                                                                          20.w,
-                                                                      child:
-                                                                          ElevatedButton(
+                                                                      Container(
+                                                                        margin: EdgeInsets.only(
+                                                                            bottom:
+                                                                                1.h),
+                                                                        width:
+                                                                            20.w,
                                                                         child:
-                                                                            Text(
-                                                                          'No',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            fontSize:
-                                                                                12.sp,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                            fontFamily:
-                                                                                'Meta1',
-                                                                            color:
-                                                                                Color(0xffffffff),
+                                                                            ElevatedButton(
+                                                                          child:
+                                                                              Text(
+                                                                            'No',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontSize:
+                                                                                  12.sp,
+                                                                              fontWeight:
+                                                                                  FontWeight.w500,
+                                                                              fontFamily:
+                                                                                  'Meta1',
+                                                                              color:
+                                                                                  Color(0xffffffff),
+                                                                            ),
                                                                           ),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context)
+                                                                                .pop();
+                                                                          },
+                                                                          style: ElevatedButton.styleFrom(
+                                                                              primary:
+                                                                                  Colors.grey.withOpacity(0.20),
+                                                                              minimumSize: Size(40.w, 5.h),
+                                                                              elevation: 00),
                                                                         ),
-                                                                        onPressed:
-                                                                            () {
-                                                                          Navigator.of(context)
-                                                                              .pop();
-                                                                        },
-                                                                        style: ElevatedButton.styleFrom(
-                                                                            primary:
-                                                                                Colors.grey.withOpacity(0.20),
-                                                                            minimumSize: Size(40.w, 5.h),
-                                                                            elevation: 00),
                                                                       ),
-                                                                    ),
-                                                                  ],
-                                                                )
-                                                              ],
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ),
-                                                        );
+                                                          );
+                                                        },
+                                                        icon: Icon(
+                                                          CupertinoIcons
+                                                              .person_badge_minus,
+                                                          color: Colors.white,
+                                                        )),
+                                                    IconButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                                MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              MessagePage(
+                                                                  uid: connections?.connectedUsers?[index].uid ?? '',
+                                                                  image: connections
+                                                                      ?.connectedUsers?[
+                                                                  index]
+                                                                      .profilePic ??
+                                                                      '',
+                                                                  name: connections
+                                                                      ?.connectedUsers?[
+                                                                  index]
+                                                                      .name ??
+                                                                      ''),
+                                                        ));
                                                       },
                                                       icon: Icon(
                                                         CupertinoIcons
-                                                            .person_badge_minus,
+                                                            .text_bubble,
                                                         color: Colors.white,
-                                                      )),
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .push(
-                                                              MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            MessagePage(
-                                                                uid: connections?.connectedUsers?[index].uid ?? '',
-                                                                image: connections
-                                                                    ?.connectedUsers?[
-                                                                index]
-                                                                    .profilePic ??
-                                                                    '',
-                                                                name: connections
-                                                                    ?.connectedUsers?[
-                                                                index]
-                                                                    .name ??
-                                                                    ''),
-                                                      ));
-                                                    },
-                                                    icon: Icon(
-                                                      CupertinoIcons
-                                                          .text_bubble,
-                                                      color: Colors.white,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
+                                                  ],
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Divider(
-                                      indent: 05,
-                                      color: Colors.white,
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                      Divider(
+                                        indent: 05,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );

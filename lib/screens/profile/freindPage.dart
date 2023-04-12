@@ -9,23 +9,24 @@ import 'package:pedrodap/Widget/buildErrorDialog.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
-import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Model/allplayersmodal.dart';
+import '../../Model/pendingreqModal.dart';
 import '../../Model/userprofileModal.dart';
 import '../../Widget/Drawer.dart';
 import '../../Widget/const.dart';
 import '../../Widget/videoprof.dart';
+import 'myconnections.dart';
 
-class Userprofile extends StatefulWidget {
+class FriendView extends StatefulWidget {
   String? uid;
 
-  Userprofile({Key? key, this.uid}) : super(key: key);
+  FriendView({Key? key, this.uid}) : super(key: key);
 
   @override
-  State<Userprofile> createState() => _UserprofileState();
+  State<FriendView> createState() => _FriendViewState();
 }
 
 List img = [
@@ -70,7 +71,7 @@ List prof = [
 
 bool isloading = true;
 
-class _UserprofileState extends State<Userprofile> {
+class _FriendViewState extends State<FriendView> {
   @override
   void initState() {
     // TODO: implement initState
@@ -102,9 +103,9 @@ class _UserprofileState extends State<Userprofile> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(context,
+                                  Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                      builder: (context) => DiscoverPage(),
+                                      builder: (context) => MyConnections(),
                                     ),
                                   );
                                 },
@@ -139,9 +140,9 @@ class _UserprofileState extends State<Userprofile> {
                                   borderRadius: BorderRadius.circular(90),
                                   child: CachedNetworkImage(
                                     fit: BoxFit.cover,
-                                    imageUrl: userprofile!
-                                        .userProfileDetails!.profilePic
-                                        .toString(),
+                                    imageUrl: userprofile
+                                            ?.userProfileDetails?.profilePic ??
+                                        '',
                                     progressIndicatorBuilder:
                                         (context, url, progress) =>
                                             CircularProgressIndicator(),
@@ -161,8 +162,8 @@ class _UserprofileState extends State<Userprofile> {
                                   SizedBox(
                                     width: 60.w,
                                     child: Text(
-                                      userprofile!.userProfileDetails!.name
-                                          .toString(),
+                                      userprofile?.userProfileDetails?.name ??
+                                          '',
                                       maxLines: 3,
                                       style: TextStyle(
                                         fontSize: 6.w,
@@ -253,7 +254,7 @@ class _UserprofileState extends State<Userprofile> {
                           ),
                           SizedBox(height: 1.h),
                           Text(
-                            userprofile!.userProfileDetails!.email.toString(),
+                            userprofile?.userProfileDetails?.email ?? '',
                             style: TextStyle(
                               fontSize: 4.5.w,
                               fontWeight: FontWeight.w500,
@@ -265,80 +266,175 @@ class _UserprofileState extends State<Userprofile> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              userprofile?.userProfileDetails?.requestStatus ==
-                                      1
-                                  ? InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 9.h,
-                                        width: 25.w,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.10),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                                color: Colors.white)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              size: 9.w,
-                                              Icons.person_search_outlined,
-                                              color: Colors.white,
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          side:
+                                              BorderSide(color: Colors.white)),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 0, 0, 0),
+                                      scrollable: true,
+                                      content: Column(
+                                        children: [
+                                          Text(
+                                            'Are you Sure You Want To Disconnect ?',
+                                            style: TextStyle(
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Meta1',
+                                              color: Color(0xffffffff),
                                             ),
-                                            Text(
-                                              'Requested',
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Meta1',
-                                                color: Color(0xffeaeaea),
+                                          ),
+                                          SizedBox(
+                                            height: 3.h,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 1.h),
+                                                width: 20.w,
+                                                child: ElevatedButton(
+                                                  child: Text(
+                                                    'Yes',
+                                                    style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
+                                                      color: Color(0xffffffff),
+                                                    ),
+                                                  ),
+                                                  onPressed: () {
+                                                    unfriendapi();
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          backgroundColor:
+                                                              Colors.grey
+                                                                  .withOpacity(
+                                                                      0.20),
+                                                          minimumSize:
+                                                              Size(40.w, 5.h),
+                                                          elevation: 00),
+                                                ),
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  : InkWell(
-                                      onTap: () {
-                                        sendreqapi();
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 9.h,
-                                        width: 25.w,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.10),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                                color: Colors.white)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              size: 9.w,
-                                              Icons.join_inner,
-                                              color: Colors.white,
-                                            ),
-                                            Text(
-                                              'Connect',
-                                              style: TextStyle(
-                                                fontSize: 4.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Meta1',
-                                                color: Color(0xffeaeaea),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 1.h),
+                                                width: 20.w,
+                                                child: ElevatedButton(
+                                                  child: Text(
+                                                    'No',
+                                                    style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Meta1',
+                                                      color: Color(0xffffffff),
+                                                    ),
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          primary: Colors.grey
+                                                              .withOpacity(
+                                                                  0.20),
+                                                          minimumSize:
+                                                              Size(40.w, 5.h),
+                                                          elevation: 00),
+                                                ),
                                               ),
-                                            )
-                                          ],
-                                        ),
+                                            ],
+                                          )
+                                        ],
                                       ),
                                     ),
+                                  );
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 9.h,
+                                  width: 25.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.10),
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(color: Colors.white)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        size: 9.w,
+                                        Icons.link_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        'Connected',
+                                        style: TextStyle(
+                                          fontSize: 4.w,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Meta1',
+                                          color: Color(0xffeaeaea),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => MessagePage(
+                                        uid: userprofile
+                                                ?.userProfileDetails?.uid ??
+                                            '',
+                                        image: userprofile?.userProfileDetails
+                                                ?.profilePic ??
+                                            '',
+                                        name: userprofile
+                                                ?.userProfileDetails?.name ??
+                                            ''),
+                                  ));
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 9.h,
+                                  width: 25.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.10),
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(color: Colors.white)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        size: 9.w,
+                                        Icons.message_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        'Message',
+                                        style: TextStyle(
+                                          fontSize: 4.w,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Meta1',
+                                          color: Color(0xffeaeaea),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                           SizedBox(
@@ -458,12 +554,12 @@ class _UserprofileState extends State<Userprofile> {
                                 // height: 25.h,
                                 width: MediaQuery.of(context).size.width,
                                 child: Text(
-                                  userprofile!.userProfileDetails!.experience ==
+                                  userprofile?.userProfileDetails?.experience ==
                                           null
                                       ? 'N/A'
-                                      : userprofile!
-                                          .userProfileDetails!.experience
-                                          .toString(),
+                                      : userprofile?.userProfileDetails
+                                              ?.experience ??
+                                          '',
                                   style: textStyle,
                                 ),
                               ),
@@ -494,17 +590,18 @@ class _UserprofileState extends State<Userprofile> {
                                 // height: 25.h,
                                 width: MediaQuery.of(context).size.width,
                                 child: Text(
-                                  userprofile!.userProfileDetails!.about == null
+                                  userprofile?.userProfileDetails?.about == null
                                       ? 'N/A'
-                                      : userprofile!.userProfileDetails!.about
-                                          .toString(),
+                                      : userprofile
+                                              ?.userProfileDetails?.about ??
+                                          '',
                                   style: textStyle,
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(height: 1.h),
-                          userprofile!.userProfileDetails!.role == '2'
+                          userprofile?.userProfileDetails?.role == '2'
                               ? Column(
                                   children: [
                                     Divider(
@@ -559,10 +656,10 @@ class _UserprofileState extends State<Userprofile> {
                                                                     10)),
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: userprofile!
-                                                          .userProfileDetails!
-                                                          .currentClubImage
-                                                          .toString(),
+                                                      imageUrl: userprofile
+                                                              ?.userProfileDetails
+                                                              ?.currentClubImage ??
+                                                          '',
                                                       progressIndicatorBuilder:
                                                           (context, url,
                                                                   progress) =>
@@ -601,10 +698,10 @@ class _UserprofileState extends State<Userprofile> {
                                                                 horizontal:
                                                                     2.w),
                                                         child: Text(
-                                                          userprofile!
-                                                              .userProfileDetails!
-                                                              .clubName
-                                                              .toString(),
+                                                          userprofile
+                                                                  ?.userProfileDetails
+                                                                  ?.clubName ??
+                                                              '',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: TextStyle(
@@ -700,10 +797,10 @@ class _UserprofileState extends State<Userprofile> {
                                                                   CachedNetworkImage(
                                                                 fit: BoxFit
                                                                     .cover,
-                                                                imageUrl: userprofile!
-                                                                    .userProfileDetails!
-                                                                    .previousClubImage
-                                                                    .toString(),
+                                                                imageUrl: userprofile
+                                                                        ?.userProfileDetails
+                                                                        ?.previousClubImage ??
+                                                                    '',
                                                                 progressIndicatorBuilder:
                                                                     (context,
                                                                             url,
@@ -752,13 +849,11 @@ class _UserprofileState extends State<Userprofile> {
                                                                           horizontal:
                                                                               2.w),
                                                                   child: Text(
-                                                                    userprofile!.userProfileDetails!.previousClub ==
+                                                                    userprofile?.userProfileDetails?.previousClub ==
                                                                             null
                                                                         ? 'N/A'
-                                                                        : userprofile!
-                                                                            .userProfileDetails!
-                                                                            .previousClub
-                                                                            .toString(),
+                                                                        : userprofile?.userProfileDetails?.previousClub ??
+                                                                            '',
                                                                     textAlign:
                                                                         TextAlign
                                                                             .center,
@@ -974,7 +1069,6 @@ class _UserprofileState extends State<Userprofile> {
     final Map<String, String> data = {};
     data['action'] = 'users_profile_details_app';
     data['uid'] = widget.uid.toString();
-    data['login_user_id'] = userData!.userData!.uid.toString();
 
     checkInternet().then((internet) async {
       if (internet) {
@@ -1013,13 +1107,56 @@ class _UserprofileState extends State<Userprofile> {
         authprovider().sendreqapi(data).then((Response response) async {
           alldata = AllplayersModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && alldata?.status == "success") {
-            userapi();
             Fluttertoast.showToast(
                 msg: "Request Send Successfully",
                 timeInSecForIosWeb: 1,
                 backgroundColor: Colors.greenAccent,
                 textColor: Colors.black,
                 fontSize: 16.0);
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            isloading = false;
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
+  unfriendapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'disconnect_user';
+    data['uid'] = (userprofile?.userProfileDetails?.uid) as String;
+    data['login_user_id'] = userData!.userData!.uid.toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().unfriendapi(data).then((Response response) async {
+          pending = PendingreqModal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && pending?.status == "success") {
+            Fluttertoast.showToast(
+                msg: "User Disconnected Successfully",
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => MyConnections(),
+              ),
+            );
+
             setState(() {
               isloading = false;
             });

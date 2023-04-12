@@ -22,6 +22,7 @@ import 'package:video_player/video_player.dart';
 import '../../Model/connectedModal.dart';
 import '../../Widget/Drawer.dart';
 import '../../provider/authprovider.dart';
+import '../../statichomepage.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
@@ -85,7 +86,7 @@ class _MyProfileState extends State<MyProfile> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
                                 },
                                 icon: Icon(
                                   Icons.arrow_back,

@@ -18,6 +18,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../Model/nutrimodal.dart';
 import '../../provider/authprovider.dart';
+import '../../statichomepage.dart';
 
 class ViewNutrition extends StatefulWidget {
   const ViewNutrition({Key? key}) : super(key: key);
@@ -91,7 +92,7 @@ class _ViewNutritionState extends State<ViewNutrition> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.of(context).pop(context);
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
                               },
                               icon: Icon(
                                 Icons.arrow_back,

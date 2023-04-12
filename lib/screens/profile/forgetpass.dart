@@ -224,8 +224,8 @@ class _forgetpassState extends State<forgetpass> {
         color: Colors.red,
       ),
       hintText: hintText,
-      prefixIcon: icon,
-      contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+      prefixIcon: Padding(padding: EdgeInsets.only(bottom: 5.h), child: icon),
+      contentPadding: EdgeInsets.symmetric(vertical: 2.h),
       prefixIconColor: Colors.purple,
       hintStyle: textStyle,
       border: OutlineInputBorder(

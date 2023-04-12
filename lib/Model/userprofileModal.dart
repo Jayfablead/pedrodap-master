@@ -43,6 +43,7 @@ class UserProfileDetails {
   String? clubName;
   String? currentClubImage;
   int? connections;
+  int? requestStatus;
 
   UserProfileDetails(
       {this.uid,
@@ -65,7 +66,8 @@ class UserProfileDetails {
         this.video,
         this.clubName,
         this.currentClubImage,
-        this.connections});
+        this.connections,
+        this.requestStatus});
 
   UserProfileDetails.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
@@ -89,6 +91,7 @@ class UserProfileDetails {
     clubName = json['club_name'];
     currentClubImage = json['current_club_image'];
     connections = json['connections'];
+    requestStatus = json['request_status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -114,6 +117,7 @@ class UserProfileDetails {
     data['club_name'] = this.clubName;
     data['current_club_image'] = this.currentClubImage;
     data['connections'] = this.connections;
+    data['request_status'] = this.requestStatus;
     return data;
   }
 }

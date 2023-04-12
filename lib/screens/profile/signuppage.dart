@@ -35,7 +35,7 @@ class _signupState extends State<signup> {
     'Personal Trainers',
   ]; // Option 2
   String? _selectedLocation; // Option 2
-
+  bool visible = false;  bool visible1 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -365,6 +365,8 @@ class _signupState extends State<signup> {
                       SizedBox(
                         height: 4.h,
                         child: TextFormField(
+                            obscureText: visible,
+                            obscuringCharacter: '*',
                             controller: _pass,
                             keyboardType: TextInputType.text,
                             style: TextStyle(
@@ -384,6 +386,26 @@ class _signupState extends State<signup> {
                               return null;
                             },
                             decoration: inputDecoration(
+                              ico: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    visible = !visible;
+                                    print(visible);
+                                    print('Ouch');
+                                  });
+                                },
+                                icon: visible
+                                    ? Icon(
+                                  Icons.visibility,
+                                  size: 15.sp,
+                                  color: Colors.white,
+                                )
+                                    : Icon(
+                                  Icons.visibility_off,
+                                  size: 15.sp,
+                                  color: Colors.white,
+                                ),
+                              ),
                               hintText: "Password",
                               icon: Icon(
                                 Icons.lock,
@@ -423,6 +445,8 @@ class _signupState extends State<signup> {
                       SizedBox(
                         height: 4.h,
                         child: TextFormField(
+                            obscureText: visible1,
+                            obscuringCharacter: '*',
                             controller: _conf,
                             keyboardType: TextInputType.text,
                             style: TextStyle(
@@ -442,6 +466,26 @@ class _signupState extends State<signup> {
                               return null;
                             },
                             decoration: inputDecoration(
+                              ico: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    visible1 = !visible1;
+                                    print(visible1);
+                                    print('Ouch');
+                                  });
+                                },
+                                icon: visible1
+                                    ? Icon(
+                                  Icons.visibility,
+                                  size: 15.sp,
+                                  color: Colors.white,
+                                )
+                                    : Icon(
+                                  Icons.visibility_off,
+                                  size: 15.sp,
+                                  color: Colors.white,
+                                ),
+                              ),
                               hintText: "Confirm Password",
                               icon: Icon(
                                 Icons.lock,
@@ -523,7 +567,7 @@ class _signupState extends State<signup> {
   );
 
   InputDecoration inputDecoration(
-      {required String hintText, required Icon icon}) {
+      {required String hintText, required Icon icon,IconButton? ico,}) {
     return InputDecoration(
       hoverColor: Colors.white,
       focusColor: Colors.white,
@@ -532,6 +576,8 @@ class _signupState extends State<signup> {
         color: Colors.red,
       ),
       hintText: hintText,
+      suffixIconColor: Colors.white,
+      suffix: ico,
       prefixIcon: Padding(padding: EdgeInsets.only(bottom: 3.h), child: icon),
       contentPadding: EdgeInsets.symmetric(vertical: 3.h),
       prefixIconColor: Colors.purple,
