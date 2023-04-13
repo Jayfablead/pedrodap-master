@@ -27,7 +27,7 @@ class searchUsersModal {
 class AllUsers {
   String? uid;
   String? role;
-  Null? clubName;
+  String? clubName;
   String? name;
   String? email;
   String? createdAt;
