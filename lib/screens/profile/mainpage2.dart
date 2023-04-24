@@ -12,7 +12,9 @@ import 'package:pedrodap/Widget/buildErrorDialog.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/pendingReqestsPage.dart';
 import 'package:pedrodap/provider/authprovider.dart';
+import 'package:pedrodap/screens/profile/Chatpage.dart';
 import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:pedrodap/screens/profile/SleepSchedule.dart';
 import 'package:pedrodap/screens/profile/listingpage.dart';
@@ -54,6 +56,12 @@ class _mainpage2State extends State<mainpage2> {
     Sachen("assets/icons/coach.png", "Training"),
     Sachen("assets/icons/hospital.png", "Health"),
     Sachen("assets/icons/sleeping.png", "Sleep"),
+  ];
+  List<Sachen> data1 = [
+    Sachen("assets/icons/coach (1).png", "Connect"),
+    Sachen("assets/icons/players.png", "Discover"),
+    Sachen("assets/icons/message.png", "Message"),
+    Sachen("assets/icons/add-friend.png", "Requests"),
   ];
   int _current = 1;
 
@@ -390,7 +398,8 @@ class _mainpage2State extends State<mainpage2> {
                                                 Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        MessagePage(uid:'121',
+                                                        MessagePage(
+                                                            uid: '121',
                                                             image:
                                                                 'assets/10.png',
                                                             name: item.name),
@@ -515,96 +524,196 @@ class _mainpage2State extends State<mainpage2> {
                       SizedBox(
                         height: 5.h,
                       ),
-                      Container(
-                        height: 10.h,
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.only(left: 5.w, top: 2.h),
-                        decoration: BoxDecoration(
-                            // gradient: LinearGradient(
-                            //   begin: Alignment.topLeft,
-                            //   end: Alignment.bottomRight,
-                            //   colors: [
-                            //     Color(0xff514d56),
-                            //     Color(0xff252525),
-                            //   ],
-                            // )
-                            ),
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            physics: BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: data.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectindex1 = index;
-                                  });
-                                  index == 0
-                                      ? Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                          builder: (context) => DiscoverPage(),
-                                        ))
-                                      : index == 1
-                                          ? Navigator.of(context)
-                                              .push(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TrainningNotes(),
-                                            ))
-                                          : index == 2
-                                              ? Navigator.of(context)
-                                                  .push(MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ViewNutrition(),
-                                                ))
-                                              : Navigator.of(context)
-                                                  .push(MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SleepSchedule(),
-                                                ));
-                                },
-                                child: Container(
-                                  width: 22.w,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                          height: 8.5.w,
-                                          width: 22.w,
-                                          alignment: Alignment.center,
-                                          margin: EdgeInsets.only(right: 5.w),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 2.w, vertical: 0.h),
-                                          child: Image.asset(
-                                              data[index].image.toString(),
-                                              fit: BoxFit.cover,
-                                              height: 9.w,
-                                              width: 8.7.w,
-                                              color: Colors.grey.shade200)),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        margin: EdgeInsets.only(right: 4.w),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 1.w, vertical: 0.h),
-                                        child: Text(
-                                          data[index].name.toString(),
-                                          maxLines: 4,
-                                          style: TextStyle(
-                                              color: Colors.grey.shade200,
-                                              fontSize: 10.sp,
-                                              fontFamily: 'Meta1',
-                                              fontWeight: FontWeight.normal),
-                                          textAlign: TextAlign.center,
+                      userData!.userData!.role == '2'
+                          ? Container(
+                              height: 10.h,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.only(left: 5.w, top: 2.h),
+                              decoration: BoxDecoration(
+                                  // gradient: LinearGradient(
+                                  //   begin: Alignment.topLeft,
+                                  //   end: Alignment.bottomRight,
+                                  //   colors: [
+                                  //     Color(0xff514d56),
+                                  //     Color(0xff252525),
+                                  //   ],
+                                  // )
+                                  ),
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: data.length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          selectindex1 = index;
+                                        });
+                                        index == 0
+                                            ? Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DiscoverPage(),
+                                              ))
+                                            : index == 1
+                                                ? Navigator.of(context)
+                                                    .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TrainningNotes(),
+                                                  ))
+                                                : index == 2
+                                                    ? Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ViewNutrition(),
+                                                      ))
+                                                    : Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SleepSchedule(),
+                                                      ));
+                                      },
+                                      child: Container(
+                                        width: 22.w,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                                height: 8.5.w,
+                                                width: 22.w,
+                                                alignment: Alignment.center,
+                                                margin:
+                                                    EdgeInsets.only(right: 5.w),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 2.w,
+                                                    vertical: 0.h),
+                                                child: Image.asset(
+                                                    data[index]
+                                                        .image
+                                                        .toString(),
+                                                    fit: BoxFit.cover,
+                                                    height: 9.w,
+                                                    width: 8.7.w,
+                                                    color:
+                                                        Colors.grey.shade200)),
+                                            SizedBox(
+                                              height: 1.h,
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              margin:
+                                                  EdgeInsets.only(right: 4.w),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 1.w,
+                                                  vertical: 0.h),
+                                              child: Text(
+                                                data[index].name.toString(),
+                                                maxLines: 4,
+                                                style: TextStyle(
+                                                    color: Colors.grey.shade200,
+                                                    fontSize: 10.sp,
+                                                    fontFamily: 'Meta1',
+                                                    fontWeight:
+                                                        FontWeight.normal),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
+                                    );
+                                  }),
+                            )
+                          : Container(
+                              height: 12.h,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.only(left: 5.w, top: 2.h),
+                              decoration: BoxDecoration(),
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: data.length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          selectindex1 = index;
+                                        });
+                                        index == 0
+                                            ? Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DiscoverPage(),
+                                              ))
+                                            : index == 1
+                                                ? Navigator.of(context)
+                                                    .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        mainpage2(),
+                                                  ))
+                                                : index == 2
+                                                    ? Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ChatPage(),
+                                                      ))
+                                                    : Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PendingRequestPage(),
+                                                      ));
+                                      },
+                                      child: Container(
+                                        width: 22.w,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                                height: 9.w,
+                                                width: 22.w,
+                                                alignment: Alignment.center,
+                                                margin:
+                                                    EdgeInsets.only(right: 5.w),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 1.w,
+                                                    vertical: 0.h),
+                                                child: Image.asset(
+                                                    data1[index]
+                                                        .image
+                                                        .toString(),
+                                                    fit: BoxFit.fill,
+                                                    height: 8.w,
+                                                    width: 8.w,
+                                                    color:
+                                                        Colors.grey.shade200)),
+                                            SizedBox(
+                                              height: 0.7.h,
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              margin:
+                                                  EdgeInsets.only(right: 4.w),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 1.w,
+                                                  vertical: 0.h),
+                                              child: Text(
+                                                data1[index].name.toString(),
+                                                maxLines: 4,
+                                                style: TextStyle(
+                                                    color: Colors.grey.shade200,
+                                                    fontSize: 10.sp,
+                                                    fontFamily: 'Meta1',
+                                                    fontWeight:
+                                                        FontWeight.normal),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            ),
                     ],
                   ),
                 ),

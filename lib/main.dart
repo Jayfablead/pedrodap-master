@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:pedrodap/Widget/color.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/loginpage.dart';
 import 'package:pedrodap/splashScreen.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => authprovider()),
         ],
         child: MaterialApp(
+          theme: ThemeData(timePickerTheme: timePickerThemeDataclass),
           debugShowCheckedModeBanner: false,
           home: Player(),
           builder: EasyLoading.init(),
@@ -36,5 +38,4 @@ class MyApp extends StatelessWidget {
       );
     });
   }
-
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Model/searchfittModal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
@@ -57,6 +59,8 @@ var islikes = false;
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 bool isloading = true;
 TextEditingController _search = TextEditingController();
+TextEditingController _title = TextEditingController();
+TextEditingController _desc = TextEditingController();
 
 class _ViewFitnessState extends State<ViewFitness> {
   @override
@@ -91,7 +95,11 @@ class _ViewFitnessState extends State<ViewFitness> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => StaticHomePage(),
+                                    ));
                               },
                               icon: Icon(
                                 Icons.arrow_back,
@@ -150,7 +158,7 @@ class _ViewFitnessState extends State<ViewFitness> {
                                     ),
                                   )
                                 : Container(
-                                    height: 80.h,
+                                    height: 68.h,
                                     child: ListView.builder(
                                       itemCount: allfitness!
                                           .allFitnessProgrammesDetails!.length,
@@ -412,8 +420,8 @@ class _ViewFitnessState extends State<ViewFitness> {
                                       ),
                                     ),
                                   )
-                                : Container(
-                                    height: 80.h,
+                                : SizedBox(
+                                    height: 68.h,
                                     child: ListView.builder(
                                       itemCount: searchfitness!
                                           .allFitnessProgrammeSearch!.length,
@@ -659,6 +667,174 @@ class _ViewFitnessState extends State<ViewFitness> {
                                       },
                                     ),
                                   ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 1.h),
+                            width: 90.w,
+                            child: ElevatedButton(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    '+',
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Add Fitness Programme',
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Meta1',
+                                      color: Color(0xffffffff),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        side: BorderSide(color: Colors.white)),
+                                    backgroundColor:
+                                        Color.fromARGB(255, 0, 0, 0),
+                                    scrollable: true,
+                                    content: Column(
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: InkWell(
+                                              onTap: () =>
+                                                  Navigator.of(context).pop(),
+                                              child: Icon(
+                                                CupertinoIcons.clear,
+                                                color: Colors.white,
+                                                size: 15.sp,
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          height: 2.h,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                            bottom: 20,
+                                            right: 5,
+                                            left: 5,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.grey.withOpacity(0.20),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: TextField(
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            controller: _title,
+                                            decoration: InputDecoration(
+                                                hintText: 'Title',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.white),
+                                                border: InputBorder.none),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                            bottom: 20,
+                                            right: 5,
+                                            left: 5,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.grey.withOpacity(0.20),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: TextField(
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            controller: _desc,
+                                            decoration: InputDecoration(
+                                                hintText: 'Description',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.white),
+                                                border: InputBorder.none),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(bottom: 1.h),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 2.w),
+                                          child: ElevatedButton(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Text(
+                                                  '+',
+                                                  style: TextStyle(
+                                                    fontSize: 20.sp,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Add',
+                                                  style: TextStyle(
+                                                    fontSize: 12.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: 'Meta1',
+                                                    color: Color(0xffffffff),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            onPressed: () {
+                                              if (_title.text == '' ||
+                                                  _desc.text == '') {
+                                                Fluttertoast.showToast(
+                                                    msg: "Please add all Data",
+                                                    toastLength:
+                                                        Toast.LENGTH_SHORT,
+                                                    timeInSecForIosWeb: 1,
+                                                    backgroundColor: Colors.red,
+                                                    textColor: Colors.black,
+                                                    fontSize: 11.sp);
+                                              } else {
+                                                addfitnessapi();
+                                              }
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.grey
+                                                    .withOpacity(0.20),
+                                                minimumSize: Size(40.w, 7.h),
+                                                elevation: 00),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.grey.withOpacity(0.20),
+                                minimumSize: Size(60.w, 7.h),
+                                elevation: 10,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -714,7 +890,6 @@ class _ViewFitnessState extends State<ViewFitness> {
 
           if (response.statusCode == 200 &&
               searchfitness?.status == "success") {
-            print(alltrainings!.allTrainingsAndNotes!.length);
             setState(() {
               isloading = false;
             });
@@ -755,6 +930,52 @@ class _ViewFitnessState extends State<ViewFitness> {
             await SaveDataLocal.saveLogInData(userData!);
             print(userData?.status);
             print(userData!.userData!.uid);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
+
+  addfitnessapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'add_fitness_programmedt';
+    data['player_id'] = userData!.userData!.uid.toString();
+    data['title'] = _title.text.trim().toString();
+    data['desc'] = _desc.text.trim().toString();
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().addfitnessapi(data).then((Response response) async {
+          allfitness = FitnessModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && allfitness?.status == "success") {
+            Navigator.pop(context);
+            Fluttertoast.showToast(
+                msg: "Fitness Added Successfully",
+                toastLength: Toast.LENGTH_SHORT,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.black,
+                textColor: Colors.white,
+                fontSize: 11.sp);
+            playerapi();
+            _title.text = '';
+            _desc.text = '';
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {

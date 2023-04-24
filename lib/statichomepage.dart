@@ -7,12 +7,14 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/pendingReqestsPage.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
 import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:pedrodap/screens/profile/Nutri.dart';
 import 'package:pedrodap/screens/profile/SleepSchedule.dart';
 import 'package:pedrodap/screens/profile/healthreportScreen.dart';
+import 'package:pedrodap/screens/profile/mainpage2.dart';
 import 'package:pedrodap/screens/profile/myconnections.dart';
 import 'package:pedrodap/screens/profile/myprofile.dart';
 import 'package:pedrodap/screens/profile/trainningnotes.dart';
@@ -45,6 +47,13 @@ class _StaticHomePageState extends State<StaticHomePage> {
     Sachen("assets/icons/coach.png", "Training"),
     Sachen("assets/icons/hospital.png", "Health"),
     Sachen("assets/icons/sleeping.png", "Sleep"),
+  ];
+
+  List<Sachen> data1 = [
+    Sachen("assets/icons/coach (1).png", "Connect"),
+    Sachen("assets/icons/players.png", "Discover"),
+    Sachen("assets/icons/message.png", "Message"),
+    Sachen("assets/icons/add-friend.png", "Requests"),
   ];
   int selectindex1 = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -132,8 +141,7 @@ class _StaticHomePageState extends State<StaticHomePage> {
                                 profiledata?.viewProfileDetails?.age == null
                                     ? 'N/A'
                                     : profiledata?.viewProfileDetails?.age ??
-                                    '' +
-                                        ' yrs old',
+                                        '' + ' yrs old',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'Meta',
@@ -281,7 +289,9 @@ class _StaticHomePageState extends State<StaticHomePage> {
                                     height: 0.5.h,
                                   ),
                                   Text(
-                                    (profiledata?.viewProfileDetails?.messagesCount).toString(),
+                                    (profiledata
+                                            ?.viewProfileDetails?.messagesCount)
+                                        .toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'Meta',
@@ -403,7 +413,96 @@ class _StaticHomePageState extends State<StaticHomePage> {
                                     );
                                   }),
                             )
-                          : Container(),
+                          : Container(
+                              height: 12.h,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.only(left: 5.w, top: 2.h),
+                              decoration: BoxDecoration(),
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: data.length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          selectindex1 = index;
+                                        });
+                                        index == 0
+                                            ? Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DiscoverPage(),
+                                              ))
+                                            : index == 1
+                                                ? Navigator.of(context)
+                                                    .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        mainpage2(),
+                                                  ))
+                                                : index == 2
+                                                    ? Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ChatPage(),
+                                                      ))
+                                                    : Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PendingRequestPage(),
+                                                      ));
+                                      },
+                                      child: Container(
+                                        width: 22.w,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                                height: 9.w,
+                                                width: 22.w,
+                                                alignment: Alignment.center,
+                                                margin:
+                                                    EdgeInsets.only(right: 5.w),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 1.w,
+                                                    vertical: 0.h),
+                                                child: Image.asset(
+                                                    data1[index]
+                                                        .image
+                                                        .toString(),
+                                                    fit: BoxFit.fill,
+                                                    height: 8.w,
+                                                    width: 8.w,
+                                                    color:
+                                                        Colors.grey.shade200)),
+                                            SizedBox(
+                                              height: 0.7.h,
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              margin:
+                                                  EdgeInsets.only(right: 4.w),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 1.w,
+                                                  vertical: 0.h),
+                                              child: Text(
+                                                data1[index].name.toString(),
+                                                maxLines: 4,
+                                                style: TextStyle(
+                                                    color: Colors.grey.shade200,
+                                                    fontSize: 10.sp,
+                                                    fontFamily: 'Meta1',
+                                                    fontWeight:
+                                                        FontWeight.normal),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            ),
                     ],
                   ),
                 )),
@@ -442,6 +541,7 @@ class _StaticHomePageState extends State<StaticHomePage> {
       }
     });
   }
+
   playerapi() {
     final Map<String, String> data = {};
     data['action'] = 'view_profile_details';
@@ -454,7 +554,6 @@ class _StaticHomePageState extends State<StaticHomePage> {
 
           if (response.statusCode == 200 && userData?.status == "success") {
             setState(() {
-
               isloading = false;
             });
 
