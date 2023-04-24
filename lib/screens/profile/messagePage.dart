@@ -105,7 +105,7 @@ class _MessagePageState extends State<MessagePage> {
     super.initState();
     showmessageapi();
     print(widget.uid ?? '');
-    _timer = Timer.periodic(const Duration(milliseconds: 200), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       showmessageapi();
     });
     senderid = userData?.userData?.uid.toString();
