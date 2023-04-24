@@ -46,7 +46,6 @@ This Application is Made for Football Community to Connect With Eachothers.
 <img src="https://github.com/Jayfablead/pedrodap-master/blob/main/assets/app/Screenshot_1682323662.png" width="200" height="450" /> &nbsp;   <img src="https://github.com/Jayfablead/pedrodap-master/blob/main/assets/app/Screenshot_1682323680.png" width="200" height="450" /> &nbsp;  <img src="https://github.com/Jayfablead/pedrodap-master/blob/main/assets/app/Screenshot_1682323683.png" width="200" height="450" /> &nbsp;
 
 <img src="https://github.com/Jayfablead/pedrodap-master/blob/main/assets/app/Screenshot_1682323699.png" width="200" height="450" /> &nbsp;   <img src="https://github.com/Jayfablead/pedrodap-master/blob/main/assets/app/Screenshot_20230424_164331.png" width="200" height="450" /> &nbsp;  <img src="https://github.com/Jayfablead/pedrodap-master/blob/main/assets/app/Screenshot_20230424_164525.png" width="200" height="450" /> &nbsp;
-
 etc many more ....
  
  
