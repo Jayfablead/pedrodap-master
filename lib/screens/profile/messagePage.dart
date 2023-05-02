@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -103,10 +104,10 @@ class _MessagePageState extends State<MessagePage> {
   @override
   void initState() {
     super.initState();
-    showmessageapi();
+
     print(widget.uid ?? '');
-    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      showmessageapi();
+    _timer = Timer.periodic(const Duration(milliseconds: 500), (timer) {
+      showmessageapi(widget.uid.toString());
     });
     senderid = userData?.userData?.uid.toString();
 
@@ -117,7 +118,12 @@ class _MessagePageState extends State<MessagePage> {
     // );
     // _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   }
-
+  @override
+  void dispose() {
+    _timer?.cancel();
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return commanScreen(
@@ -924,7 +930,7 @@ class _MessagePageState extends State<MessagePage> {
     );
   }
 
-  showmessageapi() {
+  showmessageapi(String receive) {
     final Map<String, String> data = {};
     data['action'] = 'chat_messages_app';
     data['login_user_id'] = userData?.userData?.uid ?? '';
@@ -976,7 +982,7 @@ class _MessagePageState extends State<MessagePage> {
           print(profiledata?.status);
           if (response.statusCode == 200 && profiledata?.status == "success") {
             _chat.text = '';
-            showmessageapi();
+            showmessageapi(widget.uid.toString());
             setState(() {
               isloading = false;
             });

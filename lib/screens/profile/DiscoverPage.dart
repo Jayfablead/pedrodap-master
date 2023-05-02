@@ -360,7 +360,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                           BorderRadius.circular(90),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: alldata?.allUsers?[index]
+                                            imageUrl: searchuser?.allUsers?[index]
                                                 .profilePic ??
                                                 '',
                                             progressIndicatorBuilder:

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Model/allplayersmodal.dart';
 import 'package:pedrodap/Model/playermodal.dart';
+import 'package:pedrodap/Model/searchusersmodal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/buildErrorDialog.dart';
 import 'package:pedrodap/Widget/const.dart';
@@ -191,23 +192,7 @@ class _mainpage2State extends State<mainpage2> {
                           SizedBox(
                             width: 5.w,
                           ),
-                          Container(
-                            width: 69.w,
-                            child: SizedBox(
-                              height: 16.w,
-                              child: TextField(
-                                controller: _search,
-                                keyboardType: TextInputType.text,
-                                decoration: inputDecoration(
-                                    hintText: "Search",
-                                    col: Colors.grey.withOpacity(0.20),
-                                    icon: Icon(
-                                      Icons.search,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                            ),
-                          )
+                         searchBox()
                         ],
                       ),
                       SizedBox(
@@ -726,31 +711,74 @@ class _mainpage2State extends State<mainpage2> {
   TextStyle textStyle =
       TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: 'Meta1');
 
-  InputDecoration inputDecoration(
-      {required String hintText, required Color col, required Icon icon}) {
-    return InputDecoration(
-      fillColor: col,
-      hoverColor: Colors.white,
-      focusColor: Colors.white,
-      filled: true,
-      errorStyle: const TextStyle(
-        color: Colors.red,
+  Widget searchBox() {
+    return Container(width: 69.w,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.20),
+        borderRadius: BorderRadius.circular(20),
       ),
-      hintText: hintText,
-      prefixIcon: icon,
-      contentPadding: EdgeInsets.symmetric(vertical: 5.0),
-      prefixIconColor: Colors.purple,
-      hintStyle: textStyle,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.sp)),
-        borderSide: BorderSide.none,
+      child: TextField(
+        controller: _search,
+        onChanged: (value) {
+          searchapi();
+        },
+        style: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(0),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.white,
+            size: 20,
+          ),
+          prefixIconConstraints: BoxConstraints(
+            maxHeight: 20,
+            minWidth: 25,
+          ),
+          border: InputBorder.none,
+          hintText: 'Search',
+          hintStyle: TextStyle(color: Colors.white, fontFamily: 'Meta1'),
+        ),
       ),
-      focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.sp)),
-          borderSide: BorderSide.none),
     );
   }
+  searchapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'search_users_app';
+    data['uid'] = userData!.userData!.uid.toString();
+    data['search_keyword'] = _search.text.trim().toString();
+    print(data);
 
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().searchuserapi(data).then((Response response) async {
+          searchuser =
+              searchUsersModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 &&
+              searchtodotraining?.status == "success") {
+
+            setState(() {
+              isloading = false;
+            });
+
+            await SaveDataLocal.saveLogInData(userData!);
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
+  }
   playerapi() {
     final Map<String, String> data = {};
     data['action'] = 'all_users_app';
