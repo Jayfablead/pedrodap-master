@@ -76,6 +76,7 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print( " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ${widget.videos} =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     playerapi1();
     _user.text = widget.name.toString();
     _age.text = widget.age.toString();
@@ -635,7 +636,10 @@ class _EditProfileState extends State<EditProfile> {
                                 onTap: () async {
                                   final video = await _picker.pickVideo(
                                       source: ImageSource.gallery);
-                                  videofile = File(video!.path);
+                               setState(() {
+                                 videofile = File(video!.path);
+                               });
+                                  print('=-=-=-=-=-=-=-=-=-=-=-=-=-= $videofile =-=-=-=-=-=-=-=-==-=-=-');
                                 },
                                 child: Container(
                                   alignment: Alignment.center,
@@ -668,9 +672,14 @@ class _EditProfileState extends State<EditProfile> {
                               ),
                               (videofile != null)
                                   ? ClipRRect(
+
                                       borderRadius: BorderRadius.circular(10),
-                                      child: profplayer(
-                                        video: videofile?.path,
+                                      child: Container(
+                                        height: 20.h,
+                                        width: 50.w,
+                                        child: profplayer(
+                                          video: videofile?.path.toString(),
+                                        ),
                                       ),
                                     )
                                   : Container(),
@@ -695,7 +704,7 @@ class _EditProfileState extends State<EditProfile> {
                                               )
                                             : VideoPlayer(_controller)
                                       ),
-                                      Positioned(
+                                     widget.videos == null ?Container():Positioned(
                                         left: 52.w,
                                         bottom: 17.h,
                                         child: InkWell(

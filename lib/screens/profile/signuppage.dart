@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:pedrodap/Model/UserModal.dart';
 import 'package:pedrodap/Widget/buildErrorDialog.dart';
 import 'package:pedrodap/Widget/const.dart';
+import 'package:pedrodap/Widget/donedialog.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/loginpage.dart';
@@ -626,8 +627,8 @@ class _signupState extends State<signup> {
               // buildErrorDialog(context, "", "Login Successfully");
 
               if (_pass.text == _conf.text) {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => loginpage()));
+                DoneDialog(context, 'Done', 'Account Created Successfully');
+
                 _email.text = '';
                 _phone.text = '';
                 _user.text = '';

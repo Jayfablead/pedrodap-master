@@ -372,6 +372,7 @@ class _loginpageState extends State<loginpage> {
   }
 
   loginapi() {
+    print('helooo');
     if (_formKey.currentState!.validate()) {
       final Map<String, String> data = {};
       data['email'] = _email.text.trim().toString();

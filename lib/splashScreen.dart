@@ -188,6 +188,7 @@ class _PlayerState extends State<Player> {
     userData = await SaveDataLocal.getDataFromLocal();
     setState(() {
       userData;
+      print(userData?.userData?.name);
     });
   }
 

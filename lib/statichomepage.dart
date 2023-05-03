@@ -63,16 +63,20 @@ class _StaticHomePageState extends State<StaticHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _timer = Timer.periodic(const Duration(milliseconds: 200), (timer) {
-    //
-    //
-    //   connectionsapi();
-    //   playerapi();
-    // });
     connectionsapi();
     playerapi();
-  }
+    _timer = Timer.periodic(const Duration(seconds: 500), (timer) {
+      connectionsapi();
+      playerapi();
+    });
 
+  }
+  @override
+  void dispose() {
+    _timer?.cancel();
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return commanScreen(
@@ -515,12 +519,13 @@ class _StaticHomePageState extends State<StaticHomePage> {
     final Map<String, String> data = {};
     data['action'] = 'connected_users';
     data['uid'] = userData!.userData!.uid.toString();
-
+print('=========================== +++++ ${data}');
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().Connectionsapi(data).then((Response response) async {
           connections = ConnectedModal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && connections?.status == "success") {
+            print('=========================== +++++ ${connections?.totalConnectedUser}');
             setState(() {
               isloading = false;
             });
@@ -530,7 +535,9 @@ class _StaticHomePageState extends State<StaticHomePage> {
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
+          setState(() {
             isloading = false;
+          });
           }
         });
       } else {
@@ -557,9 +564,7 @@ class _StaticHomePageState extends State<StaticHomePage> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
-            print(userData?.status);
-            print(userData?.userData?.uid);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
