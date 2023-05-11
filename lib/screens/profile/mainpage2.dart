@@ -1018,41 +1018,26 @@ class _mainpage2State extends State<mainpage2> {
                                                       ),
                                                       InkWell(
                                                         onTap: () {
-                                                          Navigator.of(context)
-                                                              .push(
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  MessagePage(
-                                                                      uid:
-                                                                          '121',
-                                                                      image:
-                                                                          'assets/10.png',
-                                                                      name: item
-                                                                          .name),
-                                                            ),
-                                                          );
+
                                                         },
                                                         child: Column(
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
+                                                          MainAxisAlignment
+                                                              .center,
                                                           children: [
                                                             Icon(
-                                                              CupertinoIcons
-                                                                  .text_bubble,
-                                                              color:
-                                                                  Colors.white,
+                                                              Icons
+                                                                  .join_inner,
+                                                              color: Colors.white,
                                                               size: 19.sp,
                                                             ),
                                                             Text(
-                                                              'Chat',
+                                                              'Connect',
                                                               style: TextStyle(
                                                                 fontSize: 3.5.w,
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                                fontFamily:
-                                                                    'Meta1',
+                                                                FontWeight.w500,
+                                                                fontFamily: 'Meta1',
                                                                 color: Color(
                                                                     0xffb4b4b4),
                                                               ),
@@ -1090,7 +1075,7 @@ class _mainpage2State extends State<mainpage2> {
                                                                 .circular(
                                                                     20.sp)),
                                                     child: Text(
-                                                      "View",
+                                                      "View Profile",
                                                       style: TextStyle(
                                                           fontSize: 14.sp,
                                                           color: Colors.white,
