@@ -65,6 +65,32 @@ class _mainpage2State extends State<mainpage2> {
     Sachen("assets/icons/add-friend.png", "Requests"),
   ];
   int _current = 1;
+  List age = [
+    'below 18',
+    '19 to 22',
+    '23 to 27',
+    '28 to 35',
+    '36 to 40',
+    'above 40',
+  ];
+  List ocupation = [
+    'Fitness Trainer',
+    'Coach',
+    'Scouts',
+    'Medicals',
+    'Nutritionist',
+    'Personal trainer',
+    'Player',
+  ];
+  List club = [
+    'Brentford Academy',
+    'Psg',
+    'Al-Nasir',
+    'Fc Barcelona',
+    'Real Madrid',
+    'Arsenal',
+    'Manchester Utd',
+  ];
 
   int selectindex1 = 0;
   CarouselController _controller = CarouselController();
@@ -185,26 +211,264 @@ class _mainpage2State extends State<mainpage2> {
                           //         "https://icdn.football-espana.net/wp-content/uploads/2022/06/Neymar-Junior2.jpeg")),
                           searchBox(),
                           PopupMenuButton(
-                              itemBuilder: (context) {
-                                return [
-                                  PopupMenuItem(
-                                      child: Text(
-                                    'Age',
-                                    style: textStyle,
-                                  )),
-
-                                  PopupMenuItem(
-                                      child: Text(
-                                    'Occupation',
-                                    style: textStyle,
-                                  )),
-                                  PopupMenuItem(
-                                      child: Text(
-                                    'Club',
-                                    style: textStyle,
-                                  )),
-                                ];
-                              },
+                              itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                        child: InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return Container(
+                                              height: 60.h,
+                                              width: 80.w,
+                                              child: AlertDialog(
+                                                  backgroundColor: Colors.black,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      side: BorderSide(
+                                                          color: Colors.white)),
+                                                  title: Text(
+                                                    'Select Age',
+                                                    style: textStyle1,
+                                                  ),
+                                                  content: SizedBox(
+                                                    height: 30.h,
+                                                    width: 70.w,
+                                                    child: GridView.builder(
+                                                      gridDelegate:
+                                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                                              childAspectRatio:
+                                                                  10 / 5,
+                                                              crossAxisCount:
+                                                                  2),
+                                                      itemCount: age.length,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return InkWell(
+                                                          onTap: () {},
+                                                          child: Container(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            margin:
+                                                                EdgeInsets.all(
+                                                                    2.w),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    1.w),
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .white),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20)),
+                                                            child: Text(
+                                                              age[index],
+                                                              style: textStyle,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                  )),
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Age',
+                                            style: textStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 0.7.h,
+                                          ),
+                                          Divider(
+                                            color: Colors.grey,
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                                    PopupMenuItem(
+                                        child: InkWell(onTap: () {
+                                          Navigator.pop(context);
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return Container(
+                                                height: 60.h,
+                                                width: 80.w,
+                                                child: AlertDialog(
+                                                    backgroundColor: Colors.black,
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                        side: BorderSide(
+                                                            color: Colors.white)),
+                                                    title: Text(
+                                                      'Select Occupation',
+                                                      style: textStyle1,
+                                                    ),
+                                                    content: SizedBox(
+                                                      height: 30.h,
+                                                      width: 70.w,
+                                                      child: GridView.builder(
+                                                        gridDelegate:
+                                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                                            childAspectRatio:
+                                                            9 / 5,
+                                                            crossAxisCount:
+                                                            2),
+                                                        itemCount: ocupation.length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return InkWell(
+                                                            onTap: () {},
+                                                            child: Container(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              margin:
+                                                              EdgeInsets.all(
+                                                                  2.w),
+                                                              padding:
+                                                              EdgeInsets.all(
+                                                                  2.w),
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .white),
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                      20)),
+                                                              child: Text(
+                                                                ocupation[index],
+                                                                style: textStyle,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    )),
+                                              );
+                                            },
+                                          );
+                                        },
+                                          child: Column(
+                                      mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                      children: [
+                                          Text(
+                                            'Occupation',
+                                            style: textStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 0.7.h,
+                                          ),
+                                          Divider(
+                                            color: Colors.grey,
+                                          ),
+                                      ],
+                                    ),
+                                        )),
+                                    PopupMenuItem(
+                                        child: InkWell(onTap: () {
+                                          Navigator.pop(context);
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return Container(
+                                                height: 60.h,
+                                                width: 80.w,
+                                                child: AlertDialog(
+                                                    backgroundColor: Colors.black,
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                        side: BorderSide(
+                                                            color: Colors.white)),
+                                                    title: Text(
+                                                      'Select Club',
+                                                      style: textStyle1,
+                                                    ),
+                                                    content: SizedBox(
+                                                      height: 30.h,
+                                                      width: 70.w,
+                                                      child: GridView.builder(
+                                                        gridDelegate:
+                                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                                            childAspectRatio:
+                                                            9 / 5,
+                                                            crossAxisCount:
+                                                            2),
+                                                        itemCount: club.length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return InkWell(
+                                                            onTap: () {},
+                                                            child: Container(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              margin:
+                                                              EdgeInsets.all(
+                                                                  2.w),
+                                                              padding:
+                                                              EdgeInsets.all(
+                                                                  2.w),
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .white),
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                      20)),
+                                                              child: Text(
+                                                                club[index],
+                                                                style: textStyle,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    )),
+                                              );
+                                            },
+                                          );
+                                        },
+                                          child: Column(
+                                      mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                      children: [
+                                          Text(
+                                            'Club',
+                                            style: textStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 0.7.h,
+                                          ),
+                                          Divider(
+                                            color: Colors.grey,
+                                          ),
+                                      ],
+                                    ),
+                                        )),
+                                  ],
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   side: BorderSide(color: Colors.white)),
@@ -230,8 +494,8 @@ class _mainpage2State extends State<mainpage2> {
                                   },
                                   child: SingleChildScrollView(
                                     child: Container(
-                                      // padding:EdgeInsets.all(5.w),
-                                      height: 40.h,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.h),
                                       width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
                                           border: Border.all(
@@ -427,18 +691,7 @@ class _mainpage2State extends State<mainpage2> {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      Navigator.of(context)
-                                                          .push(
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              MessagePage(
-                                                                  uid: '121',
-                                                                  image:
-                                                                      'assets/10.png',
-                                                                  name: item
-                                                                      .name),
-                                                        ),
-                                                      );
+
                                                     },
                                                     child: Column(
                                                       mainAxisAlignment:
@@ -446,13 +699,13 @@ class _mainpage2State extends State<mainpage2> {
                                                               .center,
                                                       children: [
                                                         Icon(
-                                                          CupertinoIcons
-                                                              .text_bubble,
+                                                          Icons
+                                                              .join_inner,
                                                           color: Colors.white,
                                                           size: 19.sp,
                                                         ),
                                                         Text(
-                                                          'Chat',
+                                                          'Connect',
                                                           style: TextStyle(
                                                             fontSize: 3.5.w,
                                                             fontWeight:
@@ -494,7 +747,7 @@ class _mainpage2State extends State<mainpage2> {
                                                         BorderRadius.circular(
                                                             20.sp)),
                                                 child: Text(
-                                                  "View",
+                                                  "View Profile",
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
                                                       color: Colors.white,
@@ -517,7 +770,7 @@ class _mainpage2State extends State<mainpage2> {
                                     _current = index;
                                   });
                                 },
-                                height: 40.h,
+                                height: 60.h,
                                 enlargeCenterPage: true,
                                 autoPlay: false,
                                 // aspectRatio: 16 / 9,
@@ -530,7 +783,7 @@ class _mainpage2State extends State<mainpage2> {
                             )
                           : searchuser?.allUsers?.length == 0
                               ? Container(
-                                  height: 40.h,
+                                  padding: EdgeInsets.symmetric(vertical: 2.h),
                                   alignment: Alignment.center,
                                   child: Text(
                                     'No User Found',
@@ -552,8 +805,8 @@ class _mainpage2State extends State<mainpage2> {
                                       },
                                       child: SingleChildScrollView(
                                         child: Container(
-                                          // padding:EdgeInsets.all(5.w),
-                                          height: 40.h,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 2.h),
                                           width:
                                               MediaQuery.of(context).size.width,
                                           decoration: BoxDecoration(
@@ -860,7 +1113,7 @@ class _mainpage2State extends State<mainpage2> {
                                         _current = index;
                                       });
                                     },
-                                    height: 40.h,
+                                    height: 48.h,
                                     enlargeCenterPage: true,
                                     autoPlay: false,
                                     // aspectRatio: 16 / 9,
@@ -872,7 +1125,7 @@ class _mainpage2State extends State<mainpage2> {
                                   ),
                                 ),
                       SizedBox(
-                        height: 6.h,
+                        height: 2.h,
                       ),
                       // Padding(
                       //   padding: EdgeInsets.symmetric(horizontal: 3.w),
@@ -903,9 +1156,7 @@ class _mainpage2State extends State<mainpage2> {
                       //     ],
                       //   ),
                       // ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
+
                       userData!.userData!.role == '2'
                           ? Container(
                               height: 10.h,
@@ -1107,6 +1358,8 @@ class _mainpage2State extends State<mainpage2> {
 
   TextStyle textStyle =
       TextStyle(color: Colors.white, fontSize: 12.sp, fontFamily: 'Meta1');
+  TextStyle textStyle1 =
+      TextStyle(color: Colors.white, fontSize: 13.sp, fontFamily: 'Meta1');
 
   Widget searchBox() {
     return Container(
