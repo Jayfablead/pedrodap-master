@@ -95,148 +95,138 @@ class _loginpageState extends State<loginpage> {
                   height: 5.h,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.5.h),
+                  height: 8.h,
+                  padding: EdgeInsets.only(bottom: 2.h),
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    color: (setup != 1)
-                        ? Colors.transparent
-                        : Colors.white.withOpacity(0.15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 47.0, bottom: 0.0, top: 1.0),
-                          child: (setup == 1)
-                              ? Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade300,
-                                      fontFamily: 'Meta1',
-                                      fontSize: 12.sp),
-                                )
-                              : Container()),
-                      SizedBox(
-                        height: 4.h,
-                        child: TextFormField(
-                            controller: _email,
-                            keyboardType: TextInputType.emailAddress,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Meta1',
-                                fontSize: 12.sp),
-                            onTap: () {
-                              setState(() {
-                                setup = 1;
-                              });
-                            },
-                            validator: (value) {
-                              String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}" +
-                                  "\\@" +
-                                  "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                                  "(" +
-                                  "\\." +
-                                  "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                                  ")+";
-                              //Convert string p to a RegEx
-                              RegExp regExp = RegExp(p);
-                              if (value!.isEmpty) {
-                                return "            Enter Your Email";
-                              } else {
-                                //If email address matches pattern
-                                return null;
-                              }
-                            },
-                            decoration: inputDecoration(
-                              ico: IconButton(
-                                  onPressed: () {}, icon: Icon(null)),
-                              hintText: "Email",
-                              icon: Icon(
-                                Icons.email_outlined,
-                                color: Colors.grey.shade500,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
+                      color: Colors.white.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextFormField(
+// onChanged: (value){
+//   print('=-=-=-=-=-=-=-=-=-=-=-=- ${value.length} =-=-=-=-=-=-=-=-=-=-=-=-=-=-');
+//
+// },
+
+                      controller: _email,
+                      keyboardType: TextInputType.emailAddress,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontSize: 12.sp),
+                      onTap: () {
+                        setState(() {
+                          setup = 1;
+                        });
+                      },
+                      validator: (value) {
+                        String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}" +
+                            "\\@" +
+                            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                            "(" +
+                            "\\." +
+                            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                            ")+";
+                        //Convert string p to a RegEx
+                        RegExp regExp = RegExp(p);
+                        if (value!.isEmpty) {
+                          return "            Enter Your Email";
+                        } else {
+                          //If email address matches pattern
+                          return null;
+                        }
+                      },
+                      decoration: inputDecoration(
+                        ico: IconButton(onPressed: () {}, icon: Icon(null)),
+                        hintText: "Email",
+                        icon: Icon(
+                          Icons.email_outlined,
+                          color: Colors.grey.shade500,
+                        ),
+                      )),
                 ),
                 SizedBox(
                   height: 3.h,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.5.h),
+                  height: 8.h,
+                  padding: EdgeInsets.only(bottom: 1.h),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    color: (setup != 1)
-                        ? Colors.transparent
-                        : Colors.white.withOpacity(0.15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 47.0, bottom: 0.0, top: 1.0),
-                          child: (setup == 1)
-                              ? Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade300,
-                                      fontFamily: 'Meta1',
-                                      fontSize: 12.sp),
-                                )
-                              : Container()),
-                      SizedBox(
-                        height: 4.h,
-                        child: TextFormField(
-                            obscureText: visible,
-                            obscuringCharacter: '*',
-                            controller: _pass,
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Meta1',
-                                fontSize: 12.sp),
-                            validator: (value) {
+                      color: Colors.white.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextFormField(
+                      obscureText: visible,
+                      obscuringCharacter: '*',
+                      controller: _pass,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontSize: 12.sp),
+                      validator: (value) {
+                        setState(() {
+                          value;
+                        });
+                        if (value!.isEmpty) {
+                          return "            Enter Your Password";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        // fillColor: Colors.red,
+                        hoverColor: Colors.white,
+                        focusColor: Colors.white,
+                        filled: false,
+
+                        errorStyle: TextStyle(
+                          color: Colors.red,
+                        ),
+                        isDense: true,
+                        hintText: "Password",
+                        suffixIconColor: Colors.white,
+                        suffix: Padding(
+                          padding: EdgeInsets.only(top: 1.5.h),
+                          child: IconButton(
+                            onPressed: () {
                               setState(() {
-                                value;
+                                visible = !visible;
+                                print(visible);
+                                print('Ouch');
                               });
-                              if (value!.isEmpty) {
-                                return "            Enter Your Password";
-                              }
-                              return null;
                             },
-                            decoration: inputDecoration(
-                              hintText: "Password",
-                              ico: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    visible = !visible;
-                                    print(visible);
-                                    print('Ouch');
-                                  });
-                                },
-                                icon: visible
-                                    ? Icon(
-                                        Icons.visibility,
-                                        size: 15.sp,
-                                        color: Colors.white,
-                                      )
-                                    : Icon(
-                                        Icons.visibility_off,
-                                        size: 15.sp,
-                                        color: Colors.white,
-                                      ),
-                              ),
-                              icon: Icon(
-                                Icons.lock,
-                                color: Colors.white,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
+                            icon: visible
+                                ? Icon(
+                                    Icons.visibility,
+                                    size: 15.sp,
+                                    color: Colors.white,
+                                  )
+                                : Icon(
+                                    Icons.visibility_off,
+                                    size: 15.sp,
+                                    color: Colors.white,
+                                  ),
+                          ),
+                        ),
+
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.only(top: 2.h),
+                          child: Icon(
+                            Icons.lock,
+                            color: Colors.white,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.only(bottom: 3.h),
+                        prefixIconColor: Colors.purple,
+                        hintStyle: textStyle,
+                        border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(12.sp)),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.sp)),
+                            borderSide: BorderSide.none),
+                      )),
                 ),
                 SizedBox(
                   height: 5.h,
@@ -357,8 +347,11 @@ class _loginpageState extends State<loginpage> {
       suffixIconColor: Colors.white,
       suffix: ico,
 
-      prefixIcon: Padding(padding: EdgeInsets.only(bottom: 3.3.h), child: icon),
-      contentPadding: EdgeInsets.symmetric(vertical: 3.h),
+      prefixIcon: Padding(
+        padding: EdgeInsets.only(top: 2.5.h),
+        child: icon,
+      ),
+      contentPadding: EdgeInsets.only(bottom: 3.h),
       prefixIconColor: Colors.purple,
       hintStyle: textStyle,
       border: OutlineInputBorder(

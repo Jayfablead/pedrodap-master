@@ -36,7 +36,7 @@ class _signupState extends State<signup> {
     'Personal Trainers',
   ]; // Option 2
   String? _selectedLocation; // Option 2
-  bool visible = false;  bool visible1 = false;
+  bool visible = true;  bool visible1 = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,9 +95,7 @@ class _signupState extends State<signup> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.sp),
-                        color: (setup != 1)
-                            ? Colors.transparent
-                            : Colors.white.withOpacity(0.15),
+                        color:  Colors.white.withOpacity(0.15),
                       ),
                       padding: EdgeInsets.symmetric(
                           horizontal: 5.0, vertical: 0.5.h),
@@ -153,60 +151,41 @@ class _signupState extends State<signup> {
                     SizedBox(
                       height: 2.h,
                     ),
+               
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 0.5.h),
+                      height: 8.h,
+                      padding: EdgeInsets.only(bottom: 2.h),
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.sp),
-                        color: (setup != 1)
-                            ? Colors.transparent
-                            : Colors.white.withOpacity(0.15),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 47.0, bottom: 0.0, top: 1.0),
-                              child: (setup == 1)
-                                  ? Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade300,
-                                          fontFamily: 'Meta1',
-                                          fontSize: 10.sp),
-                                    )
-                                  : Container()),
-                          SizedBox(
-                            height: 4.h,
-                            child: TextFormField(
-                                controller: _user,
-                                keyboardType: TextInputType.text,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Meta1',
-                                    fontSize: 12.sp),
-                                onTap: () {
-                                  setState(() {
-                                    setup = 1;
-                                  });
-                                  print(setup);
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "            Enter Your User Name";
-                                  }
-                                  return null;
-                                },
-                                decoration: inputDecoration(
-                                  hintText: "Name",
-                                  icon: Icon(
-                                    Icons.person,
-                                    color: Colors.grey.shade500,
-                                  ),
-                                )),
-                          ),
-                        ],
-                      ),
+                          color: Colors.white.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: TextFormField(
+                          controller: _user,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Meta1',
+                              fontSize: 12.sp),
+                          onTap: () {
+                            setState(() {
+                              setup = 1;
+                            });
+                            print(setup);
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "            Enter Your User Name";
+                            }
+                            return null;
+                          },
+                          decoration: inputDecoration(ico: IconButton(onPressed: (){}, icon: Icon(null)),
+                            hintText: "Name",
+                            icon: Icon(
+                              Icons.person,
+                              color: Colors.grey.shade500,
+                              size: 15.sp,
+                            ),
+                          )),
                     ),
                   ],
                 ),
@@ -214,288 +193,264 @@ class _signupState extends State<signup> {
                   height: 2.h,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.5.h),
+                  height: 8.h,
+                  padding: EdgeInsets.only(bottom: 2.h),
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    color: (setup != 1)
-                        ? Colors.transparent
-                        : Colors.white.withOpacity(0.15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 47.0, bottom: 0.0, top: 1.0),
-                          child: (setup == 1)
-                              ? Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade300,
-                                      fontFamily: 'Meta1',
-                                      fontSize: 10.sp),
-                                )
-                              : Container()),
-                      SizedBox(
-                        height: 4.h,
-                        child: TextFormField(
-                            controller: _phone,
-                            keyboardType: TextInputType.phone,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Meta1',
-                                fontSize: 12.sp),
-                            onTap: () {
-                              setState(() {
-                                setup = 1;
-                              });
-                              print(setup);
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "            Enter Your phonenumber";
-                              }
-                              return null;
-                            },
-                            decoration: inputDecoration(
-                              hintText: "Phone Number",
-                              icon: Icon(
-                                Icons.phone_android,
-                                color: Colors.grey.shade500,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
+                      color: Colors.white.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextFormField(
+                      controller: _phone,
+                      keyboardType: TextInputType.phone,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontSize: 12.sp),
+                      onTap: () {
+                        setState(() {
+                          setup = 1;
+                        });
+                        print(setup);
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "            Enter Your phonenumber";
+                        }
+                        return null;
+                      },
+                      decoration: inputDecoration( ico: IconButton(onPressed: (){}, icon: Icon(null),),
+                        hintText: "Phone Number",
+                        icon: Icon(
+                          Icons.phone_android,
+                          color: Colors.grey.shade500,
+                          size: 15.sp,
+                        ),
+                      )),
                 ),
                 SizedBox(
                   height: 2.h,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.5.h),
+                  height: 8.h,
+                  padding: EdgeInsets.only(bottom: 2.h),
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    color: (setup != 1)
-                        ? Colors.transparent
-                        : Colors.white.withOpacity(0.15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 47.0, bottom: 0.0, top: 1.0),
-                          child: (setup == 1)
-                              ? Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade300,
-                                      fontFamily: 'Meta1',
-                                      fontSize: 10.sp),
-                                )
-                              : Container()),
-                      SizedBox(
-                        height: 4.h,
-                        child: TextFormField(
-                            controller: _email,
-                            keyboardType: TextInputType.emailAddress,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Meta1',
-                                fontSize: 12.sp),
-                            onTap: () {
-                              setState(() {
-                                setup = 1;
-                              });
-                              print(setup);
-                            },
-                            validator: (value) {
-                              String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}" +
-                                  "\\@" +
-                                  "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                                  "(" +
-                                  "\\." +
-                                  "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                                  ")+";
-                              //Convert string p to a RegEx
-                              RegExp regExp = RegExp(p);
-                              if (value!.isEmpty) {
-                                return "            Enter Your Email";
-                              } else {
-                                //If email address matches pattern
-                                return null;
-                              }
-                            },
-                            decoration: inputDecoration(
-                              hintText: "Email",
-                              icon: Icon(
-                                Icons.email_outlined,
-                                color: Colors.grey.shade500,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
+                      color: Colors.white.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextFormField(
+                      controller: _email,
+                      keyboardType: TextInputType.emailAddress,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontSize: 12.sp),
+                      onTap: () {
+                        setState(() {
+                          setup = 1;
+                        });
+                        print(setup);
+                      },
+                      validator: (value) {
+                        String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}" +
+                            "\\@" +
+                            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                            "(" +
+                            "\\." +
+                            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                            ")+";
+                        //Convert string p to a RegEx
+                        RegExp regExp = RegExp(p);
+                        if (value!.isEmpty) {
+                          return "            Enter Your Email";
+                        } else {
+                          //If email address matches pattern
+                          return null;
+                        }
+                      },
+                      decoration: inputDecoration(ico: IconButton(onPressed: (){}, icon: Icon(null),),
+                        hintText: "Email",
+                        icon: Icon(
+                          Icons.email_outlined,
+                          color: Colors.grey.shade500,
+                          size: 15.sp,
+                        ),
+                      )),
                 ),
                 SizedBox(
                   height: 2.h,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.5.h),
+                  height: 8.h,
+                  padding: EdgeInsets.only(bottom: 2.h),
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    color: (setup != 1)
-                        ? Colors.transparent
-                        : Colors.white.withOpacity(0.15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 47.0, bottom: 0.0, top: 1.0),
-                          child: (setup == 1)
-                              ? Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade300,
-                                      fontFamily: 'Meta1',
-                                      fontSize: 10.sp),
-                                )
-                              : Container()),
-                      SizedBox(
-                        height: 4.h,
-                        child: TextFormField(
-                            obscureText: visible,
-                            obscuringCharacter: '*',
-                            controller: _pass,
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Meta1',
-                                fontSize: 12.sp),
-                            onTap: () {
+                      color: Colors.white.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextFormField(
+                      obscureText: visible,
+                      obscuringCharacter: '*',
+                      controller: _pass,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontSize: 12.sp),
+                      onTap: () {
+                        setState(() {
+                          setup = 1;
+                        });
+                        print(setup);
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "            Enter Your Password";
+                        }
+                        return null;
+                      },
+                      decoration:  InputDecoration(
+                        // fillColor: Colors.red,
+                        hoverColor: Colors.white,
+                        focusColor: Colors.white,
+                        filled: false,
+
+                        errorStyle: TextStyle(
+                          color: Colors.red,
+                        ),
+                        isDense: true,
+                        hintText: "Password",
+                        suffixIconColor: Colors.white,
+                        suffix: Padding(
+                          padding: EdgeInsets.only(top: 1.5.h),
+                          child: IconButton(
+                            onPressed: () {
                               setState(() {
-                                setup = 1;
+                                visible = !visible;
+                                print(visible);
+                                print('Ouch');
                               });
-                              print(setup);
                             },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "            Enter Your Password";
-                              }
-                              return null;
-                            },
-                            decoration: inputDecoration(
-                              ico: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    visible = !visible;
-                                    print(visible);
-                                    print('Ouch');
-                                  });
-                                },
-                                icon: visible
-                                    ? Icon(
-                                  Icons.visibility,
-                                  size: 15.sp,
-                                  color: Colors.white,
-                                )
-                                    : Icon(
-                                  Icons.visibility_off,
-                                  size: 15.sp,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              hintText: "Password",
-                              icon: Icon(
-                                Icons.lock,
-                                color: Colors.grey.shade500,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
+                            icon: visible
+                                ? Icon(
+                              Icons.visibility,
+                              size: 15.sp,
+                              color: Colors.white,
+                            )
+                                : Icon(
+                              Icons.visibility_off,
+                              size: 15.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.only(top: 2.h),
+                          child: Icon(
+                            Icons.lock,
+                            color: Colors.white,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.only(bottom: 3.h),
+                        prefixIconColor: Colors.purple,
+                        hintStyle: textStyle,
+                        border: OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(12.sp)),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(12.sp)),
+                            borderSide: BorderSide.none),
+                      )),
                 ),
                 SizedBox(
                   height: 2.h,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.5.h),
+                  height: 8.h,
+                  padding: EdgeInsets.only(bottom: 1.h),
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    color: (setup != 1)
-                        ? Colors.transparent
-                        : Colors.white.withOpacity(0.15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 47.0, bottom: 0.0, top: 1.0),
-                          child: (setup == 1)
-                              ? Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade300,
-                                      fontFamily: 'Meta1',
-                                      fontSize: 10.sp),
-                                )
-                              : Container()),
-                      SizedBox(
-                        height: 4.h,
-                        child: TextFormField(
-                            obscureText: visible1,
-                            obscuringCharacter: '*',
-                            controller: _conf,
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Meta1',
-                                fontSize: 12.sp),
-                            onTap: () {
+                      color: Colors.white.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextFormField(
+                      obscureText: visible1,
+                      obscuringCharacter: '*',
+                      controller: _conf,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontSize: 12.sp),
+                      onTap: () {
+                        setState(() {
+                          setup = 1;
+                        });
+                        print(setup);
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "            Enter Your Confirm Password";
+                        }
+                        return null;
+                      },
+                      decoration:  InputDecoration(
+                        // fillColor: Colors.red,
+                        hoverColor: Colors.white,
+                        focusColor: Colors.white,
+                        filled: false,
+
+                        errorStyle: TextStyle(
+                          color: Colors.red,
+                        ),
+                        isDense: true,
+                        hintText: "Confirm Password",
+                        suffixIconColor: Colors.white,
+                        suffix: Padding(
+                          padding: EdgeInsets.only(top: 1.5.h),
+                          child: IconButton(
+                            onPressed: () {
                               setState(() {
-                                setup = 1;
+                                visible1 = !visible1;
+                                print(visible1);
+                                print('Ouch');
                               });
-                              print(setup);
                             },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "            Enter Your Confirm Password";
-                              }
-                              return null;
-                            },
-                            decoration: inputDecoration(
-                              ico: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    visible1 = !visible1;
-                                    print(visible1);
-                                    print('Ouch');
-                                  });
-                                },
-                                icon: visible1
-                                    ? Icon(
-                                  Icons.visibility,
-                                  size: 15.sp,
-                                  color: Colors.white,
-                                )
-                                    : Icon(
-                                  Icons.visibility_off,
-                                  size: 15.sp,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              hintText: "Confirm Password",
-                              icon: Icon(
-                                Icons.lock,
-                                color: Colors.grey.shade500,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
+                            icon: visible
+                                ? Icon(
+                              Icons.visibility,
+                              size: 15.sp,
+                              color: Colors.white,
+                            )
+                                : Icon(
+                              Icons.visibility_off,
+                              size: 15.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.only(top: 2.h),
+                          child: Icon(
+                            Icons.lock,
+                            color: Colors.white,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.only(bottom: 3.h),
+                        prefixIconColor: Colors.purple,
+                        hintStyle: textStyle,
+                        border: OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(12.sp)),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(12.sp)),
+                            borderSide: BorderSide.none),
+                      )),
                 ),
                 SizedBox(
                   height: 3.h,
@@ -567,28 +522,38 @@ class _signupState extends State<signup> {
     fontSize: 12.sp,
   );
 
-  InputDecoration inputDecoration(
-      {required String hintText, required Icon icon,IconButton? ico,}) {
+  InputDecoration inputDecoration({
+    required String hintText,
+    required Icon icon,
+    required IconButton ico,
+  }) {
     return InputDecoration(
+      // fillColor: Colors.red,
       hoverColor: Colors.white,
       focusColor: Colors.white,
       filled: false,
-      errorStyle: const TextStyle(
+
+      errorStyle: TextStyle(
         color: Colors.red,
       ),
+      isDense: true,
       hintText: hintText,
       suffixIconColor: Colors.white,
       suffix: ico,
-      prefixIcon: Padding(padding: EdgeInsets.only(bottom: 3.h), child: icon),
-      contentPadding: EdgeInsets.symmetric(vertical: 3.h),
+
+      prefixIcon: Padding(
+        padding: EdgeInsets.only(top: 2.5.h),
+        child: icon,
+      ),
+      contentPadding: EdgeInsets.only(bottom: 3.h),
       prefixIconColor: Colors.purple,
       hintStyle: textStyle,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.sp)),
+        borderRadius: BorderRadius.all(Radius.circular(12.sp)),
         borderSide: BorderSide.none,
       ),
       focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.sp)),
+          borderRadius: BorderRadius.all(Radius.circular(12.sp)),
           borderSide: BorderSide.none),
     );
   }
