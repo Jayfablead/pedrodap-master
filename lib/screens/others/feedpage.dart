@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
+import 'package:pedrodap/mainpages/feedimages.dart';
+import 'package:pedrodap/mainpages/feedvieos.dart';
 import 'package:sizer/sizer.dart';
 
 class FeedPage extends StatefulWidget {
@@ -10,15 +12,18 @@ class FeedPage extends StatefulWidget {
 }
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-List tab = ['Images','Videos'];
+List tab = ['Images', 'Videos'];
+
 class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: drawer(),
-      backgroundColor: Colors.black,
-      appBar: AppBar(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: drawer(),
+        backgroundColor: Colors.black,
+        appBar: AppBar(
           centerTitle: true,
           title: Text(
             'Pedro',
@@ -27,13 +32,59 @@ class _FeedPageState extends State<FeedPage> {
           elevation: 00,
           backgroundColor: Colors.transparent,
           leading: IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState?.openDrawer();
-              },
-              icon: Icon(
-                Icons.menu_rounded,
-                color: Colors.white,
-              ),),bottom: TabBar(tabs:[Tab(child: Row(children: [Icon(Icons.broken_image_outlined),Text('Images')],),)] ),
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer();
+            },
+            icon: Icon(
+              Icons.menu_rounded,
+              color: Colors.white,
+            ),
+          ),
+          bottom: TabBar(
+              indicatorPadding: EdgeInsets.symmetric(horizontal: 22.w),indicatorColor: Colors.cyan,indicatorWeight: 3,
+              tabs: [
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.broken_image_outlined,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 2.w,
+                      ),
+                      Text(
+                        'Images',
+                        style: textStyle1,
+                      )
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.video_camera_back_outlined,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 2.w,
+                      ),
+                      Text(
+                        'Videos',
+                        style: textStyle1,
+                      )
+                    ],
+                  ),
+                )
+              ]),
+        ),
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [FeedImages(), FeedVideos()],
+        ),
       ),
     );
   }
