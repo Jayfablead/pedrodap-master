@@ -125,6 +125,7 @@ import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pedrodap/Widget/const.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:pedrodap/screens/profile/loginpage.dart';
 import 'package:pedrodap/statichomepage.dart';
 import 'package:sizer/sizer.dart';
@@ -165,7 +166,7 @@ class _PlayerState extends State<Player> {
           ? Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => loginpage()))
           : Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => StaticHomePage())),
+              MaterialPageRoute(builder: (context) => FeedPage())),
     );
   }
 

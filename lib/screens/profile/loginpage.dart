@@ -13,6 +13,7 @@ import '../../Model/UserModal.dart';
 import '../../Widget/const.dart';
 import '../../Widget/sharedpreferance.dart';
 import '../../provider/authprovider.dart';
+import '../others/feedpage.dart';
 import 'forgetpass.dart';
 
 class loginpage extends StatefulWidget {
@@ -383,7 +384,7 @@ class _loginpageState extends State<loginpage> {
               // buildErrorDialog(context, "", "Login Successfully");
               if (_formKey.currentState!.validate()) {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => StaticHomePage()));
+                    MaterialPageRoute(builder: (context) => FeedPage ()));
                 _email.text = '';
                 _pass.text = '';
               }

@@ -48,8 +48,9 @@ TextEditingController _position = TextEditingController();
 bool isloading = true;
 late VideoPlayerController _controller;
 bool isPlay = false;
- int lenght = 0;
+int lenght = 0;
 bool _isExpanded = false;
+
 class _MyProfileState extends State<MyProfile> {
   @override
   void initState() {
@@ -90,7 +91,11 @@ class _MyProfileState extends State<MyProfile> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => StaticHomePage(),
+                                      ));
                                 },
                                 icon: Icon(
                                   Icons.arrow_back,
@@ -274,7 +279,8 @@ class _MyProfileState extends State<MyProfile> {
                           Center(
                               child: InkWell(
                                   onTap: () {
-                                    Navigator.push(context,
+                                    Navigator.push(
+                                      context,
                                       MaterialPageRoute(
                                         builder: (context) => EditProfile(
                                             about: profiledata!.viewProfileDetails!.about ??
@@ -316,7 +322,6 @@ class _MyProfileState extends State<MyProfile> {
                                         style: textStyle,
                                       )))),
                           SizedBox(height: 1.h),
-
                           Divider(
                             color: Color(0xff7a7a7a),
                           ),
@@ -346,13 +351,15 @@ class _MyProfileState extends State<MyProfile> {
                                         SizedBox(
                                           width: 6.w,
                                         ),
-                                        SizedBox(width: 40.w,
+                                        SizedBox(
+                                          width: 40.w,
                                           child: Text(
                                             profiledata?.viewProfileDetails
                                                         ?.currentClub ==
                                                     null
                                                 ? 'N/A'
-                                                : profiledata?.viewProfileDetails
+                                                : profiledata
+                                                        ?.viewProfileDetails
                                                         ?.currentClub ??
                                                     '',
                                             maxLines: 3,
@@ -391,13 +398,15 @@ class _MyProfileState extends State<MyProfile> {
                                         SizedBox(
                                           width: 4.w,
                                         ),
-                                        SizedBox(width: 40.w,
+                                        SizedBox(
+                                          width: 40.w,
                                           child: Text(
                                             profiledata?.viewProfileDetails
                                                         ?.previousClub ==
                                                     null
                                                 ? 'N/A'
-                                                : profiledata?.viewProfileDetails
+                                                : profiledata
+                                                        ?.viewProfileDetails
                                                         ?.previousClub ??
                                                     '',
                                             maxLines: 2,
@@ -417,7 +426,6 @@ class _MyProfileState extends State<MyProfile> {
                                   ],
                                 )
                               : Container(),
-
                           Row(
                             children: [
                               Icon(
@@ -455,7 +463,86 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                             ],
                           ),
-
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.local_hospital_outlined,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 2.w),
+                              Text(
+                                "Injuries  : ",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                              SizedBox(
+                                width: 13.w,
+                              ),
+                              Text(
+                                profiledata?.viewProfileDetails?.experience ==
+                                        null
+                                    ? 'N/A'
+                                    : profiledata
+                                            ?.viewProfileDetails?.experience ??
+                                        '',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.archive_outlined,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 2.w),
+                              Text(
+                                "Goals     : ",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                              SizedBox(
+                                width: 13.w,
+                              ),
+                              Text(
+                                profiledata?.viewProfileDetails?.experience ==
+                                        null
+                                    ? 'N/A'
+                                    : profiledata
+                                            ?.viewProfileDetails?.experience ??
+                                        '',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 3.h,
                           ),
@@ -498,7 +585,6 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                             ],
                           ),
-
                           SizedBox(
                             height: 3.h,
                           ),
@@ -522,68 +608,75 @@ class _MyProfileState extends State<MyProfile> {
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13.sp),
                                   ),
-
                                   Column(
                                     children: [
                                       Container(
                                         alignment: Alignment.center,
-                                        width: 55.w,
-                                        padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                        child:
-                                        profiledata?.viewProfileDetails?.about == ''
+                                        width: profiledata?.viewProfileDetails
+                                                    ?.about ==
+                                                ''
+                                            ? 36.w
+                                            : 55.w,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 2.w),
+                                        child: profiledata?.viewProfileDetails
+                                                    ?.about ==
+                                                ''
                                             ? Text(
-                                              'N/A',
-                                              style: textStyle,    maxLines: _isExpanded ? 10 : 1,
-                                          overflow:_isExpanded
-                                              ? TextOverflow.visible
-                                              : TextOverflow.ellipsis,
-                                            )
+                                                'N/A',
+                                                style: textStyle,
+                                                maxLines: _isExpanded ? 10 : 1,
+                                                overflow: _isExpanded
+                                                    ? TextOverflow.visible
+                                                    : TextOverflow.ellipsis,
+                                              )
                                             : Text(
-                                              profiledata?.viewProfileDetails
-                                                  ?.about ??
-                                                  '',    maxLines: _isExpanded ? 10 : 2,
-                                          overflow:_isExpanded
-                                              ? TextOverflow.visible
-                                              : TextOverflow.ellipsis,
-                                              style: textStyle,
-                                            ),
-
+                                                profiledata?.viewProfileDetails
+                                                        ?.about ??
+                                                    '',
+                                                maxLines: _isExpanded ? 10 : 2,
+                                                overflow: _isExpanded
+                                                    ? TextOverflow.visible
+                                                    : TextOverflow.ellipsis,
+                                                style: textStyle,
+                                              ),
                                       ),
-
                                     ],
                                   ),
-
                                 ],
                               ),
-                              SizedBox(height: 1.h,),
-                              lenght <= 40 ?Container() : Container(
-                                padding:
-                                EdgeInsets.only(left: 65.w, right: 0.w),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      _isExpanded = !_isExpanded;
-                                    });
-                                  },
-                                  child: Container(
-                                      child: _isExpanded
-                                          ?  Text(
-                                        "Read Less..",
-                                        style: TextStyle(
-                                            color: Colors.white,
-
-                                            fontWeight:
-                                            FontWeight.w400,fontFamily: 'Meta1'),
-                                      )
-                                          :  Text("Read More..",
-                                          style: TextStyle(
-                                              color:  Colors.white,
-
-                                              fontWeight:
-                                              FontWeight.w400,fontFamily: 'Meta1'))),
-                                ),
+                              SizedBox(
+                                height: 1.h,
                               ),
-
+                              lenght <= 40
+                                  ? Container()
+                                  : Container(
+                                      padding: EdgeInsets.only(
+                                          left: 65.w, right: 0.w),
+                                      child: InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            _isExpanded = !_isExpanded;
+                                          });
+                                        },
+                                        child: Container(
+                                            child: _isExpanded
+                                                ? Text(
+                                                    "Read Less..",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1'),
+                                                  )
+                                                : Text("Read More..",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Meta1'))),
+                                      ),
+                                    ),
                             ],
                           ),
                           SizedBox(
@@ -660,12 +753,15 @@ class _MyProfileState extends State<MyProfile> {
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                             downloadProgress) =>
-                                                        Container(height: 5.h,width: 10.w,
-                                                          child: CircularProgressIndicator(
-                                                              value:
-                                                                  downloadProgress
-                                                                      .progress),
-                                                        ),
+                                                        Container(
+                                                  height: 5.h,
+                                                  width: 10.w,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress),
+                                                ),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Padding(
@@ -685,7 +781,6 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                             ],
                           ),
-
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -801,8 +896,8 @@ class _MyProfileState extends State<MyProfile> {
             await SaveDataLocal.saveLogInData(userData!);
             print(userData?.status);
             print(userData?.userData?.uid);
-            String? dis  = profiledata?.viewProfileDetails?.about.toString();
-            lenght =dis!.length == 0 ?0 : dis.length;
+            String? dis = profiledata?.viewProfileDetails?.about.toString();
+            lenght = dis!.length == 0 ? 0 : dis.length;
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {

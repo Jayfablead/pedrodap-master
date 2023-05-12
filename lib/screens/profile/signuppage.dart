@@ -9,6 +9,7 @@ import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/donedialog.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/provider/authprovider.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:pedrodap/screens/profile/loginpage.dart';
 import 'package:sizer/sizer.dart';
 
@@ -578,7 +579,7 @@ class _signupState extends State<signup> {
               // buildErrorDialog(context, "", "Login Successfully");
               if (_formKey.currentState!.validate()) {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => StaticHomePage()));
+                    MaterialPageRoute(builder: (context) => FeedPage()));
                 _email.text = '';
                 _pass.text = '';
               }

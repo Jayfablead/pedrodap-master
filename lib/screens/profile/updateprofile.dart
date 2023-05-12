@@ -49,7 +49,8 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   TextEditingController _user = TextEditingController(text: "");
   TextEditingController _age = TextEditingController(text: "");
-
+  TextEditingController _goals = TextEditingController(text: "");
+  TextEditingController _inj = TextEditingController(text: "");
   TextEditingController _email = TextEditingController(text: "");
   TextEditingController _about = TextEditingController(text: "");
   ImagePicker _picker = ImagePicker();
@@ -120,7 +121,7 @@ class _EditProfileState extends State<EditProfile> {
           child: Column(
             children: [
               SizedBox(
-                height: 3.h,
+                height: 4.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -259,6 +260,38 @@ class _EditProfileState extends State<EditProfile> {
                     },
                     decoration:
                         inputDecoration(lable: "Age", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    controller: _inj,
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Tell About Injuries";
+                      }
+                      return null;
+                    },
+                    decoration:
+                    inputDecoration(lable: "Injuries", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    controller: _goals,
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Add Your Goals & Ambitions";
+                      }
+                      return null;
+                    },
+                    decoration:
+                    inputDecoration(lable: "Goals & Ambitions", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
                   ),
                   SizedBox(
                     height: 4.h,
