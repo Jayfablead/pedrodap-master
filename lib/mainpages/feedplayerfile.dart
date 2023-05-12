@@ -51,7 +51,7 @@ class _VideoItemsState extends State<VideoItems> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:40.h,child: ClipRRect(borderRadius: BorderRadius.circular(10),
+      height:30.h,child: ClipRRect(borderRadius: BorderRadius.circular(10),
         child: Chewie(
           controller: _chewieController,
         ),

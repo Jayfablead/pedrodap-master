@@ -12,6 +12,8 @@ import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/loginpage.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../statichomepage.dart';
+
 class signup extends StatefulWidget {
   const signup({Key? key}) : super(key: key);
 
@@ -557,7 +559,42 @@ class _signupState extends State<signup> {
           borderSide: BorderSide.none),
     );
   }
+  loginapi() {
+    print('helooo');
+    if (_formKey.currentState!.validate()) {
+      final Map<String, String> data = {};
+      data['email'] = _email.text.trim().toString();
+      data['password'] = _pass.text.trim().toString();
+      data['action'] = 'login_app';
 
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().loginapi(data).then((Response response) async {
+            userData = UserModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && userData?.status == "success") {
+              await SaveDataLocal.saveLogInData(userData!);
+              print(userData?.status);
+
+              // buildErrorDialog(context, "", "Login Successfully");
+              if (_formKey.currentState!.validate()) {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => StaticHomePage()));
+                _email.text = '';
+                _pass.text = '';
+              }
+            } else {
+              buildErrorDialog(context, "Error", "Email or Password Invalid");
+            }
+          });
+        } else {
+          setState(() {
+            // isLoading = false;
+          });
+          buildErrorDialog(context, 'Error', "Internate Required");
+        }
+      });
+    }
+  }
   signup() {
     print(_selectedLocation);
     if (_formKey.currentState!.validate()) {
@@ -592,13 +629,9 @@ class _signupState extends State<signup> {
               // buildErrorDialog(context, "", "Login Successfully");
 
               if (_pass.text == _conf.text) {
-                DoneDialog(context, 'Done', 'Account Created Successfully');
 
-                _email.text = '';
-                _phone.text = '';
-                _user.text = '';
-                _pass.text = '';
-                _conf.text = '';
+loginapi();
+
               } else {
                 buildErrorDialog(context, "Error", "Password Dosen't Match");
               }

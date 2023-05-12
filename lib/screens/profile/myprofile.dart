@@ -48,7 +48,8 @@ TextEditingController _position = TextEditingController();
 bool isloading = true;
 late VideoPlayerController _controller;
 bool isPlay = false;
-
+ int lenght = 0;
+bool _isExpanded = false;
 class _MyProfileState extends State<MyProfile> {
   @override
   void initState() {
@@ -57,6 +58,9 @@ class _MyProfileState extends State<MyProfile> {
     isloading = true;
     connectionsapi();
     playerapi();
+    setState(() {
+      _isExpanded = false;
+    });
   }
 
   bool isloading = true;
@@ -509,7 +513,7 @@ class _MyProfileState extends State<MyProfile> {
                                   ),
                                   SizedBox(width: 2.w),
                                   Text(
-                                    "My Bio : ",
+                                    "My Bio    : ",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -518,42 +522,68 @@ class _MyProfileState extends State<MyProfile> {
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13.sp),
                                   ),
+
+                                  Column(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        width: 55.w,
+                                        padding: EdgeInsets.symmetric(horizontal: 2.w),
+                                        child:
+                                        profiledata?.viewProfileDetails?.about == ''
+                                            ? Text(
+                                              'N/A',
+                                              style: textStyle,    maxLines: _isExpanded ? 10 : 1,
+                                          overflow:_isExpanded
+                                              ? TextOverflow.visible
+                                              : TextOverflow.ellipsis,
+                                            )
+                                            : Text(
+                                              profiledata?.viewProfileDetails
+                                                  ?.about ??
+                                                  '',    maxLines: _isExpanded ? 10 : 2,
+                                          overflow:_isExpanded
+                                              ? TextOverflow.visible
+                                              : TextOverflow.ellipsis,
+                                              style: textStyle,
+                                            ),
+
+                                      ),
+
+                                    ],
+                                  ),
+
                                 ],
                               ),
-                              SizedBox(
-                                height: 0.5.h,
+                              SizedBox(height: 1.h,),
+                              lenght <= 40 ?Container() : Container(
+                                padding:
+                                EdgeInsets.only(left: 65.w, right: 0.w),
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _isExpanded = !_isExpanded;
+                                    });
+                                  },
+                                  child: Container(
+                                      child: _isExpanded
+                                          ?  Text(
+                                        "Read Less..",
+                                        style: TextStyle(
+                                            color: Colors.white,
+
+                                            fontWeight:
+                                            FontWeight.w400,fontFamily: 'Meta1'),
+                                      )
+                                          :  Text("Read More..",
+                                          style: TextStyle(
+                                              color:  Colors.white,
+
+                                              fontWeight:
+                                              FontWeight.w400,fontFamily: 'Meta1'))),
+                                ),
                               ),
-                              Divider(
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                height: 0.5.h,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                width: MediaQuery.of(context).size.width,
-                                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                child:
-                                    profiledata?.viewProfileDetails?.about == ''
-                                        ? Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 2.h, bottom: 2.h),
-                                            child: Text(
-                                              'N/A',
-                                              style: textStyle,
-                                            ),
-                                          )
-                                        : Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 2.h, bottom: 2.h),
-                                            child: Text(
-                                              profiledata?.viewProfileDetails
-                                                      ?.about ??
-                                                  '',
-                                              style: textStyle,
-                                            ),
-                                          ),
-                              ),
+
                             ],
                           ),
                           SizedBox(
@@ -771,6 +801,8 @@ class _MyProfileState extends State<MyProfile> {
             await SaveDataLocal.saveLogInData(userData!);
             print(userData?.status);
             print(userData?.userData?.uid);
+            String? dis  = profiledata?.viewProfileDetails?.about.toString();
+            lenght =dis!.length == 0 ?0 : dis.length;
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
