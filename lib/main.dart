@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           theme: ThemeData(timePickerTheme: timePickerThemeDataclass),
           debugShowCheckedModeBanner: false,
+
           home: Player(),
           builder: EasyLoading.init(),
         ),
