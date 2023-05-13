@@ -49,6 +49,11 @@ class _FeedVideosState extends State<FeedVideos> {
                       looping: true,
                       autoplay: true,
                     ),
+                    Text(
+                      " Captions (${index + 1}) ",
+                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                    ),
+                    SizedBox(height: 3.h),
                     // Container(height: 25.h,width: 90.w,child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Feedplayer(video: videos[index],))),
                   ],
                 ),

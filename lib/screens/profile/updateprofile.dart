@@ -442,8 +442,7 @@ class _EditProfileState extends State<EditProfile> {
                                   width: 80.w,
                                   child: GridView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: profiledata!
-                                          .viewProfileDetails!.images!.length,
+                                      itemCount: profiledata?.viewProfileDetails?.images!.length,
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 1),
