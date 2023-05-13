@@ -116,851 +116,853 @@ class _EditProfileState extends State<EditProfile> {
       backgroundColor: Colors.black,
       drawer: drawer(),
       key: _scaffoldKey,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4.w),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 4.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    'Edit Profile',
-                    style: TextStyle(
-                      fontSize: 5.w,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Meta1",
-                      color: Color(0xffeaeaea),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      _scaffoldKey.currentState?.openDrawer();
-                    },
-                    icon: Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 3.h,
-              ),
-              Column(
-                children: [
-                  Stack(
-                    children: [
-                      // Container(
-                      //   height: 15.h,
-                      //   width: 30.w,
-                      //   child: (imagefile != null)
-                      //       ? Image.file(imagefile!, width: 300.0)
-                      //       : Image.asset("assets/prof.jpg"),
-                      // ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 1.w),
-                        height: 15.h,
-                        width: 30.w,
-                        padding: EdgeInsets.all(1.w),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(90),
-                            child: (imagefile != null)
-                                ? Image.file(
-                                    imagefile!,
-                                    width: 300.0,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.network(
-                                    widget.profile.toString(),
-                                    fit: BoxFit.cover,
-                                  )),
-                      ),
-                      Positioned(
-                          top: 9.5.h,
-                          left: 23.w,
-                          child: InkWell(
-                              onTap: () async {
-                                final image = await _picker.pickImage(
-                                    source: ImageSource.gallery);
-                                setState(() {
-                                  imagefile = File(image!.path);
-                                });
-                              },
-                              child: Container(
-                                  padding: EdgeInsets.all(2.w),
-                                  decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: const Icon(
-                                    Icons.camera_alt_outlined,
-                                    color: Colors.white,
-                                  )))),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    controller: _user,
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Enter the Name";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                      lable: "Full Name",
-                      icon: Icon(Icons.person),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    controller: _url,
-                    keyboardType: TextInputType.text,
-
-                    decoration: inputDecoration(
-                      lable: "Instagram URL",
-                      icon: Icon(Icons.connect_without_contact),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  TextFormField(
-                      controller: _exp,
-                      style: TextStyle(color: Colors.white),
-                      enabled: true,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Enter Experince";
-                        }
-                        return null;
+      body: WillPopScope(onWillPop:dialog ,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 4.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
                       },
-                      onTap: null,
-                      decoration: inputDecoration(
-                        icon: Icon(Icons.date_range,color: Colors.grey,),
-                        lable: "Experince",
-                      )),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    controller: _age,
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Give Age";
-                      }
-                      return null;
-                    },
-                    decoration:
-                        inputDecoration(lable: "Age", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    controller: _inj,
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Tell About Injuries";
-                      }
-                      return null;
-                    },
-                    decoration:
-                    inputDecoration(lable: "Injuries", icon: Icon(Icons.personal_injury_outlined,color: Colors.grey,)),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    controller: _goals,
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Add Your Goals & Ambitions";
-                      }
-                      return null;
-                    },
-                    decoration:
-                    inputDecoration(lable: "Goals & Ambitions", icon: Icon(Icons.archive_outlined,color: Colors.grey,)),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    controller: _pos,
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return userData!.userData!.role == '2'
-                            ? "Give Position"
-                            : 'Give Ocupation';
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        lable: userData!.userData!.role == '2'
-                            ? "Position "
-                            : "Ocupation ",
-                        icon: Icon(Icons.person,color: Colors.grey,)),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    maxLines: 5,
-                    controller: _about,
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Enter About Detials";
-                      }
-                      return null;
-                    },
-                    decoration: inputDecoration(
-                        lable: "About", icon: Icon(Icons.info_outline_rounded,color: Colors.grey,)),
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.image_outlined,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 2.w),
-                          Text(
-                            "My Images : ",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Meta1",
-                                fontWeight: FontWeight.w500,
-                                fontSize: 13.sp),
-                          ),
-                        ],
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
                       ),
-                      SizedBox(
-                        height: 1.h,
+                    ),
+                    Text(
+                      'Edit Profile',
+                      style: TextStyle(
+                        fontSize: 5.w,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Meta1",
+                        color: Color(0xffeaeaea),
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 25.h,
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(1.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          // color: Colors.white.withOpacity(0.15),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        _scaffoldKey.currentState?.openDrawer();
+                      },
+                      icon: Icon(
+                        Icons.menu,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Column(
+                  children: [
+                    Stack(
+                      children: [
+                        // Container(
+                        //   height: 15.h,
+                        //   width: 30.w,
+                        //   child: (imagefile != null)
+                        //       ? Image.file(imagefile!, width: 300.0)
+                        //       : Image.asset("assets/prof.jpg"),
+                        // ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 1.w),
+                          height: 15.h,
+                          width: 30.w,
+                          padding: EdgeInsets.all(1.w),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(90),
+                              child: (imagefile != null)
+                                  ? Image.file(
+                                      imagefile!,
+                                      width: 300.0,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.network(
+                                      widget.profile.toString(),
+                                      fit: BoxFit.cover,
+                                    )),
                         ),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              InkWell(
+                        Positioned(
+                            top: 9.5.h,
+                            left: 23.w,
+                            child: InkWell(
                                 onTap: () async {
-                                  final image1 = await _picker.pickImage(
+                                  final image = await _picker.pickImage(
                                       source: ImageSource.gallery);
                                   setState(() {
-                                    imagefile1 = File(image1!.path);
+                                    imagefile = File(image!.path);
                                   });
                                 },
                                 child: Container(
-                                  alignment: Alignment.center,
-                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                  height: 20.h,
-                                  width: 45.w,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(color: Colors.white)),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Text(
-                                        'Add Photo',
-                                        style: textStyle,
-                                      ),
-                                    ],
+                                    padding: EdgeInsets.all(2.w),
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(20)),
+                                    child: const Icon(
+                                      Icons.camera_alt_outlined,
+                                      color: Colors.white,
+                                    )))),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _user,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter the Name";
+                        }
+                        return null;
+                      },
+                      decoration: inputDecoration(
+                        lable: "Full Name",
+                        icon: Icon(Icons.person),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _url,
+                      keyboardType: TextInputType.text,
+
+                      decoration: inputDecoration(
+                        lable: "Instagram URL",
+                        icon: Icon(Icons.connect_without_contact),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                        controller: _exp,
+                        style: TextStyle(color: Colors.white),
+                        enabled: true,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter Experince";
+                          }
+                          return null;
+                        },
+                        onTap: null,
+                        decoration: inputDecoration(
+                          icon: Icon(Icons.date_range,color: Colors.grey,),
+                          lable: "Experince",
+                        )),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _age,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Give Age";
+                        }
+                        return null;
+                      },
+                      decoration:
+                          inputDecoration(lable: "Age", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _inj,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Tell About Injuries";
+                        }
+                        return null;
+                      },
+                      decoration:
+                      inputDecoration(lable: "Injuries", icon: Icon(Icons.personal_injury_outlined,color: Colors.grey,)),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _goals,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Add Your Goals & Ambitions";
+                        }
+                        return null;
+                      },
+                      decoration:
+                      inputDecoration(lable: "Goals & Ambitions", icon: Icon(Icons.archive_outlined,color: Colors.grey,)),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _pos,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return userData!.userData!.role == '2'
+                              ? "Give Position"
+                              : 'Give Ocupation';
+                        }
+                        return null;
+                      },
+                      decoration: inputDecoration(
+                          lable: userData!.userData!.role == '2'
+                              ? "Position "
+                              : "Ocupation ",
+                          icon: Icon(Icons.person,color: Colors.grey,)),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      maxLines: 5,
+                      controller: _about,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter About Detials";
+                        }
+                        return null;
+                      },
+                      decoration: inputDecoration(
+                          lable: "About", icon: Icon(Icons.info_outline_rounded,color: Colors.grey,)),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.image_outlined,
+                              color: Colors.white,
+                            ),
+                            SizedBox(width: 2.w),
+                            Text(
+                              "My Images : ",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Meta1",
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 13.sp),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          height: 25.h,
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.all(1.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            // color: Colors.white.withOpacity(0.15),
+                          ),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    final image1 = await _picker.pickImage(
+                                        source: ImageSource.gallery);
+                                    setState(() {
+                                      imagefile1 = File(image1!.path);
+                                    });
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                    height: 20.h,
+                                    width: 45.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(color: Colors.white)),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Text(
+                                          'Add Photo',
+                                          style: textStyle,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              (imagefile1 != null)
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.file(
-                                        imagefile1!,
-                                        height: 20.h,
-                                        width: 60.w,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )
-                                  : Container(),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              SizedBox(
-                                width: 80.w,
-                                child: GridView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: profiledata!
-                                        .viewProfileDetails!.images!.length,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 1),
-                                    itemBuilder: (contex, index) {
-                                      return Stack(
-                                        children: [
-                                          Container(
-                                            alignment: Alignment.center,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 1.w),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              child: CachedNetworkImage(
-                                                height: 20.h,
-                                                width: 60.w,
-                                                fit: BoxFit.cover,
-                                                imageUrl: profiledata!
-                                                    .viewProfileDetails!
-                                                    .images![index]
-                                                    .toString(),
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            downloadProgress) =>
-                                                        CircularProgressIndicator(
-                                                            value:
-                                                                downloadProgress
-                                                                    .progress),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 2.h, bottom: 2.h),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Add Some Images",
-                                                      style: textStyle,
+                                SizedBox(
+                                  width: 2.w,
+                                ),
+                                (imagefile1 != null)
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.file(
+                                          imagefile1!,
+                                          height: 20.h,
+                                          width: 60.w,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Container(),
+                                SizedBox(
+                                  width: 2.w,
+                                ),
+                                SizedBox(
+                                  width: 80.w,
+                                  child: GridView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: profiledata!
+                                          .viewProfileDetails!.images!.length,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 1),
+                                      itemBuilder: (contex, index) {
+                                        return Stack(
+                                          children: [
+                                            Container(
+                                              alignment: Alignment.center,
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 1.w),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: CachedNetworkImage(
+                                                  height: 20.h,
+                                                  width: 60.w,
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: profiledata!
+                                                      .viewProfileDetails!
+                                                      .images![index]
+                                                      .toString(),
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              downloadProgress) =>
+                                                          CircularProgressIndicator(
+                                                              value:
+                                                                  downloadProgress
+                                                                      .progress),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 2.h, bottom: 2.h),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Add Some Images",
+                                                        style: textStyle,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Positioned(
-                                            left: 39.w,
-                                            bottom: 19.h,
-                                            child: InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  select = index;
-                                                });
-                                                var parts = profiledata!
-                                                    .viewProfileDetails!
-                                                    .images![index]
-                                                    .toString()
-                                                    .split('/');
-                                                it = parts.last.toString();
+                                            Positioned(
+                                              left: 39.w,
+                                              bottom: 19.h,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    select = index;
+                                                  });
+                                                  var parts = profiledata!
+                                                      .viewProfileDetails!
+                                                      .images![index]
+                                                      .toString()
+                                                      .split('/');
+                                                  it = parts.last.toString();
 
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      AlertDialog(
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                20),
-                                                            side: BorderSide(
-                                                                color: Colors
-                                                                    .white)),
-                                                        backgroundColor:
-                                                        Color.fromARGB(
-                                                            255, 0, 0, 0),
-                                                        scrollable: true,
-                                                        content: Text(
-                                                          'Are You Sure You Want to Delete this Image? This Can\'t be Undone .',
-                                                          style: TextStyle(
-                                                              fontSize: 11.sp,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w400,
-                                                              fontFamily:
-                                                              'Meta1',
-                                                              color:
-                                                              Colors.white),
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        AlertDialog(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                  20),
+                                                              side: BorderSide(
+                                                                  color: Colors
+                                                                      .white)),
+                                                          backgroundColor:
+                                                          Color.fromARGB(
+                                                              255, 0, 0, 0),
+                                                          scrollable: true,
+                                                          content: Text(
+                                                            'Are You Sure You Want to Delete this Image? This Can\'t be Undone .',
+                                                            style: TextStyle(
+                                                                fontSize: 11.sp,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                                fontFamily:
+                                                                'Meta1',
+                                                                color:
+                                                                Colors.white),
+                                                          ),
+                                                          actions: [
+                                                            InkWell(
+                                                              onTap: () {
+                                                               imgdlt();
+                                                                Navigator.of(
+                                                                    context)
+                                                                    .pop();
+                                                              },
+                                                              child: Container(
+                                                                margin: EdgeInsets
+                                                                    .all(2.w),
+                                                                padding:
+                                                                EdgeInsets
+                                                                    .all(1.h),
+                                                                child: Text(
+                                                                  'Yes',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                      13.sp,
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                      fontFamily:
+                                                                      'Meta1',
+                                                                      color: Colors
+                                                                          .green),
+                                                                ),
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    border:
+                                                                    Border
+                                                                        .all(
+                                                                      color: Colors
+                                                                          .green,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius.circular(
+                                                                        10)),
+                                                              ),
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                Navigator.of(
+                                                                    context)
+                                                                    .pop();
+                                                              },
+                                                              child: Container(
+                                                                margin: EdgeInsets
+                                                                    .all(1.w),
+                                                                padding:
+                                                                EdgeInsets
+                                                                    .all(1.h),
+                                                                child: Text(
+                                                                  'No',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                      13.sp,
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                      fontFamily:
+                                                                      'Meta1',
+                                                                      color: Colors
+                                                                          .red),
+                                                                ),
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    border:
+                                                                    Border
+                                                                        .all(
+                                                                      color: Colors
+                                                                          .red,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius.circular(
+                                                                        10)),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        actions: [
-                                                          InkWell(
-                                                            onTap: () {
-                                                             imgdlt();
-                                                              Navigator.of(
-                                                                  context)
-                                                                  .pop();
-                                                            },
-                                                            child: Container(
-                                                              margin: EdgeInsets
-                                                                  .all(2.w),
-                                                              padding:
-                                                              EdgeInsets
-                                                                  .all(1.h),
-                                                              child: Text(
-                                                                'Yes',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                    13.sp,
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                    fontFamily:
-                                                                    'Meta1',
-                                                                    color: Colors
-                                                                        .green),
-                                                              ),
-                                                              decoration:
-                                                              BoxDecoration(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  border:
-                                                                  Border
-                                                                      .all(
-                                                                    color: Colors
-                                                                        .green,
-                                                                  ),
-                                                                  borderRadius:
-                                                                  BorderRadius.circular(
-                                                                      10)),
-                                                            ),
-                                                          ),
-                                                          InkWell(
-                                                            onTap: () {
-                                                              Navigator.of(
-                                                                  context)
-                                                                  .pop();
-                                                            },
-                                                            child: Container(
-                                                              margin: EdgeInsets
-                                                                  .all(1.w),
-                                                              padding:
-                                                              EdgeInsets
-                                                                  .all(1.h),
-                                                              child: Text(
-                                                                'No',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                    13.sp,
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                    fontFamily:
-                                                                    'Meta1',
-                                                                    color: Colors
-                                                                        .red),
-                                                              ),
-                                                              decoration:
-                                                              BoxDecoration(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  border:
-                                                                  Border
-                                                                      .all(
-                                                                    color: Colors
-                                                                        .red,
-                                                                  ),
-                                                                  borderRadius:
-                                                                  BorderRadius.circular(
-                                                                      10)),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                );
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.all(2.w),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  color: Colors.black,
-                                                ),
-                                                child: Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
+                                                  );
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.all(2.w),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(20),
+                                                    color: Colors.black,
+                                                  ),
+                                                  child: Icon(
+                                                    Icons.close,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      );
-                                    }),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 3.h,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.video_camera_back_outlined,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 2.w),
-                          Text(
-                            "My Videos : ",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Meta1",
-                                fontWeight: FontWeight.w500,
-                                fontSize: 13.sp),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Container(
-                        height: 30.h,
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(1.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          // color: Colors.white.withOpacity(0.15),
-                        ),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () async {
-                                  final video = await _picker.pickVideo(
-                                      source: ImageSource.gallery);
-                               setState(() {
-                                 videofile = File(video!.path);
-                               });
-                                  print('=-=-=-=-=-=-=-=-=-=-=-=-=-= $videofile =-=-=-=-=-=-=-=-==-=-=-');
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                  height: 20.h,
-                                  width: 45.w,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(color: Colors.white)),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      Text(
-                                        'Add Video',
-                                        style: textStyle,
-                                      ),
-                                    ],
-                                  ),
+                                          ],
+                                        );
+                                      }),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              (videofile != null)
-                                  ? ClipRRect(
-
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Container(
-                                        height: 20.h,
-                                        width: 50.w,
-                                        child: profplayer(
-                                          video: videofile?.path.toString(),
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  height: 20.h,
-                                  width: 60.w,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(20),
-                                        child: profiledata?.viewProfileDetails
-                                                    ?.video ==
-                                                null
-                                            ? Center(
-                                                child:
-                                                    Container(),
-                                              )
-                                            : VideoPlayer(_controller)
-                                      ),
-                                     widget.videos == null ?Container():Positioned(
-                                        left: 52.w,
-                                        bottom: 17.h,
-                                        child: InkWell(
-                                          onTap: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  AlertDialog(
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                            20),
-                                                        side: BorderSide(
-                                                            color: Colors
-                                                                .white)),
-                                                    backgroundColor:
-                                                    Color.fromARGB(
-                                                        255, 0, 0, 0),
-                                                    scrollable: true,
-                                                    content: Text(
-                                                      'Are You Sure You Want to Delete this Video ? This Can\'t be Undone.',
-                                                      style: TextStyle(
-                                                          fontSize: 11.sp,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .w400,
-                                                          fontFamily:
-                                                          'Meta1',
-                                                          color:
-                                                          Colors.white),
-                                                    ),
-                                                    actions: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                         viddlt();
-                                                          Navigator.of(
-                                                              context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          margin: EdgeInsets
-                                                              .all(2.w),
-                                                          padding:
-                                                          EdgeInsets
-                                                              .all(1.h),
-                                                          child: Text(
-                                                            'Yes',
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                13.sp,
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .w400,
-                                                                fontFamily:
-                                                                'Meta1',
-                                                                color: Colors
-                                                                    .green),
-                                                          ),
-                                                          decoration:
-                                                          BoxDecoration(
-                                                              color: Colors
-                                                                  .black,
-                                                              border:
-                                                              Border
-                                                                  .all(
-                                                                color: Colors
-                                                                    .green,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(
-                                                                  10)),
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.of(
-                                                              context)
-                                                              .pop();
-                                                        },
-                                                        child: Container(
-                                                          margin: EdgeInsets
-                                                              .all(1.w),
-                                                          padding:
-                                                          EdgeInsets
-                                                              .all(1.h),
-                                                          child: Text(
-                                                            'No',
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                13.sp,
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .w400,
-                                                                fontFamily:
-                                                                'Meta1',
-                                                                color: Colors
-                                                                    .red),
-                                                          ),
-                                                          decoration:
-                                                          BoxDecoration(
-                                                              color: Colors
-                                                                  .black,
-                                                              border:
-                                                              Border
-                                                                  .all(
-                                                                color: Colors
-                                                                    .red,
-                                                              ),
-                                                              borderRadius:
-                                                              BorderRadius.circular(
-                                                                  10)),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                            );
-                                          },
-                                          child: Container(
-                                            padding: EdgeInsets.all(2.w),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: Colors.black,
-                                            ),
-                                            child: Icon(
-                                              Icons.close,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // Stack(
-                              //   children: [
-                              //     Container(
-                              //       width: 70.w,
-                              //       margin: EdgeInsets.symmetric(horizontal: 1.w),
-                              //       child: ClipRRect(
-                              //         borderRadius: BorderRadius.circular(10),
-                              //         child: Container(
-                              //             height: 42.h,
-                              //             width: 220.w,
-                              //             child: profiledata!
-                              //                         .viewProfileDetails!.video! ==
-                              //                     ''
-                              //                 ? Text(
-                              //                     'No videos Availlable',
-                              //                     style: textStyle,
-                              //                   )
-                              //                 : VideoPlayer(
-                              //                     _controller,
-                              //                   )),
-                              //       ),
-                              //     ),
-                              //     Positioned(
-                              //       left: 65.w,
-                              //       bottom: 20.h,
-                              //       child: Container(
-                              //         padding: EdgeInsets.all(2.w),
-                              //         decoration: BoxDecoration(
-                              //           borderRadius: BorderRadius.circular(20),
-                              //           color: Colors.black,
-                              //         ),
-                              //         child: Icon(
-                              //           Icons.close,
-                              //           color: Colors.white,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 4.h,
-                      ),
-                      Center(
-                        child: InkWell(
-                          onTap: () async {
-                         _user.text == '' || _pos.text == '' || _about.text == '' || _age.text == '' || _exp.text == '' ?buildErrorDialog(context, "Error", 'Please Add All Details'):   playerapi();
-
-
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(3.w),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text(
-                              'Update Profile',
-                              style: textStyle,
+                              ],
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 4.h,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.video_camera_back_outlined,
+                              color: Colors.white,
+                            ),
+                            SizedBox(width: 2.w),
+                            Text(
+                              "My Videos : ",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Meta1",
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 13.sp),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        Container(
+                          height: 30.h,
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.all(1.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            // color: Colors.white.withOpacity(0.15),
+                          ),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    final video = await _picker.pickVideo(
+                                        source: ImageSource.gallery);
+                                 setState(() {
+                                   videofile = File(video!.path);
+                                 });
+                                    print('=-=-=-=-=-=-=-=-=-=-=-=-=-= $videofile =-=-=-=-=-=-=-=-==-=-=-');
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                    height: 20.h,
+                                    width: 45.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(color: Colors.white)),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          height: 1.h,
+                                        ),
+                                        Text(
+                                          'Add Video',
+                                          style: textStyle,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 2.w,
+                                ),
+                                (videofile != null)
+                                    ? ClipRRect(
+
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          height: 20.h,
+                                          width: 50.w,
+                                          child: profplayer(
+                                            video: videofile?.path.toString(),
+                                          ),
+                                        ),
+                                      )
+                                    : Container(),
+                                SizedBox(
+                                  width: 2.w,
+                                ),
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 20.h,
+                                    width: 60.w,
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(20),
+                                          child: profiledata?.viewProfileDetails
+                                                      ?.video ==
+                                                  null
+                                              ? Center(
+                                                  child:
+                                                      Container(),
+                                                )
+                                              : VideoPlayer(_controller)
+                                        ),
+                                       widget.videos == null ?Container():Positioned(
+                                          left: 52.w,
+                                          bottom: 17.h,
+                                          child: InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AlertDialog(
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              20),
+                                                          side: BorderSide(
+                                                              color: Colors
+                                                                  .white)),
+                                                      backgroundColor:
+                                                      Color.fromARGB(
+                                                          255, 0, 0, 0),
+                                                      scrollable: true,
+                                                      content: Text(
+                                                        'Are You Sure You Want to Delete this Video ? This Can\'t be Undone.',
+                                                        style: TextStyle(
+                                                            fontSize: 11.sp,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .w400,
+                                                            fontFamily:
+                                                            'Meta1',
+                                                            color:
+                                                            Colors.white),
+                                                      ),
+                                                      actions: [
+                                                        InkWell(
+                                                          onTap: () {
+                                                           viddlt();
+                                                            Navigator.of(
+                                                                context)
+                                                                .pop();
+                                                          },
+                                                          child: Container(
+                                                            margin: EdgeInsets
+                                                                .all(2.w),
+                                                            padding:
+                                                            EdgeInsets
+                                                                .all(1.h),
+                                                            child: Text(
+                                                              'Yes',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                  13.sp,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                                  fontFamily:
+                                                                  'Meta1',
+                                                                  color: Colors
+                                                                      .green),
+                                                            ),
+                                                            decoration:
+                                                            BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                                border:
+                                                                Border
+                                                                    .all(
+                                                                  color: Colors
+                                                                      .green,
+                                                                ),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    10)),
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            Navigator.of(
+                                                                context)
+                                                                .pop();
+                                                          },
+                                                          child: Container(
+                                                            margin: EdgeInsets
+                                                                .all(1.w),
+                                                            padding:
+                                                            EdgeInsets
+                                                                .all(1.h),
+                                                            child: Text(
+                                                              'No',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                  13.sp,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                                  fontFamily:
+                                                                  'Meta1',
+                                                                  color: Colors
+                                                                      .red),
+                                                            ),
+                                                            decoration:
+                                                            BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                                border:
+                                                                Border
+                                                                    .all(
+                                                                  color: Colors
+                                                                      .red,
+                                                                ),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    10)),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                              );
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(2.w),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: Colors.black,
+                                              ),
+                                              child: Icon(
+                                                Icons.close,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                // Stack(
+                                //   children: [
+                                //     Container(
+                                //       width: 70.w,
+                                //       margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                //       child: ClipRRect(
+                                //         borderRadius: BorderRadius.circular(10),
+                                //         child: Container(
+                                //             height: 42.h,
+                                //             width: 220.w,
+                                //             child: profiledata!
+                                //                         .viewProfileDetails!.video! ==
+                                //                     ''
+                                //                 ? Text(
+                                //                     'No videos Availlable',
+                                //                     style: textStyle,
+                                //                   )
+                                //                 : VideoPlayer(
+                                //                     _controller,
+                                //                   )),
+                                //       ),
+                                //     ),
+                                //     Positioned(
+                                //       left: 65.w,
+                                //       bottom: 20.h,
+                                //       child: Container(
+                                //         padding: EdgeInsets.all(2.w),
+                                //         decoration: BoxDecoration(
+                                //           borderRadius: BorderRadius.circular(20),
+                                //           color: Colors.black,
+                                //         ),
+                                //         child: Icon(
+                                //           Icons.close,
+                                //           color: Colors.white,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4.h,
+                        ),
+                        Center(
+                          child: InkWell(
+                            onTap: () async {
+                           _user.text == '' || _pos.text == '' || _about.text == '' || _age.text == '' || _exp.text == '' ?buildErrorDialog(context, "Error", 'Please Add All Details'):   playerapi();
+
+
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(3.w),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Text(
+                                'Update Profile',
+                                style: textStyle,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4.h,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -1020,6 +1022,10 @@ class _EditProfileState extends State<EditProfile> {
         ),
       ),
     );
+  }
+  Future<bool> dialog() async {
+    buildErrorDialog(context, "Sorry", "You Can't Go back At this Stage");
+    return await false;
   }
 
   // name
