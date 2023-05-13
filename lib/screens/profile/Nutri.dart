@@ -72,8 +72,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pedrodap/Model/todo.dart';
-import 'package:pedrodap/Widget/Todo1.dart';
-import 'package:pedrodap/Widget/todo_items.dart';
+
 import 'package:sizer/sizer.dart';
 import '../../Widget/Drawer.dart';
 import '../../Widget/color.dart';

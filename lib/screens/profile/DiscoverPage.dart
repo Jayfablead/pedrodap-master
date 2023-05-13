@@ -7,6 +7,7 @@ import 'package:pedrodap/Model/searchusersmodal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:pedrodap/screens/profile/userprofile%20screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -85,7 +86,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FeedPage(),));
                               },
                               icon: Icon(
                                 Icons.arrow_back,

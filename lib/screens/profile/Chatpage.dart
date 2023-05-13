@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:pedrodap/Model/chatmodal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:sizer/sizer.dart';
 
@@ -99,7 +100,7 @@ class _ChatPageState extends State<ChatPage> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FeedPage(),));
                               },
                               icon: Icon(
                                 Icons.arrow_back,

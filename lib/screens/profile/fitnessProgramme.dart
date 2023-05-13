@@ -11,7 +11,7 @@ import 'package:pedrodap/Model/todo.dart';
 import 'package:pedrodap/Model/viewtodoModal.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
-import 'package:pedrodap/Widget/todo_items.dart';
+
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
 import 'package:sizer/sizer.dart';

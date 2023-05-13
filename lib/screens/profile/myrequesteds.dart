@@ -19,6 +19,7 @@ import '../../Widget/Drawer.dart';
 import '../../Widget/buildErrorDialog.dart';
 import '../../Widget/const.dart';
 import '../../Widget/sharedpreferance.dart';
+import '../others/feedpage.dart';
 
 class MyRequested extends StatefulWidget {
   const MyRequested({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class _MyRequestedState extends State<MyRequested> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => StaticHomePage(),
+                                      builder: (context) => FeedPage(),
                                     ));
                               },
                               icon: Icon(

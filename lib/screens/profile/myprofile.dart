@@ -23,6 +23,7 @@ import '../../Model/connectedModal.dart';
 import '../../Widget/Drawer.dart';
 import '../../provider/authprovider.dart';
 import '../../statichomepage.dart';
+import '../others/feedpage.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
@@ -94,7 +95,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => StaticHomePage(),
+                                        builder: (context) => FeedPage(),
                                       ));
                                 },
                                 icon: Icon(

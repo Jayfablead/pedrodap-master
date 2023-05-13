@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:pedrodap/screens/profile/myconnections.dart';
 import 'package:pedrodap/statichomepage.dart';
 import 'package:sizer/sizer.dart';
@@ -54,7 +55,7 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FeedPage(),));
                               },
                               icon: Icon(
                                 Icons.arrow_back,
