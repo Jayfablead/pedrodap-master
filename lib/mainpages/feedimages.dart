@@ -43,6 +43,12 @@ class _FeedImagesState extends State<FeedImages> {
             margin: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.w),
             child: Column(
               children: <Widget>[
+                 SizedBox(height: 1.h),
+                Text(
+                  " Name (${index + 1}) ",
+                  style: TextStyle(color: Colors.white, fontSize: 11.sp,fontFamily: 'Meta1',letterSpacing: 1),
+                ),
+                SizedBox(height: 1.h),
                 ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),child: CachedNetworkImage(
                   fit: BoxFit.cover,
                   imageUrl: images[index],
@@ -57,10 +63,10 @@ class _FeedImagesState extends State<FeedImages> {
                 ),),
                 SizedBox(height: 1.h),
                 Text(
-                  " Image(${index + 1}) ",
-                  style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                  " Caption (${index + 1}) ",
+                  style: TextStyle(color: Colors.white, fontSize: 11.sp,fontFamily: 'Meta1',letterSpacing: 1),
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: 1.h),
               ],
             ),
           ),

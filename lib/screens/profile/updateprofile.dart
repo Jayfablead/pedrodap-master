@@ -61,6 +61,7 @@ class _EditProfileState extends State<EditProfile> {
   File? videofile;
   TextEditingController _exp = TextEditingController(text: "");
   TextEditingController _pos = TextEditingController(text: "");
+  TextEditingController _url = TextEditingController(text: "");
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isLoading = true;
   late VideoPlayerController _controller;
@@ -231,12 +232,25 @@ class _EditProfileState extends State<EditProfile> {
                     height: 4.h,
                   ),
                   TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    controller: _url,
+                    keyboardType: TextInputType.text,
+
+                    decoration: inputDecoration(
+                      lable: "Instagram URL",
+                      icon: Icon(Icons.connect_without_contact),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  TextFormField(
                       controller: _exp,
                       style: TextStyle(color: Colors.white),
                       enabled: true,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "SEnter Experince";
+                          return "Enter Experince";
                         }
                         return null;
                       },
@@ -275,7 +289,7 @@ class _EditProfileState extends State<EditProfile> {
                       return null;
                     },
                     decoration:
-                    inputDecoration(lable: "Injuries", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
+                    inputDecoration(lable: "Injuries", icon: Icon(Icons.personal_injury_outlined,color: Colors.grey,)),
                   ),
                   SizedBox(
                     height: 4.h,
@@ -291,7 +305,7 @@ class _EditProfileState extends State<EditProfile> {
                       return null;
                     },
                     decoration:
-                    inputDecoration(lable: "Goals & Ambitions", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
+                    inputDecoration(lable: "Goals & Ambitions", icon: Icon(Icons.archive_outlined,color: Colors.grey,)),
                   ),
                   SizedBox(
                     height: 4.h,

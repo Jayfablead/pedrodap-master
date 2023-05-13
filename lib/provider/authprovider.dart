@@ -10,6 +10,10 @@ class authprovider with ChangeNotifier {
   Map<String, String> headers = {
     'Authorization': 'hXuRUGsEGuhGf6KG',
   };
+  Map<String, String> headersinsta = {
+    "X-RapidAPI-Host": "check-username.p.rapidapi.com",
+    "X-RapidAPI-Key" : "4856922f7amsh29f7b2e7e9419e2p1ee023jsn2119665d7ff8"
+  };
 
   Future<http.Response> signupapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=signup_app';
@@ -862,6 +866,22 @@ class authprovider with ChangeNotifier {
     var responseJson;
     final response = await http
         .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+
+    return responseJson;
+  }
+  Future<http.Response> instauser(Map<String, String> bodyData) async {
+    const url = 'https://check-username.p.rapidapi.com/check/instagram/username';
+    var responseJson;
+
+    final response = await http
+        .get(Uri.parse(url), headers: headersinsta)
         .timeout(
       const Duration(seconds: 30),
       onTimeout: () {

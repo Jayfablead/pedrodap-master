@@ -28,6 +28,7 @@ class _signupState extends State<signup> {
   TextEditingController _pass = TextEditingController();
   TextEditingController _phone = TextEditingController();
   TextEditingController _conf = TextEditingController();
+  TextEditingController _ocup = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   int setup = 1;
   List<String> _locations = [
@@ -37,6 +38,7 @@ class _signupState extends State<signup> {
     'Nutritionists',
     'Fitness Instructors',
     'Personal Trainers',
+    'Player'
   ]; // Option 2
   String? _selectedLocation; // Option 2
   bool visible = true;  bool visible1 = true;
@@ -225,6 +227,44 @@ class _signupState extends State<signup> {
                         hintText: "Phone Number",
                         icon: Icon(
                           Icons.phone_android,
+                          color: Colors.grey.shade500,
+                          size: 15.sp,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Container(
+                  height: 8.h,
+                  padding: EdgeInsets.only(bottom: 2.h),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextFormField(
+                      controller: _ocup,
+                      keyboardType: TextInputType.phone,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Meta1',
+                          fontSize: 12.sp),
+                      onTap: () {
+                        setState(() {
+                          setup = 1;
+                        });
+                        print(setup);
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "            Enter Your Occupation";
+                        }
+                        return null;
+                      },
+                      decoration: inputDecoration( ico: IconButton(onPressed: (){}, icon: Icon(null),),
+                        hintText: "Occupation",
+                        icon: Icon(
+                          Icons.work_outline_rounded,
                           color: Colors.grey.shade500,
                           size: 15.sp,
                         ),
