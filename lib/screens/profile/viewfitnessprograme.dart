@@ -9,6 +9,7 @@ import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/provider/authprovider.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:pedrodap/screens/profile/fitnessProgramme.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:pedrodap/screens/profile/replypage.dart';
@@ -88,7 +89,7 @@ class _ViewFitnessState extends State<ViewFitness> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 3.h,
+                          height: 4.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +99,7 @@ class _ViewFitnessState extends State<ViewFitness> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => StaticHomePage(),
+                                      builder: (context) => FeedPage(),
                                     ));
                               },
                               icon: Icon(

@@ -48,7 +48,7 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(height: 3.h),
+                        SizedBox(height: 4.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

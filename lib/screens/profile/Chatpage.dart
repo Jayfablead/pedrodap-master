@@ -92,7 +92,7 @@ class _ChatPageState extends State<ChatPage> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 3.h,
+                          height: 4.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -12,6 +12,7 @@ import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:pedrodap/Widget/color.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Model/sleepmodal.dart';
@@ -92,14 +93,14 @@ class _SleepScheduleState extends State<SleepSchedule> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 3.h,
+                            height: 4.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FeedPage(),));
                                 },
                                 icon: Icon(
                                   Icons.arrow_back,

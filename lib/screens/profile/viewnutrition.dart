@@ -10,6 +10,7 @@ import 'package:pedrodap/Widget/buildErrorDialog.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:pedrodap/screens/profile/Nutri.dart';
 import 'package:pedrodap/screens/profile/fitnessProgramme.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
@@ -89,7 +90,7 @@ class _ViewNutritionState extends State<ViewNutrition> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 3.h,
+                          height: 4.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +100,7 @@ class _ViewNutritionState extends State<ViewNutrition> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => StaticHomePage(),
+                                      builder: (context) => FeedPage(),
                                     ));
                               },
                               icon: Icon(

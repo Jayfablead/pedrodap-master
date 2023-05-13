@@ -12,6 +12,7 @@ import 'package:pedrodap/loader.dart';
 import 'package:pedrodap/mainpages/trainingandnotestodo.dart';
 import 'package:pedrodap/mainpages/trainingsreply.dart';
 import 'package:pedrodap/provider/authprovider.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -80,7 +81,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 3.h,
+                          height: 4.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,7 +91,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => StaticHomePage(),
+                                      builder: (context) => FeedPage(),
                                     ));
                               },
                               icon: const Icon(

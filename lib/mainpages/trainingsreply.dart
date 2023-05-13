@@ -83,7 +83,7 @@ class _TrainingReplyPageState extends State<TrainingReplyPage> {
                         padding: EdgeInsets.symmetric(horizontal: 4.w),
                         child: Column(children: [
                           SizedBox(
-                            height: 3.h,
+                            height: 4.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

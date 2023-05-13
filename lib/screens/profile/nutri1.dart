@@ -120,7 +120,7 @@ class _NutriState extends State<Nutri> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 3.h,
+                                  height: 4.h,
                                 ),
                                 Row(
                                   mainAxisAlignment:

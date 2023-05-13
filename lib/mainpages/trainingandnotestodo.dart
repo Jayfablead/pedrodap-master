@@ -111,7 +111,7 @@ class _TrainingnotespagetodoState extends State<Trainingnotespagetodo> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 3.h,
+                                  height: 4.h,
                                 ),
                                 Row(
                                   mainAxisAlignment:
