@@ -33,19 +33,19 @@ class EditProfile extends StatefulWidget {
   String? injuries;
   String? goals;
 
-
-  EditProfile(
-      {super.key,
-      this.name,
-      this.profile,
-      this.email,
-      this.exp,
-      this.age,
-      this.about,
-      this.pos,
-      this.videos,
-      this.injuries,
-      this.goals,});
+  EditProfile({
+    super.key,
+    this.name,
+    this.profile,
+    this.email,
+    this.exp,
+    this.age,
+    this.about,
+    this.pos,
+    this.videos,
+    this.injuries,
+    this.goals,
+  });
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -58,6 +58,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _inj = TextEditingController(text: "");
   TextEditingController _email = TextEditingController(text: "");
   TextEditingController _about = TextEditingController(text: "");
+  TextEditingController _cap = TextEditingController(text: "");
   ImagePicker _picker = ImagePicker();
   ImagePicker _picker1 = ImagePicker();
   var imagesTemporary;
@@ -84,7 +85,8 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print( " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ${widget.videos} =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+    print(
+        " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ${widget.videos} =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     playerapi1();
     _user.text = widget.name.toString();
     _age.text = widget.age.toString();
@@ -124,7 +126,8 @@ class _EditProfileState extends State<EditProfile> {
       backgroundColor: Colors.black,
       drawer: drawer(),
       key: _scaffoldKey,
-      body: WillPopScope(onWillPop:dialog ,
+      body: WillPopScope(
+        onWillPop: dialog,
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
@@ -212,7 +215,8 @@ class _EditProfileState extends State<EditProfile> {
                                     padding: EdgeInsets.all(2.w),
                                     decoration: BoxDecoration(
                                         color: Colors.black,
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                     child: const Icon(
                                       Icons.camera_alt_outlined,
                                       color: Colors.white,
@@ -244,7 +248,6 @@ class _EditProfileState extends State<EditProfile> {
                       style: TextStyle(color: Colors.white),
                       controller: _url,
                       keyboardType: TextInputType.text,
-
                       decoration: inputDecoration(
                         lable: "Instagram URL",
                         icon: Icon(Icons.connect_without_contact),
@@ -265,7 +268,10 @@ class _EditProfileState extends State<EditProfile> {
                         },
                         onTap: null,
                         decoration: inputDecoration(
-                          icon: Icon(Icons.date_range,color: Colors.grey,),
+                          icon: Icon(
+                            Icons.date_range,
+                            color: Colors.grey,
+                          ),
                           lable: "Experince",
                         )),
                     SizedBox(
@@ -281,9 +287,14 @@ class _EditProfileState extends State<EditProfile> {
                         }
                         return null;
                       },
-                      decoration:
-                          inputDecoration(lable: "Age", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
-                    ), SizedBox(
+                      decoration: inputDecoration(
+                          lable: "Age",
+                          icon: Icon(
+                            Icons.person_pin_circle_outlined,
+                            color: Colors.grey,
+                          )),
+                    ),
+                    SizedBox(
                       height: 4.h,
                     ),
                     TextFormField(
@@ -302,14 +313,18 @@ class _EditProfileState extends State<EditProfile> {
                           lable: userData!.userData!.role == '2'
                               ? "Position "
                               : "Ocupation ",
-                          icon: Icon(Icons.person,color: Colors.grey,)),
+                          icon: Icon(
+                            Icons.person,
+                            color: Colors.grey,
+                          )),
                     ),
                     SizedBox(
                       height: 4.h,
                     ),
                     TextFormField(
                       style: TextStyle(color: Colors.white),
-                      controller: _inj,maxLines: 3,
+                      controller: _inj,
+                      maxLines: 3,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -317,15 +332,20 @@ class _EditProfileState extends State<EditProfile> {
                         }
                         return null;
                       },
-                      decoration:
-                      inputDecoration(lable: "Injuries", icon: Icon(Icons.personal_injury_outlined,color: Colors.grey,)),
+                      decoration: inputDecoration(
+                          lable: "Injuries",
+                          icon: Icon(
+                            Icons.personal_injury_outlined,
+                            color: Colors.grey,
+                          )),
                     ),
                     SizedBox(
                       height: 4.h,
                     ),
                     TextFormField(
                       style: TextStyle(color: Colors.white),
-                      controller: _goals,maxLines: 3,
+                      controller: _goals,
+                      maxLines: 3,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -333,10 +353,13 @@ class _EditProfileState extends State<EditProfile> {
                         }
                         return null;
                       },
-                      decoration:
-                      inputDecoration(lable: "Goals & Ambitions", icon: Icon(Icons.archive_outlined,color: Colors.grey,)),
+                      decoration: inputDecoration(
+                          lable: "Goals & Ambitions",
+                          icon: Icon(
+                            Icons.archive_outlined,
+                            color: Colors.grey,
+                          )),
                     ),
-
                     SizedBox(
                       height: 4.h,
                     ),
@@ -352,7 +375,11 @@ class _EditProfileState extends State<EditProfile> {
                         return null;
                       },
                       decoration: inputDecoration(
-                          lable: "About", icon: Icon(Icons.info_outline_rounded,color: Colors.grey,)),
+                          lable: "About",
+                          icon: Icon(
+                            Icons.info_outline_rounded,
+                            color: Colors.grey,
+                          )),
                     ),
                     SizedBox(
                       height: 4.h,
@@ -384,7 +411,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          height: 25.h,
+                          height: 35.h,
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.all(1.h),
                           decoration: BoxDecoration(
@@ -396,23 +423,107 @@ class _EditProfileState extends State<EditProfile> {
                             child: Row(
                               children: [
                                 InkWell(
-                                  onTap: () async {
-                                    final image1 = await _picker.pickImage(
-                                        source: ImageSource.gallery);
-                                    setState(() {
-                                      imagefile1 = File(image1!.path);
-                                    });
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                            backgroundColor: Colors.black,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                side: BorderSide(
+                                                    color: Colors.white)),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                InkWell(
+                                                    onTap: () async {
+                                                      final image1 =
+                                                          await _picker.pickImage(
+                                                              source:
+                                                                  ImageSource
+                                                                      .gallery);
+                                                      setState(() {
+                                                        imagefile1 =
+                                                            File(image1!.path);
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      width: 50.w,
+                                                      padding:
+                                                          EdgeInsets.all(1.5.h),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                          border: Border.all(
+                                                              color: Colors
+                                                                  .white)),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.add,
+                                                            color: Colors.white,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 2.w,
+                                                          ),
+                                                          Text(
+                                                            'Add Image',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )),SizedBox(
+                                                  height: 4.h,
+                                                ),
+                                                TextFormField(
+                                                  style: TextStyle(color: Colors.white),
+                                                  controller: _cap,
+
+                                                  keyboardType: TextInputType.text,
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return "Add Caption";
+                                                    }
+                                                    return null;
+                                                  },
+                                                  decoration: inputDecoration(
+                                                      lable: "Add Caption",
+                                                      icon: Icon(
+                                                        Icons.closed_caption_off,
+                                                        color: Colors.grey,
+                                                      )),
+                                                ),
+                                              ],
+                                            ));
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                    margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 1.w),
                                     height: 20.h,
                                     width: 45.w,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(color: Colors.white)),
+                                        border:
+                                            Border.all(color: Colors.white)),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.add,
@@ -450,9 +561,11 @@ class _EditProfileState extends State<EditProfile> {
                                   width: 80.w,
                                   child: GridView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: profiledata?.viewProfileDetails?.images!.length,
+                                      itemCount: profiledata
+                                          ?.viewProfileDetails?.images!.length,
                                       gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1/1.4,
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              childAspectRatio: 1 / 1.4,
                                               crossAxisCount: 1),
                                       itemBuilder: (contex, index) {
                                         return Stack(
@@ -472,13 +585,13 @@ class _EditProfileState extends State<EditProfile> {
                                                       .viewProfileDetails!
                                                       .images![index]
                                                       .toString(),
-                                                  progressIndicatorBuilder:
-                                                      (context, url,
-                                                              downloadProgress) =>
-                                                          CircularProgressIndicator(
-                                                              value:
-                                                                  downloadProgress
-                                                                      .progress),
+                                                  progressIndicatorBuilder: (context,
+                                                          url,
+                                                          downloadProgress) =>
+                                                      CircularProgressIndicator(
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress),
                                                   errorWidget:
                                                       (context, url, error) =>
                                                           Padding(
@@ -513,121 +626,123 @@ class _EditProfileState extends State<EditProfile> {
                                                     context: context,
                                                     builder: (context) =>
                                                         AlertDialog(
-                                                          shape: RoundedRectangleBorder(
+                                                      shape:
+                                                          RoundedRectangleBorder(
                                                               borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  20),
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20),
                                                               side: BorderSide(
                                                                   color: Colors
                                                                       .white)),
-                                                          backgroundColor:
+                                                      backgroundColor:
                                                           Color.fromARGB(
                                                               255, 0, 0, 0),
-                                                          scrollable: true,
-                                                          content: Text(
-                                                            'Are You Sure You Want to Delete this Image? This Can\'t be Undone .',
-                                                            style: TextStyle(
-                                                                fontSize: 11.sp,
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .w400,
-                                                                fontFamily:
-                                                                'Meta1',
-                                                                color:
+                                                      scrollable: true,
+                                                      content: Text(
+                                                        'Are You Sure You Want to Delete this Image? This Can\'t be Undone .',
+                                                        style: TextStyle(
+                                                            fontSize: 11.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily: 'Meta1',
+                                                            color:
                                                                 Colors.white),
-                                                          ),
-                                                          actions: [
-                                                            InkWell(
-                                                              onTap: () {
-                                                               imgdlt();
-                                                                Navigator.of(
+                                                      ),
+                                                      actions: [
+                                                        InkWell(
+                                                          onTap: () {
+                                                            imgdlt();
+                                                            Navigator.of(
                                                                     context)
-                                                                    .pop();
-                                                              },
-                                                              child: Container(
-                                                                margin: EdgeInsets
-                                                                    .all(2.w),
-                                                                padding:
-                                                                EdgeInsets
-                                                                    .all(1.h),
-                                                                child: Text(
-                                                                  'Yes',
-                                                                  style: TextStyle(
-                                                                      fontSize:
+                                                                .pop();
+                                                          },
+                                                          child: Container(
+                                                            margin:
+                                                                EdgeInsets.all(
+                                                                    2.w),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    1.h),
+                                                            child: Text(
+                                                              'Yes',
+                                                              style: TextStyle(
+                                                                  fontSize:
                                                                       13.sp,
-                                                                      fontWeight:
+                                                                  fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                      fontFamily:
+                                                                  fontFamily:
                                                                       'Meta1',
-                                                                      color: Colors
-                                                                          .green),
-                                                                ),
-                                                                decoration:
+                                                                  color: Colors
+                                                                      .green),
+                                                            ),
+                                                            decoration:
                                                                 BoxDecoration(
                                                                     color: Colors
                                                                         .black,
                                                                     border:
-                                                                    Border
-                                                                        .all(
+                                                                        Border
+                                                                            .all(
                                                                       color: Colors
                                                                           .green,
                                                                     ),
                                                                     borderRadius:
-                                                                    BorderRadius.circular(
-                                                                        10)),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                Navigator.of(
+                                                                        BorderRadius.circular(
+                                                                            10)),
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            Navigator.of(
                                                                     context)
-                                                                    .pop();
-                                                              },
-                                                              child: Container(
-                                                                margin: EdgeInsets
-                                                                    .all(1.w),
-                                                                padding:
-                                                                EdgeInsets
-                                                                    .all(1.h),
-                                                                child: Text(
-                                                                  'No',
-                                                                  style: TextStyle(
-                                                                      fontSize:
+                                                                .pop();
+                                                          },
+                                                          child: Container(
+                                                            margin:
+                                                                EdgeInsets.all(
+                                                                    1.w),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    1.h),
+                                                            child: Text(
+                                                              'No',
+                                                              style: TextStyle(
+                                                                  fontSize:
                                                                       13.sp,
-                                                                      fontWeight:
+                                                                  fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                      fontFamily:
+                                                                  fontFamily:
                                                                       'Meta1',
-                                                                      color: Colors
-                                                                          .red),
-                                                                ),
-                                                                decoration:
+                                                                  color: Colors
+                                                                      .red),
+                                                            ),
+                                                            decoration:
                                                                 BoxDecoration(
                                                                     color: Colors
                                                                         .black,
                                                                     border:
-                                                                    Border
-                                                                        .all(
+                                                                        Border
+                                                                            .all(
                                                                       color: Colors
                                                                           .red,
                                                                     ),
                                                                     borderRadius:
-                                                                    BorderRadius.circular(
-                                                                        10)),
-                                                              ),
-                                                            ),
-                                                          ],
+                                                                        BorderRadius.circular(
+                                                                            10)),
+                                                          ),
                                                         ),
+                                                      ],
+                                                    ),
                                                   );
                                                 },
                                                 child: Container(
                                                   padding: EdgeInsets.all(2.w),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(20),
+                                                        BorderRadius.circular(
+                                                            20),
                                                     color: Colors.black,
                                                   ),
                                                   child: Icon(
@@ -691,21 +806,25 @@ class _EditProfileState extends State<EditProfile> {
                                   onTap: () async {
                                     final video = await _picker.pickVideo(
                                         source: ImageSource.gallery);
-                                 setState(() {
-                                   videofile = File(video!.path);
-                                 });
-                                    print('=-=-=-=-=-=-=-=-=-=-=-=-=-= $videofile =-=-=-=-=-=-=-=-==-=-=-');
+                                    setState(() {
+                                      videofile = File(video!.path);
+                                    });
+                                    print(
+                                        '=-=-=-=-=-=-=-=-=-=-=-=-=-= $videofile =-=-=-=-=-=-=-=-==-=-=-');
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                    margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 1.w),
                                     height: 20.h,
                                     width: 45.w,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(color: Colors.white)),
+                                        border:
+                                            Border.all(color: Colors.white)),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.add,
@@ -727,7 +846,6 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                                 (videofile != null)
                                     ? ClipRRect(
-
                                         borderRadius: BorderRadius.circular(10),
                                         child: Container(
                                           height: 20.h,
@@ -749,149 +867,153 @@ class _EditProfileState extends State<EditProfile> {
                                     child: Stack(
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(20),
-                                          child: profiledata?.viewProfileDetails
-                                                      ?.video ==
-                                                  null
-                                              ? Center(
-                                                  child:
-                                                      Container(),
-                                                )
-                                              : VideoPlayer(_controller)
-                                        ),
-                                       widget.videos == null ?Container():Positioned(
-                                          left: 52.w,
-                                          bottom: 17.h,
-                                          child: InkWell(
-                                            onTap: () {
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) =>
-                                                    AlertDialog(
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              20),
-                                                          side: BorderSide(
-                                                              color: Colors
-                                                                  .white)),
-                                                      backgroundColor:
-                                                      Color.fromARGB(
-                                                          255, 0, 0, 0),
-                                                      scrollable: true,
-                                                      content: Text(
-                                                        'Are You Sure You Want to Delete this Video ? This Can\'t be Undone.',
-                                                        style: TextStyle(
-                                                            fontSize: 11.sp,
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .w400,
-                                                            fontFamily:
-                                                            'Meta1',
-                                                            color:
-                                                            Colors.white),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            child: profiledata
+                                                        ?.viewProfileDetails
+                                                        ?.video ==
+                                                    null
+                                                ? Center(
+                                                    child: Container(),
+                                                  )
+                                                : VideoPlayer(_controller)),
+                                        widget.videos == null
+                                            ? Container()
+                                            : Positioned(
+                                                left: 52.w,
+                                                bottom: 17.h,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .white)),
+                                                        backgroundColor:
+                                                            Color.fromARGB(
+                                                                255, 0, 0, 0),
+                                                        scrollable: true,
+                                                        content: Text(
+                                                          'Are You Sure You Want to Delete this Video ? This Can\'t be Undone.',
+                                                          style: TextStyle(
+                                                              fontSize: 11.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        actions: [
+                                                          InkWell(
+                                                            onTap: () {
+                                                              viddlt();
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(2.w),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(1.h),
+                                                              child: Text(
+                                                                'Yes',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .green),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .green,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                            ),
+                                                          ),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .all(1.w),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(1.h),
+                                                              child: Text(
+                                                                'No',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'Meta1',
+                                                                    color: Colors
+                                                                        .red),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .red,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      actions: [
-                                                        InkWell(
-                                                          onTap: () {
-                                                           viddlt();
-                                                            Navigator.of(
-                                                                context)
-                                                                .pop();
-                                                          },
-                                                          child: Container(
-                                                            margin: EdgeInsets
-                                                                .all(2.w),
-                                                            padding:
-                                                            EdgeInsets
-                                                                .all(1.h),
-                                                            child: Text(
-                                                              'Yes',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                  13.sp,
-                                                                  fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                                  fontFamily:
-                                                                  'Meta1',
-                                                                  color: Colors
-                                                                      .green),
-                                                            ),
-                                                            decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .black,
-                                                                border:
-                                                                Border
-                                                                    .all(
-                                                                  color: Colors
-                                                                      .green,
-                                                                ),
-                                                                borderRadius:
-                                                                BorderRadius.circular(
-                                                                    10)),
-                                                          ),
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            Navigator.of(
-                                                                context)
-                                                                .pop();
-                                                          },
-                                                          child: Container(
-                                                            margin: EdgeInsets
-                                                                .all(1.w),
-                                                            padding:
-                                                            EdgeInsets
-                                                                .all(1.h),
-                                                            child: Text(
-                                                              'No',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                  13.sp,
-                                                                  fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                                  fontFamily:
-                                                                  'Meta1',
-                                                                  color: Colors
-                                                                      .red),
-                                                            ),
-                                                            decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .black,
-                                                                border:
-                                                                Border
-                                                                    .all(
-                                                                  color: Colors
-                                                                      .red,
-                                                                ),
-                                                                borderRadius:
-                                                                BorderRadius.circular(
-                                                                    10)),
-                                                          ),
-                                                        ),
-                                                      ],
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.all(2.w),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      color: Colors.black,
                                                     ),
-                                              );
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.all(2.w),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.black,
+                                                    child: Icon(
+                                                      Icons.close,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                              child: Icon(
-                                                Icons.close,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                       ],
                                     ),
                                   ),
@@ -945,9 +1067,14 @@ class _EditProfileState extends State<EditProfile> {
                         Center(
                           child: InkWell(
                             onTap: () async {
-                           _user.text == '' || _ocup.text == '' || _about.text == '' || _age.text == '' || _exp.text == '' ?buildErrorDialog(context, "Error", 'Please Add All Details'):   playerapi();
-
-
+                              _user.text == '' ||
+                                      _ocup.text == '' ||
+                                      _about.text == '' ||
+                                      _age.text == '' ||
+                                      _exp.text == ''
+                                  ? buildErrorDialog(context, "Error",
+                                      'Please Add All Details')
+                                  : playerapi();
                             },
                             child: Container(
                               padding: EdgeInsets.all(3.w),
@@ -1030,6 +1157,7 @@ class _EditProfileState extends State<EditProfile> {
       ),
     );
   }
+
   Future<bool> dialog() async {
     buildErrorDialog(context, "Sorry", "You Can't Go back At this Stage");
     return await false;
@@ -1082,7 +1210,6 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   playerapi() {
-
     final Map<String, String> data = {};
     data['action'] = 'update_profile_app';
     data['uid'] = userData!.userData!.uid.toString();
@@ -1094,6 +1221,7 @@ class _EditProfileState extends State<EditProfile> {
     // data['occupation'] = _ocup.text.trim();
     data['injuries'] = _inj.text.trim();
     data['goals'] = _goals.text.trim();
+    data['img_caption'] = _cap.text.trim();
     data['profile_image'] = imagefile != null ? imagefile!.path : "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
     data['video'] = videofile != null ? videofile?.path ?? '' : "";
@@ -1124,7 +1252,6 @@ class _EditProfileState extends State<EditProfile> {
       }
     });
   }
-
 
   viddlt() {
     final Map<String, String> data = {};

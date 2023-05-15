@@ -41,7 +41,9 @@ class _FeedPageState extends State<FeedPage> {
             ),
           ),
           bottom: TabBar(
-              indicatorPadding: EdgeInsets.symmetric(horizontal: 22.w),indicatorColor: Colors.cyan,indicatorWeight: 3,
+              indicatorPadding: EdgeInsets.symmetric(horizontal: 22.w),
+              indicatorColor: Colors.cyan,
+              indicatorWeight: 3,
               tabs: [
                 Tab(
                   child: Row(
@@ -83,7 +85,10 @@ class _FeedPageState extends State<FeedPage> {
         ),
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
-          children: [FeedImages(), FeedVideos()],
+          children: [
+            FeedImages(),
+            FeedVideos(),
+          ],
         ),
       ),
     );
