@@ -557,7 +557,7 @@ class _MyProfileState extends State<MyProfile> {
                               Text(
                                 userData?.userData?.role == '2'
                                     ? "Position : "
-                                    : "Ocupation :",
+                                    : "Occupation :",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -570,11 +570,11 @@ class _MyProfileState extends State<MyProfile> {
                                 width: 17.w,
                               ),
                               Text(
-                                profiledata?.viewProfileDetails?.position ==
-                                        null
+                                profiledata?.viewProfileDetails?.occupation ==
+                                        ''
                                     ? 'N/A'
                                     : profiledata
-                                            ?.viewProfileDetails?.position ??
+                                            ?.viewProfileDetails?.occupation ??
                                         '',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,

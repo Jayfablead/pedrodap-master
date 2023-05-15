@@ -4,6 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Model/UserModal.dart';
+import 'package:pedrodap/Model/clubidmodal.dart';
 import 'package:pedrodap/Widget/buildErrorDialog.dart';
 import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/donedialog.dart';
@@ -31,6 +32,7 @@ class _signupState extends State<signup> {
   TextEditingController _ocup = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   int setup = 1;
+  int setupclub = 1;
   List<String> _locations = [
     'Coach',
     'Scouts',
@@ -39,9 +41,22 @@ class _signupState extends State<signup> {
     'Fitness Instructors',
     'Personal Trainers',
     'Player'
-  ]; // Option 2
+  ];
+  // Option 2
+  List<String> _clubs = [];
   String? _selectedLocation; // Option 2
-  bool visible = true;  bool visible1 = true;
+  String? _selectedClub; // Option 2
+  bool visible = true;
+  bool visible1 = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    clubsapi();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +115,7 @@ class _signupState extends State<signup> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.sp),
-                        color:  Colors.white.withOpacity(0.15),
+                        color: Colors.white.withOpacity(0.15),
                       ),
                       padding: EdgeInsets.symmetric(
                           horizontal: 5.0, vertical: 0.5.h),
@@ -156,7 +171,67 @@ class _signupState extends State<signup> {
                     SizedBox(
                       height: 2.h,
                     ),
-               
+                    Container(
+
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.sp),
+                        color: Colors.white.withOpacity(0.15),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 5.0, vertical: 0.5.h),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                          offset: Offset(0, 10),
+                          dropdownDecoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(14),
+                              // color: Colors.black,
+                              color: Colors.black),
+                          hint: Row(
+                            children: [
+                              Icon(
+                                Icons.people_alt_outlined,
+                                color: Colors.grey.shade500,
+                              ),
+                              SizedBox(
+                                width: 3.w,
+                              ),
+                              Text(
+                                'Choose your Club',
+                                style: TextStyle(
+                                    color: Colors.grey.shade500,
+                                    fontFamily: 'Meta1',
+                                    fontSize: 12.sp),
+                              ),
+                            ],
+                          ),
+                          // Not necessary for Option 1
+                          value: _selectedClub,
+                          onChanged: (clubvalue) {
+                            setState(() {
+                              setupclub = 1;
+                              _selectedClub = clubvalue!.toString();
+                            });
+                          },
+                          items: cludid?.allClubsFetch?.map((location) {
+                            return DropdownMenuItem(
+                              child: Text(
+                                location.name.toString(),
+                                style: TextStyle(
+                                    color: Colors.grey.shade500,
+                                    fontFamily: 'Meta1',
+                                    fontSize: 12.sp),
+                              ),
+                              value: location.uid,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
                     Container(
                       height: 8.h,
                       padding: EdgeInsets.only(bottom: 2.h),
@@ -183,7 +258,8 @@ class _signupState extends State<signup> {
                             }
                             return null;
                           },
-                          decoration: inputDecoration(ico: IconButton(onPressed: (){}, icon: Icon(null)),
+                          decoration: inputDecoration(
+                            ico: IconButton(onPressed: () {}, icon: Icon(null)),
                             hintText: "Name",
                             icon: Icon(
                               Icons.person,
@@ -223,7 +299,11 @@ class _signupState extends State<signup> {
                         }
                         return null;
                       },
-                      decoration: inputDecoration( ico: IconButton(onPressed: (){}, icon: Icon(null),),
+                      decoration: inputDecoration(
+                        ico: IconButton(
+                          onPressed: () {},
+                          icon: Icon(null),
+                        ),
                         hintText: "Phone Number",
                         icon: Icon(
                           Icons.phone_android,
@@ -244,7 +324,7 @@ class _signupState extends State<signup> {
                       borderRadius: BorderRadius.circular(20)),
                   child: TextFormField(
                       controller: _ocup,
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.text,
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Meta1',
@@ -261,7 +341,11 @@ class _signupState extends State<signup> {
                         }
                         return null;
                       },
-                      decoration: inputDecoration( ico: IconButton(onPressed: (){}, icon: Icon(null),),
+                      decoration: inputDecoration(
+                        ico: IconButton(
+                          onPressed: () {},
+                          icon: Icon(null),
+                        ),
                         hintText: "Occupation",
                         icon: Icon(
                           Icons.work_outline_rounded,
@@ -310,7 +394,11 @@ class _signupState extends State<signup> {
                           return null;
                         }
                       },
-                      decoration: inputDecoration(ico: IconButton(onPressed: (){}, icon: Icon(null),),
+                      decoration: inputDecoration(
+                        ico: IconButton(
+                          onPressed: () {},
+                          icon: Icon(null),
+                        ),
                         hintText: "Email",
                         icon: Icon(
                           Icons.email_outlined,
@@ -350,7 +438,7 @@ class _signupState extends State<signup> {
                         }
                         return null;
                       },
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                         // fillColor: Colors.red,
                         hoverColor: Colors.white,
                         focusColor: Colors.white,
@@ -374,15 +462,15 @@ class _signupState extends State<signup> {
                             },
                             icon: visible
                                 ? Icon(
-                              Icons.visibility,
-                              size: 15.sp,
-                              color: Colors.white,
-                            )
+                                    Icons.visibility,
+                                    size: 15.sp,
+                                    color: Colors.white,
+                                  )
                                 : Icon(
-                              Icons.visibility_off,
-                              size: 15.sp,
-                              color: Colors.white,
-                            ),
+                                    Icons.visibility_off,
+                                    size: 15.sp,
+                                    color: Colors.white,
+                                  ),
                           ),
                         ),
 
@@ -398,12 +486,12 @@ class _signupState extends State<signup> {
                         hintStyle: textStyle,
                         border: OutlineInputBorder(
                           borderRadius:
-                          BorderRadius.all(Radius.circular(12.sp)),
+                              BorderRadius.all(Radius.circular(12.sp)),
                           borderSide: BorderSide.none,
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(12.sp)),
+                                BorderRadius.all(Radius.circular(12.sp)),
                             borderSide: BorderSide.none),
                       )),
                 ),
@@ -438,7 +526,7 @@ class _signupState extends State<signup> {
                         }
                         return null;
                       },
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                         // fillColor: Colors.red,
                         hoverColor: Colors.white,
                         focusColor: Colors.white,
@@ -462,15 +550,15 @@ class _signupState extends State<signup> {
                             },
                             icon: visible
                                 ? Icon(
-                              Icons.visibility,
-                              size: 15.sp,
-                              color: Colors.white,
-                            )
+                                    Icons.visibility,
+                                    size: 15.sp,
+                                    color: Colors.white,
+                                  )
                                 : Icon(
-                              Icons.visibility_off,
-                              size: 15.sp,
-                              color: Colors.white,
-                            ),
+                                    Icons.visibility_off,
+                                    size: 15.sp,
+                                    color: Colors.white,
+                                  ),
                           ),
                         ),
 
@@ -486,12 +574,12 @@ class _signupState extends State<signup> {
                         hintStyle: textStyle,
                         border: OutlineInputBorder(
                           borderRadius:
-                          BorderRadius.all(Radius.circular(12.sp)),
+                              BorderRadius.all(Radius.circular(12.sp)),
                           borderSide: BorderSide.none,
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(12.sp)),
+                                BorderRadius.all(Radius.circular(12.sp)),
                             borderSide: BorderSide.none),
                       )),
                 ),
@@ -600,6 +688,7 @@ class _signupState extends State<signup> {
           borderSide: BorderSide.none),
     );
   }
+
   loginapi() {
     print('helooo');
     if (_formKey.currentState!.validate()) {
@@ -636,58 +725,89 @@ class _signupState extends State<signup> {
       });
     }
   }
-  signup() {
-    print(_selectedLocation);
-    if (_formKey.currentState!.validate()) {
-      final Map<String, String> data = {};
-      data['name'] = _user.text.trim().toString();
-      data['type'] = (_selectedLocation == "Coach")
-          ? "3"
-          : (_selectedLocation == "Scouts")
-              ? "5"
-              : (_selectedLocation == "Medicals")
-                  ? "6"
-                  : (_selectedLocation == 'Nutritionists')
-                      ? "7"
-                      : (_selectedLocation == 'Fitness Instructors')
-                          ? "8"
-                          : "9";
-      data['email'] = _email.text.trim().toString();
-      data['password'] = _pass.text.trim().toString();
-      data['action'] = 'signup_app';
 
-      checkInternet().then((internet) async {
-        if (internet) {
-          authprovider().signupapi(data).then((Response response) async {
-            userData = UserModal.fromJson(json.decode(response.body));
-            if (response.statusCode == 200 && userData?.status == "success") {
+  clubsapi() {
+    print('Clubs');
+
+    final Map<String, String> data = {};
+    // data['email'] = _email.text.trim().toString();
+    // data['password'] = _pass.text.trim().toString();
+    data['action'] = 'all_clubs_for_signup';
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().loginapi(data).then((Response response) async {
+          cludid = Clubidmodal.fromJson(json.decode(response.body));
+          if (response.statusCode == 200 && cludid?.status == "success") {
+            await SaveDataLocal.saveLogInData(userData!);
+            print(userData?.status);
+          } else {
+            setState(() {
+              // isLoading = false;
+            });
+
+          }
+        });
+      }
+
+      signup() {
+        print(_selectedLocation);
+        if (_formKey.currentState!.validate()) {
+          final Map<String, String> data = {};
+          data['name'] = _user.text.trim().toString();
+          data['type'] = (_selectedLocation == "Coach")
+              ? "3"
+              : (_selectedLocation == "Scouts")
+                  ? "5"
+                  : (_selectedLocation == "Medicals")
+                      ? "6"
+                      : (_selectedLocation == 'Nutritionists')
+                          ? "7"
+                          : (_selectedLocation == 'Fitness Instructors')
+                              ? "8"
+                              : (_selectedLocation == 'Personal Trainers')
+                                  ? "9"
+                                  : "2";
+          data['email'] = _email.text.trim().toString();
+          data['password'] = _pass.text.trim().toString();
+          data['occupation'] = _ocup.text.trim().toString();
+          data['club_id'] = '0';
+          data['action'] = 'signup_app';
+
+          checkInternet().then((internet) async {
+            if (internet) {
+              authprovider().signupapi(data).then((Response response) async {
+                userData = UserModal.fromJson(json.decode(response.body));
+                if (response.statusCode == 200 &&
+                    userData?.status == "success") {
+                  setState(() {
+                    // isLoading = false;
+                  });
+                  await SaveDataLocal.saveLogInData(userData!);
+                  print(userData?.status);
+
+                  // buildErrorDialog(context, "", "Login Successfully");
+
+                  if (_pass.text == _conf.text) {
+                    loginapi();
+                  } else {
+                    buildErrorDialog(
+                        context, "Error", "Password Dosen't Match");
+                  }
+                } else {
+                  buildErrorDialog(
+                      context, "Error", "Invalid Details Check Detials");
+                }
+              });
+            } else {
               setState(() {
                 // isLoading = false;
               });
-              await SaveDataLocal.saveLogInData(userData!);
-              print(userData?.status);
-
-              // buildErrorDialog(context, "", "Login Successfully");
-
-              if (_pass.text == _conf.text) {
-
-loginapi();
-
-              } else {
-                buildErrorDialog(context, "Error", "Password Dosen't Match");
-              }
-            } else {
-              buildErrorDialog(
-                  context, "Error", "Invalid Details Check Detials");
+              buildErrorDialog(context, 'Error', "Internate Required");
             }
           });
-        } else {
-          setState(() {
-            // isLoading = false;
-          });
-          buildErrorDialog(context, 'Error', "Internate Required");
         }
-      });
-    }
+      }
+    });
   }
 }

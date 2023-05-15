@@ -21,6 +21,7 @@ import 'package:pedrodap/Model/viewtodoModal.dart';
 
 import '../Model/Viewmsgmodal.dart';
 import '../Model/chatmodal.dart';
+import '../Model/clubidmodal.dart';
 import '../Model/connectedModal.dart';
 import '../Model/fetchplayermodal.dart';
 import '../Model/pendingreqModal.dart';
@@ -71,5 +72,6 @@ SearchchatModal? searchchat;
 ViewchatmsgModal? viewmsgs;
 searchUsersModal? searchuser;
 ReqModal? reqsts;
+Clubidmodal? cludid;
 
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';
