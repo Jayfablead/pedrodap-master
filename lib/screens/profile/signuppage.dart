@@ -42,6 +42,7 @@ class _signupState extends State<signup> {
     'Personal Trainers',
     'Player'
   ];
+
   // Option 2
   List<String> _clubs = [];
   String? _selectedLocation; // Option 2
@@ -130,7 +131,7 @@ class _signupState extends State<signup> {
                           hint: Row(
                             children: [
                               Icon(
-                                Icons.people_alt_outlined,
+                                Icons.face_unlock_rounded,
                                 color: Colors.grey.shade500,
                               ),
                               SizedBox(
@@ -172,7 +173,6 @@ class _signupState extends State<signup> {
                       height: 2.h,
                     ),
                     Container(
-
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.sp),
@@ -182,6 +182,7 @@ class _signupState extends State<signup> {
                           horizontal: 5.0, vertical: 0.5.h),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton2(
+                          dropdownMaxHeight: 45.h,
                           offset: Offset(0, 10),
                           dropdownDecoration: BoxDecoration(
                               border: Border.all(color: Colors.white),
@@ -212,6 +213,7 @@ class _signupState extends State<signup> {
                             setState(() {
                               setupclub = 1;
                               _selectedClub = clubvalue!.toString();
+                              print(_selectedClub);
                             });
                           },
                           items: cludid?.allClubsFetch?.map((location) {
@@ -337,7 +339,7 @@ class _signupState extends State<signup> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "            Enter Your Occupation";
+                          return _selectedLocation == 'Player' ?"            Enter Your Position":"            Enter Your Occupation";
                         }
                         return null;
                       },
@@ -346,9 +348,9 @@ class _signupState extends State<signup> {
                           onPressed: () {},
                           icon: Icon(null),
                         ),
-                        hintText: "Occupation",
+                        hintText: _selectedLocation == 'Player' ?"Position":"Occupation",
                         icon: Icon(
-                          Icons.work_outline_rounded,
+                          _selectedLocation == 'Player' ?Icons.sports_handball:Icons.work_outline_rounded,
                           color: Colors.grey.shade500,
                           size: 15.sp,
                         ),
@@ -745,69 +747,66 @@ class _signupState extends State<signup> {
             setState(() {
               // isLoading = false;
             });
-
           }
         });
       }
+    });
+  }
 
-      signup() {
-        print(_selectedLocation);
-        if (_formKey.currentState!.validate()) {
-          final Map<String, String> data = {};
-          data['name'] = _user.text.trim().toString();
-          data['type'] = (_selectedLocation == "Coach")
-              ? "3"
-              : (_selectedLocation == "Scouts")
-                  ? "5"
-                  : (_selectedLocation == "Medicals")
-                      ? "6"
-                      : (_selectedLocation == 'Nutritionists')
-                          ? "7"
-                          : (_selectedLocation == 'Fitness Instructors')
-                              ? "8"
-                              : (_selectedLocation == 'Personal Trainers')
-                                  ? "9"
-                                  : "2";
-          data['email'] = _email.text.trim().toString();
-          data['password'] = _pass.text.trim().toString();
-          data['occupation'] = _ocup.text.trim().toString();
-          data['club_id'] = '0';
-          data['action'] = 'signup_app';
+  signup() {
+    print(_selectedLocation);
+    if (_formKey.currentState!.validate()) {
+      final Map<String, String> data = {};
+      data['name'] = _user.text.trim().toString();
+      data['type'] = (_selectedLocation == "Coach")
+          ? "3"
+          : (_selectedLocation == "Scouts")
+              ? "5"
+              : (_selectedLocation == "Medicals")
+                  ? "6"
+                  : (_selectedLocation == 'Nutritionists')
+                      ? "7"
+                      : (_selectedLocation == 'Fitness Instructors')
+                          ? "8"
+                          : (_selectedLocation == 'Personal Trainers')
+                              ? "9"
+                              : "2";
+      data['email'] = _email.text.trim().toString();
+      data['password'] = _pass.text.trim().toString();
+      data['occupation'] = _ocup.text.trim().toString();
+      data['club_id'] = _selectedClub.toString();
+      data['action'] = 'signup_app';
 
-          checkInternet().then((internet) async {
-            if (internet) {
-              authprovider().signupapi(data).then((Response response) async {
-                userData = UserModal.fromJson(json.decode(response.body));
-                if (response.statusCode == 200 &&
-                    userData?.status == "success") {
-                  setState(() {
-                    // isLoading = false;
-                  });
-                  await SaveDataLocal.saveLogInData(userData!);
-                  print(userData?.status);
-
-                  // buildErrorDialog(context, "", "Login Successfully");
-
-                  if (_pass.text == _conf.text) {
-                    loginapi();
-                  } else {
-                    buildErrorDialog(
-                        context, "Error", "Password Dosen't Match");
-                  }
-                } else {
-                  buildErrorDialog(
-                      context, "Error", "Invalid Details Check Detials");
-                }
-              });
-            } else {
+      checkInternet().then((internet) async {
+        if (internet) {
+          authprovider().signupapi(data).then((Response response) async {
+            userData = UserModal.fromJson(json.decode(response.body));
+            if (response.statusCode == 200 && userData?.status == "success") {
               setState(() {
                 // isLoading = false;
               });
-              buildErrorDialog(context, 'Error', "Internate Required");
+              await SaveDataLocal.saveLogInData(userData!);
+              print(userData?.status);
+
+              // buildErrorDialog(context, "", "Login Successfully");
+
+              if (_pass.text == _conf.text) {
+                loginapi();
+              } else {
+                buildErrorDialog(context, "Error", "Password Dosen't Match");
+              }
+            } else {
+              buildErrorDialog(
+                  context, "Error", "Invalid Details Check Detials");
             }
           });
+        } else {
+          setState(() {
+            // isLoading = false;
+          });
+          buildErrorDialog(context, 'Error', "Internate Required");
         }
-      }
-    });
+      });
+    }
   }
 }

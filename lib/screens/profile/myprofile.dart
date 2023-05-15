@@ -307,7 +307,9 @@ class _MyProfileState extends State<MyProfile> {
                                             videos: profiledata?.viewProfileDetails?.video == '' ||
                                                     profiledata?.viewProfileDetails?.video == null
                                                 ? null
-                                                : profiledata?.viewProfileDetails?.video),
+                                                : profiledata?.viewProfileDetails?.video,
+                                            goals: profiledata?.viewProfileDetails?.goals,
+                                            injuries: profiledata?.viewProfileDetails?.injuries),
                                       ),
                                     );
                                   },
@@ -327,106 +329,55 @@ class _MyProfileState extends State<MyProfile> {
                             color: Color(0xff7a7a7a),
                           ),
                           SizedBox(height: 0.2.h),
-                          userData!.userData!.role == '2'
-                              ? Column(
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.sports_baseball_outlined,
+                          Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.sports_baseball_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  Text(
+                                    "Current Club : ",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Meta1",
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13.sp),
+                                  ),
+                                  SizedBox(
+                                    width: 6.w,
+                                  ),
+                                  SizedBox(
+                                    width: 40.w,
+                                    child: Text(
+                                      profiledata?.viewProfileDetails
+                                                  ?.currentClub ==
+                                              null
+                                          ? 'N/A'
+                                          : profiledata?.viewProfileDetails
+                                                  ?.currentClub ??
+                                              '',
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
                                           color: Colors.white,
-                                        ),
-                                        SizedBox(width: 2.w),
-                                        Text(
-                                          "Current Club : ",
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Meta1",
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 13.sp),
-                                        ),
-                                        SizedBox(
-                                          width: 6.w,
-                                        ),
-                                        SizedBox(
-                                          width: 40.w,
-                                          child: Text(
-                                            profiledata?.viewProfileDetails
-                                                        ?.currentClub ==
-                                                    null
-                                                ? 'N/A'
-                                                : profiledata
-                                                        ?.viewProfileDetails
-                                                        ?.currentClub ??
-                                                    '',
-                                            maxLines: 3,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Meta1",
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 13.sp),
-                                          ),
-                                        ),
-                                      ],
+                                          fontFamily: "Meta1",
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13.sp),
                                     ),
-                                    SizedBox(
-                                      height: 3.h,
-                                    ),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.sports_baseball_outlined,
-                                          color: Colors.white,
-                                        ),
-                                        SizedBox(width: 2.w),
-                                        Text(
-                                          "Previous Club : ",
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Meta1",
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 13.sp),
-                                        ),
-                                        SizedBox(
-                                          width: 4.w,
-                                        ),
-                                        SizedBox(
-                                          width: 40.w,
-                                          child: Text(
-                                            profiledata?.viewProfileDetails
-                                                        ?.previousClub ==
-                                                    null
-                                                ? 'N/A'
-                                                : profiledata
-                                                        ?.viewProfileDetails
-                                                        ?.previousClub ??
-                                                    '',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Meta1",
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 13.sp),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 3.h,
-                                    ),
-                                  ],
-                                )
-                              : Container(),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 3.h,
+                              ),
+                            ],
+                          ),
                           Row(
                             children: [
                               Icon(
@@ -488,11 +439,11 @@ class _MyProfileState extends State<MyProfile> {
                                 width: 13.w,
                               ),
                               Text(
-                                profiledata?.viewProfileDetails?.experience ==
+                                profiledata?.viewProfileDetails?.injuries ==
                                         null
                                     ? 'N/A'
                                     : profiledata
-                                            ?.viewProfileDetails?.experience ??
+                                            ?.viewProfileDetails?.injuries ??
                                         '',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -528,11 +479,9 @@ class _MyProfileState extends State<MyProfile> {
                                 width: 13.w,
                               ),
                               Text(
-                                profiledata?.viewProfileDetails?.experience ==
-                                        null
+                                profiledata?.viewProfileDetails?.goals == null
                                     ? 'N/A'
-                                    : profiledata
-                                            ?.viewProfileDetails?.experience ??
+                                    : profiledata?.viewProfileDetails?.goals ??
                                         '',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -567,14 +516,13 @@ class _MyProfileState extends State<MyProfile> {
                                     fontSize: 13.sp),
                               ),
                               SizedBox(
-                                width: 17.w,
+                                width: 10.w,
                               ),
                               Text(
-                                profiledata?.viewProfileDetails?.occupation ==
-                                        ''
+                                profiledata?.viewProfileDetails?.position == ''
                                     ? 'N/A'
                                     : profiledata
-                                            ?.viewProfileDetails?.occupation ??
+                                            ?.viewProfileDetails?.position ??
                                         '',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -732,8 +680,9 @@ class _MyProfileState extends State<MyProfile> {
                                             ?.viewProfileDetails
                                             ?.images
                                             ?.length,
+
                                         gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                            SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1/1.4,
                                                 crossAxisCount: 1),
                                         itemBuilder: (contex, index) {
                                           return Container(
@@ -754,9 +703,7 @@ class _MyProfileState extends State<MyProfile> {
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                             downloadProgress) =>
-                                                        Container(
-                                                  height: 5.h,
-                                                  width: 10.w,
+                                                        Center(
                                                   child:
                                                       CircularProgressIndicator(
                                                           value:

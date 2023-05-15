@@ -40,6 +40,8 @@ class UserProfileDetails {
   String? previousClubImage;
   List<String>? images;
   String? video;
+  String? injuries;
+  String? goals;
   String? clubName;
   String? currentClubImage;
   int? connections;
@@ -64,6 +66,8 @@ class UserProfileDetails {
         this.previousClubImage,
         this.images,
         this.video,
+        this.injuries,
+        this.goals,
         this.clubName,
         this.currentClubImage,
         this.connections,
@@ -88,6 +92,8 @@ class UserProfileDetails {
     previousClubImage = json['previous_club_image'];
     images = json['images'].cast<String>();
     video = json['video'];
+    injuries = json['injuries'];
+    goals = json['goals'];
     clubName = json['club_name'];
     currentClubImage = json['current_club_image'];
     connections = json['connections'];
@@ -114,6 +120,8 @@ class UserProfileDetails {
     data['previous_club_image'] = this.previousClubImage;
     data['images'] = this.images;
     data['video'] = this.video;
+    data['injuries'] = this.injuries;
+    data['goals'] = this.goals;
     data['club_name'] = this.clubName;
     data['current_club_image'] = this.currentClubImage;
     data['connections'] = this.connections;

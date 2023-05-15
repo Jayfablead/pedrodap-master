@@ -531,6 +531,78 @@ class _FriendViewState extends State<FriendView> {
                                 ),
                           SizedBox(
                             height: 3.h,
+                          ), Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Injuries : ',
+                                    style: TextStyle(
+                                      fontSize: 4.w,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Meta1',
+                                      color: Color(0xffc7c6c6),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 1.h),
+                              Container(
+                                // height: 25.h,
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  userprofile!.userProfileDetails!.injuries ==
+                                      null
+                                      ? 'N/A'
+                                      : userprofile!
+                                      .userProfileDetails!.injuries
+                                      .toString(),
+                                  style: textStyle,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Goals & Ambitions : ',
+                                    style: TextStyle(
+                                      fontSize: 4.w,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Meta1',
+                                      color: Color(0xffc7c6c6),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 1.h),
+                              Container(
+                                // height: 25.h,
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  userprofile!.userProfileDetails!.goals ==
+                                      null
+                                      ? 'N/A'
+                                      : userprofile!
+                                      .userProfileDetails!.goals
+                                      .toString(),
+                                  style: textStyle,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 3.h,
                           ),
                           Column(
                             children: [

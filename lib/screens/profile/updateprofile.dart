@@ -30,6 +30,9 @@ class EditProfile extends StatefulWidget {
   String? pos;
   String? about;
   String? videos;
+  String? injuries;
+  String? goals;
+
 
   EditProfile(
       {super.key,
@@ -40,7 +43,9 @@ class EditProfile extends StatefulWidget {
       this.age,
       this.about,
       this.pos,
-      this.videos});
+      this.videos,
+      this.injuries,
+      this.goals,});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -61,6 +66,7 @@ class _EditProfileState extends State<EditProfile> {
   File? videofile;
   TextEditingController _exp = TextEditingController(text: "");
   TextEditingController _pos = TextEditingController(text: "");
+  TextEditingController _ocup = TextEditingController(text: "");
   TextEditingController _url = TextEditingController(text: "");
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isLoading = true;
@@ -82,10 +88,12 @@ class _EditProfileState extends State<EditProfile> {
     playerapi1();
     _user.text = widget.name.toString();
     _age.text = widget.age.toString();
-    _pos.text = widget.pos.toString();
+    _ocup.text = widget.pos.toString();
     _email.text = widget.email.toString();
     _about.text = widget.about.toString();
     _exp.text = widget.exp.toString();
+    _inj.text = widget.injuries.toString();
+    _goals.text = widget.goals.toString();
     setState(() {
       _controller = VideoPlayerController.network(
           profiledata?.viewProfileDetails?.video ?? '');
@@ -275,45 +283,12 @@ class _EditProfileState extends State<EditProfile> {
                       },
                       decoration:
                           inputDecoration(lable: "Age", icon: Icon(Icons.person_pin_circle_outlined,color: Colors.grey,)),
-                    ),
-                    SizedBox(
+                    ), SizedBox(
                       height: 4.h,
                     ),
                     TextFormField(
                       style: TextStyle(color: Colors.white),
-                      controller: _inj,
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Tell About Injuries";
-                        }
-                        return null;
-                      },
-                      decoration:
-                      inputDecoration(lable: "Injuries", icon: Icon(Icons.personal_injury_outlined,color: Colors.grey,)),
-                    ),
-                    SizedBox(
-                      height: 4.h,
-                    ),
-                    TextFormField(
-                      style: TextStyle(color: Colors.white),
-                      controller: _goals,
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Add Your Goals & Ambitions";
-                        }
-                        return null;
-                      },
-                      decoration:
-                      inputDecoration(lable: "Goals & Ambitions", icon: Icon(Icons.archive_outlined,color: Colors.grey,)),
-                    ),
-                    SizedBox(
-                      height: 4.h,
-                    ),
-                    TextFormField(
-                      style: TextStyle(color: Colors.white),
-                      controller: _pos,
+                      controller: _ocup,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -329,6 +304,39 @@ class _EditProfileState extends State<EditProfile> {
                               : "Ocupation ",
                           icon: Icon(Icons.person,color: Colors.grey,)),
                     ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _inj,maxLines: 3,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Tell About Injuries";
+                        }
+                        return null;
+                      },
+                      decoration:
+                      inputDecoration(lable: "Injuries", icon: Icon(Icons.personal_injury_outlined,color: Colors.grey,)),
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      controller: _goals,maxLines: 3,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Add Your Goals & Ambitions";
+                        }
+                        return null;
+                      },
+                      decoration:
+                      inputDecoration(lable: "Goals & Ambitions", icon: Icon(Icons.archive_outlined,color: Colors.grey,)),
+                    ),
+
                     SizedBox(
                       height: 4.h,
                     ),
@@ -430,7 +438,7 @@ class _EditProfileState extends State<EditProfile> {
                                         child: Image.file(
                                           imagefile1!,
                                           height: 20.h,
-                                          width: 60.w,
+                                          width: 50.w,
                                           fit: BoxFit.cover,
                                         ),
                                       )
@@ -444,7 +452,7 @@ class _EditProfileState extends State<EditProfile> {
                                       scrollDirection: Axis.horizontal,
                                       itemCount: profiledata?.viewProfileDetails?.images!.length,
                                       gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                          SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1/1.4,
                                               crossAxisCount: 1),
                                       itemBuilder: (contex, index) {
                                         return Stack(
@@ -487,7 +495,7 @@ class _EditProfileState extends State<EditProfile> {
                                               ),
                                             ),
                                             Positioned(
-                                              left: 39.w,
+                                              left: 52.w,
                                               bottom: 19.h,
                                               child: InkWell(
                                                 onTap: () {
@@ -937,7 +945,7 @@ class _EditProfileState extends State<EditProfile> {
                         Center(
                           child: InkWell(
                             onTap: () async {
-                           _user.text == '' || _pos.text == '' || _about.text == '' || _age.text == '' || _exp.text == '' ?buildErrorDialog(context, "Error", 'Please Add All Details'):   playerapi();
+                           _user.text == '' || _ocup.text == '' || _about.text == '' || _age.text == '' || _exp.text == '' ?buildErrorDialog(context, "Error", 'Please Add All Details'):   playerapi();
 
 
                             },
@@ -1081,8 +1089,11 @@ class _EditProfileState extends State<EditProfile> {
     data['name'] = _user.text.trim();
     data['experience'] = _exp.text.trim();
     data['age'] = _age.text.trim();
-    data['position'] = _pos.text.trim();
+    data['position'] = _ocup.text.trim();
     data['about'] = _about.text.trim();
+    // data['occupation'] = _ocup.text.trim();
+    data['injuries'] = _inj.text.trim();
+    data['goals'] = _goals.text.trim();
     data['profile_image'] = imagefile != null ? imagefile!.path : "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
     data['video'] = videofile != null ? videofile?.path ?? '' : "";

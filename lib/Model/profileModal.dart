@@ -40,6 +40,8 @@ class ViewProfileDetails {
   String? occupation;
   String? position;
   String? previousClub;
+  String? injuries;
+  String? goals;
   int? messagesCount;
   String? currentClub;
 
@@ -62,6 +64,8 @@ class ViewProfileDetails {
         this.occupation,
         this.position,
         this.previousClub,
+        this.injuries,
+        this.goals,
         this.messagesCount,
         this.currentClub});
 
@@ -84,6 +88,8 @@ class ViewProfileDetails {
     occupation = json['occupation'];
     position = json['position'];
     previousClub = json['previous_club'];
+    injuries = json['injuries'];
+    goals = json['goals'];
     messagesCount = json['messages_count'];
     currentClub = json['current_club'];
   }
@@ -108,6 +114,8 @@ class ViewProfileDetails {
     data['occupation'] = this.occupation;
     data['position'] = this.position;
     data['previous_club'] = this.previousClub;
+    data['injuries'] = this.injuries;
+    data['goals'] = this.goals;
     data['messages_count'] = this.messagesCount;
     data['current_club'] = this.currentClub;
     return data;

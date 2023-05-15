@@ -494,11 +494,11 @@ class _UserprofileState extends State<Userprofile> {
                                 // height: 25.h,
                                 width: MediaQuery.of(context).size.width,
                                 child: Text(
-                                  userprofile!.userProfileDetails!.experience ==
+                                  userprofile!.userProfileDetails!.injuries ==
                                       null
                                       ? 'N/A'
                                       : userprofile!
-                                      .userProfileDetails!.experience
+                                      .userProfileDetails!.injuries
                                       .toString(),
                                   style: textStyle,
                                 ),
@@ -531,11 +531,11 @@ class _UserprofileState extends State<Userprofile> {
                                 // height: 25.h,
                                 width: MediaQuery.of(context).size.width,
                                 child: Text(
-                                  userprofile!.userProfileDetails!.experience ==
+                                  userprofile!.userProfileDetails!.goals ==
                                       null
                                       ? 'N/A'
                                       : userprofile!
-                                      .userProfileDetails!.experience
+                                      .userProfileDetails!.goals
                                       .toString(),
                                   style: textStyle,
                                 ),
