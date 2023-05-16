@@ -964,36 +964,73 @@ class _FriendViewState extends State<FriendView> {
                               SizedBox(
                                 height: 1.h,
                               ),
-                              Container(
-                                height: 30.h,
+                              userprofile?.userProfileDetails
+                                  ?.vidCaption == '' || userprofile?.userProfileDetails
+                                  ?.vidCaption == null? Container():Container(
+                                height: 50.h,
                                 width: MediaQuery.of(context).size.width,
                                 padding: EdgeInsets.all(1.h),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15.0),
                                   // color: Colors.white.withOpacity(0.15),
                                 ),
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                  height: 30.h,
-                                  width: 70.w,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: userprofile?.userProfileDetails
-                                                      ?.video ==
-                                                  '' ||
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                      height: 25.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft:
+                                            Radius.circular(10),
+                                            topRight:
+                                            Radius.circular(10),
+                                          ),
+                                          child: userprofile?.userProfileDetails
+                                              ?.video ==
+                                              '' ||
                                               userprofile?.userProfileDetails
-                                                      ?.video ==
+                                                  ?.video ==
                                                   null
-                                          ? Center(
-                                              child: Text(
-                                                'No Video Available',
-                                                style: textStyle,
-                                              ),
-                                            )
-                                          : profplayer(
-                                              video: userprofile
-                                                  ?.userProfileDetails?.video,
-                                            )),
+                                              ? Center(
+                                            child: Text(
+                                              'No Video Available',
+                                              style: textStyle,
+                                            ),
+                                          )
+                                              : profplayer(
+                                            video: userprofile
+                                                ?.userProfileDetails?.video,
+                                          )),
+                                    ),SizedBox(
+                                      height: 0.3.h,
+                                    ),
+                                    Container(margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white
+                                            .withOpacity(0.15),
+                                        borderRadius:
+                                        BorderRadius.only(
+                                          bottomLeft:
+                                          Radius.circular(10),
+                                          bottomRight:
+                                          Radius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text(
+
+                                        userprofile?.userProfileDetails
+                                            ?.vidCaption ??"",
+                                        style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
+                                            color: Colors.white),
+                                      ),
+
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: EdgeInsets.all(1.5.w),
+                                    )
+                                  ],
                                 ),
                                 // child: Container(
                                 //   width: 70.w,

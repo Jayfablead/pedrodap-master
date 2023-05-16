@@ -1,8 +1,18 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:pedrodap/Model/feedimagesmodal.dart';
+import 'package:pedrodap/loader.dart';
 import 'package:sizer/sizer.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
+
+import '../Model/profileModal.dart';
+import '../Widget/buildErrorDialog.dart';
+import '../Widget/const.dart';
+import '../provider/authprovider.dart';
 
 class FeedImages extends StatefulWidget {
   const FeedImages({Key? key}) : super(key: key);
@@ -28,53 +38,142 @@ final List<String> images = [
   "http://m.gettywallpapers.com/wp-content/uploads/2020/01/Goku-Wallpaper-new-2023.jpg",
   "https://i.pinimg.com/originals/e0/66/08/e06608d9995f574d3ef5a19ae2ed243c.jpg",
 ];
+bool isloading = false;
 
 class _FeedImagesState extends State<FeedImages> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Feedimgapi();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: StaggeredGridView.countBuilder(
-          crossAxisCount: 4,
-          itemCount: images.length,
-          itemBuilder: (BuildContext context, int index) => Card(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),side: BorderSide(color: Colors.white)),
-            color: Colors.black,
-            margin: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.w),
-            child: Column(
-              children: <Widget>[
-                 SizedBox(height: 1.h),
-                Text(
-                  " Name (${index + 1}) ",
-                  style: TextStyle(color: Colors.white, fontSize: 11.sp,fontFamily: 'Meta1',letterSpacing: 1),
+    return commanScreen(
+      isLoading: isloading,
+      scaffold: Scaffold(
+        backgroundColor: Colors.black,
+        body: isloading
+            ? Container()
+            : Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Center(
+                  child: feedimages?.allImgPosts?.length == 0
+                      ? Container(
+                          height: 90.h,
+                          child: Text(
+                            'No Feed Available',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11.sp,
+                                fontFamily: 'Meta1',
+                                letterSpacing: 1),
+                          ),
+                        )
+                      : StaggeredGridView.countBuilder(
+                          crossAxisCount: 4,
+                          itemCount: feedimages?.allImgPosts?.length,
+                          itemBuilder: (BuildContext context, int index) =>
+                              Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                               ),
+                            color: Colors.black,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 1.h, horizontal: 1.w),
+                            child: Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10)),
+                                  child: CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feedimages
+                                            ?.allImgPosts?[index].imageUrl ??
+                                        '',
+                                    progressIndicatorBuilder:
+                                        (context, url, progress) =>
+                                            CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset(
+                                      'assets/noimg.jpeg',
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 0.2.h),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration:BoxDecoration(
+                                  color: Colors.white
+                                      .withOpacity(0.15),
+                                  borderRadius:
+                                  BorderRadius.only(
+                                    bottomLeft:
+                                    Radius.circular(10),
+                                    bottomRight:
+                                    Radius.circular(10),
+                                  ),
+                                ),
+
+                                    padding:  EdgeInsets.all(1.5.w),
+                                    child: Text(
+                                      feedimages
+                                              ?.allImgPosts?[index].imageCaption ??
+                                          '',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11.sp,
+                                          fontFamily: 'Meta1',
+                                          letterSpacing: 1),
+                                    ),
+                                  ),
+
+                                SizedBox(height: 1.h),
+                              ],
+                            ),
+                          ),
+                          staggeredTileBuilder: (int index) =>
+                              new StaggeredTile.fit(2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        ),
                 ),
-                SizedBox(height: 1.h),
-                ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: images[index],
-                  progressIndicatorBuilder:
-                      (context, url, progress) =>
-                      CircularProgressIndicator(),
-                  errorWidget: (context, url, error) =>
-                      Image.asset(
-                        'assets/noimg.jpeg',
-                        color: Colors.white,
-                      ),
-                ),),
-                SizedBox(height: 1.h),
-                Text(
-                  " Caption (${index + 1}) ",
-                  style: TextStyle(color: Colors.white, fontSize: 11.sp,fontFamily: 'Meta1',letterSpacing: 1),
-                ),
-                SizedBox(height: 1.h),
-              ],
-            ),
-          ),
-          staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-          mainAxisSpacing: 4.0,
-          crossAxisSpacing: 4.0,
-        ),
+              ),
       ),
     );
+  }
+
+  Feedimgapi() {
+    final Map<String, String> data = {};
+    data['action'] = 'feedPageApp';
+    data['uid'] = userData?.userData?.uid ?? '';
+
+    checkInternet().then((internet) async {
+      if (internet) {
+        authprovider().feedimgapi(data).then((Response response) async {
+          feedimages = FeedImagesModal.fromJson(json.decode(response.body));
+
+          if (response.statusCode == 200 && feedimages?.status == "success") {
+            setState(() {
+              isloading = false;
+            });
+
+            // buildErrorDialog(context, "", "Login Successfully");
+          } else {
+            setState(() {
+              isloading = false;
+            });
+          }
+        });
+      } else {
+        setState(() {
+          isloading = false;
+        });
+        buildErrorDialog(context, 'Error', "Internate Required");
+      }
+    });
   }
 }

@@ -13,6 +13,7 @@ import 'package:pedrodap/Widget/const.dart';
 import 'package:pedrodap/Widget/sharedpreferance.dart';
 import 'package:pedrodap/Widget/videoprof.dart';
 import 'package:pedrodap/loader.dart';
+import 'package:pedrodap/screens/profile/myconnections.dart';
 import 'package:pedrodap/screens/profile/updateprofile.dart';
 import 'package:pedrodap/screens/profile/userprofile%20screen.dart';
 import 'package:pedrodap/video.dart';
@@ -193,67 +194,71 @@ class _MyProfileState extends State<MyProfile> {
                                   SizedBox(
                                     height: 1.w,
                                   ),
-                                  Container(
-                                    width: 62.w,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              (connections?.totalConnectedUser)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                fontSize: 6.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Meta1",
-                                                color: Color(0xffffffff),
+                                  InkWell(onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyConnections(),));
+                                  },
+                                    child: Container(
+                                      width: 62.w,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Text(
+                                                (connections?.totalConnectedUser)
+                                                    .toString(),
+                                                style: TextStyle(
+                                                  fontSize: 6.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Meta1",
+                                                  color: Color(0xffffffff),
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              'Connections',
-                                              style: TextStyle(
-                                                fontSize: 3.5.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Meta1",
-                                                color: Color(0xffb4b4b4),
+                                              Text(
+                                                'Connections',
+                                                style: TextStyle(
+                                                  fontSize: 3.5.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Meta1",
+                                                  color: Color(0xffb4b4b4),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              profiledata?.viewProfileDetails
-                                                          ?.age ==
-                                                      null
-                                                  ? 'N/A'
-                                                  : profiledata
-                                                          ?.viewProfileDetails
-                                                          ?.age ??
-                                                      '',
-                                              style: TextStyle(
-                                                fontSize: 6.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Meta1",
-                                                color: Color(0xffffffff),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                profiledata?.viewProfileDetails
+                                                            ?.age ==
+                                                        null
+                                                    ? 'N/A'
+                                                    : profiledata
+                                                            ?.viewProfileDetails
+                                                            ?.age ??
+                                                        '',
+                                                style: TextStyle(
+                                                  fontSize: 6.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Meta1",
+                                                  color: Color(0xffffffff),
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              'Age',
-                                              style: TextStyle(
-                                                fontSize: 3.5.w,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Meta1",
-                                                color: Color(0xffb4b4b4),
+                                              Text(
+                                                'Age',
+                                                style: TextStyle(
+                                                  fontSize: 3.5.w,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Meta1",
+                                                  color: Color(0xffb4b4b4),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -796,35 +801,73 @@ class _MyProfileState extends State<MyProfile> {
                                 height: 1.h,
                               ),
                               Container(
-                                height: 30.h,
+                                height: 40.h,
                                 width: MediaQuery.of(context).size.width,
                                 padding: EdgeInsets.all(1.h),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15.0),
                                   // color: Colors.white.withOpacity(0.15),
                                 ),
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                  height: 30.h,
-                                  width: 70.w,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: profiledata?.viewProfileDetails
-                                                      ?.video ==
-                                                  '' ||
-                                              profiledata?.viewProfileDetails
-                                                      ?.video ==
-                                                  null
-                                          ? Center(
-                                              child: Text(
-                                                'No Video Available',
-                                                style: textStyle,
-                                              ),
-                                            )
-                                          : profplayer(
-                                              video: profiledata
-                                                  ?.viewProfileDetails?.video,
-                                            )),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                      height: 25.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: ClipRRect(
+                                          borderRadius:   BorderRadius.only(
+                                            topRight:
+                                            Radius.circular(10),
+                                            topLeft:
+                                            Radius.circular(10),
+                                          ),
+                                          child: profiledata?.viewProfileDetails
+                                                          ?.video ==
+                                                      '' ||
+                                                  profiledata?.viewProfileDetails
+                                                          ?.video ==
+                                                      null
+                                              ? Center(
+                                                  child: Text(
+                                                    'No Video Available',
+                                                    style: textStyle,
+                                                  ),
+                                                )
+                                              : profplayer(
+                                                  video: profiledata
+                                                      ?.viewProfileDetails?.video,
+                                                )),
+                                    ),SizedBox(
+                                      height: 0.3.h,
+                                    ),
+                                    profiledata?.viewProfileDetails
+                                        ?.vidCaption ==
+                                        ''||profiledata?.viewProfileDetails
+                                        ?.vidCaption ==
+                                        null?Container():Container(margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white
+                                            .withOpacity(0.15),
+                                        borderRadius:
+                                        BorderRadius.only(
+                                          bottomLeft:
+                                          Radius.circular(10),
+                                          bottomRight:
+                                          Radius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text(
+
+                                        profiledata?.viewProfileDetails?.vidCaption ?? '',
+                                        style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
+                                            color: Colors.white),
+                                      ),
+
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: EdgeInsets.all(1.5.w),
+                                    )
+                                  ],
                                 ),
                                 // child: Container(
                                 //   width: 70.w,

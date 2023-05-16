@@ -3,6 +3,7 @@ import 'package:pedrodap/Model/FitreplyModal.dart';
 import 'package:pedrodap/Model/ReqModal.dart';
 import 'package:pedrodap/Model/UserModal.dart';
 import 'package:pedrodap/Model/allplayersmodal.dart';
+import 'package:pedrodap/Model/feedimagesmodal.dart';
 import 'package:pedrodap/Model/fitnessmodal.dart';
 import 'package:pedrodap/Model/fittodoModal.dart';
 import 'package:pedrodap/Model/nutrimodal.dart';
@@ -73,5 +74,6 @@ ViewchatmsgModal? viewmsgs;
 searchUsersModal? searchuser;
 ReqModal? reqsts;
 Clubidmodal? cludid;
+FeedImagesModal? feedimages;
 
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';

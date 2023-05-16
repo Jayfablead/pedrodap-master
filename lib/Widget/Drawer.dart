@@ -13,6 +13,7 @@ import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:pedrodap/screens/profile/Chatpage.dart';
 import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:pedrodap/screens/profile/SleepSchedule.dart';
+import 'package:pedrodap/screens/profile/myconnections.dart';
 import 'package:pedrodap/screens/profile/myrequesteds.dart';
 import 'package:pedrodap/screens/profile/trainningnotes.dart';
 import 'package:pedrodap/screens/profile/viewfitnessprograme.dart';
@@ -386,6 +387,58 @@ class _drawerState extends State<drawer> {
                                       width: 2.w,
                                     ),
                                     Text("Pending Requests",
+                                        style: TextStyle(
+                                          fontSize: 4.w,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Meta1',
+                                          color: Colors.white,
+                                        )),
+                                  ],
+                                ),
+                                Icon(
+                                  Icons.chevron_right_rounded,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => MyConnections(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 6.w,
+                          ),
+                          Container(
+                            width: 66.w,
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person_pin,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Text("My Connections",
                                         style: TextStyle(
                                           fontSize: 4.w,
                                           fontWeight: FontWeight.w500,

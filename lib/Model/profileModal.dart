@@ -37,6 +37,7 @@ class ViewProfileDetails {
   List<String>? images;
   List<String>? imgCaption;
   String? video;
+  String? vidCaption;
   String? socialLink;
   String? occupation;
   String? position;
@@ -62,6 +63,7 @@ class ViewProfileDetails {
         this.images,
         this.imgCaption,
         this.video,
+        this.vidCaption,
         this.socialLink,
         this.occupation,
         this.position,
@@ -87,6 +89,7 @@ class ViewProfileDetails {
     images = json['images'].cast<String>();
     imgCaption = json['img_caption'].cast<String>();
     video = json['video'];
+    vidCaption = json['vid_caption'];
     socialLink = json['social_link'];
     occupation = json['occupation'];
     position = json['position'];
@@ -114,6 +117,7 @@ class ViewProfileDetails {
     data['images'] = this.images;
     data['img_caption'] = this.imgCaption;
     data['video'] = this.video;
+    data['vid_caption'] = this.vidCaption;
     data['social_link'] = this.socialLink;
     data['occupation'] = this.occupation;
     data['position'] = this.position;

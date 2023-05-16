@@ -59,6 +59,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _email = TextEditingController(text: "");
   TextEditingController _about = TextEditingController(text: "");
   TextEditingController _cap = TextEditingController(text: "");
+  TextEditingController _vidcap = TextEditingController(text: "");
   ImagePicker _picker = ImagePicker();
   ImagePicker _picker1 = ImagePicker();
   var imagesTemporary;
@@ -66,7 +67,9 @@ class _EditProfileState extends State<EditProfile> {
   File? imagefile1;
   File? videofile;
   String? Caps;
+  String? VidCaps;
   bool add = false;
+  bool addvid = false;
   TextEditingController _exp = TextEditingController(text: "");
   TextEditingController _pos = TextEditingController(text: "");
   TextEditingController _ocup = TextEditingController(text: "");
@@ -95,9 +98,9 @@ class _EditProfileState extends State<EditProfile> {
     _ocup.text = widget.pos.toString();
     _email.text = widget.email.toString();
     _about.text = widget.about.toString();
-    _exp.text = widget.exp.toString();
-    _inj.text = widget.injuries.toString();
-    _goals.text = widget.goals.toString();
+    _exp.text = widget.exp == null ?'':widget.exp.toString();
+    _inj.text = widget.injuries == null?'':widget.injuries.toString();
+    _goals.text = widget.goals == null?'':widget.goals.toString();
     setState(() {
       _controller = VideoPlayerController.network(
           profiledata?.viewProfileDetails?.video ?? '');
@@ -1092,13 +1095,139 @@ class _EditProfileState extends State<EditProfile> {
                               children: [
                                 InkWell(
                                   onTap: () async {
-                                    final video = await _picker.pickVideo(
-                                        source: ImageSource.gallery);
-                                    setState(() {
-                                      videofile = File(video!.path);
-                                    });
-                                    print(
-                                        '=-=-=-=-=-=-=-=-=-=-=-=-=-= $videofile =-=-=-=-=-=-=-=-==-=-=-');
+
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                            backgroundColor: Colors.black,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(20),
+                                                side: BorderSide(
+                                                    color: Colors.white)),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                InkWell(
+                                                    onTap: () async {
+                                                      final video = await _picker.pickVideo(
+                                                          source: ImageSource.gallery);
+                                                      setState(() {
+                                                        videofile = File(video!.path);
+                                                      });
+                                                      print(
+                                                          '=-=-=-=-=-=-=-=-=-=-=-=-=-= $videofile =-=-=-=-=-=-=-=-==-=-=-');
+                                                    },
+                                                    child: Container(
+                                                      alignment:
+                                                      Alignment.center,
+                                                      width: 50.w,
+                                                      padding:
+                                                      EdgeInsets.all(1.5.h),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(12),
+                                                          border: Border.all(
+                                                              color: Colors
+                                                                  .white)),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.add,
+                                                            color: Colors.white,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 2.w,
+                                                          ),
+                                                          Text(
+                                                            'Add Video',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                              'Meta1',
+                                                              color:
+                                                              Colors.white,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )),
+                                                SizedBox(
+                                                  height: 4.h,
+                                                ),
+                                                TextFormField(
+                                                  style: TextStyle(fontFamily: 'Meta1',
+                                                      color: Colors.white),
+                                                  controller: _vidcap,
+                                                  keyboardType:
+                                                  TextInputType.text,
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return "Add Caption";
+                                                    }
+                                                    return null;
+                                                  },
+                                                  decoration: inputDecoration(
+                                                      lable: "Add Caption",
+                                                      icon: Icon(
+                                                        Icons
+                                                            .closed_caption_off,
+                                                        color: Colors.grey,
+                                                      )),
+                                                ),
+                                                SizedBox(
+                                                  height: 4.h,
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        VidCaps = _vidcap.text == ''
+                                                            ? ''
+                                                            : _vidcap.text.trim();
+                                                        addvid = true;
+                                                      });
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Container(
+                                                      alignment:
+                                                      Alignment.center,
+                                                      width: 50.w,
+                                                      padding:
+                                                      EdgeInsets.all(1.5.h),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(20),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                        children: [
+                                                          Text(
+                                                            'Submit',
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                              fontFamily:
+                                                              'Meta1',
+                                                              color:
+                                                              Colors.black,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )),
+                                              ],
+                                            ));
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -1132,44 +1261,132 @@ class _EditProfileState extends State<EditProfile> {
                                 SizedBox(
                                   width: 2.w,
                                 ),
-                                (videofile != null)
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Container(
-                                          height: 20.h,
-                                          width: 50.w,
-                                          child: profplayer(
-                                            video: videofile?.path.toString(),
+                               addvid? (videofile != null)
+                                    ? Column(
+                                      children: [
+                                        ClipRRect(
+                                            borderRadius:  BorderRadius.only(
+                               topRight:
+                                   Radius.circular(10),
+                          topLeft:
+                          Radius.circular(10),
+                        ),
+                                            child: Container(
+                                              height: 20.h,
+                                              width: 70.w,
+                                              child: profplayer(
+                                                video: videofile?.path.toString(),
+                                              ),
+                                            ),
                                           ),
+                                        SizedBox(
+                                          height: 0.3.h,
                                         ),
-                                      )
-                                    : Container(),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white
+                                                .withOpacity(0.15),
+                                            borderRadius:
+                                            BorderRadius.only(
+                                              bottomLeft:
+                                              Radius.circular(10),
+                                              bottomRight:
+                                              Radius.circular(10),
+                                            ),
+                                          ),
+                                          child: Text(
+
+                                                VidCaps.toString(),
+                                            style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
+                                                color: Colors.white),
+                                          ),
+
+                                          width: 70.w,
+                                          padding: EdgeInsets.all(1.5.w),
+                                        )
+                                      ],
+                                    )
+                                    : Container(): Container(),
                                 SizedBox(
                                   width: 2.w,
                                 ),
                                 GestureDetector(
                                   onTap: () {},
                                   child: Container(
-                                    height: 20.h,
-                                    width: 60.w,
+                                    height: 30.h,
+                                    width: 70.w,
                                     child: Stack(
                                       children: [
-                                        ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            child: profiledata
-                                                        ?.viewProfileDetails
-                                                        ?.video ==
-                                                    null
-                                                ? Center(
-                                                    child: Container(),
-                                                  )
-                                                : VideoPlayer(_controller)),
-                                        widget.videos == null
+                                        Column(
+                                          children: [
+                                            SizedBox(  height: 20.h,
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius.only(
+                                                    topLeft:
+                                                    Radius.circular(10),
+                                                    topRight:
+                                                    Radius.circular(10),
+                                                  ),
+                                                  child: profiledata
+                                                              ?.viewProfileDetails
+                                                              ?.video ==
+                                                          null || profiledata
+                                                      ?.viewProfileDetails
+                                                      ?.video ==
+                                                      ''
+                                                      ? Center(
+                                                          child: Container(),
+                                                        )
+                                                      : VideoPlayer(_controller)),
+                                            ),
+                                            SizedBox(
+                                              height: 0.3.h,
+                                            ),
+                                            profiledata
+                                                ?.viewProfileDetails
+                                                ?.vidCaption ==
+                                                null || profiledata
+                                                ?.viewProfileDetails
+                                                ?.vidCaption ==
+                                                ''
+                                                ?Container(): Container(
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white
+                                                    .withOpacity(0.15),
+                                                borderRadius:
+                                                BorderRadius.only(
+                                                  bottomLeft:
+                                                  Radius.circular(10),
+                                                  bottomRight:
+                                                  Radius.circular(10),
+                                                ),
+                                              ),
+                                              child: Text(
+                                                profiledata ?.viewProfileDetails ?.vidCaption ??
+                                                    '',
+                                                style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
+                                                    color: Colors.white),
+                                              ),
+
+                                              width: 70.w,
+                                              padding: EdgeInsets.all(1.5.w),
+                                            )
+                                          ],
+                                        ),
+                                        profiledata
+                                            ?.viewProfileDetails
+                                            ?.video ==
+                                            null || profiledata
+                                            ?.viewProfileDetails
+                                            ?.video ==
+                                            ''
                                             ? Container()
                                             : Positioned(
-                                                left: 52.w,
-                                                bottom: 17.h,
+                                                left: 61.w,
+                                                bottom: 23.5.h,
                                                 child: InkWell(
                                                   onTap: () {
                                                     showDialog(
@@ -1509,6 +1726,7 @@ class _EditProfileState extends State<EditProfile> {
     data['injuries'] = _inj.text.trim();
     data['goals'] = _goals.text.trim();
     data['img_caption'] = Caps.toString();
+    data['vid_caption'] = VidCaps.toString();
     data['profile_image'] = imagefile != null ? imagefile!.path : "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
     data['video'] = videofile != null ? videofile?.path ?? '' : "";
