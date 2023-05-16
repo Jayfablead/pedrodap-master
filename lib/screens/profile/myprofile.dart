@@ -284,21 +284,17 @@ class _MyProfileState extends State<MyProfile> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => EditProfile(
-                                            about: profiledata!.viewProfileDetails!.about ??
+                                            about: profiledata?.viewProfileDetails?.about ??
                                                 '',
-                                            email: profiledata!.viewProfileDetails!.email ??
+                                            email: profiledata?.viewProfileDetails ?.email ??
                                                 '',
-                                            name: profiledata!.viewProfileDetails!.name ??
+                                            name: profiledata?.viewProfileDetails?.name ??
                                                 '',
-                                            exp: profiledata!
-                                                    .viewProfileDetails!
-                                                    .experience ??
+                                            exp: profiledata?.viewProfileDetails?.experience ??
                                                 '',
-                                            age: profiledata!.viewProfileDetails!.age ??
+                                            age: profiledata?.viewProfileDetails?.age ??
                                                 '',
-                                            pos: profiledata!
-                                                    .viewProfileDetails!
-                                                    .position ??
+                                            pos: profiledata?.viewProfileDetails?.position ??
                                                 '',
                                             profile: profiledata!
                                                     .viewProfileDetails!
@@ -350,7 +346,7 @@ class _MyProfileState extends State<MyProfile> {
                                         fontSize: 13.sp),
                                   ),
                                   SizedBox(
-                                    width: 6.w,
+                                    width: 3.w,
                                   ),
                                   SizedBox(
                                     width: 40.w,
@@ -396,7 +392,7 @@ class _MyProfileState extends State<MyProfile> {
                                     fontSize: 13.sp),
                               ),
                               SizedBox(
-                                width: 12.3.w,
+                                width: 3.w,
                               ),
                               Text(
                                 profiledata?.viewProfileDetails?.experience ==
@@ -436,7 +432,7 @@ class _MyProfileState extends State<MyProfile> {
                                     fontSize: 13.sp),
                               ),
                               SizedBox(
-                                width: 13.w,
+                                width: 3.w,
                               ),
                               Text(
                                 profiledata?.viewProfileDetails?.injuries ==
@@ -475,21 +471,25 @@ class _MyProfileState extends State<MyProfile> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 13.sp),
                               ),
+                              // SizedBox(
+                              //   width: 13.w,
+                              // ),
                               SizedBox(
-                                width: 13.w,
-                              ),
-                              Text(
-                                profiledata?.viewProfileDetails?.goals == null
-                                    ? 'N/A'
-                                    : profiledata?.viewProfileDetails?.goals ??
-                                        '',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Meta1",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 13.sp),
+                                width: 50.w,
+                                child: Text(
+                                  profiledata?.viewProfileDetails?.goals == null
+                                      ? 'N/A'
+                                      : profiledata
+                                              ?.viewProfileDetails?.goals ??
+                                          '',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Meta1",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 13.sp),
+                                ),
                               ),
                             ],
                           ),
@@ -516,7 +516,7 @@ class _MyProfileState extends State<MyProfile> {
                                     fontSize: 13.sp),
                               ),
                               SizedBox(
-                                width: 10.w,
+                                width: 3.w,
                               ),
                               Text(
                                 profiledata?.viewProfileDetails?.position == ''
@@ -658,7 +658,7 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                               Container(
                                 alignment: Alignment.center,
-                                height: 25.h,
+                                height: 30.h,
                                 width: MediaQuery.of(context).size.width,
                                 padding: EdgeInsets.all(1.h),
                                 decoration: BoxDecoration(
@@ -680,49 +680,87 @@ class _MyProfileState extends State<MyProfile> {
                                             ?.viewProfileDetails
                                             ?.images
                                             ?.length,
-
                                         gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1/1.4,
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                childAspectRatio: 1 / 1.4,
                                                 crossAxisCount: 1),
                                         itemBuilder: (contex, index) {
                                           return Container(
                                             alignment: Alignment.center,
                                             margin: EdgeInsets.symmetric(
                                                 horizontal: 1.w),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              child: CachedNetworkImage(
-                                                height: 20.h,
-                                                width: 60.w,
-                                                fit: BoxFit.cover,
-                                                imageUrl: profiledata
-                                                        ?.viewProfileDetails
-                                                        ?.images?[index] ??
-                                                    '',
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            downloadProgress) =>
-                                                        Center(
-                                                  child:
-                                                      CircularProgressIndicator(
+                                            child: Column(
+                                              children: [
+                                                ClipRRect(
+
+                                            borderRadius:
+                                            BorderRadius.only(
+                                                topLeft:
+                                                Radius.circular(10),
+                                            topRight:
+                                            Radius.circular(10),
+                                          ),
+                                                  child: CachedNetworkImage(
+                                                    height: 20.h,
+                                                    width: 70.w,
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: profiledata
+                                                            ?.viewProfileDetails
+                                                            ?.images?[index] ??
+                                                        '',
+                                                    progressIndicatorBuilder:
+                                                        (context, url,
+                                                                downloadProgress) =>
+                                                            Center(
+                                                      child: CircularProgressIndicator(
                                                           value:
                                                               downloadProgress
                                                                   .progress),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 2.h, bottom: 2.h),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Load Error!",
-                                                      style: textStyle,
+                                                    ),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 2.h,
+                                                          bottom: 2.h),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Load Error!",
+                                                          style: textStyle,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                                SizedBox(
+                                                  height: 0.3.h,
+                                                ),
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.15),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(10),
+                                                      bottomRight:
+                                                          Radius.circular(10),
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    profiledata
+                                                        ?.viewProfileDetails
+                                                        ?.imgCaption?[index] ??
+                                                        '',
+                                                    style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
+                                                        color: Colors.white),
+                                                  ),
+
+                                                  width: 70.w,
+                                                  padding: EdgeInsets.all(1.5.w),
+                                                )
+                                              ],
                                             ),
                                           );
                                         }),

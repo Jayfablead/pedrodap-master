@@ -65,6 +65,8 @@ class _EditProfileState extends State<EditProfile> {
   File? imagefile;
   File? imagefile1;
   File? videofile;
+  String? Caps;
+  bool add = false;
   TextEditingController _exp = TextEditingController(text: "");
   TextEditingController _pos = TextEditingController(text: "");
   TextEditingController _ocup = TextEditingController(text: "");
@@ -485,14 +487,16 @@ class _EditProfileState extends State<EditProfile> {
                                                           ),
                                                         ],
                                                       ),
-                                                    )),SizedBox(
+                                                    )),
+                                                SizedBox(
                                                   height: 4.h,
                                                 ),
                                                 TextFormField(
-                                                  style: TextStyle(color: Colors.white),
+                                                  style: TextStyle(fontFamily: 'Meta1',
+                                                      color: Colors.white),
                                                   controller: _cap,
-
-                                                  keyboardType: TextInputType.text,
+                                                  keyboardType:
+                                                      TextInputType.text,
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
                                                       return "Add Caption";
@@ -502,10 +506,56 @@ class _EditProfileState extends State<EditProfile> {
                                                   decoration: inputDecoration(
                                                       lable: "Add Caption",
                                                       icon: Icon(
-                                                        Icons.closed_caption_off,
+                                                        Icons
+                                                            .closed_caption_off,
                                                         color: Colors.grey,
                                                       )),
                                                 ),
+                                                SizedBox(
+                                                  height: 4.h,
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        Caps = _cap.text == ''
+                                                            ? ''
+                                                            : _cap.text.trim();
+                                                        add = true;
+                                                      });
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      width: 50.w,
+                                                      padding:
+                                                          EdgeInsets.all(1.5.h),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'Submit',
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  'Meta1',
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )),
                                               ],
                                             ));
                                       },
@@ -543,21 +593,58 @@ class _EditProfileState extends State<EditProfile> {
                                 SizedBox(
                                   width: 2.w,
                                 ),
-                                (imagefile1 != null)
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.file(
-                                          imagefile1!,
-                                          height: 20.h,
-                                          width: 50.w,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
+                                add
+                                    ? (imagefile1 != null)
+                                        ? Column(
+                                          children: [
+                                            ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.only(
+                                                  topRight:
+                                                  Radius.circular(10),
+                                                  topLeft:
+                                                  Radius.circular(10),
+                                                ),
+                                                child: Image.file(
+                                                  imagefile1!,
+                                                  height: 20.h,
+                                                  width: 70.w,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ), SizedBox(
+                                              height: 0.3.h,
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white
+                                                    .withOpacity(0.15),
+                                                borderRadius:
+                                                BorderRadius.only(
+                                                  bottomLeft:
+                                                  Radius.circular(10),
+                                                  bottomRight:
+                                                  Radius.circular(10),
+                                                ),
+                                              ),
+                                              child: Text(
+                                                Caps.toString(),
+                                                style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
+                                                    color: Colors.white),
+                                              ),
+
+                                              width: 70.w,
+                                              padding: EdgeInsets.all(1.5.w),
+                                            )
+                                          ],
+                                        )
+                                        : Container()
                                     : Container(),
                                 SizedBox(
                                   width: 2.w,
                                 ),
                                 SizedBox(
+                                  height: 30.h,
                                   width: 80.w,
                                   child: GridView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -571,187 +658,388 @@ class _EditProfileState extends State<EditProfile> {
                                         return Stack(
                                           children: [
                                             Container(
+                                              height: 30.h,
                                               alignment: Alignment.center,
                                               margin: EdgeInsets.symmetric(
                                                   horizontal: 1.w),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: CachedNetworkImage(
-                                                  height: 20.h,
-                                                  width: 60.w,
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: profiledata!
-                                                      .viewProfileDetails!
-                                                      .images![index]
-                                                      .toString(),
-                                                  progressIndicatorBuilder: (context,
-                                                          url,
-                                                          downloadProgress) =>
-                                                      CircularProgressIndicator(
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 2.h, bottom: 2.h),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Add Some Images",
-                                                        style: textStyle,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              left: 52.w,
-                                              bottom: 19.h,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    select = index;
-                                                  });
-                                                  var parts = profiledata!
-                                                      .viewProfileDetails!
-                                                      .images![index]
-                                                      .toString()
-                                                      .split('/');
-                                                  it = parts.last.toString();
-
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) =>
-                                                        AlertDialog(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20),
-                                                              side: BorderSide(
-                                                                  color: Colors
-                                                                      .white)),
-                                                      backgroundColor:
-                                                          Color.fromARGB(
-                                                              255, 0, 0, 0),
-                                                      scrollable: true,
-                                                      content: Text(
-                                                        'Are You Sure You Want to Delete this Image? This Can\'t be Undone .',
-                                                        style: TextStyle(
-                                                            fontSize: 11.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontFamily: 'Meta1',
-                                                            color:
-                                                                Colors.white),
-                                                      ),
-                                                      actions: [
-                                                        InkWell(
-                                                          onTap: () {
-                                                            imgdlt();
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Container(
-                                                            margin:
-                                                                EdgeInsets.all(
-                                                                    2.w),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    1.h),
-                                                            child: Text(
-                                                              'Yes',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      13.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .green),
-                                                            ),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    border:
-                                                                        Border
-                                                                            .all(
-                                                                      color: Colors
-                                                                          .green,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10)),
-                                                          ),
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Container(
-                                                            margin:
-                                                                EdgeInsets.all(
-                                                                    1.w),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    1.h),
-                                                            child: Text(
-                                                              'No',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      13.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontFamily:
-                                                                      'Meta1',
-                                                                  color: Colors
-                                                                      .red),
-                                                            ),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    border:
-                                                                        Border
-                                                                            .all(
-                                                                      color: Colors
-                                                                          .red,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10)),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.all(2.w),
-                                                  decoration: BoxDecoration(
+                                              child: Column(
+                                                children: [
+                                                  ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    color: Colors.black,
+                                                    BorderRadius.only(
+                                                      topLeft:
+                                                      Radius.circular(10),
+                                                      topRight:
+                                                      Radius.circular(10),
+                                                    ),
+                                                    child: CachedNetworkImage(
+                                                      height: 20.h,
+                                                      width: 70.w,
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: profiledata?.viewProfileDetails?.images![index]??'',
+                                                      progressIndicatorBuilder: (context,
+                                                              url,
+                                                              downloadProgress) =>
+                                                          CircularProgressIndicator(
+                                                              value:
+                                                                  downloadProgress
+                                                                      .progress),
+                                                      errorWidget:
+                                                          (context, url, error) =>
+                                                              Padding(
+                                                        padding: EdgeInsets.only(
+                                                            top: 2.h, bottom: 2.h),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Add Some Images",
+                                                            style: textStyle,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    color: Colors.white,
+                                                  SizedBox(
+                                                    height: 0.3.h,
                                                   ),
-                                                ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white
+                                                          .withOpacity(0.15),
+                                                      borderRadius:
+                                                      BorderRadius.only(
+                                                        bottomLeft:
+                                                        Radius.circular(10),
+                                                        bottomRight:
+                                                        Radius.circular(10),
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      profiledata
+                                                          ?.viewProfileDetails
+                                                          ?.imgCaption?[index] ??
+                                                          '',
+                                                      style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
+                                                          color: Colors.white),
+                                                    ),
+
+                                                    width: 70.w,
+                                                    padding: EdgeInsets.all(1.5.w),
+                                                  )
+                                                ],
                                               ),
                                             ),
+                                            (imagefile1 != null)
+                                                ? Positioned(
+                                                    left: 70.w,
+                                                    bottom: 26.h,
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          select = index;
+                                                        });
+                                                        var parts = profiledata!
+                                                            .viewProfileDetails!
+                                                            .images![index]
+                                                            .toString()
+                                                            .split('/');
+                                                        it = parts.last
+                                                            .toString();
+
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              AlertDialog(
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                                side: BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                            backgroundColor:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    0,
+                                                                    0),
+                                                            scrollable: true,
+                                                            content: Text(
+                                                              'Are You Sure You Want to Delete this Image? This Can\'t be Undone .',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      11.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontFamily:
+                                                                      'Meta1',
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            actions: [
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  imgdlt();
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  margin:
+                                                                      EdgeInsets
+                                                                          .all(2
+                                                                              .w),
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .h),
+                                                                  child: Text(
+                                                                    'Yes',
+                                                                    style: TextStyle(
+                                                                        fontSize: 13
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontFamily:
+                                                                            'Meta1',
+                                                                        color: Colors
+                                                                            .green),
+                                                                  ),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          border: Border
+                                                                              .all(
+                                                                            color:
+                                                                                Colors.green,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10)),
+                                                                ),
+                                                              ),
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  margin:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .w),
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .h),
+                                                                  child: Text(
+                                                                    'No',
+                                                                    style: TextStyle(
+                                                                        fontSize: 13
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontFamily:
+                                                                            'Meta1',
+                                                                        color: Colors
+                                                                            .red),
+                                                                  ),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          border: Border
+                                                                              .all(
+                                                                            color:
+                                                                                Colors.red,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10)),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.all(2.w),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                          color: Colors.black,
+                                                        ),
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : Positioned(
+                                                    left: 70.w,
+                                                    bottom: 26.h,
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          select = index;
+                                                        });
+                                                        var parts = profiledata!
+                                                            .viewProfileDetails!
+                                                            .images![index]
+                                                            .toString()
+                                                            .split('/');
+                                                        it = parts.last
+                                                            .toString();
+
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              AlertDialog(
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                                side: BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
+                                                            backgroundColor:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    0,
+                                                                    0),
+                                                            scrollable: true,
+                                                            content: Text(
+                                                              'Are You Sure You Want to Delete this Image? This Can\'t be Undone .',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      11.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontFamily:
+                                                                      'Meta1',
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            actions: [
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  imgdlt();
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  margin:
+                                                                      EdgeInsets
+                                                                          .all(2
+                                                                              .w),
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .h),
+                                                                  child: Text(
+                                                                    'Yes',
+                                                                    style: TextStyle(
+                                                                        fontSize: 13
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontFamily:
+                                                                            'Meta1',
+                                                                        color: Colors
+                                                                            .green),
+                                                                  ),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          border: Border
+                                                                              .all(
+                                                                            color:
+                                                                                Colors.green,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10)),
+                                                                ),
+                                                              ),
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  margin:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .w),
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(1
+                                                                              .h),
+                                                                  child: Text(
+                                                                    'No',
+                                                                    style: TextStyle(
+                                                                        fontSize: 13
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontFamily:
+                                                                            'Meta1',
+                                                                        color: Colors
+                                                                            .red),
+                                                                  ),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          border: Border
+                                                                              .all(
+                                                                            color:
+                                                                                Colors.red,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10)),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.all(2.w),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                          color: Colors.black,
+                                                        ),
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
                                           ],
                                         );
                                       }),
@@ -1218,10 +1506,9 @@ class _EditProfileState extends State<EditProfile> {
     data['age'] = _age.text.trim();
     data['position'] = _ocup.text.trim();
     data['about'] = _about.text.trim();
-    // data['occupation'] = _ocup.text.trim();
     data['injuries'] = _inj.text.trim();
     data['goals'] = _goals.text.trim();
-    data['img_caption'] = _cap.text.trim();
+    data['img_caption'] = Caps.toString();
     data['profile_image'] = imagefile != null ? imagefile!.path : "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
     data['video'] = videofile != null ? videofile?.path ?? '' : "";
