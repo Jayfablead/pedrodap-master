@@ -102,7 +102,8 @@ class _UserprofileState extends State<Userprofile> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(context,
+                                  Navigator.pushReplacement(
+                                    context,
                                     MaterialPageRoute(
                                       builder: (context) => DiscoverPage(),
                                     ),
@@ -476,7 +477,7 @@ class _UserprofileState extends State<Userprofile> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Injuries : ',
@@ -495,17 +496,16 @@ class _UserprofileState extends State<Userprofile> {
                                 width: MediaQuery.of(context).size.width,
                                 child: Text(
                                   userprofile!.userProfileDetails!.injuries ==
-                                      null
+                                          null
                                       ? 'N/A'
                                       : userprofile!
-                                      .userProfileDetails!.injuries
-                                      .toString(),
+                                          .userProfileDetails!.injuries
+                                          .toString(),
                                   style: textStyle,
                                 ),
                               ),
                             ],
                           ),
-
                           SizedBox(
                             height: 3.h,
                           ),
@@ -513,7 +513,7 @@ class _UserprofileState extends State<Userprofile> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Goals & Ambitions : ',
@@ -531,12 +531,11 @@ class _UserprofileState extends State<Userprofile> {
                                 // height: 25.h,
                                 width: MediaQuery.of(context).size.width,
                                 child: Text(
-                                  userprofile!.userProfileDetails!.goals ==
-                                      null
+                                  userprofile!.userProfileDetails!.goals == null
                                       ? 'N/A'
-                                      : userprofile!
-                                      .userProfileDetails!.goals
-                                      .toString(),
+                                      : userprofile!.userProfileDetails!.goals
+                                          .toString(),
+                                  maxLines: 3,
                                   style: textStyle,
                                 ),
                               ),
@@ -577,290 +576,116 @@ class _UserprofileState extends State<Userprofile> {
                             ],
                           ),
                           SizedBox(height: 1.h),
-                          userprofile!.userProfileDetails!.role == '2'
-                              ? Column(
-                                  children: [
-                                    Divider(
-                                      color: Colors.white54,
+                          Column(
+                            children: [
+                              Divider(
+                                color: Colors.white54,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Current Club',
+                                    style: TextStyle(
+                                      fontSize: 4.w,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Meta1',
+                                      color: Color(0xffc7c6c6),
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Current Club',
-                                          style: TextStyle(
-                                            fontSize: 4.w,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Meta1',
-                                            color: Color(0xffc7c6c6),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 1.h),
-                                    Container(
-                                      height: 28.h,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: 1,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 1.w, right: 2.w),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  width: 39.4.w,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(10),
-                                                        topRight:
-                                                            Radius.circular(10),
-                                                      ),
-                                                      color: Colors.black),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(10),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    10)),
-                                                    child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      imageUrl: userprofile!
-                                                          .userProfileDetails!
-                                                          .currentClubImage
-                                                          .toString(),
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  progress) =>
-                                                              CircularProgressIndicator(),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          Image.asset(
-                                                        'assets/icons/user.png',
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 1.h),
+                              Container(
+                                height: 28.h,
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 1,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 1.w, right: 2.w),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: 39.4.w,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
                                                 ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomRight:
-                                                          Radius.circular(10),
-                                                      bottomLeft:
-                                                          Radius.circular(10),
-                                                    ),
-                                                    color: Color(0xff514d56),
-                                                  ),
-                                                  alignment: Alignment.center,
-                                                  height: 6.h,
-                                                  width: 39.4.w,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    2.w),
-                                                        child: Text(
-                                                          userprofile!
-                                                              .userProfileDetails!
-                                                              .clubName
-                                                              .toString(),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 11.sp,
-                                                              fontFamily:
-                                                                  'Meta1',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ),
-                                                    ],
+                                                color: Colors.black),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight:
+                                                      Radius.circular(10)),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: userprofile!
+                                                    .userProfileDetails!
+                                                    .currentClubImage
+                                                    .toString(),
+                                                progressIndicatorBuilder: (context,
+                                                        url, progress) =>
+                                                    CircularProgressIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Image.asset(
+                                                  'assets/icons/club.png',
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(10),
+                                                bottomLeft: Radius.circular(10),
+                                              ),
+                                              color: Colors.white
+                                                  .withOpacity(0.15),
+                                            ),
+                                            alignment: Alignment.center,
+                                            height: 5.h,
+                                            width: 39.4.w,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 2.w),
+                                                  child: Text(
+                                                    userprofile!
+                                                        .userProfileDetails!
+                                                        .clubName
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 11.sp,
+                                                        fontFamily: 'Meta1',
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    userprofile?.userProfileDetails
-                                                ?.previousClub ==
-                                            null
-                                        ? Container()
-                                        : Column(
-                                            children: [
-                                              SizedBox(height: 1.h),
-                                              Divider(
-                                                color: Colors.white54,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    'Previous Club',
-                                                    style: TextStyle(
-                                                      fontSize: 4.w,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily: 'Meta1',
-                                                      color: Color(0xffc7c6c6),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(height: 1.h),
-                                              Container(
-                                                height: 28.h,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                child: ListView.builder(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount: img1.length,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 1.w,
-                                                          right: 2.w),
-                                                      child: Column(
-                                                        children: [
-                                                          Container(
-                                                            width: 39.4.w,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .only(
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              10),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              10),
-                                                                    ),
-                                                                    color: Colors
-                                                                        .black),
-                                                            child: ClipRRect(
-                                                              borderRadius: BorderRadius.only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          10),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          10)),
-                                                              child:
-                                                                  CachedNetworkImage(
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                                imageUrl: userprofile!
-                                                                    .userProfileDetails!
-                                                                    .previousClubImage
-                                                                    .toString(),
-                                                                progressIndicatorBuilder:
-                                                                    (context,
-                                                                            url,
-                                                                            progress) =>
-                                                                        CircularProgressIndicator(),
-                                                                errorWidget: (context,
-                                                                        url,
-                                                                        error) =>
-                                                                    Image.asset(
-                                                                  'assets/icons/club.png',
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                bottomRight:
-                                                                    Radius
-                                                                        .circular(
-                                                                            10),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        10),
-                                                              ),
-                                                              color: Color(
-                                                                  0xff514d56),
-                                                            ),
-                                                            alignment: Alignment
-                                                                .center,
-                                                            height: 6.h,
-                                                            width: 39.4.w,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceEvenly,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsets
-                                                                      .symmetric(
-                                                                          horizontal:
-                                                                              2.w),
-                                                                  child: Text(
-                                                                    userprofile!.userProfileDetails!.previousClub ==
-                                                                            null
-                                                                        ? 'N/A'
-                                                                        : userprofile!
-                                                                            .userProfileDetails!
-                                                                            .previousClub
-                                                                            .toString(),
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize: 11
-                                                                            .sp,
-                                                                        fontFamily:
-                                                                            'Meta1',
-                                                                        fontWeight:
-                                                                            FontWeight.w500),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                            ],
                                           ),
-                                    SizedBox(height: 1.h),
-                                  ],
-                                )
-                              : Container(),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 1.h),
+                            ],
+                          ),
                           Divider(
                             color: Colors.white54,
                           ),
@@ -886,7 +711,7 @@ class _UserprofileState extends State<Userprofile> {
                               ),
                               Container(
                                 alignment: Alignment.center,
-                                height: 25.h,
+                                height: 30.h,
                                 width: MediaQuery.of(context).size.width,
                                 padding: EdgeInsets.all(1.h),
                                 decoration: BoxDecoration(
@@ -910,48 +735,90 @@ class _UserprofileState extends State<Userprofile> {
                                             ?.length,
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
+                                                childAspectRatio: 1 / 1.4,
                                                 crossAxisCount: 1),
                                         itemBuilder: (contex, index) {
                                           return Container(
                                             alignment: Alignment.center,
                                             margin: EdgeInsets.symmetric(
                                                 horizontal: 1.w),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              child: CachedNetworkImage(
-                                                height: 20.h,
-                                                width: 60.w,
-                                                fit: BoxFit.cover,
-                                                imageUrl: userprofile
-                                                        ?.userProfileDetails
-                                                        ?.images?[index] ??
-                                                    '',
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            downloadProgress) =>
-                                                        Container(
-                                                  height: 5.h,
-                                                  width: 10.w,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 2.h, bottom: 2.h),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Load Error!",
-                                                      style: textStyle,
+                                            child: Column(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    topRight:
+                                                        Radius.circular(10),
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    height: 20.h,
+                                                    width: 70.w,
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: userprofile
+                                                            ?.userProfileDetails
+                                                            ?.images?[index] ??
+                                                        '',
+                                                    progressIndicatorBuilder:
+                                                        (context, url,
+                                                                downloadProgress) =>
+                                                            Container(
+                                                      height: 5.h,
+                                                      width: 10.w,
+                                                      child: Center(
+                                                        child: CircularProgressIndicator(
+                                                            value:
+                                                                downloadProgress
+                                                                    .progress),
+                                                      ),
+                                                    ),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 2.h,
+                                                          bottom: 2.h),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Load Error!",
+                                                          style: textStyle,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                                SizedBox(
+                                                  height: 0.3.h,
+                                                ),
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.15),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(10),
+                                                      bottomRight:
+                                                          Radius.circular(10),
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    userprofile
+                                                            ?.userProfileDetails
+                                                            ?.imgCaption?[index] ??
+                                                        '',
+                                                    style: TextStyle(
+                                                        fontFamily: 'Meta1',
+                                                        fontSize: 12.sp,
+                                                        color: Colors.white),
+                                                  ),
+                                                  width: 70.w,
+                                                  padding:
+                                                      EdgeInsets.all(1.5.w),
+                                                )
+                                              ],
                                             ),
                                           );
                                         }),
