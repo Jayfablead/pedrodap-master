@@ -1726,7 +1726,7 @@ class _EditProfileState extends State<EditProfile> {
     data['injuries'] = _inj.text.trim();
     data['goals'] = _goals.text.trim();
     data['img_caption'] = Caps.toString();
-    data['vid_caption'] = VidCaps == '' || VidCaps == null ?widget.vidcaptions.toString():VidCaps.toString();
+    data['vid_caption'] = profiledata?.viewProfileDetails?.vidCaption == '' || profiledata?.viewProfileDetails?.vidCaption == null ?widget.vidcaptions.toString():VidCaps.toString();
     data['profile_image'] = imagefile != null ? imagefile!.path : "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
     data['video'] = videofile != null ? videofile?.path ?? '' : "";

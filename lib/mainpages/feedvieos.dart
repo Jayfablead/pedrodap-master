@@ -47,7 +47,17 @@ class _FeedVideosState extends State<FeedVideos> {
       scaffold: Scaffold(
         backgroundColor: Colors.black,
         body: isloading?Container():Center(
-          child: ListView.builder(
+          child: feedvid?.allVideosFetch?.length == 0 ||feedvid?.allVideosFetch == null?Container(alignment: Alignment.center,
+            height: 80.h,
+            child: Text(
+              'No Feed Available',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.sp,
+                  fontFamily: 'Meta1',
+                  letterSpacing: 1),
+            ),
+          ):ListView.builder(
               itemBuilder: (context, index) {
                 return Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 4.w),

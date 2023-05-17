@@ -26,6 +26,7 @@ import '../Model/clubidmodal.dart';
 import '../Model/connectedModal.dart';
 import '../Model/feedvidmodal.dart';
 import '../Model/fetchplayermodal.dart';
+import '../Model/filtermodal.dart';
 import '../Model/pendingreqModal.dart';
 import '../Model/searchchatModal.dart';
 import '../Model/searchfittModal.dart';
@@ -77,5 +78,6 @@ ReqModal? reqsts;
 Clubidmodal? cludid;
 FeedImagesModal? feedimages;
 feedVidsModal? feedvid;
+Filtermodal? filter;
 
 const String baseUrl = 'https://footbal.fableadtechnolabs.com/api/ajax.php';
