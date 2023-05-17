@@ -305,6 +305,7 @@ class _MyProfileState extends State<MyProfile> {
                                                     .viewProfileDetails!
                                                     .profilePic ??
                                                 '',
+                                            vidcaptions: profiledata?.viewProfileDetails?.vidCaption ?? '',
                                             videos: profiledata?.viewProfileDetails?.video == '' ||
                                                     profiledata?.viewProfileDetails?.video == null
                                                 ? null

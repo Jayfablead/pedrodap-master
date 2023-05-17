@@ -32,6 +32,7 @@ class EditProfile extends StatefulWidget {
   String? videos;
   String? injuries;
   String? goals;
+  String? vidcaptions;
 
   EditProfile({
     super.key,
@@ -45,6 +46,7 @@ class EditProfile extends StatefulWidget {
     this.videos,
     this.injuries,
     this.goals,
+    this.vidcaptions,
   });
 
   @override
@@ -101,6 +103,8 @@ class _EditProfileState extends State<EditProfile> {
     _exp.text = widget.exp == null ?'':widget.exp.toString();
     _inj.text = widget.injuries == null?'':widget.injuries.toString();
     _goals.text = widget.goals == null?'':widget.goals.toString();
+    _vidcap.text = widget.vidcaptions.toString();
+    VidCaps = widget.vidcaptions;
     setState(() {
       _controller = VideoPlayerController.network(
           profiledata?.viewProfileDetails?.video ?? '');
@@ -896,12 +900,8 @@ class _EditProfileState extends State<EditProfile> {
                                                         setState(() {
                                                           select = index;
                                                         });
-                                                        var parts = profiledata!
-                                                            .viewProfileDetails!
-                                                            .images![index]
-                                                            .toString()
-                                                            .split('/');
-                                                        it = parts.last
+                                                        var parts = profiledata?.viewProfileDetails?.images?[index].toString().split('/');
+                                                        it = parts?.last
                                                             .toString();
 
                                                         showDialog(
@@ -1726,7 +1726,7 @@ class _EditProfileState extends State<EditProfile> {
     data['injuries'] = _inj.text.trim();
     data['goals'] = _goals.text.trim();
     data['img_caption'] = Caps.toString();
-    data['vid_caption'] = VidCaps.toString();
+    data['vid_caption'] = VidCaps == '' || VidCaps == null ?widget.vidcaptions.toString():VidCaps.toString();
     data['profile_image'] = imagefile != null ? imagefile!.path : "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
     data['video'] = videofile != null ? videofile?.path ?? '' : "";

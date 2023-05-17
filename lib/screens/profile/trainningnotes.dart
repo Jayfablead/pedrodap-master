@@ -110,9 +110,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -147,7 +145,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                     ),
                                   )
                                 : SizedBox(
-                                    height: 68.h,
+                                    height: 66.h,
                                     child: ListView.builder(
                                       itemCount: alltrainings
                                           ?.allTrainingsAndNotes?.length,
@@ -170,7 +168,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   SizedBox(
-                                                    width: 89.w,
+                                                    width: 87.w,
                                                     child: Row(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment

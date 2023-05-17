@@ -59,14 +59,14 @@ class _FeedImagesState extends State<FeedImages> {
             : Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
                 child: Center(
-                  child: feedimages?.allImgPosts?.length == 0
-                      ? Container(
-                          height: 90.h,
+                  child: feedimages?.allImgPosts?.length == 0 || feedimages?.allImgPosts == null
+                      ? Container(alignment: Alignment.center,
+                          height: 80.h,
                           child: Text(
                             'No Feed Available',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 11.sp,
+                                fontSize: 14.sp,
                                 fontFamily: 'Meta1',
                                 letterSpacing: 1),
                           ),

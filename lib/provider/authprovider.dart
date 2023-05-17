@@ -59,6 +59,20 @@ class authprovider with ChangeNotifier {
     responseJson = responses(response);
     return responseJson;
   }
+  Future<http.Response> feedvidapi(Map<String, String> bodyData) async {
+    const url = '$baseUrl/?action=feedVideoPageApp';
+    var responseJson;
+    final response = await http
+        .post(Uri.parse(url), body: bodyData, headers: headers)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        throw const SocketException('Something went wrong');
+      },
+    );
+    responseJson = responses(response);
+    return responseJson;
+  }
 
   Future<http.Response> clubsnameapi(Map<String, String> bodyData) async {
     const url = '$baseUrl/?action=all_clubs_for_signup';
