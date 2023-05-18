@@ -127,13 +127,16 @@ class _drawerState extends State<drawer> {
                           SizedBox(
                             width: 7.w,
                           ),
-                          Text(
-                            profiledata?.viewProfileDetails?.name ?? '',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15.sp,
-                                fontFamily: 'Meta1',
-                                fontWeight: FontWeight.w600),
+                          SizedBox(width: 45.w,
+                            child: Text(
+                              profiledata?.viewProfileDetails?.name ?? '',
+                              maxLines: 3,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15.sp,
+                                  fontFamily: 'Meta1',
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ],
                       ),

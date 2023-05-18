@@ -31,16 +31,23 @@ class SearchData {
   String? uid;
   String? clubName;
   String? name;
+  String? occupation;
   int? connections;
   String? profilePic;
 
   SearchData(
-      {this.uid, this.clubName, this.name, this.connections, this.profilePic});
+      {this.uid,
+        this.clubName,
+        this.name,
+        this.occupation,
+        this.connections,
+        this.profilePic});
 
   SearchData.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
     clubName = json['club_name'];
     name = json['name'];
+    occupation = json['occupation'];
     connections = json['connections'];
     profilePic = json['profile_pic'];
   }
@@ -50,6 +57,7 @@ class SearchData {
     data['uid'] = this.uid;
     data['club_name'] = this.clubName;
     data['name'] = this.name;
+    data['occupation'] = this.occupation;
     data['connections'] = this.connections;
     data['profile_pic'] = this.profilePic;
     return data;

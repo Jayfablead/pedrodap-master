@@ -213,21 +213,23 @@ class _PendingRequestPageState extends State<PendingRequestPage> {
                                                     SizedBox(
                                                       width: 4.w,
                                                     ),
-                                                    Text(
-                                                      pending
-                                                              ?.pendingRequests?[
-                                                                  index]
-                                                              .name ??
-                                                          '',
-                                                      maxLines: 2,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: 'Meta1',
-                                                          color: Colors.white),
+                                                    SizedBox(width: 40.w,
+                                                      child: Text(
+                                                        pending
+                                                                ?.pendingRequests?[
+                                                                    index]
+                                                                .name ??
+                                                            '',
+                                                        maxLines: 3,
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                        style: TextStyle(
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily: 'Meta1',
+                                                            color: Colors.white),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),

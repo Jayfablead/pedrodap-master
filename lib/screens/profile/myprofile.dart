@@ -18,6 +18,7 @@ import 'package:pedrodap/screens/profile/updateprofile.dart';
 import 'package:pedrodap/screens/profile/userprofile%20screen.dart';
 import 'package:pedrodap/video.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../Model/connectedModal.dart';
@@ -52,6 +53,16 @@ late VideoPlayerController _controller;
 bool isPlay = false;
 int lenght = 0;
 bool _isExpanded = false;
+final Uri _url = Uri.parse(profiledata?.viewProfileDetails?.socialLink ?? '');
+
+Future<void> _launchUrl() async {
+  if (await launchUrl(
+    _url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw Exception('Could not launch $_url');
+  }
+}
 
 class _MyProfileState extends State<MyProfile> {
   @override
@@ -194,9 +205,15 @@ class _MyProfileState extends State<MyProfile> {
                                   SizedBox(
                                     height: 1.w,
                                   ),
-                                  InkWell(onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyConnections(),));
-                                  },
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyConnections(),
+                                          ));
+                                    },
                                     child: Container(
                                       width: 62.w,
                                       child: Row(
@@ -206,7 +223,8 @@ class _MyProfileState extends State<MyProfile> {
                                           Column(
                                             children: [
                                               Text(
-                                                (connections?.totalConnectedUser)
+                                                (connections
+                                                        ?.totalConnectedUser)
                                                     .toString(),
                                                 style: TextStyle(
                                                   fontSize: 6.w,
@@ -268,16 +286,40 @@ class _MyProfileState extends State<MyProfile> {
                           SizedBox(
                             height: 3.w,
                           ),
-                          Text(
-                            profiledata?.viewProfileDetails?.email == null
-                                ? 'N/A'
-                                : profiledata?.viewProfileDetails?.email ?? '',
-                            style: TextStyle(
-                              fontSize: 4.5.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Meta1",
-                              color: Colors.white,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                profiledata?.viewProfileDetails?.email == null
+                                    ? 'N/A'
+                                    : profiledata?.viewProfileDetails?.email ??
+                                        '',
+                                style: TextStyle(
+                                  fontSize: 4.5.w,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "Meta1",
+                                  color: Colors.white,
+                                ),
+                              ),
+                              profiledata?.viewProfileDetails?.socialLink ==
+                                          null ||
+                                      profiledata?.viewProfileDetails
+                                              ?.socialLink ==
+                                          'null'
+                                  ? Container()
+                                  : InkWell(
+                                      onTap: () {
+                                        _launchUrl();
+                                        print(profiledata
+                                            ?.viewProfileDetails?.socialLink);
+                                      },
+                                      child: Container(
+                                        height: 3.3.h,
+                                        width: 7.w,
+                                        child: Image.asset('assets/insta.png'),
+                                      ),
+                                    )
+                            ],
                           ),
                           SizedBox(
                             height: 2.h,
@@ -291,7 +333,7 @@ class _MyProfileState extends State<MyProfile> {
                                         builder: (context) => EditProfile(
                                             about: profiledata?.viewProfileDetails?.about ??
                                                 '',
-                                            email: profiledata?.viewProfileDetails ?.email ??
+                                            email: profiledata?.viewProfileDetails?.email ??
                                                 '',
                                             name: profiledata?.viewProfileDetails?.name ??
                                                 '',
@@ -305,7 +347,10 @@ class _MyProfileState extends State<MyProfile> {
                                                     .viewProfileDetails!
                                                     .profilePic ??
                                                 '',
-                                            vidcaptions: profiledata?.viewProfileDetails?.vidCaption ?? '',
+                                            vidcaptions: profiledata
+                                                    ?.viewProfileDetails
+                                                    ?.vidCaption ??
+                                                '',
                                             videos: profiledata?.viewProfileDetails?.video == '' ||
                                                     profiledata?.viewProfileDetails?.video == null
                                                 ? null
@@ -404,8 +449,47 @@ class _MyProfileState extends State<MyProfile> {
                                 profiledata?.viewProfileDetails?.experience ==
                                         null
                                     ? 'N/A'
+                                    : '${profiledata?.viewProfileDetails?.experience} Yrs Old',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.personal_injury_outlined,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 2.w),
+                              Text(
+                                userData?.userData?.role == '2'
+                                    ? "Position : "
+                                    : "Occupation :",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Meta1",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp),
+                              ),
+                              SizedBox(
+                                width: 3.w,
+                              ),
+                              Text(
+                                profiledata?.viewProfileDetails?.position == ''
+                                    ? 'N/A'
                                     : profiledata
-                                            ?.viewProfileDetails?.experience ??
+                                            ?.viewProfileDetails?.position ??
                                         '',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -502,47 +586,6 @@ class _MyProfileState extends State<MyProfile> {
                           SizedBox(
                             height: 3.h,
                           ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.personal_injury_outlined,
-                                color: Colors.white,
-                              ),
-                              SizedBox(width: 2.w),
-                              Text(
-                                userData?.userData?.role == '2'
-                                    ? "Position : "
-                                    : "Occupation :",
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Meta1",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 13.sp),
-                              ),
-                              SizedBox(
-                                width: 3.w,
-                              ),
-                              Text(
-                                profiledata?.viewProfileDetails?.position == ''
-                                    ? 'N/A'
-                                    : profiledata
-                                            ?.viewProfileDetails?.position ??
-                                        '',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Meta1",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 13.sp),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3.h,
-                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -580,7 +623,7 @@ class _MyProfileState extends State<MyProfile> {
                                             ? Text(
                                                 'N/A',
                                                 style: textStyle,
-                                                maxLines: _isExpanded ? 10 : 1,
+                                                maxLines: _isExpanded ? 20 : 1,
                                                 overflow: _isExpanded
                                                     ? TextOverflow.visible
                                                     : TextOverflow.ellipsis,
@@ -589,7 +632,7 @@ class _MyProfileState extends State<MyProfile> {
                                                 profiledata?.viewProfileDetails
                                                         ?.about ??
                                                     '',
-                                                maxLines: _isExpanded ? 10 : 2,
+                                                maxLines: _isExpanded ? 20 : 2,
                                                 overflow: _isExpanded
                                                     ? TextOverflow.visible
                                                     : TextOverflow.ellipsis,
@@ -603,7 +646,7 @@ class _MyProfileState extends State<MyProfile> {
                               SizedBox(
                                 height: 1.h,
                               ),
-                              lenght <= 40
+                              lenght <= 35
                                   ? Container()
                                   : Container(
                                       padding: EdgeInsets.only(
@@ -698,14 +741,13 @@ class _MyProfileState extends State<MyProfile> {
                                             child: Column(
                                               children: [
                                                 ClipRRect(
-
-                                            borderRadius:
-                                            BorderRadius.only(
-                                                topLeft:
-                                                Radius.circular(10),
-                                            topRight:
-                                            Radius.circular(10),
-                                          ),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    topRight:
+                                                        Radius.circular(10),
+                                                  ),
                                                   child: CachedNetworkImage(
                                                     height: 20.h,
                                                     width: 70.w,
@@ -756,15 +798,17 @@ class _MyProfileState extends State<MyProfile> {
                                                   ),
                                                   child: Text(
                                                     profiledata
-                                                        ?.viewProfileDetails
-                                                        ?.imgCaption?[index] ??
+                                                            ?.viewProfileDetails
+                                                            ?.imgCaption?[index] ??
                                                         '',
-                                                    style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
+                                                    style: TextStyle(
+                                                        fontFamily: 'Meta1',
+                                                        fontSize: 12.sp,
                                                         color: Colors.white),
                                                   ),
-
                                                   width: 70.w,
-                                                  padding: EdgeInsets.all(1.5.w),
+                                                  padding:
+                                                      EdgeInsets.all(1.5.w),
                                                 )
                                               ],
                                             ),
@@ -812,20 +856,20 @@ class _MyProfileState extends State<MyProfile> {
                                 child: Column(
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 1.w),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 1.w),
                                       height: 25.h,
                                       width: MediaQuery.of(context).size.width,
                                       child: ClipRRect(
-                                          borderRadius:   BorderRadius.only(
-                                            topRight:
-                                            Radius.circular(10),
-                                            topLeft:
-                                            Radius.circular(10),
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
                                           ),
                                           child: profiledata?.viewProfileDetails
                                                           ?.video ==
                                                       '' ||
-                                                  profiledata?.viewProfileDetails
+                                                  profiledata
+                                                          ?.viewProfileDetails
                                                           ?.video ==
                                                       null
                                               ? Center(
@@ -836,38 +880,47 @@ class _MyProfileState extends State<MyProfile> {
                                                 )
                                               : profplayer(
                                                   video: profiledata
-                                                      ?.viewProfileDetails?.video,
+                                                      ?.viewProfileDetails
+                                                      ?.video,
                                                 )),
-                                    ),SizedBox(
+                                    ),
+                                    SizedBox(
                                       height: 0.3.h,
                                     ),
                                     profiledata?.viewProfileDetails
-                                        ?.vidCaption ==
-                                        ''||profiledata?.viewProfileDetails
-                                        ?.vidCaption ==
-                                        null?Container():Container(margin: EdgeInsets.symmetric(horizontal: 1.w),
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white
-                                            .withOpacity(0.15),
-                                        borderRadius:
-                                        BorderRadius.only(
-                                          bottomLeft:
-                                          Radius.circular(10),
-                                          bottomRight:
-                                          Radius.circular(10),
-                                        ),
-                                      ),
-                                      child: Text(
-
-                                        profiledata?.viewProfileDetails?.vidCaption ?? '',
-                                        style: TextStyle(fontFamily: 'Meta1',fontSize: 12.sp,
-                                            color: Colors.white),
-                                      ),
-
-                                      width: MediaQuery.of(context).size.width,
-                                      padding: EdgeInsets.all(1.5.w),
-                                    )
+                                                    ?.vidCaption ==
+                                                '' ||
+                                            profiledata?.viewProfileDetails
+                                                    ?.vidCaption ==
+                                                null
+                                        ? Container()
+                                        : Container(
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 1.w),
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white
+                                                  .withOpacity(0.15),
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(10),
+                                                bottomRight:
+                                                    Radius.circular(10),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              profiledata?.viewProfileDetails
+                                                      ?.vidCaption ??
+                                                  '',
+                                              style: TextStyle(
+                                                  fontFamily: 'Meta1',
+                                                  fontSize: 12.sp,
+                                                  color: Colors.white),
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            padding: EdgeInsets.all(1.5.w),
+                                          )
                                   ],
                                 ),
                                 // child: Container(
