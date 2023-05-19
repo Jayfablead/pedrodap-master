@@ -70,7 +70,7 @@ class _FeedVideosState extends State<FeedVideos> {
                           videoPlayerController:
                               VideoPlayerController.network(feedvid?.allVideosFetch?[index].videoUrl ?? ''),
                           looping: true,
-                          autoplay: true,
+                          autoplay: false,
                         ),
                         SizedBox(height: 0.2.h),
                         Container(
