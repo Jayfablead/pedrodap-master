@@ -1753,9 +1753,11 @@ class _EditProfileState extends State<EditProfile> {
     data['goals'] = _goals.text.trim();
     data['social_link'] = _url.text.trim();
     data['img_caption'] = Caps.toString();
-    data['vid_caption'] = VidCaps == '' || VidCaps == null?VidCaps == profiledata?.viewProfileDetails?.vidCaption
-        ? profiledata?.viewProfileDetails?.vidCaption ?? ''
-        : VidCaps.toString(): VidCaps.toString();
+    data['vid_caption'] = VidCaps == '' || VidCaps == null
+        ? VidCaps == profiledata?.viewProfileDetails?.vidCaption
+            ? profiledata?.viewProfileDetails?.vidCaption ?? ''
+            : VidCaps.toString()
+        : VidCaps.toString();
     data['profile_image'] = imagefile != null ? imagefile!.path : "";
     data['images[]'] = imagefile1 != null ? imagefile1!.path : "";
     data['video'] = videofile != null ? videofile?.path ?? '' : "";
@@ -1776,10 +1778,14 @@ class _EditProfileState extends State<EditProfile> {
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
+            if (response.statusCode == 200 && profiledata?.status == "fail") {
+              buildErrorDialog(
+                  context, 'Error', "please use only valid instagram url");
+            }
             EasyLoading.showError(' Profile error!');
             setState(() {});
           }
-        });
+               });
       } else {
         setState(() {});
         buildErrorDialog(context, 'Error', "Internate Required");

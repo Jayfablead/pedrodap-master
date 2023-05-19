@@ -55,12 +55,13 @@ int lenght = 0;
 bool _isExpanded = false;
 final Uri _url = Uri.parse(profiledata?.viewProfileDetails?.socialLink ?? '');
 
-Future<void> _launchUrl() async {
+Future<void> _launchUrl(context) async {
   if (await launchUrl(
     _url,
     mode: LaunchMode.externalApplication,
   )) {
-    throw Exception('Could not launch $_url');
+  } else {
+    throw buildErrorDialog(context, 'Error', "Please Use Valid Url");
   }
 }
 
@@ -309,7 +310,12 @@ class _MyProfileState extends State<MyProfile> {
                                   ? Container()
                                   : InkWell(
                                       onTap: () {
-                                        _launchUrl();
+                                        _launchUrl(context);
+
+                                        // launchUrl(
+                                        //   Uri.parse(profiledata?.viewProfileDetails?.socialLink ?? ''),
+                                        //   mode: LaunchMode.externalApplication,
+                                        // );
                                         print(profiledata
                                             ?.viewProfileDetails?.socialLink);
                                       },
