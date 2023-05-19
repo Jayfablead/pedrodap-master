@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
@@ -147,17 +148,9 @@ class _EditProfileState extends State<EditProfile> {
                   height: 4.h,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      ),
-                    ),
+
                     Text(
                       'Edit Profile',
                       style: TextStyle(
@@ -167,15 +160,7 @@ class _EditProfileState extends State<EditProfile> {
                         color: Color(0xffeaeaea),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        _scaffoldKey.currentState?.openDrawer();
-                      },
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.white,
-                      ),
-                    ),
+
                   ],
                 ),
                 SizedBox(
@@ -257,7 +242,8 @@ class _EditProfileState extends State<EditProfile> {
                     TextFormField(
                       style: TextStyle(color: Colors.white),
                       controller: _url,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.url,
+                      // inputFormatters:[FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))],
                       decoration: inputDecoration(
                         lable: "Instagram URL",
                         icon: Icon(Icons.connect_without_contact),
@@ -377,7 +363,7 @@ class _EditProfileState extends State<EditProfile> {
                       style: TextStyle(color: Colors.white),
                       maxLines: 5,
                       controller: _about,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.url,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Enter About Detials";
@@ -1655,7 +1641,7 @@ class _EditProfileState extends State<EditProfile> {
       focusColor: Colors.black,
       filled: true,
       errorStyle: TextStyle(
-        color: Colors.red,
+        color: Colors.red, fontFamily: "Meta1",
       ),
       // hintText: "jjhbf",
       label: Padding(

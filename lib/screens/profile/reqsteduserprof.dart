@@ -13,6 +13,7 @@ import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:pedrodap/screens/profile/myrequesteds.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Model/allplayersmodal.dart';
 import '../../Model/pendingreqModal.dart';
@@ -60,7 +61,17 @@ List tem1 = [
   'France Fc',
 ];
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+final Uri _url = Uri.parse(userprofile?.userProfileDetails?.socialLink ?? '');
 
+Future<void> _launchUrl(context) async {
+  if (await launchUrl(
+    _url,
+    mode: LaunchMode.externalApplication,
+  )) {
+  } else {
+    throw buildErrorDialog(context, 'Error', "Please Use Valid Url");
+  }
+}
 List name = ['Lionel Messi', 'Cr 7', 'Suarez', 'Lewandoski'];
 List time = ['3Hrs Ago', '1 Day Ago', '1 Month Ago', '2 Month Ago'];
 List prof = [
@@ -255,14 +266,41 @@ class _RqstdUserState extends State<RqstdUser> {
                             color: Colors.white54,
                           ),
                           SizedBox(height: 1.h),
-                          Text(
-                            userprofile!.userProfileDetails!.email.toString(),
-                            style: TextStyle(
-                              fontSize: 4.5.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Meta1',
-                              color: Colors.white,
-                            ),
+                          Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                userprofile!.userProfileDetails!.email.toString(),
+                                style: TextStyle(
+                                  fontSize: 4.5.w,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Meta1',
+                                  color: Colors.white,
+                                ),
+                              ),
+                              userprofile?.userProfileDetails?.socialLink ==
+                                  null ||
+                                  userprofile?.userProfileDetails
+                                      ?.socialLink ==
+                                      'null'
+                                  ? Container()
+                                  : InkWell(
+                                onTap: () {
+                                  _launchUrl(context);
+
+                                  // launchUrl(
+                                  //   Uri.parse(profiledata?.viewProfileDetails?.socialLink ?? ''),
+                                  //   mode: LaunchMode.externalApplication,
+                                  // );
+                                  print(profiledata
+                                      ?.viewProfileDetails?.socialLink);
+                                },
+                                child: Container(
+                                  height: 3.3.h,
+                                  width: 7.w,
+                                  child: Image.asset('assets/insta.png'),
+                                ),
+                              )
+                            ],
                           ),
                           SizedBox(height: 3.h),
                           Row(

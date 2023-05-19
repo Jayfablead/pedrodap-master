@@ -12,6 +12,7 @@ import 'package:pedrodap/provider/authprovider.dart';
 import 'package:pedrodap/screens/profile/DiscoverPage.dart';
 import 'package:pedrodap/screens/profile/messagePage.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Model/allplayersmodal.dart';
 import '../../Model/userprofileModal.dart';
@@ -27,7 +28,17 @@ class Userprofile extends StatefulWidget {
   @override
   State<Userprofile> createState() => _UserprofileState();
 }
+final Uri _url = Uri.parse(userprofile?.userProfileDetails?.socialLink ?? '');
 
+Future<void> _launchUrl(context) async {
+  if (await launchUrl(
+    _url,
+    mode: LaunchMode.externalApplication,
+  )) {
+  } else {
+    throw buildErrorDialog(context, 'Error', "Please Use Valid Url");
+  }
+}
 List img = [
   'assets/psg.png',
 ];
@@ -253,14 +264,41 @@ class _UserprofileState extends State<Userprofile> {
                             color: Colors.white54,
                           ),
                           SizedBox(height: 1.h),
-                          Text(
-                            userprofile!.userProfileDetails!.email.toString(),
-                            style: TextStyle(
-                              fontSize: 4.5.w,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Meta1',
-                              color: Colors.white,
-                            ),
+                          Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                userprofile!.userProfileDetails!.email.toString(),
+                                style: TextStyle(
+                                  fontSize: 4.5.w,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Meta1',
+                                  color: Colors.white,
+                                ),
+                              ),
+                              userprofile?.userProfileDetails?.socialLink ==
+                                  null ||
+                                  userprofile?.userProfileDetails
+                                      ?.socialLink ==
+                                      'null'
+                                  ? Container()
+                                  : InkWell(
+                                onTap: () {
+                                  _launchUrl(context);
+
+                                  // launchUrl(
+                                  //   Uri.parse(profiledata?.viewProfileDetails?.socialLink ?? ''),
+                                  //   mode: LaunchMode.externalApplication,
+                                  // );
+                                  print(profiledata
+                                      ?.viewProfileDetails?.socialLink);
+                                },
+                                child: Container(
+                                  height: 3.3.h,
+                                  width: 7.w,
+                                  child: Image.asset('assets/insta.png'),
+                                ),
+                              )
+                            ],
                           ),
                           SizedBox(height: 3.h),
                           Row(

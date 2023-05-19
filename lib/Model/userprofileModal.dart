@@ -42,6 +42,7 @@ class UserProfileDetails {
   List<String>? imgCaption;
   String? video;
   String? vidCaption;
+  String? socialLink;
   String? injuries;
   String? goals;
   String? clubName;
@@ -70,6 +71,7 @@ class UserProfileDetails {
         this.imgCaption,
         this.video,
         this.vidCaption,
+        this.socialLink,
         this.injuries,
         this.goals,
         this.clubName,
@@ -98,6 +100,7 @@ class UserProfileDetails {
     imgCaption = json['img_caption'].cast<String>();
     video = json['video'];
     vidCaption = json['vid_caption'];
+    socialLink = json['social_link'];
     injuries = json['injuries'];
     goals = json['goals'];
     clubName = json['club_name'];
@@ -128,6 +131,7 @@ class UserProfileDetails {
     data['img_caption'] = this.imgCaption;
     data['video'] = this.video;
     data['vid_caption'] = this.vidCaption;
+    data['social_link'] = this.socialLink;
     data['injuries'] = this.injuries;
     data['goals'] = this.goals;
     data['club_name'] = this.clubName;
