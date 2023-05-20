@@ -125,9 +125,9 @@ class _drawerState extends State<drawer> {
                           //     backgroundImage: NetworkImage(
                           //         "https://icdn.football-espana.net/wp-content/uploads/2022/06/Neymar-Junior2.jpeg")),
                           SizedBox(
-                            width: 7.w,
+                            width: 3.w,
                           ),
-                          SizedBox(width: 45.w,
+                          SizedBox(width: 48.w,
                             child: Text(
                               profiledata?.viewProfileDetails?.name ?? '',
                               maxLines: 3,
@@ -150,58 +150,58 @@ class _drawerState extends State<drawer> {
                   ),
                   Column(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => FeedPage(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 6.w,
-                              ),
-                              Container(
-                                width: 66.w,
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.image_outlined,
-                                          color: Colors.white,
-                                        ),
-                                        SizedBox(
-                                          width: 2.w,
-                                        ),
-                                        Text("Feed Page",
-                                            style: TextStyle(
-                                              fontSize: 4.w,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: 'Meta1',
-                                              color: Colors.white,
-                                            )),
-                                      ],
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right_rounded,
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Navigator.of(context).push(
+                      //       MaterialPageRoute(
+                      //         builder: (context) => FeedPage(),
+                      //       ),
+                      //     );
+                      //   },
+                      //   child: Container(
+                      //     child: Row(
+                      //       children: [
+                      //         SizedBox(
+                      //           width: 6.w,
+                      //         ),
+                      //         Container(
+                      //           width: 66.w,
+                      //           child: Row(
+                      //             mainAxisAlignment:
+                      //             MainAxisAlignment.spaceBetween,
+                      //             children: [
+                      //               Row(
+                      //                 children: [
+                      //                   Icon(
+                      //                     Icons.image_outlined,
+                      //                     color: Colors.white,
+                      //                   ),
+                      //                   SizedBox(
+                      //                     width: 2.w,
+                      //                   ),
+                      //                   Text("Feed Page",
+                      //                       style: TextStyle(
+                      //                         fontSize: 4.w,
+                      //                         fontWeight: FontWeight.w500,
+                      //                         fontFamily: 'Meta1',
+                      //                         color: Colors.white,
+                      //                       )),
+                      //                 ],
+                      //               ),
+                      //               Icon(
+                      //                 Icons.chevron_right_rounded,
+                      //                 color: Colors.white,
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 2.h,
+                      // ),
                       InkWell(
                         onTap: () {
                           Navigator.of(context).push(
@@ -565,7 +565,7 @@ class _drawerState extends State<drawer> {
                       ),
                     ),
                   ),
-                  userData!.userData!.role == '2'
+                  userData?.userData?.role == '2'
                       ? Column(
                           children: [
                             SizedBox(
@@ -893,7 +893,7 @@ class _drawerState extends State<drawer> {
   playerapi() {
     final Map<String, String> data = {};
     data['action'] = 'view_profile_details';
-    data['uid'] = userData!.userData!.uid.toString();
+    data['uid'] = userData?.userData?.uid ?? '';
 
     checkInternet().then((internet) async {
       if (internet) {

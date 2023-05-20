@@ -733,7 +733,7 @@ class _FriendViewState extends State<FriendView> {
                               ),
                               SizedBox(height: 1.h),
                               Container(
-                                height: 28.h,
+                                height: 30.h,
                                 width: MediaQuery.of(context).size.width,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
@@ -794,7 +794,7 @@ class _FriendViewState extends State<FriendView> {
                                               color: Colors.white.withOpacity(0.15),
                                             ),
                                             alignment: Alignment.center,
-                                            height: 5.h,
+                                            height: 8.h,
                                             width: 39.4.w,
                                             child: Column(
                                               mainAxisAlignment:

@@ -395,7 +395,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     if (_formKey.currentState!.validate()) {
       final Map<String, String> data = {};
       data['old_password'] = _oldpass.text.trim().toString();
-      data['uid'] = userData!.userData!.uid.toString();
+      data['uid'] = userData?.userData?.uid ?? '';
       data['confirm_password'] = _confirmpass.text.trim().toString();
       data['new_password'] = _newpass.text.trim().toString();
       data['action'] = 'change_password_app';
@@ -433,7 +433,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                 buildErrorDialog(context, "Error", "Password Dosen't Match");
               }
             } else {
-              buildErrorDialog(
+              setState(() {
+                _oldpass.text = '';
+
+                _newpass.text = '';
+                _confirmpass.text = '';
+              });
+              buildErrorDialog2(
                   context, "Error", "Please Enter Valid Old Password");
             }
           });

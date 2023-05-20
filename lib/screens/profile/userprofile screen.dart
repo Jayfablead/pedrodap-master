@@ -689,7 +689,7 @@ class _UserprofileState extends State<Userprofile> {
                                                   .withOpacity(0.15),
                                             ),
                                             alignment: Alignment.center,
-                                            height: 5.h,
+                                            height: 3.4.h,
                                             width: 39.4.w,
                                             child: Column(
                                               mainAxisAlignment:
@@ -721,7 +721,7 @@ class _UserprofileState extends State<Userprofile> {
                                   },
                                 ),
                               ),
-                              SizedBox(height: 1.h),
+                              SizedBox(height: 2.h),
                             ],
                           ),
                           Divider(

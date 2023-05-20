@@ -114,7 +114,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>url_launcher_ios.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>video_player_avfoundation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>wakelock.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

@@ -28,7 +28,8 @@ DoneDialog(BuildContext context, String title, String contant,
     ),
     onPressed: () {
       // if (callback == null) {
-      Navigator.pushReplacement(context,
+      Navigator.pushReplacement(
+        context,
         MaterialPageRoute(
           builder: (context) => loginpage(),
         ),
@@ -87,7 +88,11 @@ DoneDialog(BuildContext context, String title, String contant,
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return cupertinoAlertDialog;
+        return Theme(
+            data: ThemeData(
+                dialogBackgroundColor: Colors.black,
+                dialogTheme: DialogTheme(backgroundColor: Colors.black)),
+            child: cupertinoAlertDialog);
       },
     );
   }

@@ -191,24 +191,26 @@ class _MyRequestedState extends State<MyRequested> {
                                                         SizedBox(
                                                           width: 4.w,
                                                         ),
-                                                        Text(
-                                                          reqsts
-                                                                  ?.allRequestedUsers?[
-                                                                      index]
-                                                                  .name ??
-                                                              '',
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: TextStyle(
-                                                              fontSize: 14.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontFamily:
-                                                                  'Meta1',
-                                                              color:
-                                                                  Colors.white),
+                                                        SizedBox(width: 45.w,
+                                                          child: Text(
+                                                            reqsts
+                                                                    ?.allRequestedUsers?[
+                                                                        index]
+                                                                    .name ??
+                                                                '',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow
+                                                                .ellipsis,
+                                                            style: TextStyle(
+                                                                fontSize: 14.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily:
+                                                                    'Meta1',
+                                                                color:
+                                                                    Colors.white),
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
