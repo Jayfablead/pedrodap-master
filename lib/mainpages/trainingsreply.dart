@@ -371,7 +371,7 @@ class _TrainingReplyPageState extends State<TrainingReplyPage> {
                 isloading = false;
               });
 
-              await SaveDataLocal.saveLogInData(userData!);
+
 
               Fluttertoast.showToast(
                 msg: 'Reply Added Successfully',
@@ -418,7 +418,7 @@ class _TrainingReplyPageState extends State<TrainingReplyPage> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 

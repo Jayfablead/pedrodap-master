@@ -867,7 +867,7 @@ class _ViewNutritionState extends State<ViewNutrition> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -936,7 +936,7 @@ class _ViewNutritionState extends State<ViewNutrition> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
@@ -982,7 +982,7 @@ class _ViewNutritionState extends State<ViewNutrition> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {

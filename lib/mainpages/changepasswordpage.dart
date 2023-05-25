@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
+import 'package:pedrodap/Model/chgange%20modal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
 import 'package:sizer/sizer.dart';
 
@@ -399,21 +400,19 @@ class _ChangePasswordState extends State<ChangePassword> {
       data['confirm_password'] = _confirmpass.text.trim().toString();
       data['new_password'] = _newpass.text.trim().toString();
       data['action'] = 'change_password_app';
+      print(data);
 
       checkInternet().then((internet) async {
         if (internet) {
           authprovider().Changepassapi(data).then((Response response) async {
-            userData = UserModal.fromJson(json.decode(response.body));
-            if (response.statusCode == 200 && userData?.status == "success") {
+            changepassmdl = changepassmodal.fromJson(json.decode(response.body));
+            print(response.statusCode);
+            print(response.body);
+            print(userData?.userData?.uid);
+            if (response.statusCode == 200 && changepassmdl?.status == "success") {
               setState(() {
                 // isLoading = false;
               });
-              await SaveDataLocal.saveLogInData(userData!);
-              print("++++++++++++++++++++" + "${userData?.status}");
-
-              // buildErrorDialog(context, "", "Login Successfully");
-
-              if (_newpass.text == _confirmpass.text) {
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => loginpage()));
                 _oldpass.text = '';
@@ -429,9 +428,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     fontSize: 16.0);
                 print("================================================" +
                     "ouch");
-              } else {
-                buildErrorDialog(context, "Error", "Password Dosen't Match");
-              }
+
             } else {
               setState(() {
                 _oldpass.text = '';
@@ -439,7 +436,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 _newpass.text = '';
                 _confirmpass.text = '';
               });
-              buildErrorDialog2(
+              buildErrorDialog(
                   context, "Error", "Please Enter Valid Old Password");
             }
           });

@@ -1706,7 +1706,7 @@ class _EditProfileState extends State<EditProfile> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData?.userData?.uid);
 
@@ -1758,7 +1758,7 @@ class _EditProfileState extends State<EditProfile> {
             EasyLoading.showSuccess(' Profile Updated Successfully!');
             SuccessDialog(context, 'Done', 'Profile Changed Successfully');
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -1791,7 +1791,7 @@ class _EditProfileState extends State<EditProfile> {
 
           if (response.statusCode == 200 && profiledata?.status == "success") {
             update();
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -1820,7 +1820,7 @@ class _EditProfileState extends State<EditProfile> {
 
           if (response.statusCode == 200 && profiledata?.status == "success") {
             update();
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -1853,7 +1853,7 @@ class _EditProfileState extends State<EditProfile> {
               _about.text = profiledata!.viewProfileDetails!.about.toString();
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 

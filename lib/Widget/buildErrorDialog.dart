@@ -83,9 +83,12 @@ buildErrorDialog(BuildContext context, String title, String contant,
       context: context,
       builder: (BuildContext context) {
         return Theme(
-            data: ThemeData(
-                dialogBackgroundColor: Colors.black,
-                dialogTheme: DialogTheme(backgroundColor: Colors.black)),child: cupertinoAlertDialog);
+            data:ThemeData.dark(),
+            // ThemeData(
+            //     dialogBackgroundColor: Colors.black,
+            //     dialogTheme: DialogTheme(backgroundColor: Colors.black)),
+
+            child: cupertinoAlertDialog);
       },
     );
   }
@@ -169,9 +172,11 @@ buildErrorDialog2(BuildContext context, String title, String contant,
       context: context,
       builder: (BuildContext context) {
         return Theme(
-            data: ThemeData(
-                dialogBackgroundColor: Colors.black,
-                dialogTheme: DialogTheme(backgroundColor: Colors.black)),child: cupertinoAlertDialog);
+            data: ThemeData.dark(),
+            // ThemeData(
+            //     dialogBackgroundColor: Colors.black,
+            //     dialogTheme: DialogTheme(backgroundColor: Colors.black)),
+            child: cupertinoAlertDialog);
       },
     );
   }

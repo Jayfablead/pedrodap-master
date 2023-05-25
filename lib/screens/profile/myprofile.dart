@@ -620,7 +620,7 @@ class _MyProfileState extends State<MyProfile> {
                                                     ?.about ==
                                                 ''
                                             ? 36.w
-                                            : 55.w,
+                                            : 54.w,
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 2.w),
                                         child: profiledata?.viewProfileDetails
@@ -737,7 +737,7 @@ class _MyProfileState extends State<MyProfile> {
                                             ?.length,
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
-                                                childAspectRatio: 1 / 1.4,
+                                                childAspectRatio: 1 / 1.25,
                                                 crossAxisCount: 1),
                                         itemBuilder: (contex, index) {
                                           return Container(
@@ -971,20 +971,22 @@ class _MyProfileState extends State<MyProfile> {
     data['action'] = 'view_profile_details';
     data['uid'] = userData?.userData?.uid ?? '';
 
+
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().profileapi(data).then((Response response) async {
           profiledata = ProfileModal.fromJson(json.decode(response.body));
-
-          if (response.statusCode == 200 && userData?.status == "success") {
+          print(profiledata?.status);
+          print(response.statusCode);
+          if (response.statusCode == 200 && profiledata?.status == "success") {
             setState(() {
               _about.text = profiledata?.viewProfileDetails?.about ?? '';
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
-            print(userData?.status);
-            print(userData?.userData?.uid);
+            //
+            // print(userData?.status);
+            // print(userData?.userData?.uid);
             String? dis = profiledata?.viewProfileDetails?.about.toString();
             lenght = dis!.length == 0 ? 0 : dis.length;
 
@@ -1007,7 +1009,7 @@ class _MyProfileState extends State<MyProfile> {
   connectionsapi() {
     final Map<String, String> data = {};
     data['action'] = 'connected_users';
-    data['uid'] = userData!.userData!.uid.toString();
+    data['uid'] = (userData?.userData?.uid).toString();
 
     checkInternet().then((internet) async {
       if (internet) {
@@ -1018,7 +1020,7 @@ class _MyProfileState extends State<MyProfile> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");

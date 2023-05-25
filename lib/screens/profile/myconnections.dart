@@ -451,7 +451,7 @@ class _MyConnectionsState extends State<MyConnections> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");
@@ -490,7 +490,7 @@ class _MyConnectionsState extends State<MyConnections> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");

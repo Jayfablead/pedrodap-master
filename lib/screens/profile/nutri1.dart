@@ -1198,7 +1198,7 @@ class _NutriState extends State<Nutri> {
                 isloading = false;
               });
 
-              await SaveDataLocal.saveLogInData(userData!);
+
               print(userData?.status);
               print(userData!.userData!.uid);
               viewtodo();
@@ -1533,7 +1533,7 @@ class _NutriState extends State<Nutri> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -1585,7 +1585,7 @@ class _NutriState extends State<Nutri> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -1637,7 +1637,7 @@ class _NutriState extends State<Nutri> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -1678,7 +1678,7 @@ class _NutriState extends State<Nutri> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
@@ -1723,7 +1723,7 @@ class _NutriState extends State<Nutri> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 

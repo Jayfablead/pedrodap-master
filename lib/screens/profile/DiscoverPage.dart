@@ -549,7 +549,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
@@ -580,7 +580,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");

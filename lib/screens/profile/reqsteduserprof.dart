@@ -1052,7 +1052,7 @@ class _RqstdUserState extends State<RqstdUser> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");
@@ -1096,7 +1096,7 @@ class _RqstdUserState extends State<RqstdUser> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");

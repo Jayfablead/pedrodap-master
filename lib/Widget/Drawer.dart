@@ -150,58 +150,58 @@ class _drawerState extends State<drawer> {
                   ),
                   Column(
                     children: [
-                      // InkWell(
-                      //   onTap: () {
-                      //     Navigator.of(context).push(
-                      //       MaterialPageRoute(
-                      //         builder: (context) => FeedPage(),
-                      //       ),
-                      //     );
-                      //   },
-                      //   child: Container(
-                      //     child: Row(
-                      //       children: [
-                      //         SizedBox(
-                      //           width: 6.w,
-                      //         ),
-                      //         Container(
-                      //           width: 66.w,
-                      //           child: Row(
-                      //             mainAxisAlignment:
-                      //             MainAxisAlignment.spaceBetween,
-                      //             children: [
-                      //               Row(
-                      //                 children: [
-                      //                   Icon(
-                      //                     Icons.image_outlined,
-                      //                     color: Colors.white,
-                      //                   ),
-                      //                   SizedBox(
-                      //                     width: 2.w,
-                      //                   ),
-                      //                   Text("Feed Page",
-                      //                       style: TextStyle(
-                      //                         fontSize: 4.w,
-                      //                         fontWeight: FontWeight.w500,
-                      //                         fontFamily: 'Meta1',
-                      //                         color: Colors.white,
-                      //                       )),
-                      //                 ],
-                      //               ),
-                      //               Icon(
-                      //                 Icons.chevron_right_rounded,
-                      //                 color: Colors.white,
-                      //               )
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 2.h,
-                      // ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => FeedPage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 6.w,
+                              ),
+                              Container(
+                                width: 66.w,
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.image_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Text("Feed Page",
+                                            style: TextStyle(
+                                              fontSize: 4.w,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Meta1',
+                                              color: Colors.white,
+                                            )),
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.of(context).push(
@@ -789,6 +789,7 @@ class _drawerState extends State<drawer> {
                   ),
                   InkWell(
                     onTap: () {
+                      Navigator.of(context).pop();
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ChangePassword(),
@@ -839,6 +840,8 @@ class _drawerState extends State<drawer> {
                   SizedBox(
                     height: 5.h,
                   ),
+
+
                   InkWell(
                     onTap: () async {
                       await SaveDataLocal.clearUserData();
@@ -894,7 +897,7 @@ class _drawerState extends State<drawer> {
     final Map<String, String> data = {};
     data['action'] = 'view_profile_details';
     data['uid'] = userData?.userData?.uid ?? '';
-
+    print(data);
     checkInternet().then((internet) async {
       if (internet) {
         authprovider().profileapi(data).then((Response response) async {
@@ -905,7 +908,7 @@ class _drawerState extends State<drawer> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
 
             // buildErrorDialog(context, "", "Login Successfully");

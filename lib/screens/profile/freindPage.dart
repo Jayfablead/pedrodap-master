@@ -1112,7 +1112,7 @@ class _FriendViewState extends State<FriendView> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");
@@ -1150,7 +1150,7 @@ class _FriendViewState extends State<FriendView> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");
@@ -1194,7 +1194,7 @@ class _FriendViewState extends State<FriendView> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");

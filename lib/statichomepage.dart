@@ -518,7 +518,7 @@ class _StaticHomePageState extends State<StaticHomePage> {
   connectionsapi() {
     final Map<String, String> data = {};
     data['action'] = 'connected_users';
-    data['uid'] = userData!.userData!.uid.toString();
+    data['uid'] = (userData?.userData?.uid).toString();
 print('=========================== +++++ ${data}');
     checkInternet().then((internet) async {
       if (internet) {
@@ -530,7 +530,7 @@ print('=========================== +++++ ${data}');
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");

@@ -305,7 +305,7 @@ class _listingpageState extends State<listingpage> {
               isLoading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");

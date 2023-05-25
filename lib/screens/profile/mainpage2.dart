@@ -108,7 +108,7 @@ class _mainpage2State extends State<mainpage2> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(userData!.userData!.email);
+    // print(userData!.userData!.email);
     playerapi();
     profile();
     searchapi();
@@ -198,8 +198,7 @@ class _mainpage2State extends State<mainpage2> {
                               borderRadius: BorderRadius.circular(90),
                               child: CachedNetworkImage(
                                 fit: BoxFit.cover,
-                                imageUrl: profiledata!
-                                    .viewProfileDetails!.profilePic
+                                imageUrl: (profiledata?.viewProfileDetails?.profilePic)
                                     .toString(),
                                 progressIndicatorBuilder:
                                     (context, url, progress) =>
@@ -1766,7 +1765,7 @@ class _mainpage2State extends State<mainpage2> {
                       //   ),
                       // ),
 
-                      userData!.userData!.role == '2'
+                      userData?.userData?.role == '2'
                           ? Container(
                               height: 10.h,
                               width: MediaQuery.of(context).size.width,
@@ -2006,7 +2005,7 @@ class _mainpage2State extends State<mainpage2> {
   searchapi() {
     final Map<String, String> data = {};
     data['action'] = 'search_users_app';
-    data['uid'] = userData!.userData!.uid.toString();
+    data['uid'] = (userData?.userData?.uid).toString();
     data['search_keyword'] = _search.text.trim().toString();
     print(data);
 
@@ -2021,7 +2020,7 @@ class _mainpage2State extends State<mainpage2> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
@@ -2042,7 +2041,7 @@ class _mainpage2State extends State<mainpage2> {
   playerapi() {
     final Map<String, String> data = {};
     data['action'] = 'all_users_app';
-    data['uid'] = userData!.userData!.uid.toString();
+    data['uid'] = userData?.userData?.uid ??"";
 
     checkInternet().then((internet) async {
       if (internet) {
@@ -2053,7 +2052,7 @@ class _mainpage2State extends State<mainpage2> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");
@@ -2073,7 +2072,7 @@ class _mainpage2State extends State<mainpage2> {
   profile() {
     final Map<String, String> data = {};
     data['action'] = 'view_profile_details';
-    data['uid'] = userData!.userData!.uid.toString();
+    data['uid'] = (userData?.userData?.uid).toString();
 
     checkInternet().then((internet) async {
       if (internet) {
@@ -2087,7 +2086,7 @@ class _mainpage2State extends State<mainpage2> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData!.userData!.uid);
 
@@ -2120,7 +2119,7 @@ class _mainpage2State extends State<mainpage2> {
         authprovider().clubsnameapi(data).then((Response response) async {
           cludid = Clubidmodal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && cludid?.status == "success") {
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
           } else {
             setState(() {

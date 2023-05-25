@@ -838,7 +838,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
@@ -884,7 +884,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {
@@ -954,7 +954,7 @@ class _TrainningNotesState extends State<TrainningNotes> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
 
             // buildErrorDialog(context, "", "Login Successfully");
           } else {

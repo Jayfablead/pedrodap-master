@@ -705,7 +705,7 @@ class _signupState extends State<signup> {
             userData = UserModal.fromJson(json.decode(response.body));
             if (response.statusCode == 200 && userData?.status == "success") {
               await SaveDataLocal.saveLogInData(userData!);
-              print(userData?.status);
+
 
               // buildErrorDialog(context, "", "Login Successfully");
               if (_formKey.currentState!.validate()) {
@@ -741,7 +741,7 @@ class _signupState extends State<signup> {
         authprovider().loginapi(data).then((Response response) async {
           cludid = Clubidmodal.fromJson(json.decode(response.body));
           if (response.statusCode == 200 && cludid?.status == "success") {
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
           } else {
             setState(() {

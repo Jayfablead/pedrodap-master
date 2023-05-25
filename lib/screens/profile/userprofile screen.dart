@@ -1010,7 +1010,7 @@ class _UserprofileState extends State<Userprofile> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");
@@ -1049,7 +1049,7 @@ class _UserprofileState extends State<Userprofile> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
 
             // buildErrorDialog(context, "", "Login Successfully");

@@ -543,7 +543,7 @@ class _ChatPageState extends State<ChatPage> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData?.userData?.uid);
 
@@ -579,7 +579,7 @@ class _ChatPageState extends State<ChatPage> {
               isloading = false;
             });
 
-            await SaveDataLocal.saveLogInData(userData!);
+
             print(userData?.status);
             print(userData?.userData?.uid);
 

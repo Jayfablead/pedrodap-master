@@ -372,7 +372,7 @@ class _NutriReplyPageState extends State<NutriReplyPage> {
                 isloading = false;
               });
 
-              await SaveDataLocal.saveLogInData(userData!);
+
 
               Fluttertoast.showToast(
                 msg: 'Reply Added Successfully',
