@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:pedrodap/Model/chgange%20modal.dart';
 import 'package:pedrodap/Widget/Drawer.dart';
+import 'package:pedrodap/screens/others/feedpage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Model/UserModal.dart';
@@ -62,7 +63,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => StaticHomePage(),));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FeedPage(),));
                       },
                       icon: Icon(
                         Icons.arrow_back,
@@ -430,12 +431,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     "ouch");
 
             } else {
-              setState(() {
-                _oldpass.text = '';
 
-                _newpass.text = '';
-                _confirmpass.text = '';
-              });
               buildErrorDialog(
                   context, "Error", "Please Enter Valid Old Password");
             }

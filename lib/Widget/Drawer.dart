@@ -150,58 +150,58 @@ class _drawerState extends State<drawer> {
                   ),
                   Column(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => FeedPage(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 6.w,
-                              ),
-                              Container(
-                                width: 66.w,
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.image_outlined,
-                                          color: Colors.white,
-                                        ),
-                                        SizedBox(
-                                          width: 2.w,
-                                        ),
-                                        Text("Feed Page",
-                                            style: TextStyle(
-                                              fontSize: 4.w,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: 'Meta1',
-                                              color: Colors.white,
-                                            )),
-                                      ],
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right_rounded,
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Navigator.of(context).push(
+                      //       MaterialPageRoute(
+                      //         builder: (context) => FeedPage(),
+                      //       ),
+                      //     );
+                      //   },
+                      //   child: Container(
+                      //     child: Row(
+                      //       children: [
+                      //         SizedBox(
+                      //           width: 6.w,
+                      //         ),
+                      //         Container(
+                      //           width: 66.w,
+                      //           child: Row(
+                      //             mainAxisAlignment:
+                      //             MainAxisAlignment.spaceBetween,
+                      //             children: [
+                      //               Row(
+                      //                 children: [
+                      //                   Icon(
+                      //                     Icons.image_outlined,
+                      //                     color: Colors.white,
+                      //                   ),
+                      //                   SizedBox(
+                      //                     width: 2.w,
+                      //                   ),
+                      //                   Text("Feed Page",
+                      //                       style: TextStyle(
+                      //                         fontSize: 4.w,
+                      //                         fontWeight: FontWeight.w500,
+                      //                         fontFamily: 'Meta1',
+                      //                         color: Colors.white,
+                      //                       )),
+                      //                 ],
+                      //               ),
+                      //               Icon(
+                      //                 Icons.chevron_right_rounded,
+                      //                 color: Colors.white,
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 2.h,
+                      // ),
                       InkWell(
                         onTap: () {
                           Navigator.of(context).push(

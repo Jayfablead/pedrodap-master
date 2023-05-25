@@ -11,10 +11,16 @@ class FeedPage extends StatefulWidget {
   State<FeedPage> createState() => _FeedPageState();
 }
 
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(debugLabel: '_tabscreen');
 List tab = ['Images', 'Videos'];
 
 class _FeedPageState extends State<FeedPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _scaffoldKey.currentState?.closeDrawer();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

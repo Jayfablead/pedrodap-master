@@ -97,7 +97,7 @@ class _MyConnectionsState extends State<MyConnections> {
                             ),
                           ),
                           Text(
-                            'My network',
+                            'My Connections',
                             style: TextStyle(
                               fontSize: 5.5.w,
                               fontWeight: FontWeight.w500,
@@ -188,7 +188,7 @@ class _MyConnectionsState extends State<MyConnections> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
-                                            width: 87.w,
+                                            width: 88.w,
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceBetween,
@@ -226,7 +226,7 @@ class _MyConnectionsState extends State<MyConnections> {
                                                       ),
                                                     ),
                                                     SizedBox(
-                                                      width: 4.w,
+                                                      width: 3.w,
                                                     ),
                                                     SizedBox(width: 45.w,
                                                       child: Text(
